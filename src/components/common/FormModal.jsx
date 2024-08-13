@@ -15,7 +15,7 @@ export default function FormModal({ heading, isOpen, onClose, children }) {
       <ModalContent>
         <ModalCloseButton />
         <ModalHeader>
-          <Heading size={"lg"} as={"h1"}>
+          <Heading size={"md"} as={"h1"}>
             {heading}
           </Heading>
         </ModalHeader>

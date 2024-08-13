@@ -18,6 +18,7 @@ const FormControl = forwardRef(
       placeholder,
       label,
       helperText,
+      helpersAsList = true,
       ...rest
     },
     ref
@@ -35,11 +36,15 @@ const FormControl = forwardRef(
         </FormErrorMessage>
         {helperText && (
           <FormHelperText>
-            <UnorderedList>
-              {helperText.map((text, index) => (
-                <ListItem key={index}>{text}</ListItem>
-              ))}
-            </UnorderedList>
+            {helpersAsList ? (
+              <UnorderedList>
+                {helperText.map((text, index) => (
+                  <ListItem key={index}>{text}</ListItem>
+                ))}
+              </UnorderedList>
+            ) : (
+              helperText
+            )}
           </FormHelperText>
         )}
       </ChakraFormControl>
