@@ -1,4 +1,4 @@
-const getSubmit = async (form) => {
+export default function getSubmit(form) {
   return async () =>
     fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
       method: "POST",
@@ -7,6 +7,4 @@ const getSubmit = async (form) => {
         "Content-Type": "application/json",
       },
     });
-};
-
-export default getSubmit;
+}
