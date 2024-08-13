@@ -3,6 +3,7 @@ import globals from "globals";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
+import cypress from "eslint-plugin-cypress/flat";
 
 export default [
   {
@@ -13,6 +14,7 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
+        ...cypress.configs.globals,
       },
       parserOptions: {
         ecmaVersion: "latest",
@@ -25,6 +27,7 @@ export default [
       react,
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
+      cypress: cypress,
     },
     rules: {
       ...js.configs.recommended.rules,
