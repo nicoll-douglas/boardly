@@ -1,0 +1,18 @@
+{
+  "statusCode": 400,
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "feedback": [
+      {
+        "subject": "password",
+        "message": "Password is invalid"
+      },
+      {
+        "subject": "confirmPassword",
+        "message": "Passwords do not match"
+      }
+    ]
+  }
+}
