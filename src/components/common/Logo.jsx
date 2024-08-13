@@ -1,9 +1,18 @@
-import { Text } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
-export default function Logo() {
+export default function Logo(props) {
   return (
-    <Text fontFamily={"Jersey10"} lineHeight={0.9} fontSize={"5xl"}>
+    <Button
+      variant={"link"}
+      fontFamily={"Jersey10"}
+      lineHeight={0.8}
+      fontSize={"5xl"}
+      fontWeight={100}
+      as={Link}
+      {...props}
+    >
       Lorem
-    </Text>
+    </Button>
   );
 }

@@ -1,9 +1,15 @@
-import { Container, Flex } from "@chakra-ui/react";
+import Container from "@/components/common/Container";
+import Logo from "@/components/common/Logo";
+import Header from "@/components/common/Header";
+import LoginBtn from "@/features/auth/login/components/LoginBtn";
 
 export default function IndexPage() {
   return (
-    <Container maxW={"5xl"} bg={"red.200"} minH={"100vh"}>
-      hello
+    <Container>
+      <Header>
+        <Logo to="/" />
+        <LoginBtn ml="auto" />
+      </Header>
     </Container>
   );
 }

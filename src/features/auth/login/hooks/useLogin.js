@@ -1,7 +1,45 @@
+import { useToast } from "@chakra-ui/react";
 import getSubmit from "../services/submit";
+import useSubmitHandlers from "@/lib/hooks/useSubmitHandlers";
+import { serverError, tooMany15 } from "@/lib/constants/toasts";
+import { AuthContext } from "@/lib/contexts/AuthContext";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function useLogin(form) {
   const submit = getSubmit(form);
+  const toast = useToast();
+  const { setAccessToken } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const handlers = 
+  const handlers = {
+    400: async (response) => {
+      const { feedback } = await response.json();
+      feedback.forEach(({ subject, message }) =>
+        form.setError(subject, { message: message })
+      );
+    },
+    404: () => {
+      form.setError("username", {
+        message: "Username or password is incorrect",
+      });
+      form.setError("password", {
+        message: "Username or password is incorrect",
+      });
+    },
+    429: () => toast(tooMany15),
+    500: () => toast(serverError),
+    200: async (response) => {
+      const { accessToken } = await response.json();
+      setAccessToken(accessToken);
+      toast({
+        status: "success",
+        title: "Successfully logged in",
+      });
+      navigate("/home");
+    },
+  };
+
+  const onSubmit = useSubmitHandlers(submit, handlers);
+  return onSubmit;
 }
