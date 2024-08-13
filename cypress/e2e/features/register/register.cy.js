@@ -28,4 +28,15 @@ describe("Register form submission", () => {
       expect(request.headers["content-type"]).to.include("application/json");
     });
   });
+
+  it.only("Should set correct errors on 400 response", () => {
+    cy.fixture("/features/register/400-response.json").then((data) => {
+      cy.intercept("POST", "**/api/v1/auth/register", (req) => {
+        req.reply(data);
+      }).as("fetch");
+      cy.getByTestId("register-submit").click();
+      cy.wait("@fetch");
+      data.body.feedback.forEach(({ message }) => cy.contains(message));
+    });
+  });
 });
