@@ -7,7 +7,12 @@ export default function LoginBtn(props) {
 
   return (
     <>
-      <Button variant={"link"} onClick={onOpen} {...props}>
+      <Button
+        variant={"link"}
+        onClick={onOpen}
+        data-testid="login-btn"
+        {...props}
+      >
         Login
       </Button>
       <FormModal heading={"Login"} isOpen={isOpen} onClose={onClose}>
