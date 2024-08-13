@@ -8,6 +8,7 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import { forwardRef } from "react";
+import PasswordInput from "./PasswordInput";
 
 const FormControl = forwardRef(
   (
@@ -19,6 +20,7 @@ const FormControl = forwardRef(
       label,
       helperText,
       helpersAsList = true,
+      password,
       ...rest
     },
     ref
@@ -30,7 +32,11 @@ const FormControl = forwardRef(
         mb={6}
       >
         <FormLabel>{label}</FormLabel>
-        <Input placeholder={placeholder} ref={ref} {...rest} />
+        {password ? (
+          <PasswordInput placeholder={placeholder} ref={ref} {...rest} />
+        ) : (
+          <Input placeholder={placeholder} ref={ref} {...rest} />
+        )}
         <FormErrorMessage>
           {formRef.formState.errors[registerKey]?.message}
         </FormErrorMessage>

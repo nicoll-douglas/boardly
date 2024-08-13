@@ -3,12 +3,14 @@ import { Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import usernameValidation from "../data/usernameValidation";
 import passwordValidation from "../data/passwordValidation";
+import useRegister from "../hooks/useRegister";
 
 export default function RegisterForm() {
   const form = useForm({ shouldUnregister: true });
+  const onSubmit = useRegister(form);
 
   return (
-    <form>
+    <form onSubmit={form.handleSubmit(onSubmit)}>
       <FormControl
         formRef={form}
         registerKey={"email"}
@@ -51,6 +53,7 @@ export default function RegisterForm() {
           "Must contain at least one letter",
           "Must contain at least one number",
         ]}
+        password={true}
         {...form.register("password", passwordValidation)}
       />
       <Button type="submit" w={"full"} isLoading={form.formState.isSubmitting}>
