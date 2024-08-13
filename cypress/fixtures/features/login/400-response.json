@@ -1,0 +1,18 @@
+{
+  "statusCode": 400,
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "feedback": [
+      {
+        "subject": "username",
+        "message": "Username invalid"
+      },
+      {
+        "subject": "password",
+        "message": "Password invalid"
+      }
+    ]
+  }
+}
