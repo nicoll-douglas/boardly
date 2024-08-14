@@ -2,14 +2,13 @@ import { useToast } from "@chakra-ui/react";
 import getSubmit from "../services/submit";
 import useSubmitHandlers from "@/lib/hooks/useSubmitHandlers";
 import { serverError, tooMany15 } from "@/lib/constants/toasts";
-import { AuthContext } from "@/lib/contexts/AuthContext";
-import { useContext } from "react";
+import useAuth from "@/lib/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 export default function useLogin(form) {
   const submit = getSubmit(form);
   const toast = useToast();
-  const { setAccessToken } = useContext(AuthContext);
+  const { setAccessToken } = useAuth();
   const navigate = useNavigate();
 
   const handlers = {
