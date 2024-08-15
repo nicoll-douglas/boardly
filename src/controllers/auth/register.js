@@ -13,13 +13,14 @@ module.exports = async (req, res, next) => {
     if (emailTaken)
       return res.status(409).feedback(["email", "Email is already in use"]);
 
-    await sendVerificationEmail(email, newUser._id);
     const newUser = new User({ email, username });
+    await sendVerificationEmail(email, newUser._id);
     await newUser.setPassword(password);
     await newUser.save();
 
     return res.sendStatus(200);
   } catch (err) {
+    console.log(err);
     next(err);
   }
 };
