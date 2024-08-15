@@ -6,7 +6,7 @@ export default function NewPwdPage() {
   const { token } = useParams();
 
   return (
-    <FormModal isOpen={true} motionPreset="none">
+    <FormModal isOpen={true} motionPreset="none" heading="Your New Password">
       <NewPwdForm token={token} />
     </FormModal>
   );
