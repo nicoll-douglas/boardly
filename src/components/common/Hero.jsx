@@ -1,5 +1,5 @@
 import { VStack, Heading, Text, Image, Flex } from "@chakra-ui/react";
-import catDarkUrl from "@/assets/cat-dark.svg";
+import humaaansUrl from "@/assets/humaaans.png";
 import RegisterBtn from "@/features/auth/register/components/RegisterBtn";
 
 export default function Hero() {
@@ -26,13 +26,12 @@ export default function Hero() {
           Join for free
         </RegisterBtn>
         <Image
-          src={catDarkUrl}
-          w={{ base: "224px", sm: "320px", md: "384px" }}
-          h={{ base: "144px", sm: "206px", md: "247px" }}
+          src={humaaansUrl}
+          w={{ base: "320px", sm: "400px" }}
+          h={{ base: "222px", sm: "277px" }}
           ml="auto"
           mt={{ base: 0, md: -6, xl: 0 }}
-          alt="Cartoon cat"
-          title="https://www.vecteezy.com/vector-art/4629545-little-cat-pet"
+          alt="graphic displaying dialogue"
         />
       </Flex>
     </VStack>
