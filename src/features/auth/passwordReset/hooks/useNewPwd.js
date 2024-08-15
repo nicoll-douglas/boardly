@@ -24,14 +24,13 @@ export default function useNewPwd(form, token) {
         title: "Password Successfully Reset",
         description: "You will be redirected to login shortly.",
       });
-      setTimeout(navigate, 3000, "/home");
+      setTimeout(navigate, 3000, "/");
     },
     401: () =>
       toast({
         status: "error",
         title: "Failed to Reset Password",
-        description:
-          "If you need to reset your password, please check the email we sent you or click forgot password.",
+        description: "The link is either invalid or expired.",
       }),
   };
 
