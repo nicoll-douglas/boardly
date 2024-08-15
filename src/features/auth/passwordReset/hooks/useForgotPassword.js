@@ -24,6 +24,6 @@ export default function useForgotPassword(form) {
     },
   };
 
-  const onSubmit = useSubmitHandlers(() => submitEmail(form), handlers);
+  const onSubmit = useSubmitHandlers(async () => submitEmail(form), handlers);
   return onSubmit;
 }
