@@ -1,6 +1,5 @@
 import { Button, useDisclosure } from "@chakra-ui/react";
-import FormModal from "@/components/common/FormModal";
-import RegisterForm from "./RegisterForm";
+import ToggleableForm from "@/features/ui/formToggle/components/ToggleableForm";
 
 export default function RegisterBtn({ children = "Sign up", ...rest }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -10,9 +9,11 @@ export default function RegisterBtn({ children = "Sign up", ...rest }) {
       <Button onClick={onOpen} {...rest}>
         {children}
       </Button>
-      <FormModal isOpen={isOpen} onClose={onClose} heading="Sign Up">
-        <RegisterForm />
-      </FormModal>
+      <ToggleableForm
+        isOpen={isOpen}
+        onClose={onClose}
+        initiallyLoginForm={false}
+      />
     </>
   );
 }

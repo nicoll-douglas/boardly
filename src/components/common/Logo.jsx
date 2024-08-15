@@ -9,6 +9,9 @@ export default function Logo(props) {
       lineHeight={0.8}
       fontSize={"5xl"}
       fontWeight={100}
+      style={{
+        textDecoration: "none",
+      }}
       as={Link}
       {...props}
     >

@@ -1,6 +1,5 @@
 import { Button, useDisclosure } from "@chakra-ui/react";
-import FormModal from "@/components/common/FormModal";
-import LoginForm from "./LoginForm";
+import ToggleableForm from "@/features/ui/formToggle/components/ToggleableForm";
 
 export default function LoginBtn(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -15,9 +14,11 @@ export default function LoginBtn(props) {
       >
         Login
       </Button>
-      <FormModal heading={"Login"} isOpen={isOpen} onClose={onClose}>
-        <LoginForm />
-      </FormModal>
+      <ToggleableForm
+        isOpen={isOpen}
+        onClose={onClose}
+        initiallyLoginForm={true}
+      />
     </>
   );
 }
