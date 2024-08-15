@@ -45,4 +45,15 @@ router.post(
   require("@/controllers/auth/forgot")
 );
 
+router.post(
+  "/reset",
+  limiter(),
+  validateHTTPAuth,
+  validateBody({
+    password: auth.new.password,
+    confirmPassword: auth.new.password,
+  }),
+  require("@/controllers/auth/reset")
+);
+
 module.exports = router;
