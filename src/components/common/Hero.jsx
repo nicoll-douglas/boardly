@@ -27,8 +27,8 @@ export default function Hero() {
         </RegisterBtn>
         <Image
           src={humaaansUrl}
-          w={{ base: "320px", sm: "400px" }}
-          h={{ base: "222px", sm: "277px" }}
+          w={{ base: "320px", sm: "410px" }}
+          h={{ base: "222px", sm: "284px" }}
           ml="auto"
           mt={{ base: 0, md: -6, xl: 0 }}
           alt="graphic displaying dialogue"
