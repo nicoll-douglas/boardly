@@ -61,7 +61,7 @@ describe("Email verification page", () => {
     cy.url().should("include", "/home");
   });
 
-  it.only("Should structure request correctly", () => {
+  it("Should structure request correctly", () => {
     cy.intercept("PATCH", "**/api/auth/verify").as("fetch");
     cy.wait("@fetch").then(({ request }) => {
       cy.wrap(request.url).should("include", "/api/auth/verify");
