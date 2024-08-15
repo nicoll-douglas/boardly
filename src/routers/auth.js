@@ -1,5 +1,6 @@
 const express = require("express");
 const validateBody = require("@/middleware/validation/validateBody");
+const validateHTTPAuth = require("@/middleware/validation/validateHTTPAuth");
 const auth = require("@/lib/validationSchemas/auth");
 
 const router = express.Router();
@@ -23,5 +24,7 @@ router.post(
   }),
   require("@/controllers/auth/login")
 );
+
+router.patch("/verify", validateHTTPAuth, require("@/controllers/auth/verify"));
 
 module.exports = router;
