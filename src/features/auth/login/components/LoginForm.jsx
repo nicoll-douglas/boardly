@@ -23,7 +23,7 @@ export default function LoginForm() {
         registerKey="password"
         placeholder="Enter password"
         data-testid="login-password"
-        password={true}
+        password={{ forgot: true }}
         {...form.register("password", { required: "Password is required" })}
       />
       <Button

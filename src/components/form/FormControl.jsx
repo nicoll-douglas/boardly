@@ -6,9 +6,12 @@ import {
   FormHelperText,
   UnorderedList,
   ListItem,
+  Flex,
+  Button,
 } from "@chakra-ui/react";
 import { forwardRef } from "react";
 import PasswordInput from "./PasswordInput";
+import { Link } from "react-router-dom";
 
 const FormControl = forwardRef(
   (
@@ -37,9 +40,24 @@ const FormControl = forwardRef(
         ) : (
           <Input placeholder={placeholder} ref={ref} {...rest} />
         )}
-        <FormErrorMessage>
-          {formRef.formState.errors[registerKey]?.message}
-        </FormErrorMessage>
+        <Flex alignItems={"start"} gap={2}>
+          <FormErrorMessage>
+            {formRef.formState.errors[registerKey]?.message}
+          </FormErrorMessage>
+          {password?.forgot && (
+            <Button
+              variant={"link"}
+              as={Link}
+              to={"/auth/forgot"}
+              mt={2}
+              ml={"auto"}
+              size={"sm"}
+              minW={"fit-content"}
+            >
+              Forgot password?
+            </Button>
+          )}
+        </Flex>
         {helperText && (
           <FormHelperText>
             {helpersAsList ? (
