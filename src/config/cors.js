@@ -1,5 +1,5 @@
 const corsOptions = {
-  origin: process.env.FRONTEND_URL,
+  origin: process.env.CLIENT_URL,
   credentials: true,
   optionsSuccessStatus: 200,
 };
