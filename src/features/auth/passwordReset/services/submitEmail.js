@@ -4,6 +4,6 @@ export default async function submitEmail(form) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: form.getValues(),
+    body: JSON.stringify(form.getValues()),
   });
 }
