@@ -32,7 +32,7 @@ export default function useEmailVerification(token) {
     429: () =>
       setUIFeedback({
         heading: tooMany15.title,
-        description: tooMany15.message,
+        text: tooMany15.description,
       }),
     200: async (response) => {
       const { accessToken } = await response.json();
