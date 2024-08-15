@@ -60,4 +60,13 @@ describe("Email verification page", () => {
     cy.wait(3000);
     cy.url().should("include", "/home");
   });
+
+  it.only("Should structure request correctly", () => {
+    cy.intercept("PATCH", "**/api/auth/verify").as("fetch");
+    cy.wait("@fetch").then(({ request }) => {
+      cy.wrap(request.url).should("include", "/api/auth/verify");
+      expect(request.method).to.equal("PATCH");
+      expect(request.headers.authorization).to.equal(`Bearer ${token}`);
+    });
+  });
 });
