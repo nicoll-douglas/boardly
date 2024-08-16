@@ -25,7 +25,7 @@ function customMethods(req, res, next) {
 
   res.appendData = (key, data) => {
     body[key] = data;
-    return res.json(body);
+    return res;
   };
 
   res.sendData = () => res.json(body);

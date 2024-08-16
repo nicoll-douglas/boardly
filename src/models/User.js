@@ -11,6 +11,12 @@ const user = new mongoose.Schema(
       default: false,
       type: Boolean,
     },
+    age: Number,
+    pronouns: String,
+    bio: {
+      type: String,
+      default: "Hi, welcome to my profile!",
+    },
   },
   { timestamps: true }
 );
