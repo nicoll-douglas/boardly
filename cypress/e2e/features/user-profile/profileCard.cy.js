@@ -3,7 +3,7 @@ describe("Profile card data fetching", () => {
     cy.visit("/profile");
   });
 
-  it.only("Should display data on 200 response", () => {
+  it("Should display data on 200 response", () => {
     cy.fixture("/features/user-profile/200-response.json").then((data) => {
       cy.intercept("GET", "**/api/me", (req) => {
         req.reply(data);

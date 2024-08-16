@@ -14,9 +14,10 @@ import EditProfileBtn from "./EditProfileBtn";
 import useProtectedQuery from "@/lib/hooks/useProtectedQuery";
 import destructureData from "../utils/destructureData";
 import ProfileTags from "./ProfileTags";
+import data from "@root/cypress/fixtures/features/user-profile/200-response.json";
 
 export default function ProfileCard() {
-  const { isLoading, protectedData } = useProtectedQuery("/api/me", true);
+  const { isLoading, protectedData } = useProtectedQuery("/api/me");
   const isLoaded = !isLoading;
   const { username, bio, profileTags } = destructureData(protectedData);
 
