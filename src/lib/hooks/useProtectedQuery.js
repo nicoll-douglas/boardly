@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import getProtectedData from "@/services/getProtectedData";
 import ACCESS_TIME from "@/config/accessTime";
 
-export default function useProtectedQuery(endpoint, enabled = true) {
+export default function useProtectedQuery(endpoint, enabled = true, mockData) {
   const toast = useToast();
   const navigate = useNavigate();
   const { setAccessToken, accessToken } = useAuth();
@@ -54,6 +54,9 @@ export default function useProtectedQuery(endpoint, enabled = true) {
           .catch(() => toast(genericError));
     }
   }, [data]);
+
+  if (enabled === false && mockData)
+    return { isLoading: false, protectedData: mockData };
 
   return { isLoading, protectedData };
 }
