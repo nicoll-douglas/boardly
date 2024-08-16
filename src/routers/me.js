@@ -7,3 +7,5 @@ const router = express.Router();
 
 router.use("/", limiter(100, 0.6), validateHTTPAuth, verifyAuth);
 router.get("/", require("@/controllers/me/get"));
+
+module.exports = router;
