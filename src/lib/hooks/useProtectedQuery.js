@@ -9,13 +9,22 @@ import {
 } from "@/lib/constants/toasts";
 import { useNavigate } from "react-router-dom";
 import useAuth from "@/lib/hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import getProtectedData from "@/services/getProtectedData";
+import ACCESS_TIME from "@/config/accessTime";
 
-export default function useProtectedQuery(query) {
-  const { data, isLoading, isError } = query;
+export default function useProtectedQuery(endpoint) {
   const toast = useToast();
   const navigate = useNavigate();
-  const { setAccessToken } = useAuth();
+  const { setAccessToken, accessToken } = useAuth();
   const [protectedData, setProtectedData] = useState(null);
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: [`GET ${endpoint}`],
+    queryFn: async () => getProtectedData(endpoint, accessToken),
+    staleTime: ACCESS_TIME,
+    retry: false,
+  });
 
   useEffect(() => {
     if (isError) toast(networkError);
@@ -23,7 +32,6 @@ export default function useProtectedQuery(query) {
 
   useEffect(() => {
     if (!data) return;
-
     switch (data.status) {
       case 401:
         toast(unauthorized);
@@ -38,8 +46,8 @@ export default function useProtectedQuery(query) {
       case 200:
         data
           .json()
-          .then(({ accessToken, ...rest }) => {
-            if (accessToken) setAccessToken();
+          .then(({ accessToken: newAccessToken, ...rest }) => {
+            if (newAccessToken) setAccessToken(newAccessToken);
             setProtectedData(rest);
           })
           .catch(() => toast(genericError));
