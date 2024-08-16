@@ -6,7 +6,7 @@ function validateHTTPAuth(req, res, next) {
   }).validate({ authorization: req.headers.authorization });
   if (!error) return next();
 
-  return res.status(401);
+  return res.sendStatus(401);
 }
 
 module.exports = validateHTTPAuth;
