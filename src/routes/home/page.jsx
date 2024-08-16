@@ -4,7 +4,7 @@ import Logo from "@/components/common/Logo";
 
 export default function HomePage() {
   return (
-    <Container>
+    <Container maxW={"8xl"}>
       <Header>
         <Logo to="/home" />
       </Header>

@@ -23,4 +23,23 @@ const tooMany = {
   title: "Too many requests",
 };
 
-export { networkError, serverError, tooMany15, tooMany };
+const unauthorized = {
+  status: "warning",
+  title: "Unauthorized",
+  description: "Please login to access the requested resource.",
+};
+
+const genericError = {
+  status: "error",
+  title: "Error",
+  description: "Something went wrong, please try again.",
+};
+
+export {
+  networkError,
+  serverError,
+  tooMany15,
+  tooMany,
+  unauthorized,
+  genericError,
+};
