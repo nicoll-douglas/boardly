@@ -1,0 +1,14 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "profile": {
+      "username": "SomeExistingUser",
+      "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec lorem vel massa sollicitudin.",
+      "age": 20,
+      "pronouns": "he/him"
+    }
+  }
+}
