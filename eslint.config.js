@@ -14,6 +14,7 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
+        ...cypress.configs.globals,
       },
       parserOptions: {
         ecmaVersion: "latest",

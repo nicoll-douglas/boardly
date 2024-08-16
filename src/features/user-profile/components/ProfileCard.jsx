@@ -17,7 +17,11 @@ import ProfileTags from "./ProfileTags";
 import data from "@root/cypress/fixtures/features/user-profile/200-response.json";
 
 export default function ProfileCard() {
-  const { isLoading, protectedData } = useProtectedQuery("/api/me");
+  const { isLoading, protectedData } = useProtectedQuery(
+    "/api/me",
+    false,
+    data.body
+  );
   const isLoaded = !isLoading;
   const { username, bio, profileTags } = destructureData(protectedData);
 
