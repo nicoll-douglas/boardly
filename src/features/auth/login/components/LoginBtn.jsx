@@ -1,24 +1,9 @@
-import { Button, useDisclosure } from "@chakra-ui/react";
-import ToggleableForm from "@/features/ui/formToggle/components/ToggleableForm";
+import { Button } from "@chakra-ui/react";
 
 export default function LoginBtn(props) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
-    <>
-      <Button
-        variant={"link"}
-        onClick={onOpen}
-        data-testid="login-btn"
-        {...props}
-      >
-        Login
-      </Button>
-      <ToggleableForm
-        isOpen={isOpen}
-        onClose={onClose}
-        initiallyLoginForm={true}
-      />
-    </>
+    <Button variant={"link"} data-testid="login-btn" {...props}>
+      Login
+    </Button>
   );
 }

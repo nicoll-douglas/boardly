@@ -2,7 +2,7 @@ import { VStack, Heading, Text, Image, Flex } from "@chakra-ui/react";
 import humaaansUrl from "@/assets/humaaans.png";
 import RegisterBtn from "@/features/auth/register/components/RegisterBtn";
 
-export default function Hero() {
+export default function Hero({ onJoin }) {
   return (
     <VStack gap={4} maxW={"2xl"} as={"main"}>
       <Heading
@@ -12,7 +12,7 @@ export default function Hero() {
       >
         Privacy, anonymity, freedom, connection.
       </Heading>
-      <Text fontSize={{ sm: "lg", md: "xl" }}>
+      <Text fontSize={{ sm: "lg" }}>
         Browse anonymously, share your thoughts, participate in open dialogue or
         just come and hang out with like-minded people. Join the messaging board
         today.
@@ -22,7 +22,7 @@ export default function Hero() {
         flexDir={{ base: "column", md: "row" }}
         gap={{ base: 4, md: 0 }}
       >
-        <RegisterBtn maxW="fit-content" size="lg">
+        <RegisterBtn maxW="fit-content" size="lg" onClick={onJoin}>
           Join for free
         </RegisterBtn>
         <Image
