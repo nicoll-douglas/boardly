@@ -4,26 +4,27 @@ import {
   CardBody,
   CardHeader,
   Flex,
-  Tag,
   Heading,
   Text,
   SkeletonCircle,
   SkeletonText,
 } from "@chakra-ui/react";
 import noWrap from "@/lib/constants/noWrap";
-import Separator from "@/components/common/Separator";
 import EditProfileBtn from "./EditProfileBtn";
 import useProtectedQuery from "@/lib/hooks/useProtectedQuery";
+import destructureData from "../utils/destructureData";
+import ProfileTags from "./ProfileTags";
 
 export default function ProfileCard() {
-  const { isLoading, protectedData } = useProtectedQuery("/api/me");
+  const { isLoading, protectedData } = useProtectedQuery("/api/me", true);
   const isLoaded = !isLoading;
+  const { username, bio, profileTags } = destructureData(protectedData);
 
   return (
     <Card w={"full"} h={"full"} as={"section"} aria-label="Profile">
       <CardHeader p={4} gap={3} display={"flex"}>
         <SkeletonCircle size={16} isLoaded={isLoaded}>
-          <Avatar size={"lg"} my={"auto"} name="mogadon69"></Avatar>
+          <Avatar size={"lg"} my={"auto"} name={username}></Avatar>
         </SkeletonCircle>
         <Flex
           maxW={"calc(100% - 120px)"}
@@ -38,15 +39,12 @@ export default function ProfileCard() {
               mb={1}
               lineHeight={"normal"}
               maxW={"full"}
+              minW={28}
               {...noWrap}
             >
-              {"mogadon69"}
+              {username}
             </Heading>
-            <Flex>
-              <Tag size={"sm"}>20</Tag>
-              <Separator />
-              <Tag size="sm">he/him</Tag>
-            </Flex>
+            <ProfileTags tags={profileTags} />
           </SkeletonText>
         </Flex>
         <EditProfileBtn ml="auto" />
@@ -56,7 +54,7 @@ export default function ProfileCard() {
           <Heading size={"xs"} textTransform={"uppercase"} color={"gray.300"}>
             Bio
           </Heading>
-          <Text fontSize={"sm"}>{"Hi, I'm mogadon69, nice to meet you!"}</Text>
+          <Text fontSize={"sm"}>{bio}</Text>
         </SkeletonText>
       </CardBody>
     </Card>

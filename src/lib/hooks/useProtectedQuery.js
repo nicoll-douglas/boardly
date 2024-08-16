@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import getProtectedData from "@/services/getProtectedData";
 import ACCESS_TIME from "@/config/accessTime";
 
-export default function useProtectedQuery(endpoint) {
+export default function useProtectedQuery(endpoint, enabled = true) {
   const toast = useToast();
   const navigate = useNavigate();
   const { setAccessToken, accessToken } = useAuth();
@@ -24,6 +24,7 @@ export default function useProtectedQuery(endpoint) {
     queryFn: async () => getProtectedData(endpoint, accessToken),
     staleTime: ACCESS_TIME,
     retry: false,
+    enabled,
   });
 
   useEffect(() => {
