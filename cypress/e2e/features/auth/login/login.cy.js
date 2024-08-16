@@ -10,7 +10,7 @@ describe("Login form submission", () => {
   });
 
   it("Should set errors correctly on 400 response", () => {
-    cy.fixture("/features/login/400-response.json").then((data) => {
+    cy.fixture("/features/auth/login/400-response.json").then((data) => {
       cy.wrap(data).as("fixture");
       cy.intercept("POST", "**/api/v1/auth/login", (req) => {
         req.reply(data);
@@ -81,7 +81,7 @@ describe("Login form submission", () => {
   });
 
   it.only("Should toast and navigate correctly on 200 response", () => {
-    cy.fixture("/features/login/200-response.json").then((data) => {
+    cy.fixture("/features/auth/login/200-response.json").then((data) => {
       cy.wrap(data).as("fixture");
       cy.intercept("POST", "**/api/v1/auth/login", (req) => {
         req.reply(data);

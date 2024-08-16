@@ -30,7 +30,7 @@ describe("Register form submission", () => {
   });
 
   it.only("Should set correct errors on 400 response", () => {
-    cy.fixture("/features/register/400-response.json").then((data) => {
+    cy.fixture("/features/auth/register/400-response.json").then((data) => {
       cy.intercept("POST", "**/api/v1/auth/register", (req) => {
         req.reply(data);
       }).as("fetch");
