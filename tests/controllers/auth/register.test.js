@@ -1,5 +1,4 @@
 const request = require("supertest");
-const { connect, disconnect, clearDB } = require("@root/tests/testDB");
 const app = require("@/app");
 const User = require("@/models/User");
 
@@ -14,14 +13,8 @@ jest.mock("@/services/sendVerificationEmail", () => jest.fn());
 const sendVerificationEmail = require("@/services/sendVerificationEmail");
 
 describe("POST /api/auth/register", () => {
-  beforeAll(async () => await connect());
-  beforeEach(async () => {
-    await clearDB();
+  afterEach(async () => {
     jest.clearAllMocks();
-  });
-  afterAll(async () => {
-    await disconnect();
-    jest.resetModules();
   });
 
   test("responds correctly if username taken", async () => {

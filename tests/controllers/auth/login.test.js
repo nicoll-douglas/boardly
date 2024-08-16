@@ -1,6 +1,5 @@
 const bcrypt = require("bcrypt");
 const request = require("supertest");
-const { connect, disconnect, clearDB } = require("@root/tests/testDB");
 const app = require("@/app");
 const User = require("@/models/User");
 const {
@@ -19,14 +18,8 @@ jest.mock("@/middleware/auth/issueTokens", () => ({
 }));
 
 describe("POST /api/auth/login", () => {
-  beforeAll(async () => await connect());
-  beforeEach(async () => {
-    await clearDB();
+  afterEach(async () => {
     jest.clearAllMocks();
-  });
-  afterAll(async () => {
-    await disconnect();
-    jest.resetModules();
   });
 
   test("responds correctly if user not found", async () => {

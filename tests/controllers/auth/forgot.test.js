@@ -1,5 +1,4 @@
 const request = require("supertest");
-const { connect, disconnect, clearDB } = require("@root/tests/testDB");
 const app = require("@/app");
 const User = require("@/models/User");
 const sendResetPasswordEmail = require("@/services/sendResetPasswordEmail");
@@ -13,14 +12,8 @@ const credentials = {
 jest.mock("@/services/sendResetPasswordEmail", () => jest.fn());
 
 describe("POST /api/auth/forgot", () => {
-  beforeAll(async () => await connect());
-  beforeEach(async () => {
-    await clearDB();
+  afterEach(async () => {
     jest.clearAllMocks();
-  });
-  afterAll(async () => {
-    await disconnect();
-    jest.resetModules();
   });
 
   test("responds correctly if user with email not found", async () => {

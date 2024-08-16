@@ -1,5 +1,4 @@
 const request = require("supertest");
-const { connect, disconnect, clearDB } = require("@root/tests/testDB");
 const app = require("@/app");
 const User = require("@/models/User");
 const verifyToken = require("@/middleware/auth/verifyToken");
@@ -16,14 +15,8 @@ const token = "exampleToken";
 jest.mock("@/middleware/auth/verifyToken", () => jest.fn());
 
 describe("/api/auth/reset", () => {
-  beforeAll(async () => await connect());
-  beforeEach(async () => {
-    await clearDB();
+  afterEach(async () => {
     jest.clearAllMocks();
-  });
-  afterAll(async () => {
-    await disconnect();
-    jest.resetModules();
   });
 
   test("responds correctly if token invalid", async () => {
