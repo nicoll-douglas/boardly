@@ -1,8 +1,23 @@
-import { IconButton } from "@chakra-ui/react";
+import { IconButton, useDisclosure } from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
+import FormModal from "@/components/common/FormModal";
+import EditProfileForm from "./EditProfileForm";
 
 export default function EditProfileBtn(props) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
-    <IconButton icon={<EditIcon />} variant={"ghost"} size={"sm"} {...props} />
+    <>
+      <IconButton
+        icon={<EditIcon />}
+        variant={"ghost"}
+        size={"sm"}
+        onClick={onOpen}
+        {...props}
+      />
+      <FormModal isOpen={isOpen} onClose={onClose} heading="Edit profile">
+        <EditProfileForm onClose={onClose} />
+      </FormModal>
+    </>
   );
 }
