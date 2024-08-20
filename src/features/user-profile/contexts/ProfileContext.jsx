@@ -18,8 +18,4 @@ function ProfileProvider({ children }) {
   );
 }
 
-function useProfileContext() {
-  return useContext(ProfileContext);
-}
-
-export { ProfileContext, ProfileProvider, useProfileContext };
+export { ProfileContext, ProfileProvider };

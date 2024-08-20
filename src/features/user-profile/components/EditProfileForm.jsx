@@ -23,7 +23,7 @@ import getImgValidation from "@/lib/utils/getImgValidation";
 import useProtectedSubmission from "@/lib/hooks/useProtectedSubmission";
 import isDigits from "@/lib/utils/isDigits";
 import destructureData from "../utils/destructureData";
-import { useProfileContext } from "../contexts/ProfileContext";
+import useProfileContext from "../hooks/useProfileContext";
 
 export default function EditProfileForm({ onClose }) {
   const { isLoading, protectedData } = useProfileContext();

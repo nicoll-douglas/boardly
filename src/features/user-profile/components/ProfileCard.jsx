@@ -13,7 +13,7 @@ import noWrap from "@/lib/constants/noWrap";
 import EditProfileBtn from "./EditProfileBtn";
 import destructureData from "../utils/destructureData";
 import ProfileTags from "./ProfileTags";
-import { useProfileContext } from "../contexts/ProfileContext";
+import useProfileContext from "../hooks/useProfileContext";
 
 export default function ProfileCard() {
   const { isLoading, protectedData } = useProfileContext();
