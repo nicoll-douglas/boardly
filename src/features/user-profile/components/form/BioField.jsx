@@ -9,11 +9,11 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import bioValidation from "../../data/bioValidation";
-import { useState } from "react";
+import useMaxLength from "@/lib/hooks/useMaxLength";
 
 export default function BioField({ form, isLoaded, initial }) {
   const { onChange, ...rest } = form.register("bio", bioValidation);
-  const [length, setLength] = useState(initial?.length || 0);
+  const { length, onLengthChange } = useMaxLength(initial?.length);
 
   return (
     <FormControl isInvalid={form.formState.errors.bio} mb={6}>
@@ -32,7 +32,7 @@ export default function BioField({ form, isLoaded, initial }) {
           minH={32}
           onChange={(e) => {
             onChange(e);
-            setLength(e.target.value.length);
+            onLengthChange(e);
           }}
           {...rest}
         />
