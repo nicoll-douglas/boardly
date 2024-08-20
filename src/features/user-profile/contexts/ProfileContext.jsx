@@ -5,11 +5,7 @@ import { createContext } from "react";
 const ProfileContext = createContext(null);
 
 function ProfileProvider({ children }) {
-  const { isLoading, protectedData } = useProtectedQuery(
-    "/api/me",
-    false,
-    data.body
-  );
+  const { isLoading, protectedData } = useProtectedQuery("/api/me", true);
 
   return (
     <ProfileContext.Provider value={{ isLoading, protectedData }}>

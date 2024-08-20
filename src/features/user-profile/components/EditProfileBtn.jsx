@@ -13,6 +13,7 @@ export default function EditProfileBtn(props) {
         variant={"ghost"}
         size={"sm"}
         onClick={onOpen}
+        data-testid="profile-open"
         {...props}
       />
       <FormModal isOpen={isOpen} onClose={onClose} heading="Edit profile">

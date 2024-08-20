@@ -46,7 +46,9 @@ export default function EditProfileForm({ onClose }) {
       message: "Successfully updated profile",
       callback: () => {
         onClose();
-        queryClient.invalidateQueries(["GET /api/me"]);
+        queryClient.invalidateQueries({
+          queryKey: ["GET /api/me"],
+        });
       },
     },
     formData: true,
@@ -82,7 +84,10 @@ export default function EditProfileForm({ onClose }) {
         <FormLabel>Age</FormLabel>
         <NumberInput step={1} allowMouseWheel isValidCharacter={isDigits}>
           <Skeleton isLoaded={isLoaded}>
-            <NumberInputField {...form.register("age", ageValidation)} />
+            <NumberInputField
+              data-testid="profile-age"
+              {...form.register("age", ageValidation)}
+            />
             <NumberInputStepper>
               <NumberIncrementStepper />
               <NumberDecrementStepper />
@@ -96,11 +101,15 @@ export default function EditProfileForm({ onClose }) {
       <FormControl mb={6} isInvalid={form.formState.errors.pronouns}>
         <FormLabel>Pronouns</FormLabel>
         <Skeleton isLoaded={isLoaded}>
-          <Select placeholder="Select pronouns" {...form.register("pronouns")}>
+          <Select
+            data-testid="profile-pronouns"
+            placeholder="Select pronouns"
+            {...form.register("pronouns")}
+          >
             <option value={"he/him"}>he/him</option>
             <option value={"she/her"}>she/her</option>
             <option value={"they/them"}>they/them</option>
-            <option value={"none"}>none</option>
+            <option alue={"none"}>none</option>
           </Select>
         </Skeleton>
         <FormErrorMessage>
@@ -112,6 +121,7 @@ export default function EditProfileForm({ onClose }) {
         <Skeleton isLoaded={isLoaded}>
           <Textarea
             resize={"none"}
+            data-testid="profile-bio"
             placeholder="Enter bio"
             {...form.register("bio", bioValidation)}
             size={"md"}
@@ -130,6 +140,7 @@ export default function EditProfileForm({ onClose }) {
       <Button
         w={"full"}
         type="submit"
+        data-testid="profile-submit"
         isLoading={form.formState.isSubmitting}
         isDisabled={!isLoaded}
       >
