@@ -25,6 +25,7 @@ import isDigits from "@/lib/utils/isDigits";
 import destructureData from "../utils/destructureData";
 import useProfileContext from "../hooks/useProfileContext";
 import { useQueryClient } from "@tanstack/react-query";
+import { imgHelperText } from "@/lib/constants/helperText";
 
 export default function EditProfileForm({ onClose }) {
   const { isLoading, protectedData } = useProfileContext();
@@ -71,11 +72,9 @@ export default function EditProfileForm({ onClose }) {
         </FormErrorMessage>
         <FormHelperText>
           <UnorderedList>
-            <ListItem>File size must not exceed 2MB</ListItem>
-            <ListItem>File must be of type JPEG/PNG</ListItem>
-            <ListItem>
-              File dimensions must be no more than 500x500 pixels
-            </ListItem>
+            {imgHelperText.map((text, index) => (
+              <ListItem key={index}>{text}</ListItem>
+            ))}
           </UnorderedList>
         </FormHelperText>
       </FormControl>

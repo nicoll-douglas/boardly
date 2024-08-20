@@ -10,4 +10,10 @@ const newUnHelperText = [
   "May only contain letters, numbers, underscores and hyphens",
 ];
 
-export { newPwdHelperText, newUnHelperText };
+const imgHelperText = [
+  "File size must not exceed 2MB",
+  "File must be of type JPEG/PNG",
+  "File dimensions must be no more than 500x500 pixels",
+];
+
+export { newPwdHelperText, newUnHelperText, imgHelperText };
