@@ -1,7 +1,7 @@
 import { IconButton, useDisclosure } from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
 import FormModal from "@/components/common/FormModal";
-import EditProfileForm from "./EditProfileForm";
+import EditProfileForm from "./form/EditProfileForm";
 
 export default function EditProfileBtn(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
