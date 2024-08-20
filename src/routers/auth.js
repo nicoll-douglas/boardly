@@ -2,7 +2,7 @@ const express = require("express");
 const validateBody = require("@/middleware/validation/validateBody");
 const validateHTTPAuth = require("@/middleware/validation/validateHTTPAuth");
 const auth = require("@/lib/validationSchemas/auth");
-const limiter = require("@/middleware/global/limiter");
+const limiter = require("@/middleware/common/limiter");
 
 const router = express.Router();
 

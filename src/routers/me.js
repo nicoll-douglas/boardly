@@ -1,5 +1,5 @@
 const express = require("express");
-const limiter = require("@/middleware/global/limiter");
+const limiter = require("@/middleware/common/limiter");
 const validateHTTPAuth = require("@/middleware/validation/validateHTTPAuth");
 const verifyAuth = require("@/middleware/auth/verifyAuth");
 

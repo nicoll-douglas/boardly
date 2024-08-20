@@ -4,9 +4,9 @@ const cors = require("cors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const corsOptions = require("./config/cors");
-const customMethods = require("./middleware/global/customMethods");
-const errorHandler = require("./middleware/global/errorHandler");
-const notFoundHandler = require("./middleware/global/notFoundHandler");
+const customMethods = require("./middleware/common/customMethods");
+const errorHandler = require("./middleware/common/errorHandler");
+const notFoundHandler = require("./middleware/common/notFoundHandler");
 
 const app = express();
 app.use(cors(corsOptions));
