@@ -6,7 +6,7 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/react";
 
-export default function SelectPronouns({ form, isLoaded }) {
+export default function PronounsField({ form, isLoaded }) {
   return (
     <FormControl mb={6} isInvalid={form.formState.errors.pronouns}>
       <FormLabel>Pronouns</FormLabel>
