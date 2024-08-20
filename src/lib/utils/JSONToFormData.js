@@ -1,6 +1,6 @@
-export default function useFormData(form) {
+export default function JSONToFormData(object) {
   const formData = new FormData();
-  Object.entries(form.getValues()).forEach(([field, value]) => {
+  Object.entries(object).forEach(([field, value]) => {
     if (value instanceof FileList) {
       formData.append(field, value[0]);
     } else {
