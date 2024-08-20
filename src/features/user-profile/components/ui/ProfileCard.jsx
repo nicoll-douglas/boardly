@@ -11,9 +11,9 @@ import {
 } from "@chakra-ui/react";
 import noWrap from "@/lib/constants/noWrap";
 import EditProfileBtn from "./EditProfileBtn";
-import destructureData from "../utils/destructureData";
+import destructureData from "../../utils/destructureData";
 import ProfileTags from "./ProfileTags";
-import useProfileContext from "../hooks/useProfileContext";
+import useProfileContext from "../../hooks/useProfileContext";
 import DOMPurify from "dompurify";
 
 export default function ProfileCard() {

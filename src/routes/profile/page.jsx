@@ -2,7 +2,7 @@ import Container from "@/components/common/Container";
 import Header from "@/components/common/Header";
 import Logo from "@/components/common/Logo";
 import { Grid, GridItem } from "@chakra-ui/react";
-import ProfileCard from "@/features/user-profile/components/ProfileCard";
+import ProfileCard from "@/features/user-profile/components/ui/ProfileCard";
 import { ProfileProvider } from "@/features/user-profile/contexts/ProfileContext";
 
 export default function ProfilePage() {
