@@ -14,6 +14,7 @@ import EditProfileBtn from "./EditProfileBtn";
 import destructureData from "../utils/destructureData";
 import ProfileTags from "./ProfileTags";
 import useProfileContext from "../hooks/useProfileContext";
+import DOMPurify from "dompurify";
 
 export default function ProfileCard() {
   const { isLoading, protectedData } = useProfileContext();
@@ -56,7 +57,7 @@ export default function ProfileCard() {
           <Heading size={"xs"} textTransform={"uppercase"} color={"gray.300"}>
             Bio
           </Heading>
-          <Text fontSize={"sm"}>{bio}</Text>
+          <Text fontSize={"sm"}>{DOMPurify.sanitize(bio)}</Text>
         </SkeletonText>
       </CardBody>
     </Card>
