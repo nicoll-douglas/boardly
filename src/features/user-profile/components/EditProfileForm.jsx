@@ -26,12 +26,15 @@ import destructureData from "../utils/destructureData";
 import useProfileContext from "../hooks/useProfileContext";
 import { useQueryClient } from "@tanstack/react-query";
 import { imgHelperText } from "@/lib/constants/helperText";
+import { useState } from "react";
+import ProfileImagePreview from "./ProfileImagePreview";
 
 export default function EditProfileForm({ onClose }) {
   const { isLoading, protectedData } = useProfileContext();
-  const { bio, age, pronouns } = destructureData(protectedData);
+  const { bio, age, pronouns, avatar } = destructureData(protectedData);
   const isLoaded = !isLoading;
   const queryClient = useQueryClient();
+  const [upload, setUpload] = useState(avatar);
 
   const form = useForm({
     shouldUnregister: true,
@@ -54,23 +57,42 @@ export default function EditProfileForm({ onClose }) {
     formData: true,
   });
 
+  const { onChange, ...rest } = form.register(
+    "avatar",
+    getImgValidation({ required: false })
+  );
+
+  function handleUploadChange(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setUpload(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setUpload(avatar);
+    }
+  }
+
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
-      <FormControl mb={6} isInvalid={form.formState.errors.profilePicture}>
+      <FormControl mb={6} isInvalid={form.formState.errors.avatar}>
         <FormLabel>Profile picture</FormLabel>
         <Skeleton isLoaded={isLoaded}>
           <Input
             type="file"
             multiple={false}
             accept="image/*"
-            {...form.register(
-              "profilePicture",
-              getImgValidation({ required: false })
-            )}
+            onChange={(e) => {
+              onChange(e);
+              handleUploadChange(e);
+            }}
+            {...rest}
           />
         </Skeleton>
         <FormErrorMessage>
-          {form.formState.errors.profilePicture?.message}
+          {form.formState.errors.avatar?.message}
         </FormErrorMessage>
         <FormHelperText>
           <UnorderedList>
@@ -80,6 +102,7 @@ export default function EditProfileForm({ onClose }) {
           </UnorderedList>
         </FormHelperText>
       </FormControl>
+      <ProfileImagePreview src={upload} />
       <FormControl isInvalid={form.formState.errors.age} mb={6}>
         <FormLabel>Age</FormLabel>
         <NumberInput step={1} allowMouseWheel isValidCharacter={isDigits}>

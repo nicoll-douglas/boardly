@@ -25,8 +25,8 @@ const tooMany = {
 
 const unauthorized = {
   status: "warning",
-  title: "Unauthorized",
-  description: "Please login to access the requested resource.",
+  title: "Session Expired",
+  description: "Please login to continue.",
 };
 
 const genericError = {
