@@ -43,7 +43,7 @@ function getImgValidation(options = {}) {
               img.height < MAX_DIMENSIONS.height;
             resolve(
               sizeOK ||
-                `Image dimensions must not exceed ${MAX_DIMENSIONS.width}x${MAX_DIMENSIONS.height}px`
+                `Image dimensions must not exceed ${MAX_DIMENSIONS.width}x${MAX_DIMENSIONS.height} pixels`
             );
           };
 

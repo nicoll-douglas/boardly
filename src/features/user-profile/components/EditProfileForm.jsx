@@ -24,11 +24,13 @@ import useProtectedSubmission from "@/lib/hooks/useProtectedSubmission";
 import isDigits from "@/lib/utils/isDigits";
 import destructureData from "../utils/destructureData";
 import useProfileContext from "../hooks/useProfileContext";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function EditProfileForm({ onClose }) {
   const { isLoading, protectedData } = useProfileContext();
   const { bio, age, pronouns } = destructureData(protectedData);
   const isLoaded = !isLoading;
+  const queryClient = useQueryClient();
 
   const form = useForm({
     shouldUnregister: true,
@@ -41,7 +43,10 @@ export default function EditProfileForm({ onClose }) {
   const onSubmit = useProtectedSubmission(form, "/api/me/profile", {
     onSuccess: {
       message: "Successfully updated profile",
-      callback: onClose,
+      callback: () => {
+        onClose();
+        queryClient.invalidateQueries(["GET /api/me"]);
+      },
     },
     formData: true,
   });
