@@ -23,7 +23,9 @@ export default function ProfileCard() {
     data.body
   );
   const isLoaded = !isLoading;
-  const { username, bio, profileTags } = destructureData(protectedData);
+  const { username, bio, profileTags } = destructureData(protectedData, {
+    tags: true,
+  });
 
   return (
     <Card w={"full"} h={"full"} as={"section"} aria-label="Profile">
