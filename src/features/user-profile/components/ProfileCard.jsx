@@ -11,17 +11,12 @@ import {
 } from "@chakra-ui/react";
 import noWrap from "@/lib/constants/noWrap";
 import EditProfileBtn from "./EditProfileBtn";
-import useProtectedQuery from "@/lib/hooks/useProtectedQuery";
 import destructureData from "../utils/destructureData";
 import ProfileTags from "./ProfileTags";
-import data from "@root/cypress/fixtures/features/user-profile/200-response.json";
+import { useProfileContext } from "../contexts/ProfileContext";
 
 export default function ProfileCard() {
-  const { isLoading, protectedData } = useProtectedQuery(
-    "/api/me",
-    false,
-    data.body
-  );
+  const { isLoading, protectedData } = useProfileContext();
   const isLoaded = !isLoading;
   const { username, bio, profileTags } = destructureData(protectedData, {
     tags: true,
