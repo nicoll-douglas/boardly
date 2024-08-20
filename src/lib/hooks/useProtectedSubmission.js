@@ -2,8 +2,8 @@ import useAuth from "./useAuth";
 import { unauthorized, serverError, tooMany } from "@/lib/constants/toasts";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import JSONToFormData from "@/lib/utils/JSONToFormData";
 import useSubmitHandlers from "./useSubmitHandlers";
+import submitToProtected from "@/services/submitToProtected";
 
 export default function useProtectedSubmission(form, endpoint, options = {}) {
   const { accessToken, setAccessToken } = useAuth();
@@ -15,22 +15,8 @@ export default function useProtectedSubmission(form, endpoint, options = {}) {
     formData = false,
   } = options;
 
-  const fetchOptions = {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: formData
-      ? JSONToFormData(form.getValues())
-      : JSON.stringify(form.getValues()),
-  };
-  if (!formData) {
-    fetchOptions.headers["Content-Type"] = "application/json";
-  }
-
   const submit = async () =>
-    fetch(`${import.meta.env.VITE_API_URL}${endpoint}`, fetchOptions);
+    submitToProtected(endpoint, accessToken, form, { formData });
 
   const handlers = {
     400: async (response) => {
