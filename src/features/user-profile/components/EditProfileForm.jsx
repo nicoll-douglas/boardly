@@ -109,7 +109,7 @@ export default function EditProfileForm({ onClose }) {
             <option value={"he/him"}>he/him</option>
             <option value={"she/her"}>she/her</option>
             <option value={"they/them"}>they/them</option>
-            <option alue={"none"}>none</option>
+            <option value={"none"}>none</option>
           </Select>
         </Skeleton>
         <FormErrorMessage>
