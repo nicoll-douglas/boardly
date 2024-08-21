@@ -1,5 +1,6 @@
 const validation = {
   required: false,
+  valueAsNumber: true,
   max: {
     value: 120,
     message: "Age must be less than 120",
