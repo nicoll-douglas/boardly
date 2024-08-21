@@ -43,12 +43,18 @@ describe("Edit profile form submission", () => {
             cy.getByTestId("profile-bio").type(`{selectall}{backspace}${bio}`);
             cy.getByTestId("profile-submit").click();
 
-            cy.wait("@submit");
-            cy.contains("Successfully updated profile");
-            cy.wait("@fetch");
-            cy.contains(age);
-            cy.contains(bio);
-            cy.contains(pronouns);
+            cy.wait("@submit").then(({ request }) => {
+              expect(request.body).to.deep.equal({
+                age,
+                bio,
+                pronouns,
+              });
+              cy.contains("Successfully updated profile");
+              cy.wait("@fetch");
+              cy.contains(age);
+              cy.contains(bio);
+              cy.contains(pronouns);
+            });
           }
         );
       }
