@@ -23,7 +23,7 @@ export default function AvatarForm({ onClose }) {
     invalidate: ["GET /api/me"],
   });
   const onSubmit = useSubmitHandlers(
-    () => changeAvatar(accessToken, form, method),
+    async () => changeAvatar(accessToken, form, method),
     handlers
   );
 
