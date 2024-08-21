@@ -1,55 +1,55 @@
 import { useForm } from "react-hook-form";
 import { Button } from "@chakra-ui/react";
-import useProtectedSubmission from "@/lib/hooks/useProtectedSubmission";
 import useProfileContext from "../../hooks/useProfileContext";
-import { useQueryClient } from "@tanstack/react-query";
 import SelectPronouns from "./PronounsField";
 import AgeField from "./AgeField";
 import BioField from "./BioField";
+import useProtectedSubmission from "@/lib/hooks/useProtectedSubmission";
+import editProfile from "../../services/editProfile";
+import useSubmitHandlers from "@/lib/hooks/useSubmitHandlers";
 
 export default function EditProfileForm({ onClose }) {
   const { isLoading, profile = {} } = useProfileContext();
-  const { bio, age, pronouns } = profile;
-  const isLoaded = !isLoading;
-  const queryClient = useQueryClient();
-
   const form = useForm({
     shouldUnregister: true,
     defaultValues: {
-      bio,
-      age,
-      pronouns,
+      bio: profile.bio,
+      age: profile.age,
+      pronouns: profile.pronouns,
     },
   });
-  const values = form.watch();
-  const isInitial =
-    values.age === age && values.bio === bio && values.pronouns === pronouns;
-
-  const onSubmit = useProtectedSubmission(form, "/api/me/profile/info", {
+  const { handlers, accessToken } = useProtectedSubmission(form, {
     onSuccess: {
       message: "Successfully updated profile",
-      callback: () => {
-        onClose();
-        queryClient.invalidateQueries({
-          queryKey: ["GET /api/me"],
-        });
-      },
+      callback: onClose,
     },
+    invalidate: ["GET /api/me"],
   });
+  const onSubmit = useSubmitHandlers(
+    async () => editProfile(accessToken, form),
+    handlers
+  );
+
+  const isLoaded = !isLoading;
+  const values = form.watch();
+  const isInitial =
+    values.age === profile.age &&
+    values.bio === profile.bio &&
+    values.pronouns === profile.pronouns;
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <AgeField form={form} isLoaded={isLoaded} />
       <SelectPronouns form={form} isLoaded={isLoaded} />
-      <BioField form={form} isLoaded={isLoaded} initial={bio} />
+      <BioField form={form} isLoaded={isLoaded} initial={profile.bio} />
       <Button
         w={"full"}
         type="submit"
         data-testid="profile-submit"
         isLoading={form.formState.isSubmitting}
-        isDisabled={!isLoaded || isInitial}
+        isDisabled={isLoading || isInitial}
       >
-        Submit
+        Save
       </Button>
     </form>
   );

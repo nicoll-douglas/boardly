@@ -15,14 +15,19 @@ import Avatar from "./Avatar";
 import DOMPurify from "dompurify";
 
 export default function ProfileCard() {
-  const { isLoading, profile } = useProfileContext();
+  const { isLoading, profile = {} } = useProfileContext();
   const isLoaded = !isLoading;
-  const { username, bio, profileTags } = profile;
+  const { username, bio, tags, avatar } = profile;
 
   return (
     <Card w={"full"} h={"full"} as={"section"} aria-label="Profile">
       <CardHeader p={4} gap={3} display={"flex"}>
-        <Avatar name={username} isLoaded={isLoaded} withEditing={true} />
+        <Avatar
+          name={username}
+          isLoaded={isLoaded}
+          src={avatar}
+          withEditing={true}
+        />
         <Flex
           maxW={"calc(100% - 120px)"}
           gap={2}
@@ -41,7 +46,7 @@ export default function ProfileCard() {
             >
               {username}
             </Heading>
-            <ProfileTags tags={profileTags} />
+            <ProfileTags tags={tags} />
           </SkeletonText>
         </Flex>
         <EditProfileBtn ml="auto" />

@@ -14,9 +14,15 @@ export default function FormModal({
   onClose,
   children,
   motionPreset = "scale",
+  ...rest
 }) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} motionPreset={motionPreset}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      motionPreset={motionPreset}
+      {...rest}
+    >
       <ModalOverlay />
       <ModalContent mx={4}>
         {onClose && <ModalCloseButton />}

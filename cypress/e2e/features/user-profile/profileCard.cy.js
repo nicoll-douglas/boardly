@@ -24,8 +24,8 @@ describe("Profile card data fetching", () => {
       });
     }).as("fetch");
     cy.wait("@fetch");
-    cy.contains("Unauthorized");
-    cy.contains("Please login to access the requested resource.");
+    cy.contains("Session Expired");
+    cy.contains("Please login to continue.");
     cy.wait(250);
     cy.url().should("eq", `${Cypress.config("baseUrl")}/`);
   });
