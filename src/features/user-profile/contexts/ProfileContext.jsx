@@ -1,6 +1,7 @@
 import useProtectedQuery from "@/lib/hooks/useProtectedQuery";
 import data from "@root/cypress/fixtures/features/user-profile/200-response.json";
 import { createContext } from "react";
+import dompurify from "dompurify";
 
 const ProfileContext = createContext(null);
 
@@ -19,7 +20,14 @@ function ProfileProvider({ children }) {
   const tags = [];
   if (age) tags.push(age);
   if (pronouns) tags.push(pronouns);
-  const profile = { username, age, pronouns, bio, avatar, tags };
+  const profile = {
+    username,
+    age,
+    pronouns,
+    bio: dompurify.sanitize(bio),
+    avatar,
+    tags,
+  };
 
   return (
     <ProfileContext.Provider value={{ isLoading, profile }}>
