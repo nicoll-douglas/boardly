@@ -11,8 +11,18 @@ function ProfileProvider({ children }) {
     data.body
   );
 
+  const username = protectedData?.profile.username;
+  const age = protectedData?.profile.age;
+  const pronouns = protectedData?.profile.pronouns;
+  const bio = protectedData?.profile.bio;
+  const avatar = protectedData?.profile.avatar;
+  const tags = [];
+  if (age) tags.push(age);
+  if (pronouns) tags.push(pronouns);
+  const profile = { username, age, pronouns, bio, avatar, tags };
+
   return (
-    <ProfileContext.Provider value={{ isLoading, protectedData }}>
+    <ProfileContext.Provider value={{ isLoading, profile }}>
       {children}
     </ProfileContext.Provider>
   );

@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Button } from "@chakra-ui/react";
 import useProtectedSubmission from "@/lib/hooks/useProtectedSubmission";
-import destructureData from "../../utils/destructureData";
 import useProfileContext from "../../hooks/useProfileContext";
 import { useQueryClient } from "@tanstack/react-query";
 import SelectPronouns from "./PronounsField";
@@ -9,8 +8,8 @@ import AgeField from "./AgeField";
 import BioField from "./BioField";
 
 export default function EditProfileForm({ onClose }) {
-  const { isLoading, protectedData } = useProfileContext();
-  const { bio, age, pronouns } = destructureData(protectedData);
+  const { isLoading, profile = {} } = useProfileContext();
+  const { bio, age, pronouns } = profile;
   const isLoaded = !isLoading;
   const queryClient = useQueryClient();
 
