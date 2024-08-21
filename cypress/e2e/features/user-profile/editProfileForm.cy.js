@@ -26,7 +26,7 @@ describe("Edit profile form submission", () => {
               }
             }).as("fetch");
 
-            cy.intercept("POST", "**/api/me/profile", (req) =>
+            cy.intercept("POST", "**/api/me/profile/info", (req) =>
               req.reply({
                 statusCode: 200,
                 body: {},

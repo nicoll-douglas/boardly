@@ -7,11 +7,10 @@ import { useQueryClient } from "@tanstack/react-query";
 import SelectPronouns from "./PronounsField";
 import AgeField from "./AgeField";
 import BioField from "./BioField";
-import AvatarField from "./AvatarField";
 
 export default function EditProfileForm({ onClose }) {
   const { isLoading, protectedData } = useProfileContext();
-  const { bio, age, pronouns, avatar } = destructureData(protectedData);
+  const { bio, age, pronouns } = destructureData(protectedData);
   const isLoaded = !isLoading;
   const queryClient = useQueryClient();
 
@@ -23,8 +22,11 @@ export default function EditProfileForm({ onClose }) {
       pronouns,
     },
   });
+  const values = form.watch();
+  const isInitial =
+    values.age === age && values.bio === bio && values.pronouns === pronouns;
 
-  const onSubmit = useProtectedSubmission(form, "/api/me/profile", {
+  const onSubmit = useProtectedSubmission(form, "/api/me/profile/info", {
     onSuccess: {
       message: "Successfully updated profile",
       callback: () => {
@@ -34,12 +36,10 @@ export default function EditProfileForm({ onClose }) {
         });
       },
     },
-    formData: true,
   });
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
-      <AvatarField form={form} isLoaded={isLoaded} initial={avatar} />
       <AgeField form={form} isLoaded={isLoaded} />
       <SelectPronouns form={form} isLoaded={isLoaded} />
       <BioField form={form} isLoaded={isLoaded} initial={bio} />
@@ -48,7 +48,7 @@ export default function EditProfileForm({ onClose }) {
         type="submit"
         data-testid="profile-submit"
         isLoading={form.formState.isSubmitting}
-        isDisabled={!isLoaded}
+        isDisabled={!isLoaded || isInitial}
       >
         Submit
       </Button>

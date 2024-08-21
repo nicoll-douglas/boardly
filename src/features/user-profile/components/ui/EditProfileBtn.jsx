@@ -16,7 +16,7 @@ export default function EditProfileBtn(props) {
         data-testid="profile-open"
         {...props}
       />
-      <FormModal isOpen={isOpen} onClose={onClose} heading="Edit profile">
+      <FormModal isOpen={isOpen} onClose={onClose} heading="Edit Profile">
         <EditProfileForm onClose={onClose} />
       </FormModal>
     </>
