@@ -12,11 +12,11 @@ const router = express.Router();
 router.use("/", limiter(100, 0.6), validateHTTPAuth, verifyAuth);
 router.get("/", require("@/controllers/me/get"));
 router.post(
-  "/profile",
-  processImg("avatar"),
+  "/profile/info",
+  processImg("avatar", { fields: 3 }),
   validateImg({ optional: true }),
   validateBody(profileSchema),
-  require("@/controllers/me/profile/post")
+  require("@/controllers/me/profile/info/post")
 );
 
 module.exports = router;
