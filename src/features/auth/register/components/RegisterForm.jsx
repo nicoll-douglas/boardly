@@ -5,9 +5,9 @@ import usernameValidation from "../data/usernameValidation";
 import passwordValidation from "../data/passwordValidation";
 import useRegister from "../hooks/useRegister";
 
-export default function RegisterForm() {
+export default function RegisterForm({ onClose }) {
   const form = useForm({ shouldUnregister: true });
-  const onSubmit = useRegister(form);
+  const onSubmit = useRegister(form, onClose);
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>

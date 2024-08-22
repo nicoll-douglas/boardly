@@ -20,7 +20,6 @@ export default function Avatar({ name, src, isLoaded, withEditing }) {
           as={withEditing ? Button : "span"}
           onClick={onOpen}
           src={src}
-          bg={!src && "orange.200"}
         />
       </SkeletonCircle>
       {withEditing && (
@@ -30,7 +29,7 @@ export default function Avatar({ name, src, isLoaded, withEditing }) {
           size={"xs"}
           heading="Edit Profile Picture"
         >
-          <AvatarForm />
+          <AvatarForm onClose={onClose} />
         </FormModal>
       )}
     </>

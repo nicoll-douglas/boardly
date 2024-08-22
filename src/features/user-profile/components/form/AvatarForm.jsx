@@ -17,7 +17,7 @@ export default function AvatarForm({ onClose }) {
   const form = useForm({ shouldUnregister: true });
   const { accessToken, handlers } = useProtectedSubmission(form, {
     onSuccess: {
-      message: "Successfully update profile picture",
+      message: "Successfully updated profile picture",
       callback: onClose,
     },
     invalidate: ["GET /api/me"],

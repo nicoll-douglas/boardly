@@ -3,7 +3,7 @@ import getSubmit from "../services/submit";
 import { tooMany15, serverError } from "@/lib/constants/toasts";
 import { useToast } from "@chakra-ui/react";
 
-export default function useRegister(form) {
+export default function useRegister(form, onClose) {
   const submit = getSubmit(form);
   const toast = useToast();
 
@@ -22,11 +22,15 @@ export default function useRegister(form) {
     },
     429: () => toast(tooMany15),
     500: () => toast(serverError),
-    200: () =>
+    200: () => {
       toast({
         status: "success",
         title: "Account Created",
-      }),
+        description:
+          "Please check your email and click the link to verify your account.",
+      });
+      onClose();
+    },
   };
 
   const onSubmit = useSubmitHandlers(submit, handlers);

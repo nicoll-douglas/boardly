@@ -15,7 +15,7 @@ export default function ToggleableForm({
       isOpen={isOpen}
       onClose={onClose}
     >
-      {isLoginForm ? <LoginForm /> : <RegisterForm />}
+      {isLoginForm ? <LoginForm /> : <RegisterForm onClose={onClose} />}
       <Button
         variant={"link"}
         mx={"auto"}
