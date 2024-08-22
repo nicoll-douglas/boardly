@@ -1,4 +1,5 @@
 const { REFRESH_DURATION } = require("@/config/JWT");
+const logger = require("@/middleware/logging/winston");
 
 function customMethods(req, res, next) {
   let body = {};
@@ -10,6 +11,7 @@ function customMethods(req, res, next) {
 
   res.accessToken = (accessToken) => {
     body.accessToken = accessToken;
+    logger.info("Added new access token to response");
     return res;
   };
 
@@ -20,15 +22,20 @@ function customMethods(req, res, next) {
       secure: true,
       sameSite: "None",
     });
+    logger.info("Added new refresh token to response");
     return res;
   };
 
   res.appendData = (key, data) => {
     body[key] = data;
+    logger.info(`Appended data to response body: ${key}`);
     return res;
   };
 
-  res.sendData = () => res.json(body);
+  res.sendData = () => {
+    logger.info("Sent data back to client");
+    return res.json(body);
+  };
 
   next();
 }
