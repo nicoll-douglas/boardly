@@ -6,10 +6,10 @@ function validateBody(schema) {
     logger.info("Validating request body...");
     const { error } = Joi.object(schema).validate(req.body);
     if (!error) {
-      logger.log("Request body successfully validated");
+      logger.info("Request body successfully validated");
       return next();
     }
-    logger.error(`${error.name}: ${error.details.message}`);
+    logger.error(`${error.name}: ${error.details[0].message}`);
     logger.info("Responding with 400");
     return res.status(400).sendData();
   };

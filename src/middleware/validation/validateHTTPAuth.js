@@ -11,7 +11,7 @@ function validateHTTPAuth(req, res, next) {
     return next();
   }
 
-  logger.error(`${error.name}: ${error.details.message}`);
+  logger.error(`${error.name}: ${error.details[0].message}`);
   logger.info(`Responded with: 401`);
   return res.sendStatus(401);
 }
