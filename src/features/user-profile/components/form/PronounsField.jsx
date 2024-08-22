@@ -19,7 +19,6 @@ export default function PronounsField({ form, isLoaded }) {
           <option value={"he/him"}>he/him</option>
           <option value={"she/her"}>she/her</option>
           <option value={"they/them"}>they/them</option>
-          <option value={"none"}>none</option>
         </Select>
       </Skeleton>
       <FormErrorMessage>
