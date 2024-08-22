@@ -1,14 +1,15 @@
-const { ALLOWED_TYPES, MAX_FILE_SIZE } = require("@/config/imgUploads");
+const { ALLOWED_TYPES } = require("@/config/imgUploads");
 
-function validateImg(options) {
+function validateImg(options = {}) {
+  const { optional = true } = options;
+
   return (req, res, next) => {
-    const optional = options?.optional;
-    if (optional && !req.file) return next();
-    if (!optional && !req.file) return res.status(400).sendData();
-    if (!ALLOWED_TYPES.includes(req.file.mimetype))
-      return res.status(400).sendData();
-    if (req.file.size > MAX_FILE_SIZE) return res.status(400).sendData();
-    return next();
+    if (!req.file) {
+      return optional ? next() : res.status(400).sendData();
+    } else {
+      const allowedType = ALLOWED_TYPES.includes(req.file.mimetype);
+      return allowedType ? next() : res.status(400).sendData();
+    }
   };
 }
 

@@ -13,10 +13,18 @@ router.use("/", limiter(100, 0.6), validateHTTPAuth, verifyAuth);
 router.get("/", require("@/controllers/me/get"));
 router.post(
   "/profile/info",
-  processImg("avatar", { fields: 3 }),
-  validateImg({ optional: true }),
   validateBody(profileSchema),
   require("@/controllers/me/profile/info/post")
+);
+router.delete(
+  "/profile/avatar",
+  require("@/controllers/me/profile/avatar/delete")
+);
+router.put(
+  "/profile/avatar",
+  processImg("avatar"),
+  validateImg({ optional: true }),
+  require("@/controllers/me/profile/avatar/put")
 );
 
 module.exports = router;

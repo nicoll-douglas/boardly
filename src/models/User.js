@@ -17,6 +17,10 @@ const user = new mongoose.Schema(
       type: String,
       default: "Hi, welcome to my profile!",
     },
+    avatarID: {
+      type: String,
+      default: () => crypto.randomUUID(),
+    },
   },
   { timestamps: true }
 );
