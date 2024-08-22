@@ -1,9 +1,10 @@
 import Container from "@/components/common/Container";
 import Header from "@/components/common/Header";
 import Logo from "@/components/common/Logo";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { GridItem } from "@chakra-ui/react";
 import ProfileCard from "@/features/user-profile/components/ui/ProfileCard";
 import { ProfileProvider } from "@/features/user-profile/contexts/ProfileContext";
+import Grid from "@/components/common/Grid";
 
 export default function ProfilePage() {
   return (
@@ -12,13 +13,7 @@ export default function ProfilePage() {
         <Header>
           <Logo to="/home" />
         </Header>
-        <Grid
-          flex={1}
-          templateColumns={"repeat(12, 1fr)"}
-          templateRows={"repeat(12, 1fr)"}
-          gap={4}
-          py={4}
-        >
+        <Grid>
           <GridItem
             colStart={{ base: 1, md: 3, lg: 1 }}
             colEnd={{ base: 13, md: 11, lg: 6, xl: 5 }}
