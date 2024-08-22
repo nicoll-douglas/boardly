@@ -39,7 +39,7 @@ export default function IndexPage() {
       <Center flex={1} mt={12}>
         <Hero onJoin={openRegisterForm} />
       </Center>
-      <Center py={16}>
+      <Center mb={16}>
         <Authorship />
       </Center>
     </Container>
