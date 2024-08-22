@@ -14,6 +14,7 @@ const months = [
 ];
 
 export default function formatISOString(ISOString) {
+  if (!ISOString) return "";
   const date = new Date(ISOString);
 
   const month = months[date.getMonth()];

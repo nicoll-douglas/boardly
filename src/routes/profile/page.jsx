@@ -13,12 +13,14 @@ export default function ProfilePage() {
         <Header>
           <Logo to="/home" />
         </Header>
-        <Grid>
+        <Grid templateRows={"repeat(12, 1fr)"}>
           <GridItem
             colStart={{ base: 1, md: 3, lg: 1 }}
             colEnd={{ base: 13, md: 11, lg: 6, xl: 5 }}
             rowStart={1}
-            rowEnd={5}
+            rowEnd={6}
+            position={"sticky"}
+            top={"72px"}
           >
             <ProfileCard />
           </GridItem>
