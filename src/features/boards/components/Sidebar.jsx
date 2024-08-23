@@ -12,7 +12,7 @@ export default function Sidebar() {
   return (
     <Card w={"full"} h={"full"} as={"nav"}>
       <CardHeader p={4}>
-        <Heading size={"sm"}>Threads</Heading>
+        <Heading size={"sm"}>Boards</Heading>
       </CardHeader>
       <CardBody pt={0} p={4}>
         <UnorderedList styleType={"none"} ml={0}>
