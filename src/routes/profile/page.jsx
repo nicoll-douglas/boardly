@@ -11,14 +11,14 @@ export default function ProfilePage() {
     <ProfileProvider>
       <Container maxW={"8xl"}>
         <Header>
-          <Logo to="/home" />
+          <Logo to="/main" />
         </Header>
-        <Grid templateRows={"repeat(12, 1fr)"}>
+        <Grid>
           <GridItem
             colStart={{ base: 1, md: 3, lg: 1 }}
             colEnd={{ base: 13, md: 11, lg: 6, xl: 5 }}
             rowStart={1}
-            rowEnd={6}
+            h="fit-content"
             position={"sticky"}
             top={"72px"}
           >
