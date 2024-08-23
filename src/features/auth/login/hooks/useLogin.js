@@ -35,7 +35,7 @@ export default function useLogin(form) {
         status: "success",
         title: "Successfully logged in",
       });
-      navigate("/home");
+      navigate("/main");
     },
   };
 
