@@ -14,8 +14,7 @@ export default function Hero({ onJoin }) {
       </Heading>
       <Text fontSize={{ sm: "lg" }}>
         Browse threads, share your thoughts, participate in open dialogue or
-        just come and hang out with like-minded people. Join the messaging board
-        today.
+        just come and hang out with like-minded people. Join the forum today.
       </Text>
       <Flex w={"full"} flexDir={{ base: "column", sm: "row" }}>
         <RegisterBtn
