@@ -14,10 +14,10 @@ describe("Register form submission", () => {
   });
 
   it("Should structure request correctly", () => {
-    cy.intercept("POST", "**/api/v1/auth/register").as("fetch");
+    cy.intercept("POST", "**/api/auth/register").as("fetch");
     cy.getByTestId("register-submit").click();
     cy.wait("@fetch").then(({ request }) => {
-      cy.wrap(request.url).should("include", "/api/v1/auth/register");
+      cy.wrap(request.url).should("include", "/api/auth/register");
       expect(request.method).to.equal("POST");
       expect(request.body).to.deep.equal({
         email,
@@ -29,9 +29,9 @@ describe("Register form submission", () => {
     });
   });
 
-  it.only("Should set correct errors on 400 response", () => {
+  it("Should set correct errors on 400 response", () => {
     cy.fixture("/features/auth/register/400-response.json").then((data) => {
-      cy.intercept("POST", "**/api/v1/auth/register", (req) => {
+      cy.intercept("POST", "**/api/auth/register", (req) => {
         req.reply(data);
       }).as("fetch");
       cy.getByTestId("register-submit").click();

@@ -28,7 +28,11 @@ export default function IndexPage() {
       <Header>
         <Logo to="/" />
         <LoginBtn ml="auto" onClick={openLoginForm} />
-        <RegisterBtn ml={6} onClick={openRegisterForm} />
+        <RegisterBtn
+          ml={6}
+          data-testid="register-btn"
+          onClick={openRegisterForm}
+        />
         <ToggleableForm
           isOpen={isOpen}
           isLoginForm={isLoginForm}

@@ -12,7 +12,7 @@ describe("Login form submission", () => {
   it("Should set errors correctly on 400 response", () => {
     cy.fixture("/features/auth/login/400-response.json").then((data) => {
       cy.wrap(data).as("fixture");
-      cy.intercept("POST", "**/api/v1/auth/login", (req) => {
+      cy.intercept("POST", "**/api/auth/login", (req) => {
         req.reply(data);
       }).as("fetch");
     });
@@ -25,10 +25,10 @@ describe("Login form submission", () => {
   });
 
   it("Should structure request correctly", () => {
-    cy.intercept("POST", "**/api/v1/auth/login").as("fetch");
+    cy.intercept("POST", "**/api/auth/login").as("fetch");
     cy.getByTestId("login-submit").click();
     cy.wait("@fetch").then(({ request }) => {
-      cy.wrap(request.url).should("include", "/api/v1/auth/login");
+      cy.wrap(request.url).should("include", "/api/auth/login");
       expect(request.body).to.deep.equal({ username, password });
       expect(request.headers["content-type"]).to.include("application/json");
       expect(request.method).to.equal("POST");
@@ -36,7 +36,7 @@ describe("Login form submission", () => {
   });
 
   it("Should set errors correctly on 404 response", () => {
-    cy.intercept("POST", "**/api/v1/auth/login", (req) => {
+    cy.intercept("POST", "**/api/auth/login", (req) => {
       req.reply({
         statusCode: 404,
       });
@@ -47,7 +47,7 @@ describe("Login form submission", () => {
   });
 
   it("Should toast correctly on 429 response", () => {
-    cy.intercept("POST", "**/api/v1/auth/login", (req) => {
+    cy.intercept("POST", "**/api/auth/login", (req) => {
       req.reply({
         statusCode: 429,
       });
@@ -59,7 +59,7 @@ describe("Login form submission", () => {
   });
 
   it("Should toast correctly on 500 response", () => {
-    cy.intercept("POST", "**/api/v1/auth/login", (req) => {
+    cy.intercept("POST", "**/api/auth/login", (req) => {
       req.reply({
         statusCode: 500,
       });
@@ -71,7 +71,7 @@ describe("Login form submission", () => {
   });
 
   it("Should toast correctly on network error", () => {
-    cy.intercept("POST", "**/api/v1/auth/login", {
+    cy.intercept("POST", "**/api/auth/login", {
       forceNetworkError: true,
     }).as("fetch");
     cy.getByTestId("login-submit").click();
@@ -80,10 +80,10 @@ describe("Login form submission", () => {
     cy.contains("Something went wrong, please try again.");
   });
 
-  it.only("Should toast and navigate correctly on 200 response", () => {
+  it("Should toast and navigate correctly on 200 response", () => {
     cy.fixture("/features/auth/login/200-response.json").then((data) => {
       cy.wrap(data).as("fixture");
-      cy.intercept("POST", "**/api/v1/auth/login", (req) => {
+      cy.intercept("POST", "**/api/auth/login", (req) => {
         req.reply(data);
       }).as("fetch");
     });

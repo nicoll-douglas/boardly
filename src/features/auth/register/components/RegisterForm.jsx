@@ -16,6 +16,7 @@ export default function RegisterForm({ onClose }) {
         registerKey={"email"}
         placeholder="Enter email"
         label="Email"
+        data-testid="register-email"
         helperText="We'll use your email to help you sign up"
         helpersAsList={false}
         {...form.register("email", { required: "Email is required" })}
@@ -24,6 +25,7 @@ export default function RegisterForm({ onClose }) {
         formRef={form}
         registerKey={"confirmEmail"}
         placeholder="Re-enter email"
+        data-testid="register-confirm-email"
         label="Confirm email"
         {...form.register("confirmEmail", {
           required: "Please confirm your email",
@@ -36,6 +38,7 @@ export default function RegisterForm({ onClose }) {
         registerKey={"username"}
         placeholder="Enter username"
         label="Username"
+        data-testid="register-username"
         helperText={[
           "Must be no more than 20 characters long",
           "May only contain letters, numbers, underscores and hyphens",
@@ -47,6 +50,7 @@ export default function RegisterForm({ onClose }) {
         registerKey="password"
         placeholder="Enter password"
         label="Password"
+        data-testid="register-password"
         helperText={[
           "Must be at least 5 characters long",
           "Must be no more than 30 characters long",
@@ -56,7 +60,12 @@ export default function RegisterForm({ onClose }) {
         password={true}
         {...form.register("password", passwordValidation)}
       />
-      <Button type="submit" w={"full"} isLoading={form.formState.isSubmitting}>
+      <Button
+        type="submit"
+        data-testid="register-submit"
+        w={"full"}
+        isLoading={form.formState.isSubmitting}
+      >
         Submit
       </Button>
     </form>
