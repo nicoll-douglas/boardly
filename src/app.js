@@ -1,5 +1,6 @@
 require("dotenv").config({ override: true });
 require("module-alias/register");
+require("./models/index");
 const cors = require("cors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
@@ -29,6 +30,7 @@ app.use(limiter(100, 0.6));
 app.use(validateHTTPAuth);
 app.use(verifyAuth);
 app.use("/api/me", require("./routers/me"));
+app.use("/api/boards", require("./routers/boards"));
 
 app.use(notFoundHandler);
 app.use(errorHandler);

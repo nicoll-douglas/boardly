@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
   try {
     const id = req.user._id;
     const profile = await User.findById(id).select(
-      "username age bio pronouns avatarID"
+      "username age bio pronouns avatarID createdAt"
     );
     const { avatarID, ...rest } = profile.toObject();
     const avatar = bucket.file(avatarID);
