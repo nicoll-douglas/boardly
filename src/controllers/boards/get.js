@@ -1,8 +1,11 @@
 const Board = require("@/models/Board");
 
 module.exports = async (req, res, next) => {
+  const { boardID } = req.params;
+  const query = boardID === "main" ? { name: "_main" } : { _id: boardID };
+
   try {
-    let mainBoard = await Board.findOne({ name: "_main" })
+    let mainBoard = await Board.findOne(query)
       .select({
         name: 1,
         admin: 1,
