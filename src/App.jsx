@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import "./assets/styles.css";
 import IndexPage from "./routes/page";
-import MainPage from "./routes/main/page";
+import BoardPage from "./routes/boards/page";
 import VerificationPage from "./routes/auth/verify/page";
 import ForgotPasswordPage from "./routes/auth/forgot/page";
 import NewPwdPage from "./routes/auth/reset/page";
@@ -11,7 +11,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<IndexPage />}></Route>
-      <Route path="/main" element={<MainPage />}></Route>
+      <Route path="/boards/:boardID" element={<BoardPage />}></Route>
       <Route path="/auth/verify/:token" element={<VerificationPage />}></Route>
       <Route path="/auth/forgot" element={<ForgotPasswordPage />}></Route>
       <Route path="/auth/reset/:token" element={<NewPwdPage />}></Route>

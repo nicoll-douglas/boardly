@@ -2,22 +2,20 @@ import { createContext } from "react";
 import useProtectedQuery from "@/lib/hooks/useProtectedQuery";
 import mockData from "@root/cypress/fixtures/features/boards/200-response.json";
 
-const MainBoardContext = createContext(null);
+const BoardContext = createContext(null);
 
-function MainBoardProvider({ children }) {
+function BoardProvider({ boardID, children }) {
   const { isLoading, protectedData } = useProtectedQuery(
-    "/api/boards/main",
+    `/api/boards/${boardID}`,
     false,
     mockData.body
   );
 
   return (
-    <MainBoardContext.Provider
-      value={{ isLoading, board: protectedData?.board }}
-    >
+    <BoardContext.Provider value={{ isLoading, board: protectedData?.board }}>
       {children}
-    </MainBoardContext.Provider>
+    </BoardContext.Provider>
   );
 }
 
-export { MainBoardContext, MainBoardProvider };
+export { BoardContext, BoardProvider };

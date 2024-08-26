@@ -17,7 +17,7 @@ export default function Sidebar() {
       <CardBody pt={0} p={4}>
         <UnorderedList styleType={"none"} ml={0}>
           <ListItem mb={"2px"}>
-            <SidebarLink to="/main">_main</SidebarLink>
+            <SidebarLink to="/boards/main">_main</SidebarLink>
           </ListItem>
         </UnorderedList>
       </CardBody>

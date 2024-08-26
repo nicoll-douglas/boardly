@@ -11,7 +11,7 @@ export default function ProfilePage() {
     <ProfileProvider>
       <Container maxW={"8xl"}>
         <Header>
-          <Logo to="/main" />
+          <Logo to="/boards/main" />
         </Header>
         <Grid>
           <GridItem

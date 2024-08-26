@@ -7,10 +7,10 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 import DataBar from "@/components/common/DataBar";
-import useMainBoard from "../hooks/useMainBoard";
+import useBoard from "../hooks/useBoard";
 
 export default function BoardDetailsCard() {
-  const { isLoading, board } = useMainBoard();
+  const { isLoading, board } = useBoard();
   const isLoaded = !isLoading;
 
   return (

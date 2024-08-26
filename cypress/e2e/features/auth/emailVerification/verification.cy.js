@@ -58,7 +58,7 @@ describe("Email verification page", () => {
     cy.contains("Email Verified");
     cy.contains("You will be redirected shortly, welcome to Lorem!");
     cy.wait(3000);
-    cy.url().should("include", "/main");
+    cy.url().should("include", "/boards/main");
   });
 
   it("Should structure request correctly", () => {

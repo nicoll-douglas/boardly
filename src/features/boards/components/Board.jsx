@@ -12,7 +12,7 @@ export default function board({ children }) {
   return (
     <Container maxW={"8xl"}>
       <Header>
-        <Logo to="/main" />
+        <Logo to="/boards/main" />
         <ProfileLink />
       </Header>
       <Grid>

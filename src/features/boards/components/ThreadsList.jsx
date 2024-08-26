@@ -7,10 +7,10 @@ import {
   Tag,
 } from "@chakra-ui/react";
 import ThreadLink from "./ThreadLink";
-import useMainBoard from "../hooks/useMainBoard";
+import useBoard from "../hooks/useBoard";
 
 export default function ThreadsList() {
-  const { isLoading, board } = useMainBoard();
+  const { isLoading, board } = useBoard();
   const isLoaded = !isLoading;
   const threads = board?.threads;
   const length = threads?.length ?? -1;

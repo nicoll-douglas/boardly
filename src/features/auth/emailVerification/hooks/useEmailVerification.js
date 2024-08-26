@@ -40,7 +40,7 @@ export default function useEmailVerification(token) {
       const { accessToken } = await response.json();
       setAccessToken(accessToken);
       setTimeout(() => {
-        navigate("/main");
+        navigate("/boards/main");
         toast({
           status: "success",
           title: "Successfully logged in",
