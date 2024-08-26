@@ -1,9 +1,7 @@
 const Board = require("@/models/Board");
-const initializeMainBoard = require("@/middleware/common/initializeMainBoard");
 
 module.exports = async (req, res, next) => {
   try {
-    await initializeMainBoard();
     let mainBoard = await Board.findOne({ name: "_main" })
       .select({
         name: 1,
