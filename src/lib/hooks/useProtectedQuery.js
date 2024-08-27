@@ -24,6 +24,9 @@ export default function useProtectedQuery(endpoint, mockData) {
   useEffect(() => {
     if (!error) return;
     switch (error.status) {
+      case 404:
+        setTimeout(navigate, 1250, "/not-found");
+        break;
       case 401:
         notifs.unauthorized();
         setTimeout(navigate, 250, "/");
