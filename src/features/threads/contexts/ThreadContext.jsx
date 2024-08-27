@@ -7,7 +7,6 @@ const ThreadContext = createContext(null);
 function ThreadProvider({ threadID, children }) {
   const { isLoading, protectedData } = useProtectedQuery(
     `/api/threads/${threadID}`,
-    false,
     mockData.body
   );
 

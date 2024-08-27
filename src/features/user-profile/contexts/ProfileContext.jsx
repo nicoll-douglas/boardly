@@ -7,11 +7,7 @@ import formatISOString from "@/lib/utils/formatISOString";
 const ProfileContext = createContext(null);
 
 function ProfileProvider({ children }) {
-  const { isLoading, protectedData } = useProtectedQuery(
-    "/api/me",
-    true,
-    data.body
-  );
+  const { isLoading, protectedData } = useProtectedQuery("/api/me", data.body);
 
   const profile = {
     ...protectedData?.profile,

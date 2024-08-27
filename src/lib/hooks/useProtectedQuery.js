@@ -5,8 +5,9 @@ import { useQuery } from "@tanstack/react-query";
 import getProtectedData from "@/services/getProtectedData";
 import ACCESS_TIME from "@/config/accessTime";
 import useNotif from "@/lib/hooks/useNotif";
+import FETCH_ENABLED from "@/config/dataFetching";
 
-export default function useProtectedQuery(endpoint, enabled = true, mockData) {
+export default function useProtectedQuery(endpoint, mockData) {
   const notifs = useNotif();
   const navigate = useNavigate();
   const { setAccessToken, accessToken } = useAuth();
@@ -17,7 +18,7 @@ export default function useProtectedQuery(endpoint, enabled = true, mockData) {
     queryFn: async () => getProtectedData(endpoint, accessToken),
     staleTime: ACCESS_TIME,
     retry: false,
-    enabled,
+    enabled: FETCH_ENABLED,
   });
 
   useEffect(() => {
@@ -45,8 +46,7 @@ export default function useProtectedQuery(endpoint, enabled = true, mockData) {
     setProtectedData(rest);
   }, [data]);
 
-  if (enabled === false && mockData)
-    return { isLoading: false, protectedData: mockData };
+  if (!FETCH_ENABLED) return { isLoading: false, protectedData: mockData };
 
   return { isLoading, protectedData };
 }
