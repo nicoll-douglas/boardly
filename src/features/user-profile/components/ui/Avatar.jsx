@@ -1,37 +1,9 @@
-import {
-  useDisclosure,
-  Avatar as ChakraAvatar,
-  SkeletonCircle,
-  Button,
-} from "@chakra-ui/react";
-import FormModal from "@/components/common/FormModal";
-import AvatarForm from "../form/AvatarForm";
+import { Avatar as ChakraAvatar, SkeletonCircle } from "@chakra-ui/react";
 
-export default function Avatar({ name, src, isLoaded, withEditing }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
+export default function Avatar({ name, src, isLoaded, skeletonSize, ...rest }) {
   return (
-    <>
-      <SkeletonCircle size={withEditing ? 16 : 24} isLoaded={isLoaded}>
-        <ChakraAvatar
-          size={withEditing ? "lg" : "xl"}
-          name={name}
-          p={0}
-          as={withEditing ? Button : "span"}
-          onClick={onOpen}
-          src={src}
-        />
-      </SkeletonCircle>
-      {withEditing && (
-        <FormModal
-          isOpen={isOpen}
-          onClose={onClose}
-          size={"xs"}
-          heading="Edit Profile Picture"
-        >
-          <AvatarForm onClose={onClose} />
-        </FormModal>
-      )}
-    </>
+    <SkeletonCircle size={skeletonSize ?? 24} isLoaded={isLoaded}>
+      <ChakraAvatar size={"xl"} name={name} p={0} src={src} {...rest} />
+    </SkeletonCircle>
   );
 }

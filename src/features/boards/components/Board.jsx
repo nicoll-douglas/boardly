@@ -4,7 +4,7 @@ import Logo from "@/components/common/Logo";
 import Grid from "@/components/common/Grid";
 import { GridItem } from "@chakra-ui/react";
 import Sidebar from "@/features/boards/components/Sidebar";
-import ProfileLink from "@/components/common/ProfileLink";
+import ProfileLink from "@/features/user-profile/components/ui/ProfileLink";
 import BoardDetailsCard from "@/features/boards/components/BoardDetailsCard";
 import ButtonsCard from "@/features/boards/components/ButtonsCard";
 

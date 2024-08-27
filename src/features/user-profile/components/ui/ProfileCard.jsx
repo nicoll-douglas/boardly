@@ -10,8 +10,8 @@ import {
 import noWrap from "@/lib/constants/noWrap";
 import EditProfileBtn from "./EditProfileBtn";
 import useProfileContext from "../../hooks/useProfileContext";
-import Avatar from "./Avatar";
 import DataBar from "@/components/common/DataBar";
+import AvatarWithEditing from "./AvatarWithEditing";
 
 export default function ProfileCard() {
   const { isLoading, profile = {} } = useProfileContext();
@@ -21,12 +21,7 @@ export default function ProfileCard() {
   return (
     <Card w={"full"} h={"full"} as={"section"} aria-label="Profile">
       <CardHeader p={4} gap={3} display={"flex"} alignItems={"center"}>
-        <Avatar
-          name={username}
-          isLoaded={isLoaded}
-          src={avatar}
-          withEditing={true}
-        />
+        <AvatarWithEditing name={username} isLoaded={isLoaded} src={avatar} />
         <Skeleton isLoaded={isLoaded} maxW={"calc(100% - 120px)"}>
           <Heading
             fontSize={"2xl"}
