@@ -1,15 +1,14 @@
-import { useToast } from "@chakra-ui/react";
-import { networkError } from "@/lib/constants/toasts";
+import useNotif from "@/lib/hooks/useNotif";
 
 export default function useSubmitHandlers(submit, handlers) {
-  const toast = useToast();
+  const notifs = useNotif();
 
   const onSubmit = async () => {
     try {
       const response = await submit();
       handlers[response.status](response);
     } catch {
-      toast(networkError);
+      notifs.networkError();
     }
   };
 

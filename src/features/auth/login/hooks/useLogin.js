@@ -1,15 +1,14 @@
-import { useToast } from "@chakra-ui/react";
 import getSubmit from "../services/submit";
 import useSubmitHandlers from "@/lib/hooks/useSubmitHandlers";
-import { serverError, tooMany15 } from "@/lib/constants/toasts";
 import useAuth from "@/lib/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import useNotif from "@/lib/hooks/useNotif";
 
 export default function useLogin(form) {
   const submit = getSubmit(form);
-  const toast = useToast();
   const { setAccessToken } = useAuth();
   const navigate = useNavigate();
+  const { toast, ...notifs } = useNotif();
 
   const handlers = {
     400: async (response) => {
@@ -26,8 +25,8 @@ export default function useLogin(form) {
         message: "Username or password is incorrect",
       });
     },
-    429: () => toast(tooMany15),
-    500: () => toast(serverError),
+    429: () => notifs.tooMany15(),
+    500: () => notifs.serverError(),
     200: async (response) => {
       const { accessToken } = await response.json();
       setAccessToken(accessToken);

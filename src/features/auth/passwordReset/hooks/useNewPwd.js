@@ -1,11 +1,10 @@
 import useSubmitHandlers from "@/lib/hooks/useSubmitHandlers";
-import { tooMany15, serverError } from "@/lib/constants/toasts";
 import submitNewPwd from "../services/submitNewPwd";
-import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import useNotif from "@/lib/hooks/useNotif";
 
 export default function useNewPwd(form, token) {
-  const toast = useToast();
+  const { toast, ...notifs } = useNotif();
   const navigate = useNavigate();
 
   const handlers = {
@@ -15,8 +14,8 @@ export default function useNewPwd(form, token) {
         form.setError(subject, { message: message })
       );
     },
-    429: () => toast(tooMany15),
-    500: () => toast(serverError),
+    429: () => notifs.tooMany15(),
+    500: () => notifs.serverError(),
     200: () => {
       form.reset();
       toast({

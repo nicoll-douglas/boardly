@@ -4,10 +4,12 @@ import theme from "./theme/index";
 import { AuthProvider } from "./lib/contexts/AuthContext";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
+const queryClient = new QueryClient();
+
 export default function Contexts({ children }) {
   return (
     <BrowserRouter>
-      <QueryClientProvider client={new QueryClient()}>
+      <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <ChakraProvider theme={theme}>{children}</ChakraProvider>
         </AuthProvider>

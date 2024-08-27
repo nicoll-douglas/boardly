@@ -1,18 +1,17 @@
 import useSubmitHandlers from "@/lib/hooks/useSubmitHandlers";
 import submitEmail from "../services/submitEmail";
-import { tooMany15, serverError } from "@/lib/constants/toasts";
-import { useToast } from "@chakra-ui/react";
+import useNotif from "@/lib/hooks/useNotif";
 
 export default function useForgotPassword(form) {
-  const toast = useToast();
+  const { toast, ...notifs } = useNotif();
 
   const handlers = {
     404: () =>
       form.setError("email", {
         message: "Count not find a user with this email address",
       }),
-    429: () => toast(tooMany15),
-    500: () => toast(serverError),
+    429: () => notifs.tooMany15(),
+    500: () => notifs.serverError(),
     200: () => {
       form.reset();
       toast({

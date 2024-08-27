@@ -25,7 +25,7 @@ export default function BoardDetailsCard() {
           {isLoaded && (
             <>
               <DataBar name="Members" value={board?.memberCount} dividerTop />
-              <DataBar name="Admin" value={board?.admin.username} dividerTop />
+              <DataBar name="Admin" value={board?.admin?.username} dividerTop />
               <DataBar name="Threads" value={board?.threadCount} dividerTop />
             </>
           )}

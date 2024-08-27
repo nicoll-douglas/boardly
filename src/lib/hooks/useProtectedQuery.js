@@ -1,25 +1,18 @@
-import { useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import {
-  networkError,
-  serverError,
-  tooMany,
-  unauthorized,
-  genericError,
-} from "@/lib/constants/toasts";
 import { useNavigate } from "react-router-dom";
 import useAuth from "@/lib/hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import getProtectedData from "@/services/getProtectedData";
 import ACCESS_TIME from "@/config/accessTime";
+import useNotif from "@/lib/hooks/useNotif";
 
 export default function useProtectedQuery(endpoint, enabled = true, mockData) {
-  const toast = useToast();
+  const notifs = useNotif();
   const navigate = useNavigate();
   const { setAccessToken, accessToken } = useAuth();
   const [protectedData, setProtectedData] = useState(null);
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: [`GET ${endpoint}`],
     queryFn: async () => getProtectedData(endpoint, accessToken),
     staleTime: ACCESS_TIME,
@@ -28,31 +21,28 @@ export default function useProtectedQuery(endpoint, enabled = true, mockData) {
   });
 
   useEffect(() => {
-    if (isError) toast(networkError);
-  }, [isError]);
-
-  useEffect(() => {
-    if (!data) return;
-    switch (data.status) {
+    if (!error) return;
+    switch (error.status) {
       case 401:
-        toast(unauthorized);
+        notifs.unauthorized();
         setTimeout(navigate, 250, "/");
         break;
       case 500:
-        toast(serverError);
+        notifs.serverError();
         break;
       case 429:
-        toast(tooMany);
+        notifs.tooMany();
         break;
-      case 200:
-        data
-          .json()
-          .then(({ accessToken: newAccessToken, ...rest }) => {
-            if (newAccessToken) setAccessToken(newAccessToken);
-            setProtectedData(rest);
-          })
-          .catch(() => toast(genericError));
+      case 0:
+        notifs.networkError();
     }
+  }, [error]);
+
+  useEffect(() => {
+    if (!data) return;
+    const { accessToken: newAccessToken, ...rest } = data;
+    if (newAccessToken) setAccessToken(newAccessToken);
+    setProtectedData(rest);
   }, [data]);
 
   if (enabled === false && mockData)

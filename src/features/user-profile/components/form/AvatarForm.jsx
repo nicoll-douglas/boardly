@@ -10,7 +10,7 @@ import changeAvatar from "../../services/changeAvatar";
 import useSubmitHandlers from "@/lib/hooks/useSubmitHandlers";
 
 export default function AvatarForm({ onClose }) {
-  const { isLoading, profile } = useProfileContext();
+  const { isLoading, profile = {} } = useProfileContext();
   const { avatar = null } = profile;
   const [preview, setPreview] = useState(avatar);
   const [method, setMethod] = useState(null);

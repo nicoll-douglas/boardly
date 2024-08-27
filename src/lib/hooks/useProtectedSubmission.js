@@ -1,15 +1,14 @@
 import useAuth from "./useAuth";
-import { unauthorized, serverError, tooMany } from "@/lib/constants/toasts";
-import { useToast } from "@chakra-ui/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
+import useNotif from "@/lib/hooks/useNotif";
 
 export default function useProtectedSubmission(form, options = {}) {
   const { accessToken, setAccessToken } = useAuth();
-  const toast = useToast();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { toast, ...notifs } = useNotif();
 
   const { onSuccess = { message: "Successfully updated", callback: null } } =
     options;
@@ -17,11 +16,11 @@ export default function useProtectedSubmission(form, options = {}) {
   const handlers = useMemo(
     () => ({
       401: () => {
-        toast(unauthorized);
+        notifs.unauthorized();
         setTimeout(navigate, 250, "/");
       },
-      500: () => toast(serverError),
-      429: () => toast(tooMany),
+      500: () => notifs.serverError(),
+      429: () => notifs.tooMany15(),
       200: async (response) => {
         const { accessToken: newAccessToken } = await response.json();
         if (newAccessToken) setAccessToken(newAccessToken);

@@ -1,5 +1,3 @@
-// to be used in chakra ui toast calls
-
 const networkError = {
   status: "error",
   title: "Network Error",

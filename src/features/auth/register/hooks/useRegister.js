@@ -1,11 +1,10 @@
 import useSubmitHandlers from "@/lib/hooks/useSubmitHandlers";
 import getSubmit from "../services/submit";
-import { tooMany15, serverError } from "@/lib/constants/toasts";
-import { useToast } from "@chakra-ui/react";
+import useNotif from "@/lib/hooks/useNotif";
 
 export default function useRegister(form, onClose) {
   const submit = getSubmit(form);
-  const toast = useToast();
+  const { toast, ...notifs } = useNotif();
 
   const handlers = {
     400: async (response) => {
@@ -20,8 +19,8 @@ export default function useRegister(form, onClose) {
         form.setError(subject, { message: message })
       );
     },
-    429: () => toast(tooMany15),
-    500: () => toast(serverError),
+    429: () => notifs.tooMany15(),
+    500: () => notifs.serverError(),
     200: () => {
       toast({
         status: "success",

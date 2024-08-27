@@ -9,7 +9,7 @@ const ProfileContext = createContext(null);
 function ProfileProvider({ children }) {
   const { isLoading, protectedData } = useProtectedQuery(
     "/api/me",
-    false,
+    true,
     data.body
   );
 

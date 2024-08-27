@@ -7,7 +7,7 @@ const BoardContext = createContext(null);
 function BoardProvider({ boardID, children }) {
   const { isLoading, protectedData } = useProtectedQuery(
     `/api/boards/${boardID}`,
-    false,
+    true,
     mockData.body
   );
 
