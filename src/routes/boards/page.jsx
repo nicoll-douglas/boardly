@@ -5,11 +5,11 @@ import Board from "@/features/boards/components/Board";
 import { useParams } from "react-router-dom";
 
 export default function BoardPage() {
-  const { boardID } = useParams();
+  const { boardName } = useParams();
 
   return (
     <ProfileProvider>
-      <BoardProvider boardID={boardID}>
+      <BoardProvider boardName={boardName}>
         <Board>
           <ThreadsList />
         </Board>

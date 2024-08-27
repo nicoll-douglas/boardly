@@ -13,13 +13,13 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<IndexPage />}></Route>
-      <Route path="/boards/:boardID" element={<BoardPage />}></Route>
+      <Route path="/boards/:boardName" element={<BoardPage />}></Route>
       <Route path="/auth/verify/:token" element={<VerificationPage />}></Route>
       <Route path="/auth/forgot" element={<ForgotPasswordPage />}></Route>
       <Route path="/auth/reset/:token" element={<NewPwdPage />}></Route>
       <Route path="/profile" element={<ProfilePage />}></Route>
       <Route
-        path="/boards/:boardID/threads/:threadID"
+        path="/boards/:boardName/threads/:threadID"
         element={<ThreadsPage />}
       ></Route>
       <Route path="/not-found" element={<NotFoundPage />}></Route>

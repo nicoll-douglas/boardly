@@ -4,9 +4,9 @@ import mockData from "@root/cypress/fixtures/features/boards/200-response.json";
 
 const BoardContext = createContext(null);
 
-function BoardProvider({ boardID, children }) {
+function BoardProvider({ boardName, children }) {
   const { isLoading, protectedData } = useProtectedQuery(
-    `/api/boards/${boardID}`,
+    `/api/boards/${boardName}`,
     mockData.body
   );
 

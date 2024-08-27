@@ -29,7 +29,7 @@ export default function ThreadsList() {
                 threadName={title}
                 authorName={author.username}
                 authorLink={`/users/${author._id}`}
-                link={`/threads/${_id}`}
+                link={`/boards/${board.name}/threads/${_id}`}
               />
             ))}
           {length === 0 && (
