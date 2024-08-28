@@ -19,7 +19,6 @@
         {
           "body": "reply1",
           "_id": "1",
-          "replyingTo": null,
           "createdAt": "2024-08-22T20:50:49.132Z",
           "author": {
             "_id": "u1",
@@ -37,24 +36,11 @@
             "username": "user2",
             "createdAt": "2024-08-22T20:50:49.132Z",
             "avatar": null
-          },
-          "replyingTo": {
-            "body": "reply1",
-            "_id": "1",
-            "replyingTo": null,
-            "createdAt": "2024-08-22T20:50:49.132Z",
-            "author": {
-              "_id": "u1",
-              "createdAt": "2024-08-22T20:50:49.132Z",
-              "username": "user1",
-              "avatar": "https://placebear.com/150/150"
-            }
           }
         },
         {
           "body": "reply3",
           "_id": "3",
-          "replyingTo": null,
           "createdAt": "2024-08-22T20:50:49.132Z",
           "author": {
             "_id": "u3",
