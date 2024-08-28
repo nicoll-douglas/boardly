@@ -38,8 +38,8 @@ export default function board({ children }) {
           colEnd={13}
           h={"fit-content"}
           position={{ base: "static", md: "sticky" }}
-          top={"72px"}
-          maxH={{ base: 72, md: "calc(100dvh - 88px)" }}
+          top={{ md: "72px" }}
+          maxH={{ md: "calc(100dvh - 88px)" }}
           rowStart={1}
         >
           <BoardDetailsCard />

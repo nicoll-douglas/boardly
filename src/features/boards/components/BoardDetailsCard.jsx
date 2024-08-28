@@ -16,8 +16,10 @@ export default function BoardDetailsCard() {
   return (
     <Card w={"full"} h={"full"} as={"section"} aria-label="Board details">
       <CardHeader p={4}>
-        <Skeleton isLoaded={isLoaded} h={9}>
-          <Heading size={"lg"}>{board?.name}</Heading>
+        <Skeleton isLoaded={isLoaded}>
+          <Heading size={"lg"} minH={{ base: 8, md: 9 }}>
+            {board?.name && `/${board.name}`}
+          </Heading>
         </Skeleton>
       </CardHeader>
       <CardBody p={4} pt={0} overflowY={"auto"}>
