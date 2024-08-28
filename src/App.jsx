@@ -8,22 +8,27 @@ import NewPwdPage from "./routes/auth/reset/page";
 import ProfilePage from "./routes/profile/page";
 import ThreadsPage from "./routes/threads/page";
 import NotFoundPage from "./routes/not-found/page";
+import { ProfileProvider } from "./features/user-profile/contexts/ProfileContext";
+import Board from "./features/boards/components/Board";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<IndexPage />}></Route>
-      <Route path="/boards/:boardName" element={<BoardPage />}></Route>
-      <Route path="/auth/verify/:token" element={<VerificationPage />}></Route>
-      <Route path="/auth/forgot" element={<ForgotPasswordPage />}></Route>
-      <Route path="/auth/reset/:token" element={<NewPwdPage />}></Route>
-      <Route path="/profile" element={<ProfilePage />}></Route>
-      <Route
-        path="/boards/:boardName/threads/:threadID"
-        element={<ThreadsPage />}
-      ></Route>
-      <Route path="/not-found" element={<NotFoundPage />}></Route>
-      <Route path="*" element={<NotFoundPage />}></Route>
+      <Route path="/" element={<IndexPage />} />
+      <Route path="/auth/verify/:token" element={<VerificationPage />} />
+      <Route path="/auth/forgot" element={<ForgotPasswordPage />} />
+      <Route path="/auth/reset/:token" element={<NewPwdPage />} />
+
+      <Route element={<ProfileProvider />}>
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/boards/:boardName" element={<Board />}>
+          <Route index element={<BoardPage />} />
+          <Route path="threads/:threadID" element={<ThreadsPage />} />
+        </Route>
+      </Route>
+
+      <Route path="/not-found" element={<NotFoundPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }

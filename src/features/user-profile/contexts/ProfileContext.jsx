@@ -1,23 +1,21 @@
 import useProtectedQuery from "@/lib/hooks/useProtectedQuery";
-import data from "@root/cypress/fixtures/features/user-profile/200-response.json";
-import { createContext } from "react";
-import dompurify from "dompurify";
-import formatISOString from "@/lib/utils/formatISOString";
+import mockData from "@root/cypress/fixtures/features/user-profile/200-response.json";
+import { createContext, useMemo } from "react";
+import { Outlet } from "react-router-dom";
 
 const ProfileContext = createContext(null);
 
-function ProfileProvider({ children }) {
-  const { isLoading, protectedData } = useProtectedQuery("/api/me", data.body);
+function ProfileProvider() {
+  const { isLoading, data } = useProtectedQuery("/api/me", mockData.body);
 
-  const profile = {
-    ...protectedData?.profile,
-    bio: dompurify.sanitize(protectedData?.profile.bio),
-    createdAt: formatISOString(protectedData?.profile.createdAt),
-  };
+  const contextValue = useMemo(
+    () => ({ isLoading, profile: data?.profile }),
+    [isLoading, data]
+  );
 
   return (
-    <ProfileContext.Provider value={{ isLoading, profile }}>
-      {children}
+    <ProfileContext.Provider value={contextValue}>
+      <Outlet />
     </ProfileContext.Provider>
   );
 }
