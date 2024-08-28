@@ -1,19 +1,22 @@
-import { createContext } from "react";
+import { createContext, useMemo } from "react";
 import useProtectedQuery from "@/lib/hooks/useProtectedQuery";
-const mockData = require("@root/cypress/fixtures/features/threads/200-response.json");
+import mockData from "@root/cypress/fixtures/features/threads/200-response.json";
 
 const ThreadContext = createContext(null);
 
 function ThreadProvider({ threadID, children }) {
-  const { isLoading, protectedData } = useProtectedQuery(
+  const { isLoading, data, notFound } = useProtectedQuery(
     `/api/threads/${threadID}`,
     mockData.body
   );
 
+  const contextValue = useMemo(
+    () => ({ isLoading, thread: data?.thread, notFound }),
+    [isLoading, data, notFound]
+  );
+
   return (
-    <ThreadContext.Provider
-      value={{ isLoading, thread: protectedData?.thread }}
-    >
+    <ThreadContext.Provider value={contextValue}>
       {children}
     </ThreadContext.Provider>
   );

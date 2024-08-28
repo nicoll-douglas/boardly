@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "@/lib/hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
@@ -11,7 +11,6 @@ export default function useProtectedQuery(endpoint, mockData) {
   const notifs = useNotif();
   const navigate = useNavigate();
   const { setAccessToken, accessToken } = useAuth();
-  const [protectedData, setProtectedData] = useState(null);
 
   const { data, isLoading, error } = useQuery({
     queryKey: [`GET ${endpoint}`],
@@ -20,13 +19,11 @@ export default function useProtectedQuery(endpoint, mockData) {
     retry: false,
     enabled: FETCH_ENABLED,
   });
+  const notFound = error?.status === 404;
 
   useEffect(() => {
     if (!error) return;
     switch (error.status) {
-      case 404:
-        setTimeout(navigate, 1250, "/not-found");
-        break;
       case 401:
         notifs.unauthorized();
         setTimeout(navigate, 250, "/");
@@ -44,12 +41,16 @@ export default function useProtectedQuery(endpoint, mockData) {
 
   useEffect(() => {
     if (!data) return;
-    const { accessToken: newAccessToken, ...rest } = data;
+    const { accessToken: newAccessToken } = data;
     if (newAccessToken) setAccessToken(newAccessToken);
-    setProtectedData(rest);
   }, [data]);
 
-  if (!FETCH_ENABLED) return { isLoading: false, protectedData: mockData };
+  if (!FETCH_ENABLED)
+    return {
+      isLoading: false,
+      data: mockData,
+      notFound: false,
+    };
 
-  return { isLoading, protectedData };
+  return { isLoading, data, notFound };
 }
