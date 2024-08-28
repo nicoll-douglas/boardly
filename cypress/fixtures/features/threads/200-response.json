@@ -10,7 +10,10 @@
       "body": "Hello this is a cool thread",
       "createdAt": "2024-08-22T20:50:49.132Z",
       "author": {
-        "username": "mogadon69"
+        "_id": "u0",
+        "username": "mogadon69",
+        "createdAt": "2024-08-22T20:50:49.132Z",
+        "avatar": "https://placebear.com/200/200"
       },
       "replies": [
         {
@@ -20,7 +23,9 @@
           "createdAt": "2024-08-22T20:50:49.132Z",
           "author": {
             "_id": "u1",
-            "username": "user1"
+            "username": "user1",
+            "createdAt": "2024-08-22T20:50:49.132Z",
+            "avatar": "https://placebear.com/150/150"
           }
         },
         {
@@ -29,7 +34,9 @@
           "createdAt": "2024-08-22T20:50:49.132Z",
           "author": {
             "_id": "u2",
-            "username": "user2"
+            "username": "user2",
+            "createdAt": "2024-08-22T20:50:49.132Z",
+            "avatar": null
           },
           "replyingTo": {
             "body": "reply1",
@@ -38,7 +45,9 @@
             "createdAt": "2024-08-22T20:50:49.132Z",
             "author": {
               "_id": "u1",
-              "username": "user1"
+              "createdAt": "2024-08-22T20:50:49.132Z",
+              "username": "user1",
+              "avatar": "https://placebear.com/150/150"
             }
           }
         },
@@ -49,7 +58,9 @@
           "createdAt": "2024-08-22T20:50:49.132Z",
           "author": {
             "_id": "u3",
-            "username": "user3"
+            "createdAt": "2024-08-22T20:50:49.132Z",
+            "username": "user3",
+            "avatar": null
           }
         }
       ]

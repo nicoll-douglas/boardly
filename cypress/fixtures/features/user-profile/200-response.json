@@ -10,7 +10,8 @@
       "age": 20,
       "pronouns": "he/him",
       "avatar": "https://placebear.com/200/200",
-      "createdAt": "2024-08-22T20:50:49.132Z"
+      "createdAt": "2024-08-22T20:50:49.132Z",
+      "threadCount": 21
     }
   }
 }

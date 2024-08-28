@@ -44,6 +44,7 @@ export default function ProfileCard() {
         </SkeletonText>
         <SkeletonText noOfLines={4} isLoaded={isLoaded}>
           <DataBar name="Joined on" value={profile.createdAt} dividerTop />
+          <DataBar name="Threads" value={profile.threadCount} dividerTop />
           {profile.age && <DataBar name="Age" value={profile.age} dividerTop />}
           {profile.pronouns && (
             <DataBar name="Pronouns" value={profile.pronouns} dividerTop />
