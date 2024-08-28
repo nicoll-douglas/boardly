@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import useProfileContext from "@/features/user-profile/hooks/useProfileContext";
 
 export default function ProfileLink() {
-  const { isLoading, profile } = useProfileContext();
+  const { isLoading, profile = {} } = useProfileContext();
 
   return (
     <SkeletonCircle isLoaded={!isLoading} ml={"auto"}>

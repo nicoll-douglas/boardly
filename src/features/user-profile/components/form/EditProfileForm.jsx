@@ -7,13 +7,14 @@ import BioField from "./BioField";
 import useProtectedSubmission from "@/lib/hooks/useProtectedSubmission";
 import editProfile from "../../services/editProfile";
 import useSubmitHandlers from "@/lib/hooks/useSubmitHandlers";
+import DOMPurify from "dompurify";
 
 export default function EditProfileForm({ onClose }) {
   const { isLoading, profile = {} } = useProfileContext();
   const form = useForm({
     shouldUnregister: true,
     defaultValues: {
-      bio: profile.bio,
+      bio: profile?.bio && DOMPurify.sanitize(profile.bio),
       age: profile.age,
       pronouns: profile.pronouns,
     },

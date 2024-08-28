@@ -12,6 +12,8 @@ import EditProfileBtn from "./EditProfileBtn";
 import useProfileContext from "../../hooks/useProfileContext";
 import DataBar from "@/components/common/DataBar";
 import AvatarWithEditing from "./AvatarWithEditing";
+import DOMPurify from "dompurify";
+import formatISOString from "@/lib/utils/formatISOString";
 
 export default function ProfileCard() {
   const { isLoading, profile = {} } = useProfileContext();
@@ -40,10 +42,14 @@ export default function ProfileCard() {
           <Heading size={"sm"} color={"gray.300"}>
             Bio
           </Heading>
-          <Text>{bio}</Text>
+          <Text>{bio && DOMPurify.sanitize(bio)}</Text>
         </SkeletonText>
         <SkeletonText noOfLines={4} isLoaded={isLoaded}>
-          <DataBar name="Joined on" value={profile.createdAt} dividerTop />
+          <DataBar
+            name="Joined on"
+            value={formatISOString(profile.createdAt)}
+            dividerTop
+          />
           <DataBar name="Threads" value={profile.threadCount} dividerTop />
           {profile.age && <DataBar name="Age" value={profile.age} dividerTop />}
           {profile.pronouns && (
