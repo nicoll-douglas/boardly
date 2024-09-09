@@ -1,4 +1,22 @@
-module.exports = function (req, res, next) {
+exports._delete = async (req, res, next) => {
+  const user = req.user;
+  const file = user.avatar;
+
+  try {
+    req.log(`does avatar file exist?`);
+    const [exists] = await file.exists();
+
+    if (exists) {
+      await file.delete();
+      req.log("file exists, deleted, 200");
+    }
+    return res.status(200)._end();
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports._put = (req, res, next) => {
   const imgFile = req.file;
   const user = req.user;
   const file = user.avatar;
