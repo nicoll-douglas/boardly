@@ -6,12 +6,9 @@ const thread = new mongoose.Schema(
     body: String,
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     replies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reply" }],
+    board: { type: mongoose.Schema.Types.ObjectId, ref: "Board" },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
-
-thread.virtual("replyCount").get(function () {
-  return this.replies.length;
-});
 
 module.exports = mongoose.model("Thread", thread);
