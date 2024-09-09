@@ -6,10 +6,14 @@ module.exports = async (req, res, next) => {
 
   try {
     const foundUser = await verifyToken(token);
-    if (!foundUser) return res.sendStatus(401);
+    if (!foundUser) {
+      req.log("token, 401, sent");
+      return res.sendStatus(401);
+    }
 
     await foundUser.setPassword(password);
     await foundUser.save();
+    req.log("password reset, 200, sent");
     return res.sendStatus(200);
   } catch (err) {
     next(err);

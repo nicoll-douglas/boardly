@@ -10,25 +10,36 @@ module.exports = async (req, res, next) => {
 
   try {
     const foundUser = await User.findOne({ username });
-    if (!foundUser) return res.sendStatus(404);
+    if (!foundUser) {
+      req.log("username, 404, sent");
+      return res.sendStatus(404);
+    }
 
     const passwordMatch = await bcrypt.compare(
       password,
       foundUser.hashedPassword
     );
-    if (!passwordMatch) return res.sendStatus(404);
-    if (!foundUser.verified) return res.sendStatus(401);
+    if (!passwordMatch) {
+      req.log("password, 404, sent");
+      return res.sendStatus(404);
+    }
+
+    if (!foundUser.verified) {
+      req.log("unverified, 401, sent");
+      return res.sendStatus(401);
+    }
 
     const accessToken = issueAccessToken(foundUser._id);
     const refreshToken = issueRefreshToken(foundUser._id);
     foundUser.refreshToken = refreshToken;
     await foundUser.save();
 
+    req.log("200");
     return res
       .status(200)
-      .refreshToken(refreshToken)
-      .accessToken(accessToken)
-      .sendData();
+      ._accessToken(accessToken)
+      ._refreshToken(refreshToken)
+      ._end();
   } catch (err) {
     next(err);
   }

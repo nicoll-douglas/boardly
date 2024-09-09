@@ -1,39 +1,45 @@
-const { REFRESH_DURATION } = require("@/config/JWT");
-const logger = require("@/middleware/logging/winston");
+const { REFRESH_DURATION, ACCESS_DURATION } = require("@/config/JWT");
 
 function customMethods(req, res, next) {
   let body = {};
 
-  res.feedback = (...msgs) => {
+  res._feedback = (...msgs) => {
     body.feedback = msgs.map(([subject, message]) => ({ subject, message }));
+    req.log("feedback appended:");
+    req.log(JSON.stringify(body.feedback, null, 2));
     return res.json(body);
   };
 
-  res.accessToken = (accessToken) => {
-    body.accessToken = accessToken;
-    logger.info("Added new access token to response");
+  res._accessToken = (accessToken) => {
+    res.cookie("accessToken", accessToken, {
+      maxAge: ACCESS_DURATION,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "None",
+    });
+    req.log("access token appended");
     return res;
   };
 
-  res.refreshToken = (refreshToken) => {
+  res._refreshToken = (refreshToken) => {
     res.cookie("refreshToken", refreshToken, {
       maxAge: REFRESH_DURATION,
       httpOnly: true,
       secure: true,
       sameSite: "None",
     });
-    logger.info("Added new refresh token to response");
+    req.log("refresh token appended");
     return res;
   };
 
-  res.appendData = (key, data) => {
+  res._append = (key, data) => {
     body[key] = data;
-    logger.info(`Appended data to response body: ${key}`);
+    req.log(`new data appended "${key}"`);
     return res;
   };
 
-  res.sendData = () => {
-    logger.info("Sent data back to client");
+  res._end = () => {
+    req.log("sent");
     return res.json(body);
   };
 

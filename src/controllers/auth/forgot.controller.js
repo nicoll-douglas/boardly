@@ -6,9 +6,13 @@ module.exports = async (req, res, next) => {
 
   try {
     const foundUser = await User.findOne({ email });
-    if (!foundUser) return res.sendStatus(404);
+    if (!foundUser) {
+      req.log("email, 404, sent");
+      return res.sendStatus(404);
+    }
 
     await sendResetPasswordEmail(email, foundUser._id);
+    req.log("email sent, 200, sent");
     return res.sendStatus(200);
   } catch (err) {
     next(err);
