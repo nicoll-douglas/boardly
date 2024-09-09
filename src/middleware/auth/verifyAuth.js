@@ -1,5 +1,5 @@
-const { issueAccessToken } = require("./issueTokens");
 const verifyJWT = require("@/middleware/auth/verifyJWT");
+const handleRefresh = require("@/middleware/auth/handleRefresh");
 
 async function verifyAuth(req, res, next) {
   const { authorization } = req.headers;
@@ -14,21 +14,7 @@ async function verifyAuth(req, res, next) {
       return next();
     }
 
-    const { refreshToken } = req.cookies;
-    const userWithRefresh = await verifyJWT(refreshToken, {
-      refreshToken: true,
-    });
-
-    if (!userWithRefresh) {
-      req.log("auth invalid, 401, sent");
-      return res.sendStatus(401);
-    }
-    req.log("auth valid");
-
-    req.user = userWithRefresh;
-    const newAccessToken = issueAccessToken(userWithRefresh._id);
-
-    res._accessToken(newAccessToken);
+    await handleRefresh();
     return next();
   } catch (err) {
     return next(err);
