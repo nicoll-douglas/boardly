@@ -1,4 +1,4 @@
-const sendVerificationEmail = require("@/services/sendVerificationEmail");
+const sendVerificationEmail = require("@/services/email/sendVerificationEmail");
 const User = require("@/models/User");
 
 module.exports = async (req, res, next) => {

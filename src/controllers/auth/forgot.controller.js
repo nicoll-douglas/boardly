@@ -1,5 +1,5 @@
 const User = require("@/models/User");
-const sendResetPasswordEmail = require("@/services/sendResetPasswordEmail");
+const sendResetPasswordEmail = require("@/services/email/sendResetPasswordEmail");
 
 module.exports = async (req, res, next) => {
   const { email } = req.body;

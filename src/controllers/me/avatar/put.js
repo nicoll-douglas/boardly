@@ -1,13 +1,9 @@
-const bucket = require("@/services/firebaseStorage");
-const logger = require("@/middleware/logging/winston");
-
 module.exports = function (req, res, next) {
   const imgFile = req.file;
   const user = req.user;
+  const file = user.avatar;
 
-  const file = bucket.file(user.avatarID);
-
-  logger.info(`Created write stream for file: ${user.avatarID}`);
+  req.log("new write stream");
   const stream = file.createWriteStream({
     metadata: {
       contentType: imgFile.mimetype,
@@ -18,15 +14,16 @@ module.exports = function (req, res, next) {
     .on("error", (err) => next(err))
     .on("finish", async () => {
       try {
-        logger.info("Making file public...");
+        req.log("making file public...");
         await file.makePublic();
-        logger.info("Status is 200");
-        res.status(200).sendData();
+
+        req.log("200");
+        res.status(200)._end();
       } catch (err) {
         next(err);
       }
     });
 
-  logger.info(`Writing ${user.avatarID} buffer to storage bucket...`);
+  req.log("writing...");
   stream.end(imgFile.buffer);
 };
