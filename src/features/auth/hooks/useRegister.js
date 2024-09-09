@@ -30,7 +30,7 @@ export default function useRegister(form, onClose) {
           description:
             "Please check your email and click the link to verify your account.",
         });
-        onClose();
+        if (onClose) onClose();
       },
     }),
     []

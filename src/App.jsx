@@ -5,6 +5,8 @@ import Verify from "./pages/auth/verify/index";
 import Forgot from "./pages/auth/forgot/index";
 import Reset from "./pages/auth/reset/index";
 import NotFoundPage from "./pages/not-found/index";
+import Login from "./pages/auth/login";
+import Register from "./pages/auth/register";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
       <Route path="/auth/verify" element={<Verify />} />
       <Route path="/auth/forgot" element={<Forgot />} />
       <Route path="/auth/reset" element={<Reset />} />
+      <Route path="/auth/login" element={<Login />} />
+      <Route path="/auth/register" element={<Register />} />
       <Route path="/not-found" element={<NotFoundPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
