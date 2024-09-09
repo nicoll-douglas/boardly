@@ -43,7 +43,7 @@ export default function useLogin(form) {
           status: "success",
           title: "Successfully logged in",
         });
-        navigate("/boards/main");
+        navigate("/home");
       },
     }),
     []

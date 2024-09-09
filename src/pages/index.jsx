@@ -18,7 +18,7 @@ export default function Index() {
   const { elevated, isLoading } = usePrivilege();
 
   if (isLoading) return <Loader />;
-  if (elevated) return <Navigate to={"/boards/main"} />;
+  if (elevated) return <Navigate to={"/home"} />;
 
   function openLoginForm() {
     setIsLoginForm(true);

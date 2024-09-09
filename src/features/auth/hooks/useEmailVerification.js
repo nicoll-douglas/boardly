@@ -48,7 +48,7 @@ export default function useEmailVerification(token) {
     setAccessToken(data.accessToken);
 
     const timeout = setTimeout(() => {
-      navigate("/boards/main");
+      navigate("/home");
       toast({
         status: "success",
         title: "Successfully logged in",

@@ -90,6 +90,6 @@ describe("Login form submission", () => {
     cy.getByTestId("login-submit").click();
     cy.wait("@fetch");
     cy.contains("Successfully logged in");
-    cy.url().should("include", "/boards/main");
+    cy.url().should("include", "/home");
   });
 });
