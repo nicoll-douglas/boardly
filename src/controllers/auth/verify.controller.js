@@ -8,17 +8,17 @@ module.exports = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
 
   try {
-    const foundUser = await verifyJWT(token);
-    if (!foundUser) {
+    const { user } = await verifyJWT(token);
+    if (!user) {
       req.log("token, 401, sent");
       return res.sendStatus(401);
     }
 
-    const accessToken = issueAccessToken(foundUser._id);
-    const refreshToken = issueRefreshToken(foundUser._id);
-    foundUser.refreshToken = refreshToken;
-    foundUser.verified = true;
-    await foundUser.save();
+    const accessToken = issueAccessToken(user._id);
+    const refreshToken = issueRefreshToken(user._id);
+    user.refreshToken = refreshToken;
+    user.verified = true;
+    await user.save();
 
     req.log("user updated, 200");
     res

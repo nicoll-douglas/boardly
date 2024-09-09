@@ -5,14 +5,14 @@ module.exports = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
 
   try {
-    const foundUser = await verifyJWT(token);
-    if (!foundUser) {
+    const { user } = await verifyJWT(token);
+    if (!user) {
       req.log("token, 401, sent");
       return res.sendStatus(401);
     }
 
-    await foundUser.setPassword(password);
-    await foundUser.save();
+    await user.setPassword(password);
+    await user.save();
     req.log("password reset, 200, sent");
     return res.sendStatus(200);
   } catch (err) {
