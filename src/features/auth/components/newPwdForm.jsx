@@ -1,7 +1,7 @@
 import FormControl from "@/components/form/FormControl";
 import { useForm } from "react-hook-form";
 import { newPwdHelperText } from "@/lib/constants/helperText";
-import passwordValidation from "@/features/auth/register/data/passwordValidation";
+import passwordValidation from "../data/passwordValidation";
 import { Button } from "@chakra-ui/react";
 import useNewPwd from "../hooks/useNewPwd";
 

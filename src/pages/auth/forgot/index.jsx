@@ -1,7 +1,7 @@
 import FormModal from "@/components/common/FormModal";
-import ForgotPwdForm from "@/features/auth/passwordReset/components/ForgotPwdForm";
+import ForgotPwdForm from "@/features/auth/components/ForgotPwdForm";
 
-export default function ForgotPasswordPage() {
+export default function Forgot() {
   return (
     <FormModal isOpen={true} heading="Forgot Password" motionPreset={"none"}>
       <ForgotPwdForm />

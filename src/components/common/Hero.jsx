@@ -1,5 +1,5 @@
 import { VStack, Heading, Text, Image, Flex } from "@chakra-ui/react";
-import RegisterBtn from "@/features/auth/register/components/RegisterBtn";
+import RegisterBtn from "@/features/auth/components/RegisterBtn";
 import chattingUrl from "@/assets/chatting.svg";
 
 export default function Hero({ onJoin }) {

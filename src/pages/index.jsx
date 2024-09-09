@@ -9,7 +9,7 @@ import Authorship from "@/components/common/Authorship";
 import ToggleableForm from "@/features/ui/formToggle/components/ToggleableForm";
 import { useState } from "react";
 
-export default function IndexPage() {
+export default function Index() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoginForm, setIsLoginForm] = useState(null);
 

@@ -1,12 +1,12 @@
-import { useParams } from "react-router-dom";
-import useEmailVerification from "@/features/auth/emailVerification/hooks/useEmailVerification";
+import { useSearchParams } from "react-router-dom";
+import useEmailVerification from "@/features/auth/hooks/useEmailVerification";
 import Container from "@/components/common/Container";
 import Header from "@/components/common/Header";
 import Logo from "@/components/common/Logo";
 import { Flex, Heading, Text, Spinner } from "@chakra-ui/react";
 
-export default function VerificationPage() {
-  const { token } = useParams();
+export default function Verify() {
+  const { token } = useSearchParams();
   const { isLoading, UIFeedback } = useEmailVerification(token);
 
   return (
