@@ -18,9 +18,6 @@ const user = new mongoose.Schema(
       type: String,
       default: "Hi, welcome to my profile!",
     },
-    threads: [{ type: mongoose.Schema.Types.ObjectId, ref: "Thread" }],
-    replies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reply" }],
-    boards: [{ type: mongoose.Schema.Types.ObjectId, ref: "Board" }],
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
