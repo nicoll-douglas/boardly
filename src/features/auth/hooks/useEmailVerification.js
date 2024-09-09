@@ -1,17 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import sendVerificationToken from "../services/sendVerificationToken";
+import verify from "../services/verify";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useNotif from "@/lib/hooks/useNotif";
+import useAuth from "@/lib/hooks/useAuth";
 
 export default function useEmailVerification(token) {
   const [UIFeedback, setUIFeedback] = useState(null);
   const navigate = useNavigate();
   const { toast, ...notifs } = useNotif();
+  const { setAccessToken } = useAuth();
 
   const { error, data, isLoading } = useQuery({
-    queryKey: ["PATCH /api/auth/verify"],
-    queryFn: async () => sendVerificationToken(token),
+    queryKey: ["POST /api/auth/verify"],
+    queryFn: async () => verify(token),
     staleTime: 0,
     retry: false,
   });
@@ -43,6 +45,7 @@ export default function useEmailVerification(token) {
       heading: "Email Verified",
       text: "You will be redirected shortly, welcome to Lorem!",
     });
+    setAccessToken(data.accessToken);
 
     const timeout = setTimeout(() => {
       navigate("/boards/main");

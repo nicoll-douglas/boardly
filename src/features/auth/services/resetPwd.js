@@ -1,4 +1,4 @@
-export default async function submitNewPwd(form, token) {
+export default async function resetPwd(form, token) {
   return fetch(`${import.meta.env.VITE_API_URL}/api/auth/reset`, {
     method: "POST",
     credentials: "include",

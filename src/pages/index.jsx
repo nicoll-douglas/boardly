@@ -1,8 +1,8 @@
 import Container from "@/components/common/Container";
 import Logo from "@/components/common/Logo";
 import Header from "@/components/common/Header";
-import LoginBtn from "@/features/auth/login/components/LoginBtn";
-import RegisterBtn from "@/features/auth/register/components/RegisterBtn";
+import LoginBtn from "@/features/auth/components/LoginBtn";
+import RegisterBtn from "@/features/auth/components/RegisterBtn";
 import { Center, useDisclosure } from "@chakra-ui/react";
 import Hero from "@/components/common/Hero";
 import Authorship from "@/components/common/Authorship";

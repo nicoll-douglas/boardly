@@ -26,7 +26,7 @@ export default function Board() {
             colEnd={{ base: 13, md: 11, lg: 4, xl: 4 }}
             display={{ base: "none", lg: "inline" }}
             position={"sticky"}
-            maxH={"calc(100dvh - 88px)"}
+            h={"calc(100dvh - 88px)"}
             top={"72px"}
           >
             <Sidebar />

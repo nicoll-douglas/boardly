@@ -1,6 +1,6 @@
 import FetchError from "@/lib/classes/FetchError";
 
-export default async function sendVerificationToken(token) {
+export default async function verify(token) {
   let response;
   try {
     response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/verify`, {
