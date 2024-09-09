@@ -11,18 +11,19 @@ const notFoundHandler = require("./middleware/common/notFoundHandler");
 const limiter = require("@/middleware/common/limiter");
 const validateHTTPAuth = require("@/middleware/validation/validateHTTPAuth");
 const verifyAuth = require("@/middleware/auth/verifyAuth");
-const requestLogger = require("./middleware/logging/requestLogger");
+const devLogger = require("./middleware/logging/devLogger");
 const initializeMainBoardAndAdmin = require("./middleware/common/initializeMainBoardAndAdmin");
 
 const app = express();
+initializeMainBoardAndAdmin();
+
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(requestLogger);
+app.use(devLogger);
 app.use(customMethods);
-app.use(initializeMainBoardAndAdmin);
 
 // unprotected routes
 app.use("/api/auth", require("./routers/auth"));
