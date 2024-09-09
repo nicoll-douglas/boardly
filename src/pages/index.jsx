@@ -8,10 +8,17 @@ import Hero from "@/components/common/Hero";
 import Authorship from "@/components/common/Authorship";
 import ToggleableForm from "@/features/ui/formToggle/components/ToggleableForm";
 import { useState } from "react";
+import usePrivilege from "@/lib/hooks/usePrivilege";
+import { Navigate } from "react-router-dom";
+import Loader from "@/components/common/Loader";
 
 export default function Index() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoginForm, setIsLoginForm] = useState(null);
+  const { elevated, isLoading } = usePrivilege();
+
+  if (isLoading) return <Loader />;
+  if (elevated) return <Navigate to={"/boards/main"} />;
 
   function openLoginForm() {
     setIsLoginForm(true);
