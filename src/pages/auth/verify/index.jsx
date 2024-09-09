@@ -6,8 +6,10 @@ import Logo from "@/components/common/Logo";
 import { Flex, Heading, Text, Spinner } from "@chakra-ui/react";
 
 export default function Verify() {
-  const { token } = useSearchParams();
-  const { isLoading, UIFeedback } = useEmailVerification(token);
+  const [searchParams] = useSearchParams();
+  const { isLoading, UIFeedback } = useEmailVerification(
+    searchParams.get("token")
+  );
 
   return (
     <Container>

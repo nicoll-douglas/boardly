@@ -27,6 +27,13 @@ export default function useLogin(form) {
           message: "Username or password is incorrect",
         });
       },
+      401: () => {
+        toast({
+          status: "warning",
+          title: "Verification Needed",
+          description: "Please check your email to verify your account.",
+        });
+      },
       429: () => notifs.tooMany15(),
       500: () => notifs.serverError(),
       200: async (response) => {

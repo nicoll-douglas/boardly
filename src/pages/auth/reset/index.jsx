@@ -3,11 +3,11 @@ import NewPwdForm from "@/features/auth/components/NewPwdForm";
 import { useSearchParams } from "react-router-dom";
 
 export default function Reset() {
-  const { token } = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   return (
     <FormModal isOpen={true} motionPreset="none" heading="Your New Password">
-      <NewPwdForm token={token} />
+      <NewPwdForm token={searchParams.get("token")} />
     </FormModal>
   );
 }
