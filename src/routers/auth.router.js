@@ -2,6 +2,7 @@ const express = require("express");
 const validate = require("@/middleware/validation/validate");
 const limiter = require("@/middleware/common/limiter");
 const authSchemas = require("@/validation/auth.schema");
+const handleRefresh = require("@/middleware/auth/handleRefresh");
 
 const router = express.Router();
 
@@ -36,6 +37,9 @@ router
     validate.auth(),
     validate.body(authSchemas.reset),
     require("@/controllers/auth/reset.controller")
+  )
+  .get("/refresh", limiter(100, 0.6), handleRefresh, (req, res) =>
+    res.status(200)._end()
   );
 
 module.exports = router;
