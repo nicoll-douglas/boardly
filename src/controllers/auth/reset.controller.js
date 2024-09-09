@@ -1,11 +1,11 @@
-const verifyToken = require("@/middleware/auth/verifyToken");
+const verifyJWT = require("@/middleware/auth/verifyJWT");
 
 module.exports = async (req, res, next) => {
   const { password } = req.body;
   const token = req.headers.authorization.split(" ")[1];
 
   try {
-    const foundUser = await verifyToken(token);
+    const foundUser = await verifyJWT(token);
     if (!foundUser) {
       req.log("token, 401, sent");
       return res.sendStatus(401);

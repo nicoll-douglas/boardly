@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("@/models/User");
 
-async function verifyToken(token, options) {
+async function verifyJWT(token, options) {
   try {
     const { id } = jwt.verify(token, process.env.JWT_SECRET);
     if (options?.refreshToken) {
@@ -14,4 +14,4 @@ async function verifyToken(token, options) {
   }
 }
 
-module.exports = verifyToken;
+module.exports = verifyJWT;
