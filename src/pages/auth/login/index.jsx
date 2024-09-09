@@ -1,10 +1,13 @@
 import FormModal from "@/components/common/FormModal";
 import LoginForm from "@/features/auth/components/LoginForm";
+import Optimistic from "@/components/special/Optimistic";
 
 export default function Login() {
   return (
-    <FormModal isOpen={true} motionPreset="none" heading="Login">
-      <LoginForm />
-    </FormModal>
+    <Optimistic>
+      <FormModal isOpen={true} motionPreset="none" heading="Login">
+        <LoginForm />
+      </FormModal>
+    </Optimistic>
   );
 }

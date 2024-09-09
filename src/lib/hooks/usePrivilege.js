@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import useNotif from "@/lib/hooks/useNotif";
 import { useEffect } from "react";
 import useAuth from "@/lib/hooks/useAuth";
+import ACCESS_TIME from "@/config/accessTime";
 
 export default function usePrivilege() {
   const notifs = useNotif();
@@ -12,7 +13,7 @@ export default function usePrivilege() {
   const { data, isLoading, error, isSuccess } = useQuery({
     queryKey: ["GET /refresh"],
     queryFn: async () => refresh(),
-    staleTime: 0,
+    staleTime: ACCESS_TIME,
     retry: false,
     enabled: FETCH_ENABLED,
   });

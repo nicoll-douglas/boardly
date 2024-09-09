@@ -33,7 +33,7 @@ export default function useNotif() {
   const unauthorized = () =>
     toast({
       status: "warning",
-      title: "Session Expired",
+      title: "Unauthorized",
       description: "Please login to continue.",
     });
 

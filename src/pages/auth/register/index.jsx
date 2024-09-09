@@ -1,10 +1,13 @@
 import FormModal from "@/components/common/FormModal";
 import RegisterForm from "@/features/auth/components/RegisterForm";
+import Optimistic from "@/components/special/Optimistic";
 
 export default function Register() {
   return (
-    <FormModal isOpen={true} motionPreset="none" heading="Sign Up">
-      <RegisterForm />
-    </FormModal>
+    <Optimistic>
+      <FormModal isOpen={true} motionPreset="none" heading="Sign Up">
+        <RegisterForm />
+      </FormModal>
+    </Optimistic>
   );
 }

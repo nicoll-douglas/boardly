@@ -8,17 +8,11 @@ import Hero from "@/components/common/Hero";
 import Authorship from "@/components/common/Authorship";
 import ToggleableForm from "@/features/ui/formToggle/components/ToggleableForm";
 import { useState } from "react";
-import usePrivilege from "@/lib/hooks/usePrivilege";
-import { Navigate } from "react-router-dom";
-import Loader from "@/components/common/Loader";
+import Optimistic from "@/components/special/Optimistic";
 
 export default function Index() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoginForm, setIsLoginForm] = useState(null);
-  const { elevated, isLoading } = usePrivilege();
-
-  if (isLoading) return <Loader />;
-  if (elevated) return <Navigate to={"/home"} />;
 
   function openLoginForm() {
     setIsLoginForm(true);
@@ -31,28 +25,30 @@ export default function Index() {
   }
 
   return (
-    <Container>
-      <Header>
-        <Logo to="/" />
-        <LoginBtn ml="auto" onClick={openLoginForm} />
-        <RegisterBtn
-          ml={6}
-          data-testid="register-btn"
-          onClick={openRegisterForm}
-        />
-        <ToggleableForm
-          isOpen={isOpen}
-          isLoginForm={isLoginForm}
-          onClose={onClose}
-          onToggle={() => setIsLoginForm(!isLoginForm)}
-        />
-      </Header>
-      <Center flex={1} mt={12}>
-        <Hero onJoin={openRegisterForm} />
-      </Center>
-      <Center mb={16}>
-        <Authorship />
-      </Center>
-    </Container>
+    <Optimistic>
+      <Container>
+        <Header>
+          <Logo to="/" />
+          <LoginBtn ml="auto" onClick={openLoginForm} />
+          <RegisterBtn
+            ml={6}
+            data-testid="register-btn"
+            onClick={openRegisterForm}
+          />
+          <ToggleableForm
+            isOpen={isOpen}
+            isLoginForm={isLoginForm}
+            onClose={onClose}
+            onToggle={() => setIsLoginForm(!isLoginForm)}
+          />
+        </Header>
+        <Center flex={1} mt={12}>
+          <Hero onJoin={openRegisterForm} />
+        </Center>
+        <Center mb={16}>
+          <Authorship />
+        </Center>
+      </Container>
+    </Optimistic>
   );
 }
