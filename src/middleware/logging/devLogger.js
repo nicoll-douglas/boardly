@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
   res.on("finish", () => logger.info("request end"));
 
   req.log = (message) => {
-    if (process.node.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === "development") {
       logger.info(message);
     }
   };

@@ -1,6 +1,6 @@
 const admin = require("firebase-admin");
 const serviceAccount = require(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
-const logger = require("@/middleware/logging/winston");
+const logger = require("@/middleware/logging/logger");
 
 logger.info("Initializing firebase app...");
 admin.initializeApp({

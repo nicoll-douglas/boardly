@@ -18,7 +18,7 @@ module.exports = async (req, res, next) => {
     }
 
     const newUser = new User({ email, username });
-    await sendVerificationEmail(email, newUser._id);
+    await sendVerificationEmail(email, newUser._id.toString());
 
     await newUser.setPassword(password);
     await newUser.save();
