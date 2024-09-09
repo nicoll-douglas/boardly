@@ -1,4 +1,3 @@
-import useAuth from "@/lib/hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import sendVerificationToken from "../services/sendVerificationToken";
 import { useEffect, useState } from "react";
@@ -6,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import useNotif from "@/lib/hooks/useNotif";
 
 export default function useEmailVerification(token) {
-  const { setAccessToken } = useAuth();
   const [UIFeedback, setUIFeedback] = useState(null);
   const navigate = useNavigate();
   const { toast, ...notifs } = useNotif();
@@ -41,8 +39,6 @@ export default function useEmailVerification(token) {
 
   useEffect(() => {
     if (!data) return;
-    const { accessToken } = data;
-    setAccessToken(accessToken);
     setUIFeedback({
       heading: "Email Verified",
       text: "You will be redirected shortly, welcome to Lorem!",

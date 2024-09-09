@@ -4,7 +4,7 @@ export default async function sendVerificationToken(token) {
   let response;
   try {
     response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/verify`, {
-      method: "PATCH",
+      method: "POST",
       credentials: "include",
       headers: {
         Authorization: `Bearer ${token}`,
