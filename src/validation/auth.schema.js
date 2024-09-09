@@ -4,8 +4,9 @@ const { lax, restricted } = require("@/lib/constants/regex");
 const email = Joi.string()
   .required()
   .email({ tlds: { allow: false } });
+const required = Joi.string().required();
 
-const auth = {
+const fieldSchemas = {
   new: {
     password: Joi.string()
       .required()
@@ -23,10 +24,34 @@ const auth = {
     email,
   },
   existing: {
-    password: Joi.string().required(),
-    username: Joi.string().required(),
+    password: required,
+    username: required,
     email,
   },
 };
 
-module.exports = auth;
+const register = Joi.object({
+  password: fieldSchemas.new.password,
+  username: fieldSchemas.new.username,
+  email: fieldSchemas.new.email,
+}).unknown();
+
+const login = Joi.object({
+  password: fieldSchemas.existing.password,
+  username: fieldSchemas.existing.username,
+});
+
+const forgot = Joi.object({
+  email: fieldSchemas.existing.email,
+}).unknown();
+
+const reset = Joi.object({
+  password: fieldSchemas.new.password,
+}).unknown();
+
+module.exports = {
+  register,
+  login,
+  forgot,
+  reset,
+};

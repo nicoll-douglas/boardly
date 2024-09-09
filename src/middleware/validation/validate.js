@@ -2,16 +2,16 @@ const Joi = require("joi");
 
 exports.body = (schema) => {
   return (req, res, next) => {
-    req.logger.debug("[BODY] - VALIDATING");
+    req.log("validating body");
     const { error } = schema.validate(req.body);
 
     if (!error) {
-      req.logger.debug("[BODY] - VALID");
+      req.log("body is valid");
       return next();
     }
 
-    req.logger.debug(`${error.name}: ${error.details[0].message}`);
-    req.logger.http("[RESPONSE] - STATUS 400");
+    req.log(`${error.name}: ${error.details[0].message}`);
+    req.log("status is 400");
 
     return res.status(400)._end();
   };
@@ -19,19 +19,19 @@ exports.body = (schema) => {
 
 exports.auth = () => {
   return (req, res, next) => {
-    req.logger.debug("[AUTH] - VALIDATING");
+    req.log("validating auth header");
     const { error } = Joi.object({
       authorization: Joi.string().required(),
     }).validate({ authorization: req.headers.authorization });
 
     if (!error) {
-      req.logger.debug("[AUTH] - VALID");
+      req.log("auth header is valid");
       return next();
     }
 
-    req.logger.debug(`${error.name}: ${error.details[0].message}`);
-    req.logger.http("[RESPONSE] - STATUS 401");
-    req.logger.http("[RESPONSE] - SENT");
+    req.log(`${error.name}: ${error.details[0].message}`);
+    req.log("status is 401");
+    req.log("response sent");
 
     return res.sendStatus(401);
   };

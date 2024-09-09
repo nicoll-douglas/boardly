@@ -1,59 +1,41 @@
 const express = require("express");
-const validateBody = require("@/middleware/validation/validateBody");
-const validateHTTPAuth = require("@/middleware/validation/validateHTTPAuth");
-const auth = require("@/lib/validationSchemas/auth");
+const validate = require("@/middleware/validation/validate");
 const limiter = require("@/middleware/common/limiter");
+const authSchemas = require("@/validation/auth.schema");
 
 const router = express.Router();
 
-router.post(
-  "/register",
-  limiter(),
-  validateBody({
-    email: auth.new.email,
-    confirmEmail: auth.new.email,
-    username: auth.new.username,
-    password: auth.new.password,
-  }),
-  require("@/controllers/auth/register")
-);
-
-router.post(
-  "/login",
-  limiter(),
-  validateBody({
-    username: auth.existing.username,
-    password: auth.existing.password,
-  }),
-  require("@/controllers/auth/login")
-);
-
-router.patch(
-  "/verify",
-  limiter(),
-  validateHTTPAuth,
-  require("@/controllers/auth/verify")
-);
-
-router.post(
-  "/forgot",
-  limiter(),
-  validateBody({
-    email: auth.existing.email,
-    confirmEmail: auth.existing.email,
-  }),
-  require("@/controllers/auth/forgot")
-);
-
-router.post(
-  "/reset",
-  limiter(),
-  validateHTTPAuth,
-  validateBody({
-    password: auth.new.password,
-    confirmPassword: auth.new.password,
-  }),
-  require("@/controllers/auth/reset")
-);
+router
+  .post(
+    "/register",
+    limiter(),
+    validate.body(authSchemas.register),
+    require("@/controllers/auth/register.controller")
+  )
+  .post(
+    "/login",
+    limiter(),
+    validate.body(authSchemas.login),
+    require("@/controllers/auth/login.controller")
+  )
+  .post(
+    "/verify",
+    limiter(),
+    validate.auth(),
+    require("@/controllers/auth/verify.controller")
+  )
+  .post(
+    "/forgot",
+    limiter(),
+    validate.body(authSchemas.forgot),
+    require("@/controllers/auth/forgot.controller")
+  )
+  .post(
+    "/reset",
+    limiter(),
+    validate.auth(),
+    validate.body(authSchemas.reset),
+    require("@/controllers/auth/reset.controller")
+  );
 
 module.exports = router;
