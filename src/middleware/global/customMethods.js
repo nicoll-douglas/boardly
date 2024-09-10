@@ -14,7 +14,7 @@ function customMethods(req, res, next) {
     res.cookie("accessToken", accessToken, {
       maxAge: ACCESS_DURATION,
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
       sameSite: "None",
     });
     req.log("access token appended");
