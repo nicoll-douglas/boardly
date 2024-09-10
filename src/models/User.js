@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const bucket = require("@/services/firebaseStorage");
 
 const user = new mongoose.Schema(
   {
@@ -18,13 +17,12 @@ const user = new mongoose.Schema(
       type: String,
       default: "Hi, welcome to my profile!",
     },
+    threads: [{ type: mongoose.Schema.Types.ObjectId, ref: "Thread" }],
+    replies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reply" }],
+    boards: [{ type: mongoose.Schema.Types.ObjectId, ref: "Board" }],
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
-
-user.virtual("avatar").get(function () {
-  return bucket.file(`avatar-${this._id.toString()}`);
-});
 
 user.methods.setPassword = async function (password) {
   const hashedPassword = await bcrypt.hash(password, 10);

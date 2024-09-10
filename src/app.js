@@ -1,5 +1,6 @@
 require("dotenv").config({ override: true });
 require("module-alias/register");
+require("@/models/index");
 
 const cors = require("cors");
 const express = require("express");
@@ -30,6 +31,7 @@ app.use("/api/auth", require("./routers/auth.router"));
 // protected routes
 app.use(limiter(100, 0.6));
 app.use(verifyAuth);
+app.use("/api/users", require("./routers/users.router"));
 
 app.use(notFoundHandler);
 app.use(errorHandler);
