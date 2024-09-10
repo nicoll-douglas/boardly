@@ -8,7 +8,7 @@ import ACCESS_TIME from "@/config/accessTime";
 export default function usePrivilege() {
   const notifs = useNotif();
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["GET /refresh"],
     queryFn: async () => refresh(),
     staleTime: ACCESS_TIME,
@@ -25,10 +25,13 @@ export default function usePrivilege() {
       case 429:
         notifs.tooMany();
         break;
-      case 0:
-        notifs.networkError();
     }
   }, [data]);
+
+  useEffect(() => {
+    if (!error) return;
+    notifs.networkError();
+  }, [error]);
 
   if (!PRIVILEGE_ENABLED) return { elevated: false, isLoading: false };
 

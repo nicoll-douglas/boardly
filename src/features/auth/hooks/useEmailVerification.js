@@ -18,7 +18,12 @@ export default function useEmailVerification(token) {
 
   useEffect(() => {
     if (!error) return;
-    switch (error.status) {
+    notifs.networkError();
+  }, [error]);
+
+  useEffect(() => {
+    if (!data) return;
+    switch (data.status) {
       case 401:
         setUIFeedback({
           heading: "Failed to Verify",
@@ -31,27 +36,21 @@ export default function useEmailVerification(token) {
       case 429:
         notifs.tooMany15();
         break;
-      case 0:
-        notifs.networkError();
-        break;
+      case 200: {
+        setUIFeedback({
+          heading: "Email Verified",
+          text: "You will be redirected shortly, welcome to Lorem!",
+        });
+        const timeout = setTimeout(() => {
+          navigate("/home");
+          toast({
+            status: "success",
+            title: "Successfully logged in",
+          });
+        }, 3000);
+        return () => clearTimeout(timeout);
+      }
     }
-  }, [error]);
-
-  useEffect(() => {
-    if (!data) return;
-    setUIFeedback({
-      heading: "Email Verified",
-      text: "You will be redirected shortly, welcome to Lorem!",
-    });
-
-    const timeout = setTimeout(() => {
-      navigate("/home");
-      toast({
-        status: "success",
-        title: "Successfully logged in",
-      });
-    }, 3000);
-    return () => clearTimeout(timeout);
   }, [data]);
 
   return { isLoading, UIFeedback };
