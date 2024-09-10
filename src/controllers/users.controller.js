@@ -4,6 +4,7 @@ exports._get = async (req, res, next) => {
   const USER_ROLE = req.USER_ROLE;
   const { username } = req.params;
 
+  req.log("query for requested user");
   try {
     let requestedUser = await User.findOne({ username })
       .select("-email -hashedPassword -refreshToken -verified")
@@ -20,10 +21,16 @@ exports._get = async (req, res, next) => {
         select: "name",
       });
 
-    if (!requestedUser) res.status(404).end();
+    if (!requestedUser) {
+      req.log("not found, 404, sent");
+      return res.status(404).end();
+    }
+
+    req.log("user to object");
     requestedUser = requestedUser.toObject();
 
-    res
+    req.log("200, appended user, appended role, sent");
+    return res
       .status(200)
       ._append("profile", requestedUser)
       ._append("USER_ROLE", USER_ROLE)
