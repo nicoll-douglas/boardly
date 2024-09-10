@@ -12,21 +12,24 @@ import {
   Spacer,
   Divider,
   Tag,
+  Collapse,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { timeAgo } from "@/lib/utils";
+import { useCompactView } from "@/features/ui/compactView";
 
 export default function ThreadPreview({ thread }) {
   const { createdAt, title, body, _id, board } = thread;
+  const { compactView } = useCompactView();
 
   return (
-    <LinkBox>
+    <LinkBox w={"full"}>
       <Card size={"sm"} variant={"filled"}>
         <CardHeader>
           <Box>
-            <Flex w={"full"} mb={2}>
+            <Flex w={"full"} mb={1}>
               <Box>
-                {"in "}
+                {"In "}
                 <Button
                   variant={"link"}
                   as={Link}
@@ -46,10 +49,12 @@ export default function ThreadPreview({ thread }) {
             </LinkOverlay>
           </Box>
         </CardHeader>
-        <Divider />
-        <CardBody>
-          <Text>{body}</Text>
-        </CardBody>
+        <Collapse in={!compactView} animateOpacity>
+          <Divider />
+          <CardBody>
+            <Text>{body}</Text>
+          </CardBody>
+        </Collapse>
       </Card>
     </LinkBox>
   );
