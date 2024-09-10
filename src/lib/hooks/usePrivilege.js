@@ -3,14 +3,12 @@ import { PRIVILEGE_ENABLED } from "@/config/dataFetching";
 import { useQuery } from "@tanstack/react-query";
 import useNotif from "@/lib/hooks/useNotif";
 import { useEffect } from "react";
-import useAuth from "@/lib/hooks/useAuth";
 import ACCESS_TIME from "@/config/accessTime";
 
 export default function usePrivilege() {
   const notifs = useNotif();
-  const { setAccessToken } = useAuth();
 
-  const { data, isLoading, error, isSuccess } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["GET /refresh"],
     queryFn: async () => refresh(),
     staleTime: ACCESS_TIME,
@@ -19,8 +17,8 @@ export default function usePrivilege() {
   });
 
   useEffect(() => {
-    if (!error) return;
-    switch (error.status) {
+    if (!data) return;
+    switch (data.status) {
       case 500:
         notifs.serverError();
         break;
@@ -30,14 +28,9 @@ export default function usePrivilege() {
       case 0:
         notifs.networkError();
     }
-  }, [error]);
-
-  useEffect(() => {
-    if (!data) return;
-    setAccessToken(data.accessToken);
   }, [data]);
 
   if (!PRIVILEGE_ENABLED) return { elevated: false, isLoading: false };
 
-  return { elevated: isSuccess, isLoading };
+  return { elevated: data?.ok, isLoading };
 }

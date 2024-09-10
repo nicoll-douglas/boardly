@@ -1,14 +1,11 @@
 import FetchError from "@/lib/classes/FetchError";
 
-export default async function getProtectedData(endpoint, accessToken) {
+export default async function getProtectedData(endpoint) {
   let response;
   try {
     response = await fetch(`${import.meta.env.VITE_API_URL}${endpoint}`, {
       method: "GET",
       credentials: "include",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
     });
   } catch {
     throw new FetchError(0);
