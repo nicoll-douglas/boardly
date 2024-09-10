@@ -7,9 +7,11 @@ import {
   Image,
   Flex,
   Box,
+  Button,
 } from "@chakra-ui/react";
 import Header from "@/components/common/Header";
 import Logo from "@/components/common/Logo";
+import { Link } from "react-router-dom";
 
 export default function OffPage({ title, message, imageUrl }) {
   return (
@@ -23,29 +25,29 @@ export default function OffPage({ title, message, imageUrl }) {
             <Flex
               gap={4}
               alignItems={"center"}
+              justifyContent={"end"}
               flexDir={{ base: "column", lg: "row" }}
             >
               <VStack
                 gap={3}
-                maxW={"2xl"}
+                maxW={"420px"}
                 as={"main"}
                 alignItems={{ base: "center", lg: "start" }}
                 textAlign={{ base: "center", lg: "left" }}
               >
-                <Heading
-                  as="h1"
-                  size={{ base: "2xl", sm: "4xl" }}
-                  wordBreak={"break-word"}
-                >
+                <Heading as="h1" size={{ base: "2xl", sm: "4xl" }}>
                   {title}
                 </Heading>
                 <Text fontSize={{ sm: "lg" }}>{message}</Text>
+                <Button as={Link} to={"/"} size={"lg"} mt={2}>
+                  Go Back
+                </Button>
               </VStack>
               <Image
                 src={imageUrl}
                 w={{ base: "300px", md: "380px" }}
                 h={{ base: "300px", md: "380px" }}
-                mt={{ base: -12, lg: 0 }}
+                mt={{ base: -8, lg: 0 }}
                 alt="graphic displaying dialogue"
               />
             </Flex>
