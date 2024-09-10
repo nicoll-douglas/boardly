@@ -21,12 +21,12 @@ module.exports = async (req, res, next) => {
     await user.save();
 
     req.log("user updated, 200");
-    res
+    return res
       .status(200)
       ._accessToken(accessToken)
       ._refreshToken(refreshToken)
-      .json({ username: user.username });
+      .end();
   } catch (err) {
-    next(err);
+    return next(err);
   }
 };

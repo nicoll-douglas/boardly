@@ -39,8 +39,8 @@ module.exports = async (req, res, next) => {
       .status(200)
       ._accessToken(accessToken)
       ._refreshToken(refreshToken)
-      .json({ username: foundUser.username });
+      .end();
   } catch (err) {
-    next(err);
+    return next(err);
   }
 };

@@ -11,7 +11,6 @@ async function verifyAuth(req, res, next) {
     if (user) {
       req.user = user;
       req.log("auth valid");
-      res._append("username", user.username);
       return next();
     }
 
@@ -28,7 +27,7 @@ async function verifyAuth(req, res, next) {
     req.log("auth valid");
     req.user = user;
     const newAccessToken = issueAccessToken(user._id);
-    res._accessToken(newAccessToken)._append("username", user.username);
+    res._accessToken(newAccessToken);
     return next();
   } catch (err) {
     return next(err);

@@ -11,7 +11,7 @@ async function verifyJWT(token, options) {
   }
 
   if (options?.refreshToken) {
-    return User.findOne({ refreshToken: token });
+    return User.findOne({ _id: id, refreshToken: token });
   } else {
     return User.findById(id);
   }
