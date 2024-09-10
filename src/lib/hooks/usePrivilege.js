@@ -1,5 +1,5 @@
 import refresh from "@/services/refresh";
-import FETCH_ENABLED from "@/config/dataFetching";
+import { PRIVILEGE_ENABLED } from "@/config/dataFetching";
 import { useQuery } from "@tanstack/react-query";
 import useNotif from "@/lib/hooks/useNotif";
 import { useEffect } from "react";
@@ -15,7 +15,7 @@ export default function usePrivilege() {
     queryFn: async () => refresh(),
     staleTime: ACCESS_TIME,
     retry: false,
-    enabled: FETCH_ENABLED,
+    enabled: PRIVILEGE_ENABLED,
   });
 
   useEffect(() => {
@@ -36,6 +36,8 @@ export default function usePrivilege() {
     if (!data) return;
     setAccessToken(data.accessToken);
   }, [data]);
+
+  if (!PRIVILEGE_ENABLED) return { elevated: false, isLoading: false };
 
   return { elevated: isSuccess, isLoading };
 }
