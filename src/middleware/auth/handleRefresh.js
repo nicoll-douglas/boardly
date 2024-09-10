@@ -16,7 +16,7 @@ async function handleRefresh(req, res, next) {
   req.user = user;
   const newAccessToken = issueAccessToken(user._id);
 
-  res._accessToken(newAccessToken);
+  res._accessToken(newAccessToken)._append("username", user.username);
   return next();
 }
 
