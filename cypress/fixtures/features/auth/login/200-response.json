@@ -1,9 +1,0 @@
-{
-  "statusCode": 200,
-  "headers": {
-    "Content-Type": "application/json"
-  },
-  "body": {
-    "accessToken": "1234"
-  }
-}
