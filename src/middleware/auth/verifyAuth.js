@@ -26,6 +26,7 @@ async function verifyAuth(req, res, next) {
 
     req.log("auth valid");
     req.user = user;
+
     const newAccessToken = issueAccessToken(user._id);
     res._accessToken(newAccessToken);
     return next();
