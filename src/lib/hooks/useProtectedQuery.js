@@ -20,16 +20,7 @@ export default function useProtectedQuery(endpoint, mockData) {
 
   useEffect(() => {
     if (!error) return;
-    switch (error.status) {
-      case 500:
-        notifs.serverError();
-        break;
-      case 429:
-        notifs.tooMany();
-        break;
-      case 0:
-        notifs.networkError();
-    }
+    if (error.status === 0) notifs.networkError();
   }, [error]);
 
   useEffect(() => {
