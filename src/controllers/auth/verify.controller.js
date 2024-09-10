@@ -14,6 +14,8 @@ module.exports = async (req, res, next) => {
       return res.status(401).end();
     }
 
+    if (user.verified) return res.status(200).end();
+
     const accessToken = issueAccessToken(user._id);
     const refreshToken = issueRefreshToken(user._id);
     user.refreshToken = refreshToken;
