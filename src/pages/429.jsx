@@ -7,6 +7,7 @@ export default function TooMany() {
       title="Too Many Requests"
       message="Slow down!"
       imageUrl={explosionUrl}
+      textWidth="350px"
     />
   );
 }

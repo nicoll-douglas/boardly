@@ -7,6 +7,7 @@ export default function Unauthorized() {
       title="Unauthorized"
       message="Please login to continue or access the requested resource."
       imageUrl={authUrl}
+      textWidth="480px"
     />
   );
 }

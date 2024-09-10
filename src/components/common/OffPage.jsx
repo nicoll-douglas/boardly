@@ -13,7 +13,12 @@ import Header from "@/components/common/Header";
 import Logo from "@/components/common/Logo";
 import { Link } from "react-router-dom";
 
-export default function OffPage({ title, message, imageUrl }) {
+export default function OffPage({
+  title,
+  message,
+  imageUrl,
+  textWidth = "420px",
+}) {
   return (
     <Box position={"fixed"} minW={"100vw"} minH={"100vh"} zIndex={100}>
       <Box overflowY={"auto"} maxH={"100vh"}>
@@ -30,7 +35,7 @@ export default function OffPage({ title, message, imageUrl }) {
             >
               <VStack
                 gap={3}
-                maxW={"420px"}
+                maxW={textWidth}
                 as={"main"}
                 alignItems={{ base: "center", lg: "start" }}
                 textAlign={{ base: "center", lg: "left" }}
