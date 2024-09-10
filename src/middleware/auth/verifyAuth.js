@@ -14,8 +14,7 @@ async function verifyAuth(req, res, next) {
       return next();
     }
 
-    await handleRefresh();
-    return next();
+    handleRefresh(req, res, next);
   } catch (err) {
     return next(err);
   }
