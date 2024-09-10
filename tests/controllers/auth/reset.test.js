@@ -1,7 +1,7 @@
 const request = require("supertest");
 const app = require("@/app");
 const User = require("@/models/User");
-const verifyToken = require("@/middleware/auth/verifyToken");
+const verifyJWT = require("@/middleware/auth/verifyJWT");
 const bcrypt = require("bcrypt");
 
 const password = "ValidPassword123";
@@ -12,7 +12,7 @@ const credentials = {
 
 const token = "exampleToken";
 
-jest.mock("@/middleware/auth/verifyToken", () => jest.fn());
+jest.mock("@/middleware/auth/verifyJWT", () => jest.fn());
 
 describe("/api/auth/reset", () => {
   afterEach(async () => {
@@ -24,7 +24,7 @@ describe("/api/auth/reset", () => {
       .post("/api/auth/reset")
       .set("Authorization", `Bearer ${token}`)
       .send(credentials);
-    expect(verifyToken).toHaveBeenCalledWith(token);
+    expect(verifyJWT).toHaveBeenCalledWith(token);
     expect(res.status).toBe(401);
   });
 
@@ -32,12 +32,12 @@ describe("/api/auth/reset", () => {
     const user = await new User({
       hashedPassword: bcrypt.hashSync(password, 10),
     });
-    verifyToken.mockResolvedValue(user);
+    verifyJWT.mockResolvedValue(user);
     const res = await request(app)
       .post("/api/auth/reset")
       .set("Authorization", `Bearer ${token}`)
       .send(credentials);
-    expect(verifyToken).toHaveBeenCalledWith(token);
+    expect(verifyJWT).toHaveBeenCalledWith(token);
     expect(res.status).toBe(200);
   });
 });

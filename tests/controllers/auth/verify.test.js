@@ -1,13 +1,13 @@
 const request = require("supertest");
 const app = require("@/app");
 const User = require("@/models/User");
-const verifyToken = require("@/middleware/auth/verifyToken");
+const verifyJWT = require("@/middleware/auth/verifyJWT");
 const {
   issueAccessToken,
   issueRefreshToken,
 } = require("@/middleware/auth/issueTokens");
 
-jest.mock("@/middleware/auth/verifyToken", () => jest.fn());
+jest.mock("@/middleware/auth/verifyJWT", () => jest.fn());
 jest.mock("@/middleware/auth/issueTokens", () => ({
   issueAccessToken: jest.fn(),
   issueRefreshToken: jest.fn(),
@@ -24,7 +24,7 @@ describe("PATCH /api/auth/verify", () => {
     const res = await request(app)
       .patch("/api/auth/verify")
       .set("Authorization", `Bearer ${token}`);
-    expect(verifyToken).toHaveBeenCalledWith(token);
+    expect(verifyJWT).toHaveBeenCalledWith(token);
     expect(res.status).toBe(401);
   });
 
@@ -35,14 +35,14 @@ describe("PATCH /api/auth/verify", () => {
     const user = await new User({
       email: "email@gmail.com",
     }).save();
-    verifyToken.mockResolvedValue(user);
+    verifyJWT.mockResolvedValue(user);
     issueAccessToken.mockReturnValue("1234");
     issueRefreshToken.mockReturnValue("12345");
 
     const res = await request(app)
       .patch("/api/auth/verify")
       .set("Authorization", `Bearer ${token}`);
-    expect(verifyToken).toHaveBeenCalledWith(token);
+    expect(verifyJWT).toHaveBeenCalledWith(token);
     expect(issueAccessToken).toHaveBeenCalledWith(user._id);
     expect(issueRefreshToken).toHaveBeenCalledWith(user._id);
 

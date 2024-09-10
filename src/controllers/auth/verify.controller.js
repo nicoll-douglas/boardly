@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
 
   try {
-    const { user } = await verifyJWT(token);
+    const user = await verifyJWT(token);
     if (!user) {
       req.log("token, 401, sent");
       return res.sendStatus(401);

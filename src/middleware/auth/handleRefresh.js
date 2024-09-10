@@ -3,13 +3,13 @@ const { issueAccessToken } = require("@/middleware/auth/issueTokens");
 
 async function handleRefresh(req, res, next) {
   const { refreshToken } = req.cookies;
-  const { user, expired } = await verifyJWT(refreshToken, {
+  const user = await verifyJWT(refreshToken, {
     refreshToken: true,
   });
 
   if (!user) {
     req.log("auth invalid, 401, sent");
-    return res.status(401)._append("feedback", { expired })._end();
+    return res.sendStatus(401);
   }
   req.log("auth valid");
 

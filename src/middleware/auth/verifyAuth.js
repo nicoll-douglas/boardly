@@ -7,7 +7,7 @@ async function verifyAuth(req, res, next) {
 
   req.log("verifying auth");
   try {
-    const { user } = await verifyJWT(accessToken);
+    const user = await verifyJWT(accessToken);
     if (user) {
       req.user = user;
       req.log("auth valid");

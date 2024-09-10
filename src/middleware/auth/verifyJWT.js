@@ -6,25 +6,14 @@ async function verifyJWT(token, options) {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     id = decoded.id;
-  } catch (err) {
-    return {
-      user: null,
-      expired: err instanceof jwt.TokenExpiredError,
-    };
+  } catch {
+    return null;
   }
 
   if (options?.refreshToken) {
-    const user = await User.findOne({ refreshToken: token });
-    return {
-      user,
-      expired: false,
-    };
+    return User.findOne({ refreshToken: token });
   } else {
-    const user = await User.findById(id);
-    return {
-      user,
-      expired: false,
-    };
+    return User.findById(id);
   }
 }
 
