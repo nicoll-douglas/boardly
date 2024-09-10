@@ -14,7 +14,7 @@ exports.body = (schema) => {
     req.log(`${error.name}: ${error.details[0].message}`);
     req.log("status is 400");
 
-    return res.status(400)._end();
+    return res.status(400).end();
   };
 };
 
@@ -34,19 +34,18 @@ exports.auth = () => {
     req.log("status is 401");
     req.log("response sent");
 
-    return res.sendStatus(401);
+    return res.status(401).end();
   };
 };
 
 exports.image = (options = {}) => {
   const { optional = true } = options;
-
   return (req, res, next) => {
     if (!req.file) {
-      return optional ? next() : res.status(400)._end();
+      return optional ? next() : res.status(400).end();
     }
 
     const allowedType = ALLOWED_TYPES.includes(req.file.mimetype);
-    return allowedType ? next() : res.status(400)._end();
+    return allowedType ? next() : res.status(400).end();
   };
 };

@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
     const foundUser = await User.findOne({ username });
     if (!foundUser) {
       req.log("username, 404, sent");
-      return res.sendStatus(404);
+      return res.status(404).end();
     }
 
     const passwordMatch = await bcrypt.compare(
@@ -21,12 +21,12 @@ module.exports = async (req, res, next) => {
     );
     if (!passwordMatch) {
       req.log("password, 404, sent");
-      return res.sendStatus(404);
+      return res.status(404).end();
     }
 
     if (!foundUser.verified) {
       req.log("unverified, 401, sent");
-      return res.sendStatus(401);
+      return res.status(401).end();
     }
 
     const accessToken = issueAccessToken(foundUser._id);
@@ -39,7 +39,7 @@ module.exports = async (req, res, next) => {
       .status(200)
       ._accessToken(accessToken)
       ._refreshToken(refreshToken)
-      ._end();
+      .end();
   } catch (err) {
     next(err);
   }

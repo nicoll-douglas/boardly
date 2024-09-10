@@ -8,13 +8,13 @@ module.exports = async (req, res, next) => {
     const user = await verifyJWT(token);
     if (!user) {
       req.log("token, 401, sent");
-      return res.sendStatus(401);
+      return res.status(401).end();
     }
 
     await user.setPassword(password);
     await user.save();
     req.log("password reset, 200, sent");
-    return res.sendStatus(200);
+    return res.status(200).end();
   } catch (err) {
     next(err);
   }

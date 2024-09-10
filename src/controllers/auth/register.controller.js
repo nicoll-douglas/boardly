@@ -24,7 +24,7 @@ module.exports = async (req, res, next) => {
     await newUser.save();
 
     req.log("email sent, user created, 200");
-    return res.sendStatus(200);
+    return res.status(200).end();
   } catch (err) {
     console.log(err);
     next(err);

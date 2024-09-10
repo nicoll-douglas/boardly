@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
     const user = await verifyJWT(token);
     if (!user) {
       req.log("token, 401, sent");
-      return res.sendStatus(401);
+      return res.status(401).end();
     }
 
     const accessToken = issueAccessToken(user._id);
@@ -21,11 +21,7 @@ module.exports = async (req, res, next) => {
     await user.save();
 
     req.log("user updated, 200");
-    res
-      .status(200)
-      ._accessToken(accessToken)
-      ._refreshToken(refreshToken)
-      ._end();
+    res.status(200)._accessToken(accessToken)._refreshToken(refreshToken).end();
   } catch (err) {
     next(err);
   }

@@ -9,7 +9,7 @@ async function handleRefresh(req, res, next) {
 
   if (!user) {
     req.log("auth invalid, 401, sent");
-    return res.sendStatus(401);
+    return res.status(401).end();
   }
   req.log("auth valid");
 

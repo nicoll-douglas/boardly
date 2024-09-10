@@ -39,7 +39,7 @@ router
     require("@/controllers/auth/reset.controller")
   )
   .get("/refresh", limiter(100, 0.6), handleRefresh, (req, res) =>
-    res.status(200)._end()
+    res.status(200).end()
   );
 
 module.exports = router;
