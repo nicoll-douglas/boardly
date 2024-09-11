@@ -15,7 +15,7 @@ import useProfile from "../hooks/useProfile";
 import ThreadPreview from "./ThreadPreview";
 import ReplyPreview from "./ReplyPreview";
 import BoardPreview from "./BoardPreview";
-import policeUrl from "@/assets/images/police.svg";
+import boardUrl from "@/assets/images/board.svg";
 import chatting2Url from "@/assets/images/chatting-2.svg";
 
 export default function ProfileTabs() {
@@ -75,7 +75,7 @@ export default function ProfileTabs() {
               {profile.boards.length === 0 ? (
                 <NoData
                   text="Any boards you administrate will show up here!"
-                  imageUrl={policeUrl}
+                  imageUrl={boardUrl}
                 />
               ) : (
                 profile.boards.map((board) => (
