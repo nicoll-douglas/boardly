@@ -1,6 +1,6 @@
-import FormModal from "@/components/common/FormModal";
-import ForgotPwdForm from "@/features/auth/components/ForgotPwdForm";
-import Optimistic from "@/components/utility/Optimistic";
+import { FormModal } from "@/components/common";
+import { ForgotPwdForm } from "@/features/auth";
+import { Optimistic } from "@/components/utility";
 
 export default function Forgot() {
   return (

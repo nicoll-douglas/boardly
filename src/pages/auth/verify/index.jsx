@@ -1,8 +1,6 @@
 import { useSearchParams } from "react-router-dom";
-import useEmailVerification from "@/features/auth/hooks/useEmailVerification";
-import Container from "@/components/common/Container";
-import Header from "@/components/common/Header";
-import Logo from "@/components/common/Logo";
+import { useEmailVerification } from "@/features/auth";
+import { Container, Header, Logo } from "@/components/common";
 import { Flex, Heading, Text, Spinner } from "@chakra-ui/react";
 
 export default function Verify() {

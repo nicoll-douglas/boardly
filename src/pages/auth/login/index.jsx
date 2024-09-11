@@ -1,6 +1,6 @@
-import FormModal from "@/components/common/FormModal";
-import LoginForm from "@/features/auth/components/LoginForm";
-import Optimistic from "@/components/utility/Optimistic";
+import { FormModal } from "@/components/common";
+import { LoginForm } from "@/features/auth";
+import { Optimistic } from "@/components/utility";
 
 export default function Login() {
   return (
