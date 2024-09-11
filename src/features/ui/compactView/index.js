@@ -1,4 +1,3 @@
-import { CompactViewProvider } from "./contexts/CompactViewContext";
-import useCompactView from "./hooks/useCompactView";
-
-export { CompactViewProvider, useCompactView };
+export { CompactViewProvider } from "./contexts/CompactViewContext";
+export { default as useCompactView } from "./hooks/useCompactView";
+export { default as CompactViewBtn } from "./components/CompactViewBtn";
