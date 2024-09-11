@@ -12,19 +12,22 @@ import { EditIcon } from "@chakra-ui/icons";
 import config from "@/config";
 import Tag from "./Tag";
 import { noWrap } from "@/lib/constants";
+import { useCompactView } from "@/features/ui/compactView";
 
 export default function BoardPreview({ board, userRole }) {
+  const { compactView } = useCompactView();
+
   return (
     <LinkBox w={"full"}>
       <Card size={"sm"} w={"full"}>
-        <CardBody>
-          <Flex justifyContent={"space-between"} gap={4}>
+        <CardBody p={compactView ? 2 : 3}>
+          <Flex justifyContent={"space-between"} alignItems={"center"} gap={4}>
             <LinkOverlay
               as={Link}
               to={`/boards/${board._id}`}
               maxW={{ base: "calc(100% - 40px)", sm: "calc(100% - 165px)" }}
             >
-              <Heading size={"md"} {...noWrap}>
+              <Heading size={compactView ? "sm" : "md"} {...noWrap}>
                 {board.name}
               </Heading>
             </LinkOverlay>
