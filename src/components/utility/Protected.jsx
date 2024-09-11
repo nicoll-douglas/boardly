@@ -1,12 +1,29 @@
-import { useProtectedQuery } from "@/hooks/service";
 import { Navigate } from "react-router-dom";
 import { TooMany, NotFound, ServerError } from "@/components/status-pages";
+import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getProtectedData } from "@/services";
+import { useNotif } from "@/hooks/ui";
 
 import Loader from "@/components/common/Loader";
 import config from "@/config";
 
 export default function Protected({ children, Context, endpoint, mockData }) {
-  const { data, isLoading, error } = useProtectedQuery(endpoint);
+  const notifs = useNotif();
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: [`GET ${endpoint}`],
+    queryFn: async () => getProtectedData(endpoint),
+    staleTime: config.auth.accessTime,
+    retry: false,
+    enabled: config.fetch.queriesEnabled,
+  });
+
+  useEffect(() => {
+    if (!error) return;
+    if (error.status === 0) notifs.networkError();
+  }, [error]);
+
   let contextValue = config.fetch.queriesEnabled ? data : mockData;
 
   if (isLoading) return <Loader />;
