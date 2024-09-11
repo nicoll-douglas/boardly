@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import FormControl from "@/components/form/FormControl";
+import { FormControl } from "@/components/form";
 import { Button } from "@chakra-ui/react";
 import useLogin from "../hooks/useLogin";
 

@@ -1,4 +1,4 @@
-import FormControl from "@/components/form/FormControl";
+import { FormControl } from "@/components/form";
 import { useForm } from "react-hook-form";
 import passwordValidation from "../data/passwordValidation";
 import { Button } from "@chakra-ui/react";
