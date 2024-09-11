@@ -1,6 +1,6 @@
-import refresh from "@/services/refresh";
+import { refresh } from "@/services";
 import { useQuery } from "@tanstack/react-query";
-import useNotif from "@/hooks/useNotif";
+import useNotif from "../ui/useNotif";
 import { useEffect } from "react";
 import config from "@/config";
 

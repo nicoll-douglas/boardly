@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
-import useNotif from "@/hooks/useNotif";
+import useNotif from "../ui/useNotif";
 
 export default function useProtectedSubmission(form, options = {}) {
   const navigate = useNavigate();
