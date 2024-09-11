@@ -14,8 +14,9 @@
         "createdAt": "2024-09-10T15:48:28.790Z",
         "board": {
           "name": "Cats",
-          "_id": "board-1"
-        }
+          "_id": "board-cats"
+        },
+        "replies": []
       },
       {
         "title": "Pretium egestas aliquam fermentum vulputate iaculis pulvinar cursus.",
@@ -24,34 +25,74 @@
         "createdAt": "2024-09-04T12:48:28.790Z",
         "board": {
           "name": "Dogs",
-          "_id": "board-2"
-        }
+          "_id": "board-dogs"
+        },
+        "replies": ["replyId1", "replyId2", "replyId3"]
       }
     ],
     "replies": [
       {
         "body": "Tortor dui cursus dapibus cursus mi congue.",
         "_id": "reply-1",
-        "createdAt": "2024-09-02T12:48:28.790Z"
+        "author": {
+          "username": "steve123"
+        },
+        "createdAt": "2024-09-02T12:48:28.790Z",
+        "thread": {
+          "title": "Dis dictum auctor lacinia purus sociosqu nulla non.",
+          "body": "Sapien faucibus fusce fames non nunc. Inceptos egestas elementum commodo congue, rhoncus arcu?",
+          "_id": "thread-1",
+          "author": {
+            "username": "bob123"
+          },
+          "board": {
+            "name": "Rats",
+            "_id": "board-rats"
+          }
+        },
+        "parent": null,
+        "replies": ["replyId1", "replyId2", "replyId3"]
       },
       {
         "body": "Suscipit class pellentesque vivamus taciti aptent maximus orci ac egestas.",
         "_id": "reply-2",
-        "createdAt": "2024-09-10T21:20:28.790Z"
+        "createdAt": "2024-09-10T21:20:28.790Z",
+        "author": {
+          "username": "steve123"
+        },
+        "thread": {
+          "title": "Auctor aenean convallis convallis lectus iaculis sociosqu urna eget.",
+          "body": "Auctor aenean convallis convallis lectus iaculis sociosqu urna eget. Ex malesuada proin metus dictum molestie et ex. Lacinia torquent lobortis himenaeos mattis etiam maecenas vestibulum duis consequat. Tristique nisl duis phasellus lacinia mi posuere.",
+          "_id": "thread-2",
+          "author": {
+            "username": "john123"
+          },
+          "board": {
+            "name": "Elephants",
+            "_id": "board-elephants"
+          }
+        },
+        "parent": {
+          "author": {
+            "username": "sally123"
+          },
+          "body": "Curae at cursus; tortor euismod auctor vivamus fringilla."
+        },
+        "replies": []
       }
     ],
     "boards": [
       {
         "name": "Cats",
-        "_id": "board-1"
+        "_id": "board-cats"
       },
       {
         "name": "Dogs",
-        "_id": "board-2"
+        "_id": "board-dogs"
       },
       {
-        "name": "TheBoardToEndAllBoards",
-        "_id": "board-3"
+        "name": "Cows",
+        "_id": "board-cows"
       }
     ]
   },

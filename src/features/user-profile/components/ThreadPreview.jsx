@@ -8,18 +8,19 @@ import {
   Text,
   CardBody,
   Flex,
-  Button,
   Spacer,
   Divider,
-  Tag,
   Collapse,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { timeAgo } from "@/lib/utils";
 import { useCompactView } from "@/features/ui/compactView";
+import Tag from "./Tag";
+import CardLabel from "./CardLabel";
+import { noWrap } from "@/lib/constants";
 
 export default function ThreadPreview({ thread }) {
-  const { createdAt, title, body, _id, board } = thread;
+  const { createdAt, title, body, _id, board, replies } = thread;
   const { compactView } = useCompactView();
 
   return (
@@ -27,34 +28,31 @@ export default function ThreadPreview({ thread }) {
       <Card size={"sm"} variant={"filled"}>
         <CardHeader>
           <Box>
-            <Flex w={"full"} mb={1}>
-              <Box>
-                {"In "}
-                <Button
-                  variant={"link"}
-                  as={Link}
-                  to={`/boards/${board.name}`}
-                  minW={"fit-content"}
-                >
-                  {board.name}
-                </Button>
-              </Box>
+            <Flex w={"full"}>
+              <CardLabel
+                preText={"On"}
+                linkText={board.name}
+                link={`/boards/${board.name}`}
+              />
               <Spacer />
-              <Tag>{timeAgo(createdAt)}</Tag>
+              <Flex gap={2}>
+                <Tag>{`${replies.length} replies`}</Tag>
+                <Tag>{timeAgo(createdAt)}</Tag>
+              </Flex>
             </Flex>
-            <LinkOverlay as={Link} to={`/threads/${_id}`}>
-              <Heading as={"h1"} size={"md"}>
-                {title}
-              </Heading>
-            </LinkOverlay>
           </Box>
         </CardHeader>
-        <Collapse in={!compactView} animateOpacity>
-          <Divider />
-          <CardBody>
-            <Text>{body}</Text>
-          </CardBody>
-        </Collapse>
+        <Divider />
+        <CardBody>
+          <LinkOverlay as={Link} to={`/threads/${_id}`}>
+            <Heading as={"h1"} size={"md"} {...(compactView ? noWrap : {})}>
+              {title}
+            </Heading>
+          </LinkOverlay>
+          <Collapse in={!compactView} animateOpacity>
+            <Text mt={2}>{body}</Text>
+          </Collapse>
+        </CardBody>
       </Card>
     </LinkBox>
   );
