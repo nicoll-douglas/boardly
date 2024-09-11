@@ -16,13 +16,7 @@ export default function User() {
         <Header>
           <Logo to="/home" />
         </Header>
-        <Flex
-          flex={1}
-          pb={4}
-          gap={4}
-          flexDir={{ base: "column", md: "row" }}
-          alignItems={"start"}
-        >
+        <Flex flex={1} pb={4} gap={4} flexDir={{ base: "column", md: "row" }}>
           <ProfileInfo />
           <Divider display={{ md: "none" }} />
           <ProfileTabs />

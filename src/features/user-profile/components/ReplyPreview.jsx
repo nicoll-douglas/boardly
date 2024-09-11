@@ -26,30 +26,28 @@ export default function ReplyPreview({ reply, userRole }) {
     <LinkBox w={"full"}>
       <Card size={"sm"} variant={"filled"}>
         <CardHeader>
-          <Box>
-            <Flex w={"full"} alignItems={"start"} gap={4}>
-              <Box w={"calc(100% - 210px)"} flex={1}>
-                <Collapse in={!compactView} animateOpacity>
-                  <CardLabel
-                    preText={"On"}
-                    linkText={reply.thread.board.name}
-                    link={`/boards/${reply.thread.board.name}`}
-                  />
-                </Collapse>
+          <Flex w={"full"} alignItems={"start"} gap={4}>
+            <Box w={"calc(100% - 210px)"} flex={1}>
+              <Collapse in={!compactView} animateOpacity>
                 <CardLabel
-                  preText="In"
-                  linkText={reply.thread.title}
-                  link={`/threads/${reply.thread._id}`}
+                  preText={"On"}
+                  linkText={reply.thread.board.name}
+                  link={`/boards/${reply.thread.board.name}`}
                 />
-              </Box>
-              <Flex gap={2} alignItems={"start"} minW={"fit-content"}>
-                <Tag display={{ base: "none", lg: "flex" }}>
-                  {`${reply.replies.length} replies`}
-                </Tag>
-                <Tag>{timeAgo(reply.createdAt)}</Tag>
-              </Flex>
+              </Collapse>
+              <CardLabel
+                preText="In"
+                linkText={reply.thread.title}
+                link={`/threads/${reply.thread._id}`}
+              />
+            </Box>
+            <Flex gap={2} alignItems={"start"} minW={"fit-content"}>
+              <Tag display={{ base: "none", lg: "flex" }}>
+                {`${reply.replies.length} replies`}
+              </Tag>
+              <Tag>{timeAgo(reply.createdAt)}</Tag>
             </Flex>
-          </Box>
+          </Flex>
         </CardHeader>
         <Divider />
         <CardBody>
@@ -58,12 +56,14 @@ export default function ReplyPreview({ reply, userRole }) {
             to={`/threads/${reply.thread._id}#${reply._id}`}
           >
             <Text {...(compactView ? noWrap : {})}>
-              {`${parent.author.username} says: ${parent.body}`}
+              {`${parent.author.username} said: ${parent.body}`}
             </Text>
             <Text {...(compactView ? noWrap : {})}>
-              {userRole === config.userRoles.self
-                ? `You say: ${reply.body}`
-                : `${reply.author.username} says: ${reply.body}`}
+              {`${
+                userRole === config.userRoles.self
+                  ? "You"
+                  : reply.author.username
+              } said: ${reply.body}`}
             </Text>
           </LinkOverlay>
         </CardBody>

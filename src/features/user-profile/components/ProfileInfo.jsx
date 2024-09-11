@@ -41,15 +41,15 @@ export default function ProfileInfo() {
             <Heading size={"md"} as={"h1"}>
               {profile.username}
             </Heading>
-            <Text>{profile.bio}</Text>
+            {profile.bio && <Text>{profile.bio}</Text>}
           </Box>
         </Flex>
       </CardHeader>
       <Divider my={{ base: 4, md: 0 }} />
       <CardBody>
         <Stack divider={<StackDivider />} gap={1}>
-          <ProfileField value={profile.age} title={"Age"} />
-          <ProfileField value={profile.pronouns} title="Pronouns" />
+          <ProfileField value={profile.age ?? "-"} title={"Age"} />
+          <ProfileField value={profile.pronouns || "-"} title="Pronouns" />
           <ProfileField
             value={formatISOString(profile.createdAt)}
             title={"Joined"}

@@ -8,7 +8,6 @@ import {
   Text,
   CardBody,
   Flex,
-  Spacer,
   Divider,
   Collapse,
 } from "@chakra-ui/react";
@@ -27,20 +26,19 @@ export default function ThreadPreview({ thread }) {
     <LinkBox w={"full"}>
       <Card size={"sm"} variant={"filled"}>
         <CardHeader>
-          <Box>
-            <Flex w={"full"}>
+          <Flex w={"full"} gap={4}>
+            <Box w={"calc(100% - 180px)"} flex={1}>
               <CardLabel
                 preText={"On"}
                 linkText={board.name}
                 link={`/boards/${board.name}`}
               />
-              <Spacer />
-              <Flex gap={2}>
-                <Tag>{`${replies.length} replies`}</Tag>
-                <Tag>{timeAgo(createdAt)}</Tag>
-              </Flex>
+            </Box>
+            <Flex gap={2} minW={"fit-content"} alignItems={"start"}>
+              <Tag>{`${replies.length} replies`}</Tag>
+              <Tag>{timeAgo(createdAt)}</Tag>
             </Flex>
-          </Box>
+          </Flex>
         </CardHeader>
         <Divider />
         <CardBody>
