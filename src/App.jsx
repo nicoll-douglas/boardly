@@ -1,13 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import "./assets/css/styles.css";
+
+import { NotFound } from "./components/status-pages";
+import { Optimistic } from "./components/utility";
 import Index from "./pages";
 import Verify from "./pages/auth/verify";
 import Forgot from "./pages/auth/forgot";
 import Reset from "./pages/auth/reset";
-import { NotFound } from "./components/status-pages";
 import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
-import Optimistic from "./components/utility/Optimistic";
 import User from "./pages/users/[username]";
 
 function App() {
