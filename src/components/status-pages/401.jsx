@@ -1,4 +1,4 @@
-import authUrl from "@/assets/auth.svg";
+import authUrl from "@/assets/images/auth.svg";
 import StatusPage from "./StatusPage";
 
 export default function Unauthorized() {

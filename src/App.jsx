@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import "./assets/styles.css";
+import "./assets/css/styles.css";
 import Index from "./pages";
 import Verify from "./pages/auth/verify";
 import Forgot from "./pages/auth/forgot";

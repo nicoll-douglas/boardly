@@ -18,7 +18,7 @@ import ToggleableForm from "@/features/ui/formToggle/components/ToggleableForm";
 import { useState } from "react";
 import Optimistic from "@/components/special/Optimistic";
 import { Spacer } from "@chakra-ui/react";
-import chattingUrl from "@/assets/chatting.svg";
+import chattingUrl from "@/assets/images/chatting.svg";
 
 export default function Index() {
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -1,4 +1,4 @@
-import notFoundUrl from "@/assets/not-found.svg";
+import notFoundUrl from "@/assets/images/not-found.svg";
 import StatusPage from "./StatusPage";
 
 export default function NotFound() {

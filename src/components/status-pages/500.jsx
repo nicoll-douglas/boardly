@@ -1,5 +1,5 @@
 import StatusPage from "./StatusPage";
-import constructionUrl from "@/assets/construction.svg";
+import constructionUrl from "@/assets/images/construction.svg";
 
 export default function ServerError() {
   return (

@@ -1,5 +1,5 @@
 import StatusPage from "./StatusPage";
-import explosionUrl from "@/assets/explosion.svg";
+import explosionUrl from "@/assets/images/explosion.svg";
 
 export default function TooMany() {
   return (
