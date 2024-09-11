@@ -15,7 +15,7 @@ const fieldSchemas = {
       .custom((value, helpers) => {
         const noLetter = !/[a-zA-Z]/.test(value);
         const noNumber = !/[0-9]/.test(value);
-        const isInvalid = !lax.test(value);
+        const isInvalid = !lax.noWhiteSpace.test(value);
         if (noLetter || noNumber || isInvalid) {
           return helpers.error("any.invalid");
         }
