@@ -22,7 +22,7 @@ import config from "@/config";
 export default function ProfileInfo() {
   const data = useProfile();
   const profile = data.profile;
-  const USER_ROLE = data.USER_ROLE;
+  const userRole = data.userRole;
 
   return (
     <Card variant={"outline"} w={{ base: "full", md: 80 }}>
@@ -48,7 +48,7 @@ export default function ProfileInfo() {
           />
         </Stack>
       </CardBody>
-      {USER_ROLE === config.userRoles.self && (
+      {userRole === config.userRoles.self && (
         <>
           <Divider />
           <CardFooter>
