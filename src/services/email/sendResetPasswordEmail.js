@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const transporter = require("@/config/mailTransport");
+const transporter = require("./mailTransport");
 const { PASSWORD_RESET_DURATION } = require("@/config/JWT");
 
 async function sendResetPasswordEmail(email, id) {

@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const transporter = require("@/config/mailTransport");
+const transporter = require("./mailTransport");
 const { EMAIL_VERIFICATION_DURATION } = require("@/config/JWT");
 
 async function sendVerificationEmail(email, id) {
