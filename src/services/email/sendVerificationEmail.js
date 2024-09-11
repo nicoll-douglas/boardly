@@ -1,12 +1,14 @@
 const jwt = require("jsonwebtoken");
 const transporter = require("./mailTransport");
-const { EMAIL_VERIFICATION_DURATION } = require("@/config/JWT");
+const config = require("@/config");
 
 async function sendVerificationEmail(email, id) {
   const token = jwt.sign(
     {
       id,
-      exp: Math.floor((Date.now() + EMAIL_VERIFICATION_DURATION) / 1000),
+      exp: Math.floor(
+        (Date.now() + config.jwt.emailVerificationDuration) / 1000
+      ),
     },
     process.env.JWT_SECRET
   );

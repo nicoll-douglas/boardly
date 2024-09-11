@@ -1,4 +1,4 @@
-const { REFRESH_DURATION, ACCESS_DURATION } = require("@/config/JWT");
+const config = require("@/config");
 
 function customMethods(req, res, next) {
   let body = {};
@@ -12,7 +12,7 @@ function customMethods(req, res, next) {
 
   res._accessToken = (accessToken) => {
     res.cookie("accessToken", accessToken, {
-      maxAge: ACCESS_DURATION,
+      maxAge: config.jwt.accessDuration,
       httpOnly: true,
       secure: true,
       sameSite: "None",
@@ -23,7 +23,7 @@ function customMethods(req, res, next) {
 
   res._refreshToken = (refreshToken) => {
     res.cookie("refreshToken", refreshToken, {
-      maxAge: REFRESH_DURATION,
+      maxAge: config.jwt.refreshDuration,
       httpOnly: true,
       secure: true,
       sameSite: "None",

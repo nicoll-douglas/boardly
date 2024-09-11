@@ -8,7 +8,7 @@ module.exports = {
     maxSize: 2 * 1024 * 1024,
     allowedTypes: ["image/jpeg", "image/png"],
   },
-  JWT: {
+  jwt: {
     accessDuration: 5 * 60 * 1000,
     refreshDuration: 28 * 24 * 60 * 60 * 1000,
     emailVerificationDuration: 24 * 60 * 60 * 1000,

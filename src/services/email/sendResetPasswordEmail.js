@@ -1,12 +1,12 @@
 const jwt = require("jsonwebtoken");
 const transporter = require("./mailTransport");
-const { PASSWORD_RESET_DURATION } = require("@/config/JWT");
+const config = require("@/config");
 
 async function sendResetPasswordEmail(email, id) {
   const token = jwt.sign(
     {
       id,
-      exp: Math.floor((Date.now() + PASSWORD_RESET_DURATION) / 1000),
+      exp: Math.floor((Date.now() + config.jwt.passwordResetDuration) / 1000),
     },
     process.env.JWT_SECRET
   );

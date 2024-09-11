@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
-const { ACCESS_DURATION, REFRESH_DURATION } = require("@/config/JWT");
+const config = require("@/config");
 
 function issueAccessToken(id) {
   const accessToken = jwt.sign(
     {
       id,
-      exp: Math.floor((Date.now() + ACCESS_DURATION) / 1000),
+      exp: Math.floor((Date.now() + config.jwt.accessDuration) / 1000),
     },
     process.env.JWT_SECRET
   );
@@ -16,7 +16,7 @@ function issueRefreshToken(id) {
   const refreshToken = jwt.sign(
     {
       id,
-      exp: Math.floor((Date.now() + REFRESH_DURATION) / 1000),
+      exp: Math.floor((Date.now() + config.jwt.refreshDuration) / 1000),
     },
     process.env.JWT_SECRET
   );

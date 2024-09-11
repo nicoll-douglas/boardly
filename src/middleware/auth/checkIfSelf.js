@@ -1,4 +1,4 @@
-const USER_ROLES = require("@/config/userRoles");
+const config = require("@/config");
 
 function checkIfSelf(options) {
   return (req, res, next) => {
@@ -6,7 +6,7 @@ function checkIfSelf(options) {
     const user = req.user;
 
     if (user.username === username) {
-      req.USER_ROLE = USER_ROLES.SELF;
+      req.userRole = config.userRoles.self;
       req.log("user is self");
       return next();
     }
@@ -18,7 +18,7 @@ function checkIfSelf(options) {
     }
 
     req.log("user is basic");
-    req.USER_ROLE = USER_ROLES.BASIC;
+    req.userRole = config.userRoles.basic;
     return next();
   };
 }

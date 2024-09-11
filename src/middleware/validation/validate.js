@@ -1,5 +1,5 @@
 const Joi = require("joi");
-const { ALLOWED_TYPES } = require("@/config/imgUploads");
+const config = require("@/config");
 
 exports.body = (schema) => {
   return (req, res, next) => {
@@ -45,7 +45,9 @@ exports.image = (options = {}) => {
       return optional ? next() : res.status(400).end();
     }
 
-    const allowedType = ALLOWED_TYPES.includes(req.file.mimetype);
+    const allowedType = config.imgUploads.allowedTypes.includes(
+      req.file.mimetype
+    );
     return allowedType ? next() : res.status(400).end();
   };
 };

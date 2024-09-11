@@ -1,7 +1,7 @@
 const User = require("@/models/User");
 
 exports._get = async (req, res, next) => {
-  const USER_ROLE = req.USER_ROLE;
+  const userRole = req.userRole;
   const { username } = req.params;
 
   req.log("query for requested user");
@@ -33,7 +33,7 @@ exports._get = async (req, res, next) => {
     return res
       .status(200)
       ._append("profile", requestedUser)
-      ._append("USER_ROLE", USER_ROLE)
+      ._append("userRole", userRole)
       ._end();
   } catch (err) {
     next(err);
