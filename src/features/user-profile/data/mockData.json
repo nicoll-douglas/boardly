@@ -1,0 +1,59 @@
+{
+  "profile": {
+    "username": "steve123",
+    "avatar": "https://placebear.com/200/200",
+    "age": 25,
+    "bio": "Hello, I'm Steve!",
+    "pronouns": "he/him",
+    "createdAt": "2024-09-10T15:48:28.790Z",
+    "threads": [
+      {
+        "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "body": "Scelerisque torquent mauris ridiculus natoque, erat lacus nam. Habitant convallis magnis viverra senectus fermentum non nisl. Tempor felis id lacus eleifend mauris.\n\nProin sagittis phasellus porttitor viverra nunc. Ante ultricies non dictum rutrum bibendum dictum? Vehicula sit turpis nascetur scelerisque nibh facilisi sapien. Duis velit felis adipiscing aenean massa.",
+        "_id": "thread-1",
+        "createdAt": "2024-09-10T15:48:28.790Z",
+        "board": {
+          "name": "Cats",
+          "_id": "board-1"
+        }
+      },
+      {
+        "title": "Pretium egestas aliquam fermentum vulputate iaculis pulvinar cursus.",
+        "body": "Tempor elit at volutpat convallis; hac tincidunt leo ac. Elementum dignissim suscipit faucibus mi posuere. Taciti efficitur vel nunc euismod aliquet sagittis magnis.",
+        "_id": "thread-2",
+        "createdAt": "2024-09-04T12:48:28.790Z",
+        "board": {
+          "name": "Dogs",
+          "_id": "board-2"
+        }
+      }
+    ],
+    "replies": [
+      {
+        "body": "Tortor dui cursus dapibus cursus mi congue.",
+        "_id": "reply-1",
+        "createdAt": "2024-09-02T12:48:28.790Z"
+      },
+      {
+        "body": "Suscipit class pellentesque vivamus taciti aptent maximus orci ac egestas.",
+        "_id": "reply-2",
+        "createdAt": "2024-09-10T21:20:28.790Z"
+      }
+    ],
+    "boards": [
+      {
+        "name": "Cats",
+        "_id": "board-1"
+      },
+      {
+        "name": "Dogs",
+        "_id": "board-2"
+      },
+      {
+        "name": "TheBoardToEndAllBoards",
+        "_id": "board-3"
+      }
+    ]
+  },
+  "USER_ROLE": 1
+}

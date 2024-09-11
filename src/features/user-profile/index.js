@@ -1,7 +1,6 @@
-import ProfileInfo from "./components/ProfileInfo";
-import ProfileTabs from "./components/ProfileTabs";
-import { ProfileProvider } from "./contexts/ProfileContext";
-import useProfile from "./hooks/useProfile";
-import mockProfile from "./data/mockProfile.json";
-
-export { ProfileInfo, ProfileTabs, ProfileProvider, useProfile, mockProfile };
+import mockData from "./data/mockData.json";
+export { mockData };
+export { default as ProfileInfo } from "./components/ProfileInfo";
+export { default as ProfileTabs } from "./components/ProfileTabs";
+export { ProfileProvider } from "./contexts/ProfileContext";
+export { default as useProfile } from "./hooks/useProfile";
