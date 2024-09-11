@@ -1,6 +1,5 @@
-import FormModal from "@/components/common/FormModal";
-import LoginForm from "@/features/auth/components/LoginForm";
-import RegisterForm from "@/features/auth/components/RegisterForm";
+import { FormModal } from "@/components/common";
+import { LoginForm, RegisterForm } from "@/features/auth";
 import { Button } from "@chakra-ui/react";
 
 export default function ToggleableForm({

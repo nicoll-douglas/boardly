@@ -1,8 +1,3 @@
-import Container from "@/components/common/Container";
-import Logo from "@/components/common/Logo";
-import Header from "@/components/common/Header";
-import LoginBtn from "@/features/auth/components/LoginBtn";
-import RegisterBtn from "@/features/auth/components/RegisterBtn";
 import {
   Center,
   useDisclosure,
@@ -13,11 +8,16 @@ import {
   Heading,
   Image,
   Flex,
+  Spacer,
 } from "@chakra-ui/react";
-import ToggleableForm from "@/features/ui/formToggle/components/ToggleableForm";
 import { useState } from "react";
-import Optimistic from "@/components/utility/Optimistic";
-import { Spacer } from "@chakra-ui/react";
+
+import { Container, Logo, Header } from "@/components/common";
+import { Optimistic } from "@/components/utility";
+
+import { ToggleableForm } from "@/features/ui/formToggle";
+import { RegisterBtn, LoginBtn } from "@/features/auth";
+
 import chattingUrl from "@/assets/images/chatting.svg";
 
 export default function Index() {
