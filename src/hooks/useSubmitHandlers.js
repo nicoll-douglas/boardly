@@ -1,4 +1,4 @@
-import useNotif from "@/lib/hooks/useNotif";
+import useNotif from "@/hooks/useNotif";
 
 export default function useSubmitHandlers(submit, handlers) {
   const notifs = useNotif();

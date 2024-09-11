@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import getProtectedData from "@/services/getProtectedData";
 import ACCESS_TIME from "@/config/accessTime";
-import useNotif from "@/lib/hooks/useNotif";
+import useNotif from "@/hooks/useNotif";
 import FETCH_ENABLED from "@/config/dataFetching";
 
 export default function useProtectedQuery(endpoint) {

@@ -14,7 +14,8 @@ export default function useNotif() {
     toast({
       status: "error",
       title: "Server Error",
-      description: "Something went wrong, please try again later.",
+      description:
+        "Something went wrong, please try again. If the problem persists, please come back later.",
     });
 
   const tooMany15 = () =>

@@ -1,7 +1,7 @@
 import refresh from "@/services/refresh";
 import { PRIVILEGE_ENABLED } from "@/config/dataFetching";
 import { useQuery } from "@tanstack/react-query";
-import useNotif from "@/lib/hooks/useNotif";
+import useNotif from "@/hooks/useNotif";
 import { useEffect } from "react";
 import ACCESS_TIME from "@/config/accessTime";
 
