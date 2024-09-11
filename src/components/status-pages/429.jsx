@@ -1,9 +1,9 @@
-import OffPage from "@/components/common/OffPage";
+import StatusPage from "./StatusPage";
 import explosionUrl from "@/assets/explosion.svg";
 
 export default function TooMany() {
   return (
-    <OffPage
+    <StatusPage
       title="Too Many Requests"
       message="Slow down!"
       imageUrl={explosionUrl}

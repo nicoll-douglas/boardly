@@ -13,11 +13,13 @@ import Header from "@/components/common/Header";
 import Logo from "@/components/common/Logo";
 import { Link } from "react-router-dom";
 
-export default function OffPage({
+export default function StatusPage({
   title,
   message,
   imageUrl,
   textWidth = "420px",
+  link = "/home",
+  linkText = "Go back",
 }) {
   return (
     <Box position={"fixed"} minW={"100vw"} minH={"100vh"} zIndex={100}>
@@ -44,8 +46,8 @@ export default function OffPage({
                   {title}
                 </Heading>
                 <Text fontSize={{ sm: "lg" }}>{message}</Text>
-                <Button as={Link} to={"/"} size={"lg"} mt={2}>
-                  Go Back
+                <Button as={Link} to={link} size={"lg"} mt={2}>
+                  {linkText}
                 </Button>
               </VStack>
               <Image

@@ -1,13 +1,15 @@
 import authUrl from "@/assets/auth.svg";
-import OffPage from "@/components/common/OffPage";
+import StatusPage from "./StatusPage";
 
 export default function Unauthorized() {
   return (
-    <OffPage
+    <StatusPage
       title="Unauthorized"
       message="Please login to continue or access the requested resource."
       imageUrl={authUrl}
       textWidth="480px"
+      link="/auth/login"
+      linkText="Login"
     />
   );
 }

@@ -1,9 +1,9 @@
 import notFoundUrl from "@/assets/not-found.svg";
-import OffPage from "@/components/common/OffPage";
+import StatusPage from "./StatusPage";
 
 export default function NotFound() {
   return (
-    <OffPage
+    <StatusPage
       title="Not Found"
       message="The page you're looking for could not be found."
       imageUrl={notFoundUrl}

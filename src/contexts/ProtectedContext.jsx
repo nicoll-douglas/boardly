@@ -1,8 +1,7 @@
 import useProtectedQuery from "@/hooks/useProtectedQuery";
-import NotFound from "@/pages/404";
 import { Navigate } from "react-router-dom";
-import ServerError from "@/pages/500";
-import TooMany from "@/pages/429";
+import { TooMany, NotFound, ServerError } from "@/components/status-pages";
+
 import Loader from "@/components/common/Loader";
 import config from "@/config";
 
