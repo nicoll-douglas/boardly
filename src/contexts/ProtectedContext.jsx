@@ -1,4 +1,4 @@
-import useProtectedQuery from "@/hooks/useProtectedQuery";
+import { useProtectedQuery } from "@/hooks/service";
 import { Navigate } from "react-router-dom";
 import { TooMany, NotFound, ServerError } from "@/components/status-pages";
 

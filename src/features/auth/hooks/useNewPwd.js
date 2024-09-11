@@ -1,7 +1,7 @@
-import useSubmitHandlers from "@/hooks/useSubmitHandlers";
+import { useSubmitHandlers } from "@/hooks/service";
 import resetPwd from "../services/resetPwd";
 import { useNavigate } from "react-router-dom";
-import useNotif from "@/hooks/useNotif";
+import { useNotif } from "@/hooks/ui";
 import { useMemo } from "react";
 
 export default function useNewPwd(form, token) {

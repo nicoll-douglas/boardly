@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import verify from "../services/verify";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useNotif from "@/hooks/useNotif";
+import { useNotif } from "@/hooks/ui";
 
 export default function useEmailVerification(token) {
   const [UIFeedback, setUIFeedback] = useState(null);
