@@ -1,9 +1,9 @@
 import FormControl from "@/components/form/FormControl";
 import { useForm } from "react-hook-form";
-import { newPwdHelperText } from "@/lib/constants/helperText";
 import passwordValidation from "../data/passwordValidation";
 import { Button } from "@chakra-ui/react";
 import useNewPwd from "../hooks/useNewPwd";
+import { helperText } from "@/lib/constants";
 
 export default function NewPwdForm({ token }) {
   const form = useForm();
@@ -16,7 +16,7 @@ export default function NewPwdForm({ token }) {
         registerKey="password"
         placeholder="Enter password"
         label="Password"
-        helperText={newPwdHelperText}
+        helperText={helperText.newPwd}
         type="password"
         data-testid="reset-password"
         {...form.register("password", passwordValidation)}

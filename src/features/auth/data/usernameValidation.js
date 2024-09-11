@@ -1,4 +1,4 @@
-import { restricted } from "@/lib/constants/regex";
+import { regex } from "@/lib/constants";
 
 // react-hook-form validation spec
 // if requirements are to change, update the helper text
@@ -9,7 +9,7 @@ const validation = {
     message: "Username must be no more than 20 characters long",
   },
   pattern: {
-    value: restricted,
+    value: regex.restricted,
     message: "Username contains an invalid character",
   },
 };

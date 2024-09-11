@@ -1,4 +1,4 @@
-import { lax } from "@/lib/constants/regex";
+import { regex } from "@/lib/constants";
 
 // react-hook-form validation spec
 // if requirements are to change, update the helper text
@@ -22,7 +22,10 @@ const validation = {
       return /[0-9]/.test(value) || "Password must contain at least one number";
     },
     hasInvalid: (value) => {
-      return lax.test(value) || "Password contains an invalid character";
+      return (
+        regex.lax.noWhiteSpace.test(value) ||
+        "Password contains an invalid character"
+      );
     },
   },
 };

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import usernameValidation from "../data/usernameValidation";
 import passwordValidation from "../data/passwordValidation";
 import useRegister from "../hooks/useRegister";
+import { helperText } from "@/lib/constants";
 
 export default function RegisterForm({ onClose }) {
   const form = useForm({ shouldUnregister: true });
@@ -39,10 +40,7 @@ export default function RegisterForm({ onClose }) {
         placeholder="Enter username"
         label="Username"
         data-testid="register-username"
-        helperText={[
-          "Must be no more than 20 characters long",
-          "May only contain letters, numbers, underscores and hyphens",
-        ]}
+        helperText={helperText.newUn}
         {...form.register("username", usernameValidation)}
       />
       <FormControl
@@ -51,12 +49,7 @@ export default function RegisterForm({ onClose }) {
         placeholder="Enter password"
         label="Password"
         data-testid="register-password"
-        helperText={[
-          "Must be at least 5 characters long",
-          "Must be no more than 30 characters long",
-          "Must contain at least one letter",
-          "Must contain at least one number",
-        ]}
+        helperText={helperText.newPwd}
         password={true}
         {...form.register("password", passwordValidation)}
       />

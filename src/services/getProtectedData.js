@@ -1,4 +1,4 @@
-import FetchError from "@/lib/classes/FetchError";
+import { FetchError } from "@/lib/classes";
 
 export default async function getProtectedData(endpoint) {
   let response;
