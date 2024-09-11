@@ -14,9 +14,13 @@ import ProfileTabPanel from "./ProfileTabPanel";
 import useProfile from "../hooks/useProfile";
 import ThreadPreview from "./ThreadPreview";
 import ReplyPreview from "./ReplyPreview";
+import BoardPreview from "./BoardPreview";
+import policeUrl from "@/assets/images/police.svg";
+import chatting2Url from "@/assets/images/chatting-2.svg";
 
 export default function ProfileTabs() {
   const { profile, userRole } = useProfile();
+
   return (
     <Card
       variant={{ base: "unstyled", md: "outline" }}
@@ -55,12 +59,29 @@ export default function ProfileTabs() {
               {profile.replies.length === 0 ? (
                 <NoData
                   text={"Your replies to other users will show up here!"}
+                  imageUrl={chatting2Url}
                 />
               ) : (
                 profile.replies.map((reply) => (
                   <ReplyPreview
                     key={reply._id}
                     reply={reply}
+                    userRole={userRole}
+                  />
+                ))
+              )}
+            </ProfileTabPanel>
+            <ProfileTabPanel gap={2}>
+              {profile.boards.length === 0 ? (
+                <NoData
+                  text="Any boards you administrate will show up here!"
+                  imageUrl={policeUrl}
+                />
+              ) : (
+                profile.boards.map((board) => (
+                  <BoardPreview
+                    key={board._id}
+                    board={board}
                     userRole={userRole}
                   />
                 ))

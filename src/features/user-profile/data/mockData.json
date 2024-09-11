@@ -13,7 +13,7 @@
         "_id": "thread-1",
         "createdAt": "2024-09-10T15:48:28.790Z",
         "board": {
-          "name": "Cats",
+          "name": "boardlsdifhgnlsfgh lkshlkjhlkhj kj",
           "_id": "board-cats"
         },
         "replies": []
@@ -84,15 +84,30 @@
     "boards": [
       {
         "name": "Cats",
-        "_id": "board-cats"
+        "_id": "board-cats",
+        "admin": {
+          "username": "steve123"
+        },
+        "members": ["memberId1", "memberId2", "memberId3"],
+        "createdAt": "2024-09-02T12:48:28.790Z"
       },
       {
         "name": "Dogs",
-        "_id": "board-dogs"
+        "_id": "board-dogs",
+        "admin": {
+          "username": "steve123"
+        },
+        "members": [],
+        "createdAt": "2024-09-10T21:20:28.790Z"
       },
       {
         "name": "Cows",
-        "_id": "board-cows"
+        "_id": "board-cows",
+        "admin": {
+          "username": "steve123"
+        },
+        "members": ["memberId4", "memberId5"],
+        "createdAt": "2024-09-10T15:48:28.790Z"
       }
     ]
   },
