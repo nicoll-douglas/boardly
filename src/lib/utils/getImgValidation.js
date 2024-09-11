@@ -1,8 +1,4 @@
-import {
-  MAX_FILE_SIZE,
-  MAX_DIMENSIONS,
-  ALLOWED_TYPES,
-} from "@/config/imgUploads";
+import config from "@/config";
 
 function getImgValidation(options = {}) {
   const { required = false } = options;
@@ -15,7 +11,8 @@ function getImgValidation(options = {}) {
           if (!firstFile) return true;
         }
         return (
-          firstFile.size < MAX_FILE_SIZE || "Image size must not exceed 2MB"
+          firstFile.size < config.imgUploads.maxSize ||
+          "Image size must not exceed 2MB"
         );
       },
       fileType: ([firstFile]) => {
@@ -23,11 +20,14 @@ function getImgValidation(options = {}) {
           if (!firstFile) return true;
         }
         return (
-          ALLOWED_TYPES.includes(firstFile.type) ||
+          config.imgUploads.allowedTypes.includes(firstFile.type) ||
           "Image type must be JPEG/PNG"
         );
       },
       dimensions: async ([firstFile]) => {
+        const maxW = config.imgUploads.maxDimensions.width;
+        const maxH = config.imgUploads.maxDimensions.height;
+
         if (!required) {
           if (!firstFile) return true;
         }
@@ -38,12 +38,10 @@ function getImgValidation(options = {}) {
 
           img.onload = () => {
             URL.revokeObjectURL(url);
-            const sizeOK =
-              img.width < MAX_DIMENSIONS.width &&
-              img.height < MAX_DIMENSIONS.height;
+            const sizeOK = img.width < maxW && img.height < maxH;
             resolve(
               sizeOK ||
-                `Image dimensions must not exceed ${MAX_DIMENSIONS.width}x${MAX_DIMENSIONS.height} pixels`
+                `Image dimensions must not exceed ${maxW}x${maxH} pixels`
             );
           };
 

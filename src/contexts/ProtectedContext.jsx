@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import ServerError from "@/pages/500";
 import TooMany from "@/pages/429";
 import Loader from "@/components/common/Loader";
-import FETCH_ENABLED from "@/config/dataFetching";
+import config from "@/config";
 
 export default function ProtectedProvider({
   children,
@@ -13,7 +13,7 @@ export default function ProtectedProvider({
   mockData,
 }) {
   const { data, isLoading, error } = useProtectedQuery(endpoint);
-  let contextValue = FETCH_ENABLED ? data : mockData;
+  let contextValue = config.fetch.queriesEnabled ? data : mockData;
 
   if (isLoading) return <Loader />;
   switch (error?.status) {

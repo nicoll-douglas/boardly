@@ -1,19 +1,19 @@
 import refresh from "@/services/refresh";
-import { PRIVILEGE_ENABLED } from "@/config/dataFetching";
 import { useQuery } from "@tanstack/react-query";
 import useNotif from "@/hooks/useNotif";
 import { useEffect } from "react";
-import ACCESS_TIME from "@/config/accessTime";
+import config from "@/config";
 
 export default function usePrivilege() {
   const notifs = useNotif();
+  const privilegeEnabled = config.fetch.privilegeEnabled;
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["GET /refresh"],
     queryFn: async () => refresh(),
-    staleTime: ACCESS_TIME,
+    staleTime: config.auth.accessTime,
     retry: false,
-    enabled: PRIVILEGE_ENABLED,
+    enabled: privilegeEnabled,
   });
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function usePrivilege() {
     notifs.networkError();
   }, [error]);
 
-  if (!PRIVILEGE_ENABLED) return { elevated: false, isLoading: false };
+  if (!privilegeEnabled) return { elevated: false, isLoading: false };
 
   return { elevated: data?.ok, isLoading };
 }

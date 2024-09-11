@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import getProtectedData from "@/services/getProtectedData";
-import ACCESS_TIME from "@/config/accessTime";
 import useNotif from "@/hooks/useNotif";
-import FETCH_ENABLED from "@/config/dataFetching";
+import config from "@/config";
 
 export default function useProtectedQuery(endpoint) {
   const notifs = useNotif();
@@ -11,9 +10,9 @@ export default function useProtectedQuery(endpoint) {
   const { data, isLoading, error } = useQuery({
     queryKey: [`GET ${endpoint}`],
     queryFn: async () => getProtectedData(endpoint),
-    staleTime: ACCESS_TIME,
+    staleTime: config.auth.accessTime,
     retry: false,
-    enabled: FETCH_ENABLED,
+    enabled: config.fetch.queriesEnabled,
   });
 
   useEffect(() => {
