@@ -15,7 +15,7 @@ import { useState } from "react";
 import { Container, Logo, Header } from "@/components/common";
 import { Optimistic } from "@/components/utility";
 
-import { ToggleableForm } from "@/features/ui/formToggle";
+import ToggleableForm from "@/features/ui/formToggle";
 import { RegisterBtn, LoginBtn } from "@/features/auth";
 
 import chattingUrl from "@/assets/images/chatting.svg";
