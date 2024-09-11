@@ -7,7 +7,7 @@ import Reset from "./pages/auth/reset";
 import { NotFound } from "./components/status-pages";
 import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
-import Optimistic from "./components/special/Optimistic";
+import Optimistic from "./components/utility/Optimistic";
 import User from "./pages/users/[username]";
 
 function App() {

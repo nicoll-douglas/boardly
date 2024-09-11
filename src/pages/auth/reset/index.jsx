@@ -1,7 +1,7 @@
 import FormModal from "@/components/common/FormModal";
 import NewPwdForm from "@/features/auth/components/NewPwdForm";
 import { useSearchParams } from "react-router-dom";
-import Optimistic from "@/components/special/Optimistic";
+import Optimistic from "@/components/utility/Optimistic";
 
 export default function Reset() {
   const [searchParams] = useSearchParams();

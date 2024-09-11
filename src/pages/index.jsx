@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import ToggleableForm from "@/features/ui/formToggle/components/ToggleableForm";
 import { useState } from "react";
-import Optimistic from "@/components/special/Optimistic";
+import Optimistic from "@/components/utility/Optimistic";
 import { Spacer } from "@chakra-ui/react";
 import chattingUrl from "@/assets/images/chatting.svg";
 
