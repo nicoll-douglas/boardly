@@ -15,42 +15,49 @@ import {
 } from "@chakra-ui/react";
 import ProfileField from "./ProfileField";
 import { EditIcon } from "@chakra-ui/icons";
-import mockProfile from "../data/mockProfile.json";
-import formatISOString from "@/lib/utils/formatISOString";
+import { formatISOString } from "@/lib/utils";
+import useProfile from "../hooks/useProfile";
+import config from "@/config";
 
-export default function ProfileInfo({ data }) {
-  data = mockProfile;
-  const profile = data?.profile;
+export default function ProfileInfo() {
+  const data = useProfile();
+  const profile = data.profile;
+  const USER_ROLE = data.USER_ROLE;
 
   return (
-    <Card variant={"outline"} w={80}>
+    <Card variant={"outline"} w={{ base: "full", md: 80 }}>
       <CardHeader>
         <Flex gap={4} alignItems={"center"} flexWrap={"wrap"}>
-          <Avatar size={"lg"} />
+          <Avatar size={"lg"} src={profile.avatar} name={profile.username} />
           <Box>
             <Heading size={"md"} as={"h1"}>
-              {profile?.username}
+              {profile.username}
             </Heading>
-            <Text>{profile?.bio}</Text>
+            <Text>{profile.bio}</Text>
           </Box>
         </Flex>
       </CardHeader>
+      <Divider />
       <CardBody>
         <Stack divider={<StackDivider />} gap={1}>
-          <ProfileField value={profile?.age} title={"Age"} />
-          <ProfileField value={profile?.pronouns} title="Pronouns" />
+          <ProfileField value={profile.age} title={"Age"} />
+          <ProfileField value={profile.pronouns} title="Pronouns" />
           <ProfileField
-            value={formatISOString(profile?.createdAt)}
+            value={formatISOString(profile.createdAt)}
             title={"Joined"}
           />
         </Stack>
       </CardBody>
-      <Divider />
-      <CardFooter>
-        <Button variant={"ghost"} size={"sm"} leftIcon={<EditIcon />}>
-          Edit
-        </Button>
-      </CardFooter>
+      {USER_ROLE === config.userRoles.self && (
+        <>
+          <Divider />
+          <CardFooter>
+            <Button variant={"ghost"} size={"sm"} leftIcon={<EditIcon />}>
+              Edit
+            </Button>
+          </CardFooter>
+        </>
+      )}
     </Card>
   );
 }
