@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import Protected from "@/components/utility/Protected";
+import { Protected } from "@/components/utility";
 import mockData from "../data/mockData.json";
 
 const ProfileContext = createContext();
