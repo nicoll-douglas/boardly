@@ -1,5 +1,5 @@
 import { Container, Header, Logo } from "@/components/common";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Divider } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import {
   ProfileProvider,
@@ -16,8 +16,15 @@ export default function User() {
         <Header>
           <Logo to="/home" />
         </Header>
-        <Flex flex={1} pb={4} gap={4} flexDir={{ base: "column", md: "row" }}>
+        <Flex
+          flex={1}
+          pb={4}
+          gap={4}
+          flexDir={{ base: "column", md: "row" }}
+          alignItems={"start"}
+        >
           <ProfileInfo />
+          <Divider display={{ md: "none" }} />
           <ProfileTabs />
         </Flex>
       </Container>

@@ -57,9 +57,9 @@ export default function ReplyPreview({ reply, userRole }) {
             as={Link}
             to={`/threads/${reply.thread._id}#${reply._id}`}
           >
-            <Text
-              {...(compactView ? noWrap : {})}
-            >{`${parent.author.username} says: ${parent.body}`}</Text>
+            <Text {...(compactView ? noWrap : {})}>
+              {`${parent.author.username} says: ${parent.body}`}
+            </Text>
             <Text {...(compactView ? noWrap : {})}>
               {userRole === config.userRoles.self
                 ? `You say: ${reply.body}`

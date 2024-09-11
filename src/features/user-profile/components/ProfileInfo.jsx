@@ -25,7 +25,15 @@ export default function ProfileInfo() {
   const userRole = data.userRole;
 
   return (
-    <Card variant={"outline"} w={{ base: "full", md: 80 }}>
+    <Card
+      variant={{ base: "unstyled", md: "outline" }}
+      w={{ base: "full", md: 64, lg: 80 }}
+      position={{ base: "static", md: "sticky" }}
+      top={"72px"}
+      h={{ md: "calc(100vh - 88px)" }}
+      size={"sm"}
+      overflowY={"auto"}
+    >
       <CardHeader>
         <Flex gap={4} alignItems={"center"} flexWrap={"wrap"}>
           <Avatar size={"lg"} src={profile.avatar} name={profile.username} />
@@ -37,7 +45,7 @@ export default function ProfileInfo() {
           </Box>
         </Flex>
       </CardHeader>
-      <Divider />
+      <Divider my={{ base: 4, md: 0 }} />
       <CardBody>
         <Stack divider={<StackDivider />} gap={1}>
           <ProfileField value={profile.age} title={"Age"} />
@@ -50,7 +58,7 @@ export default function ProfileInfo() {
       </CardBody>
       {userRole === config.userRoles.self && (
         <>
-          <Divider />
+          <Divider my={{ base: 4, md: 0 }} />
           <CardFooter>
             <Button variant={"ghost"} size={"sm"} leftIcon={<EditIcon />}>
               Edit

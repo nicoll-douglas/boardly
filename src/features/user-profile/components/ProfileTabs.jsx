@@ -17,16 +17,26 @@ import ReplyPreview from "./ReplyPreview";
 
 export default function ProfileTabs() {
   const { profile, userRole } = useProfile();
-
   return (
-    <Card variant={"outline"} flex={1} size={"sm"}>
+    <Card
+      variant={{ base: "unstyled", md: "outline" }}
+      flex={1}
+      size={"sm"}
+      minH={{ md: "calc(100vh - 88px)" }}
+      maxW={"full"}
+    >
       <CardHeader>
         <ControlBar />
       </CardHeader>
-      <Divider />
+      <Divider my={{ base: 4, md: 0 }} />
       <CardBody>
         <Tabs>
-          <TabList>
+          <TabList
+            position={{ base: "sticky", md: "static" }}
+            top={"72px"}
+            zIndex={100}
+            bg={"gray.800"}
+          >
             <Tab>Threads</Tab>
             <Tab>Replies</Tab>
             <Tab>Boards</Tab>
