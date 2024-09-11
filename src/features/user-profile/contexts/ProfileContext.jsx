@@ -1,18 +1,18 @@
 import { createContext } from "react";
-import { ProtectedContext } from "@/contexts";
+import Protected from "@/components/utility/Protected";
 import mockData from "../data/mockData.json";
 
 const ProfileContext = createContext();
 
 function ProfileProvider({ children, username }) {
   return (
-    <ProtectedContext
+    <Protected
       endpoint={`/api/users/${username}`}
       mockData={mockData}
       Context={ProfileContext}
     >
       {children}
-    </ProtectedContext>
+    </Protected>
   );
 }
 

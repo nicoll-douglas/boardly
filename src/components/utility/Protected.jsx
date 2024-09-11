@@ -5,12 +5,7 @@ import { TooMany, NotFound, ServerError } from "@/components/status-pages";
 import Loader from "@/components/common/Loader";
 import config from "@/config";
 
-export default function ProtectedProvider({
-  children,
-  Context,
-  endpoint,
-  mockData,
-}) {
+export default function Protected({ children, Context, endpoint, mockData }) {
   const { data, isLoading, error } = useProtectedQuery(endpoint);
   let contextValue = config.fetch.queriesEnabled ? data : mockData;
 
@@ -32,4 +27,3 @@ export default function ProtectedProvider({
       );
   }
 }
-export { ProtectedProvider };
