@@ -14,7 +14,7 @@ module.exports = {
     emailVerificationDuration: 24 * 60 * 60 * 1000,
     passwordResetDuration: 60 * 60 * 1000,
   },
-  userRoles: {
+  userPrivilege: {
     basic: 0,
     self: 1,
     admin: 2,

@@ -6,6 +6,7 @@ const reply = new mongoose.Schema(
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     replies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reply" }],
     thread: { type: mongoose.Schema.Types.ObjectId, ref: "Thread" },
+    parent: { type: mongoose.Schema.Types.ObjectId, ref: "Reply" },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );

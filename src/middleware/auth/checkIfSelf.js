@@ -6,7 +6,7 @@ function checkIfSelf(options) {
     const user = req.user;
 
     if (user.username === username) {
-      req.userRole = config.userRoles.self;
+      req.userPrivilege = config.userPrivilege.self;
       req.log("user is self");
       return next();
     }
@@ -18,7 +18,7 @@ function checkIfSelf(options) {
     }
 
     req.log("user is basic");
-    req.userRole = config.userRoles.basic;
+    req.userPrivilege = config.userPrivilege.basic;
     return next();
   };
 }
