@@ -22,7 +22,7 @@ import config from "@/config";
 export default function ProfileInfo() {
   const data = useProfile();
   const profile = data.profile;
-  const userRole = data.userRole;
+  const userPrivilege = data.userPrivilege;
 
   return (
     <Card
@@ -56,7 +56,7 @@ export default function ProfileInfo() {
           />
         </Stack>
       </CardBody>
-      {userRole === config.userRoles.self && (
+      {userPrivilege === config.userPrivilege.self && (
         <>
           <Divider my={{ base: 4, md: 0 }} />
           <CardFooter>

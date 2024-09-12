@@ -6,7 +6,7 @@ const config = {
     queriesEnabled: false,
     privilegeEnabled: false,
   },
-  userRoles: {
+  userPrivilege: {
     basic: 0,
     self: 1,
     admin: 2,

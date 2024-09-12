@@ -18,7 +18,7 @@ import CardLabel from "./CardLabel";
 import { useCompactView } from "@/features/ui/compactView";
 import { noWrap } from "@/lib/constants";
 
-export default function ReplyPreview({ reply, userRole }) {
+export default function ReplyPreview({ reply, userPrivilege }) {
   const parent = reply.parent || reply.thread;
   const { compactView } = useCompactView();
 
@@ -60,7 +60,7 @@ export default function ReplyPreview({ reply, userRole }) {
             </Text>
             <Text {...(compactView ? noWrap : {})}>
               {`${
-                userRole === config.userRoles.self
+                userPrivilege === config.userPrivilege.self
                   ? "You"
                   : reply.author.username
               } said: ${reply.body}`}

@@ -19,7 +19,7 @@ import boardUrl from "@/assets/images/board.svg";
 import chatting2Url from "@/assets/images/chatting-2.svg";
 
 export default function ProfileTabs() {
-  const { profile, userRole } = useProfile();
+  const { profile, userPrivilege } = useProfile();
 
   return (
     <Card
@@ -66,7 +66,7 @@ export default function ProfileTabs() {
                   <ReplyPreview
                     key={reply._id}
                     reply={reply}
-                    userRole={userRole}
+                    userPrivilege={userPrivilege}
                   />
                 ))
               )}
@@ -82,7 +82,7 @@ export default function ProfileTabs() {
                   <BoardPreview
                     key={board._id}
                     board={board}
-                    userRole={userRole}
+                    userPrivilege={userPrivilege}
                   />
                 ))
               )}

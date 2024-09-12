@@ -14,7 +14,7 @@ import Tag from "./Tag";
 import { noWrap } from "@/lib/constants";
 import { useCompactView } from "@/features/ui/compactView";
 
-export default function BoardPreview({ board, userRole }) {
+export default function BoardPreview({ board, userPrivilege }) {
   const { compactView } = useCompactView();
 
   return (
@@ -31,7 +31,7 @@ export default function BoardPreview({ board, userRole }) {
                 {board.name}
               </Heading>
             </LinkOverlay>
-            {userRole === config.userRoles.self && (
+            {userPrivilege === config.userPrivilege.self && (
               <Flex gap={2} minW={"fit-content"}>
                 <Tag display={{ base: "none", sm: "flex" }}>
                   {`members: ${board.members.length}`}
