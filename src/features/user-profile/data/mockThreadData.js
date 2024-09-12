@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import config from "@/config";
 
 function newThread() {
   return {
@@ -13,6 +14,9 @@ function newThread() {
       _id: `board-${faker.string.uuid()}`,
       name: faker.word.noun(),
     },
+    replies: Array.from({ length: faker.number.int({ min: 0, max: 10 }) }, () =>
+      faker.string.uuid()
+    ),
   };
 }
 
@@ -20,6 +24,7 @@ const threadData = {
   threads: Array.from({ length: faker.number.int({ min: 0, max: 30 }) }, () =>
     newThread()
   ),
+  userPrivilege: config.userPrivilege.self,
 };
 
 export default threadData;

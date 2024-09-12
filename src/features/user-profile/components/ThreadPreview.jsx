@@ -19,7 +19,7 @@ import CardLabel from "./CardLabel";
 import { noWrap } from "@/lib/constants";
 
 export default function ThreadPreview({ thread }) {
-  const { createdAt, title, body, _id, board, replies } = thread;
+  const { createdAt, title, body, _id, board } = thread;
   const { compactView } = useCompactView();
 
   return (
@@ -35,7 +35,6 @@ export default function ThreadPreview({ thread }) {
               />
             </Box>
             <Flex gap={2} minW={"fit-content"} alignItems={"start"}>
-              <Tag>{`${replies.length} replies`}</Tag>
               <Tag>{timeAgo(createdAt)}</Tag>
             </Flex>
           </Flex>
@@ -47,9 +46,13 @@ export default function ThreadPreview({ thread }) {
               {title}
             </Heading>
           </LinkOverlay>
-          <Collapse in={!compactView} animateOpacity>
-            <Text mt={2}>{body}</Text>
-          </Collapse>
+          {body && (
+            <Collapse in={!compactView} animateOpacity>
+              <Text mt={2} whiteSpace={"pre-wrap"} lineHeight={1.25}>
+                {body}
+              </Text>
+            </Collapse>
+          )}
         </CardBody>
       </Card>
     </LinkBox>

@@ -7,19 +7,20 @@ import {
   TabPanels,
   Tabs,
   Divider,
+  TabPanel,
+  VStack,
 } from "@chakra-ui/react";
 import ControlBar from "./ControlBar";
-import NoData from "./NoData";
-import ProfileTabPanel from "./ProfileTabPanel";
-import useProfile from "../hooks/useProfile";
-import ThreadPreview from "./ThreadPreview";
-import ReplyPreview from "./ReplyPreview";
-import BoardPreview from "./BoardPreview";
-import boardUrl from "@/assets/images/board.svg";
-import chatting2Url from "@/assets/images/chatting-2.svg";
+import ThreadsTab from "./ThreadsTab";
+import { ThreadsTabProvider } from "../contexts/ThreadsTabContext";
+import RepliesTab from "./RepliesTab";
+import { RepliesTabProvider } from "../contexts/RepliesTabContext";
+import BoardsTab from "./BoardsTab";
+import { BoardsTabProvider } from "../contexts/BoardsTabContext";
+import { useCompactView } from "@/features/ui/compactView";
 
 export default function ProfileTabs() {
-  const { profile, userPrivilege } = useProfile();
+  const { compactView } = useCompactView();
 
   return (
     <Card
@@ -34,7 +35,7 @@ export default function ProfileTabs() {
       </CardHeader>
       <Divider my={{ base: 4, md: 0 }} />
       <CardBody>
-        <Tabs>
+        <Tabs isLazy>
           <TabList
             position={{ base: "sticky", md: "static" }}
             top={"72px"}
@@ -46,47 +47,27 @@ export default function ProfileTabs() {
             <Tab>Boards</Tab>
           </TabList>
           <TabPanels>
-            <ProfileTabPanel>
-              {profile.threads.length === 0 ? (
-                <NoData text={"Create a thread to get started!"} />
-              ) : (
-                profile.threads.map((thread) => (
-                  <ThreadPreview key={thread._id} thread={thread} />
-                ))
-              )}
-            </ProfileTabPanel>
-            <ProfileTabPanel>
-              {profile.replies.length === 0 ? (
-                <NoData
-                  text={"Your replies to other users will show up here!"}
-                  imageUrl={chatting2Url}
-                />
-              ) : (
-                profile.replies.map((reply) => (
-                  <ReplyPreview
-                    key={reply._id}
-                    reply={reply}
-                    userPrivilege={userPrivilege}
-                  />
-                ))
-              )}
-            </ProfileTabPanel>
-            <ProfileTabPanel gap={2}>
-              {profile.boards.length === 0 ? (
-                <NoData
-                  text="Any boards you administrate will show up here!"
-                  imageUrl={boardUrl}
-                />
-              ) : (
-                profile.boards.map((board) => (
-                  <BoardPreview
-                    key={board._id}
-                    board={board}
-                    userPrivilege={userPrivilege}
-                  />
-                ))
-              )}
-            </ProfileTabPanel>
+            <TabPanel px={{ base: 0, lg: 4 }}>
+              <VStack gap={compactView ? 2 : 3}>
+                <ThreadsTabProvider>
+                  <ThreadsTab />
+                </ThreadsTabProvider>
+              </VStack>
+            </TabPanel>
+            <TabPanel px={{ base: 0, lg: 4 }}>
+              <VStack gap={compactView ? 2 : 3}>
+                <RepliesTabProvider>
+                  <RepliesTab />
+                </RepliesTabProvider>
+              </VStack>
+            </TabPanel>
+            <TabPanel px={{ base: 0, lg: 4 }}>
+              <VStack gap={2}>
+                <BoardsTabProvider>
+                  <BoardsTab />
+                </BoardsTabProvider>
+              </VStack>
+            </TabPanel>
           </TabPanels>
         </Tabs>
       </CardBody>

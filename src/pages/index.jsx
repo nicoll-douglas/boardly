@@ -64,8 +64,8 @@ export default function Index() {
             </Heading>
             <Text fontSize={{ sm: "lg" }}>
               Browse threads, share your thoughts, participate in open dialogue
-              or just come and hang out with like-minded people. Join the forum
-              today.
+              or just come and hang out with like-minded people. Join the
+              messaging board today.
             </Text>
             <Flex w={"full"} flexDir={{ base: "column", sm: "row" }}>
               <RegisterBtn

@@ -9,6 +9,7 @@ import {
   Flex,
   Divider,
   Collapse,
+  Heading,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { timeAgo } from "@/lib/utils";
@@ -17,10 +18,12 @@ import Tag from "./Tag";
 import CardLabel from "./CardLabel";
 import { useCompactView } from "@/features/ui/compactView";
 import { noWrap } from "@/lib/constants";
+import useProfile from "../hooks/useProfile";
 
 export default function ReplyPreview({ reply, userPrivilege }) {
   const parent = reply.parent || reply.thread;
   const { compactView } = useCompactView();
+  const data = useProfile();
 
   return (
     <LinkBox w={"full"}>
@@ -42,9 +45,6 @@ export default function ReplyPreview({ reply, userPrivilege }) {
               />
             </Box>
             <Flex gap={2} alignItems={"start"} minW={"fit-content"}>
-              <Tag display={{ base: "none", lg: "flex" }}>
-                {`${reply.replies.length} replies`}
-              </Tag>
               <Tag>{timeAgo(reply.createdAt)}</Tag>
             </Flex>
           </Flex>
@@ -55,15 +55,30 @@ export default function ReplyPreview({ reply, userPrivilege }) {
             as={Link}
             to={`/threads/${reply.thread._id}#${reply._id}`}
           >
-            <Text {...(compactView ? noWrap : {})}>
-              {`${parent.author.username} said: ${parent.body}`}
+            <Heading
+              size={"sm"}
+              {...(compactView ? noWrap : {})}
+            >{`${parent.author.username} said:`}</Heading>
+            <Text
+              {...(compactView ? noWrap : {})}
+              whiteSpace={compactView ? "nowrap" : "pre-wrap"}
+            >
+              {parent.body || parent.title}
             </Text>
-            <Text {...(compactView ? noWrap : {})}>
-              {`${
-                userPrivilege === config.userPrivilege.self
-                  ? "You"
-                  : reply.author.username
-              } said: ${reply.body}`}
+            <Heading
+              size={"sm"}
+              mt={compactView ? 0 : 4}
+              {...(compactView ? noWrap : {})}
+            >{`${
+              userPrivilege === config.userPrivilege.self
+                ? "You"
+                : data.profile.username
+            } said:`}</Heading>
+            <Text
+              {...(compactView ? noWrap : {})}
+              whiteSpace={compactView ? "nowrap" : "pre-wrap"}
+            >
+              {reply.body}
             </Text>
           </LinkOverlay>
         </CardBody>

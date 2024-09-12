@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import config from "@/config";
 
 function newReply() {
   return {
@@ -16,18 +17,26 @@ function newReply() {
         _id: `board-${faker.string.uuid()}`,
         name: faker.word.noun(),
       },
-      parent:
-        Math.random() < 0.5
-          ? {
-              _id: `reply-${faker.string.uuid()}`,
-              body: faker.lorem.sentence(),
-              author: {
-                _id: `author-${faker.string.uuid()}`,
-                name: faker.internet.userName(),
-              },
-            }
-          : null,
+      author: {
+        _id: `author-${faker.string.uuid()}`,
+        username: faker.internet.userName(),
+      },
     },
+    parent:
+      Math.random() < 0.5
+        ? {
+            _id: `reply-${faker.string.uuid()}`,
+            body: faker.lorem.sentence(),
+            author: {
+              _id: `author-${faker.string.uuid()}`,
+              username: faker.internet.userName(),
+            },
+          }
+        : null,
+    children: Array.from(
+      { length: faker.number.int({ min: 0, max: 10 }) },
+      () => faker.string.uuid()
+    ),
   };
 }
 
@@ -35,6 +44,7 @@ const replyData = {
   replies: Array.from({ length: faker.number.int({ min: 0, max: 30 }) }, () =>
     newReply()
   ),
+  userPrivilege: config.userPrivilege.self,
 };
 
 export default replyData;
