@@ -3,6 +3,8 @@ import config from "@/config";
 
 const pronounValues = [undefined, "he/him", "she/her", "they/them"];
 
+// mock data associated with /api/users/:username
+
 const profileData = {
   profile: {
     username: faker.internet.userName(),
@@ -12,7 +14,7 @@ const profileData = {
     pronouns: pronounValues[faker.number.int({ min: 0, max: 3 })],
     createdAt: faker.date.past(),
   },
-  userPrivilege: config.userPrivilege.self,
+  userPrivilege: config.userPrivilege.self, // self or basic
 };
 
 export default profileData;
