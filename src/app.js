@@ -1,11 +1,11 @@
 require("dotenv").config({ override: true });
 require("module-alias/register");
-require("@/models/index");
+require("./models");
 
 const cors = require("cors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const corsOptions = require("./config/cors");
+const config = require("./config");
 
 const customMethods = require("./middleware/global/customMethods");
 const errorHandler = require("./middleware/global/errorHandler");
@@ -17,7 +17,7 @@ const verifyAuth = require("@/middleware/auth/verifyAuth");
 
 const app = express();
 
-app.use(cors(corsOptions));
+app.use(cors(config.corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
