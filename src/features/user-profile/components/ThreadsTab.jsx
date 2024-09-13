@@ -1,13 +1,13 @@
 import NoData from "./NoData";
 import ThreadPreview from "./ThreadPreview";
-import { Spinner } from "@chakra-ui/react";
+import Loader from "./Loader";
 import { ThreadsTabContext } from "../contexts/ThreadsTabContext";
 import { useContext } from "react";
 
 export default function ThreadsTab() {
   const { data, isLoading } = useContext(ThreadsTabContext);
 
-  if (isLoading) return <Spinner my={16} size={"xl"} />;
+  if (isLoading) return <Loader />;
 
   return (
     <>

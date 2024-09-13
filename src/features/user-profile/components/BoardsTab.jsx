@@ -1,14 +1,14 @@
 import NoData from "./NoData";
 import BoardPreview from "./BoardPreview";
-import { Spinner } from "@chakra-ui/react";
 import boardUrl from "@/assets/images/board.svg";
 import { useContext } from "react";
 import { BoardsTabContext } from "../contexts/BoardsTabContext";
+import Loader from "./Loader";
 
 export default function BoardsTab() {
   const { data, isLoading } = useContext(BoardsTabContext);
 
-  if (isLoading) return <Spinner my={16} size={"xl"} />;
+  if (isLoading) return <Loader />;
 
   return (
     <>

@@ -1,6 +1,6 @@
 import NoData from "./NoData";
 import ReplyPreview from "./ReplyPreview";
-import { Spinner } from "@chakra-ui/react";
+import Loader from "./Loader";
 import chatting2Url from "@/assets/images/chatting-2.svg";
 import { RepliesTabContext } from "../contexts/RepliesTabContext";
 import { useContext } from "react";
@@ -8,7 +8,7 @@ import { useContext } from "react";
 export default function RepliesTab() {
   const { data, isLoading } = useContext(RepliesTabContext);
 
-  if (isLoading) return <Spinner my={16} size={"xl"} />;
+  if (isLoading) return <Loader />;
 
   return (
     <>
