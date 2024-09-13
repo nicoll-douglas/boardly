@@ -28,7 +28,7 @@ export default function StatusPage({
           <Header>
             <Logo to={"/"} />
           </Header>
-          <Center mt={12} mb={32} flex={1}>
+          <Center mt={12} mb={32} flex={1} px={4}>
             <Flex
               gap={4}
               alignItems={"center"}

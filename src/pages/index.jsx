@@ -55,7 +55,7 @@ export default function Index() {
             onToggle={() => setIsLoginForm(!isLoginForm)}
           />
         </Header>
-        <Center flex={1} mt={12}>
+        <Center flex={1} mt={12} px={4}>
           <VStack gap={4} maxW={"2xl"} as={"main"}>
             <Heading
               as="h1"

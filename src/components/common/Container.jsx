@@ -7,6 +7,7 @@ export default function Container({ children, ...rest }) {
       minH={"100vh"}
       display={"flex"}
       flexDir={"column"}
+      px={0}
       {...rest}
     >
       {children}
