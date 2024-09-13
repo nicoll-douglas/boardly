@@ -17,6 +17,7 @@ import { Optimistic } from "@/components/utility";
 
 import ToggleableForm from "@/features/ui/formToggle";
 import { RegisterBtn, LoginBtn } from "@/features/auth";
+import ToggleThemeBtn from "@/features/ui/dark-mode";
 
 import chattingUrl from "@/assets/images/chatting.svg";
 
@@ -40,7 +41,8 @@ export default function Index() {
         <Header>
           <Logo to="/" />
           <Spacer />
-          <LoginBtn onClick={openLoginForm} />
+          <ToggleThemeBtn />
+          <LoginBtn ml={4} onClick={openLoginForm} />
           <RegisterBtn
             ml={6}
             data-testid="register-btn"

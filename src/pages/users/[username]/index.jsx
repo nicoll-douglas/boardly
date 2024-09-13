@@ -1,10 +1,11 @@
 import { Container, Header, Logo } from "@/components/common";
-import { Flex, Divider } from "@chakra-ui/react";
+import { Flex, Divider, Spacer } from "@chakra-ui/react";
 import {
   ProfileProvider,
   ProfileInfo,
   ProfileTabs,
 } from "@/features/user-profile";
+import ToggleThemeBtn from "@/features/ui/dark-mode";
 
 export default function User() {
   return (
@@ -12,6 +13,8 @@ export default function User() {
       <Container maxW="8xl">
         <Header>
           <Logo to="/home" />
+          <Spacer />
+          <ToggleThemeBtn />
         </Header>
         <Flex flex={1} pb={4} gap={4} flexDir={{ base: "column", md: "row" }}>
           <ProfileInfo />

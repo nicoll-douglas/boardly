@@ -9,6 +9,7 @@ import {
   Divider,
   TabPanel,
   VStack,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import ControlBar from "./ControlBar";
 import ThreadsTab from "./ThreadsTab";
@@ -21,6 +22,7 @@ import { useCompactView } from "@/features/ui/compactView";
 
 export default function ProfileTabs() {
   const { compactView } = useCompactView();
+  const bgColor = useColorModeValue("white", "gray.800");
 
   return (
     <Card
@@ -40,7 +42,7 @@ export default function ProfileTabs() {
             position={{ base: "sticky", md: "static" }}
             top={"72px"}
             zIndex={100}
-            bg={"gray.800"}
+            bg={bgColor}
           >
             <Tab>Threads</Tab>
             <Tab>Replies</Tab>
