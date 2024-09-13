@@ -27,6 +27,8 @@ async function giveReplies(userDoc) {
       await parentReply.save();
       userReplies[i].parent = parentReply._id;
     }
+
+    await userReplies[i].save();
   }
   userDoc.replies = userReplies.map((reply) => reply._id);
 }
