@@ -10,7 +10,7 @@ function BoardsTabProvider({ children }) {
 
   return (
     <Protected
-      endpoint={`/api/users/${username}/replies`}
+      endpoint={`/api/users/${username}/boards`}
       mockData={mockBoardData}
       Context={BoardsTabContext}
       preventEarlyRender={false}
