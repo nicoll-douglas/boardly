@@ -6,13 +6,13 @@ const { faker } = require("@faker-js/faker");
 const mongoose = require("mongoose");
 
 async function giveReplies(userDoc) {
-  const replyCount = faker.number.int({ min: 1, max: 10 });
+  const replyCount = faker.number.int({ min: 1, max: 25 });
   const userReplies = await createReply(replyCount);
 
   for (let i = 0; i < replyCount; i++) {
     const [replyThread] = await createThread();
     replyThread.board = (await createBoard())[0]._id;
-    replyThread.author = (await createReply())[0]._id;
+    replyThread.author = (await createUser())[0]._id;
     await replyThread.save();
     userReplies[i].thread = replyThread._id;
 

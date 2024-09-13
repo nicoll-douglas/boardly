@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const { faker } = require("@faker-js/faker");
 
 async function giveThreads(userDoc) {
-  const threadCount = faker.number.int({ min: 1, max: 10 });
+  const threadCount = faker.number.int({ min: 1, max: 25 });
   const userThreads = await createThread(threadCount);
 
   for (let i = 0; i < threadCount; i++) {

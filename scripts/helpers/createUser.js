@@ -17,7 +17,6 @@ async function createVerifiedUser() {
   const user = new User({
     username: faker.internet.userName(),
     verified: true,
-    refreshToken: issueRefreshToken(),
     age:
       Math.random() < 0.5 ? faker.number.int({ min: 18, max: 120 }) : undefined,
     bio: Math.random() < 0.5 ? faker.lorem.sentence() : undefined,
@@ -25,6 +24,7 @@ async function createVerifiedUser() {
     hasAvatar: Math.random() < 0.5 ? faker.image.avatar() : undefined,
     email: faker.internet.email(),
   });
+  user.refreshToken = issueRefreshToken(user._id);
   await user.setPassword(faker.internet.password());
   return user.save();
 }
