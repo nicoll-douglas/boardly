@@ -34,15 +34,11 @@ async function createUser(quantity = 1, options) {
   const users = [];
 
   for (let i = 0; i < quantity; i++) {
-    let user;
-    if (verified) {
-      user = await createVerifiedUser();
-    } else {
-      user = await createUnverifiedUser();
-    }
-    users.push(user);
+    users.push(
+      await (verified ? createVerifiedUser() : createUnverifiedUser())
+    );
   }
-  return quantity === 1 ? users[0] : users;
+  return users;
 }
 
 module.exports = createUser;

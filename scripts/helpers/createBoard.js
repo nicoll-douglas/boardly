@@ -11,7 +11,7 @@ async function createBoard(quantity = 1) {
     boards.push(board);
   }
 
-  return quantity === 1 ? boards[0] : boards;
+  return boards;
 }
 
 module.exports = createBoard;

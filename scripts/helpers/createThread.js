@@ -15,7 +15,7 @@ async function createThread(quantity = 1) {
     threads.push(thread);
   }
 
-  return quantity === 1 ? threads[0] : threads;
+  return threads;
 }
 
 module.exports = createThread;

@@ -23,7 +23,7 @@ async function seedProfile() {
   console.log(
     `info: self created. you should now be able to login on the client. username: ${SELF_USERNAME}, password: ${SELF_PASSWORD}`
   );
-  const user = await createUser();
+  const [user] = await createUser();
   console.log(`info: successfully created user profile "${user.username}"`);
 
   await giveThreads(user);
@@ -34,6 +34,9 @@ async function seedProfile() {
 
   await giveBoards(user);
   console.log(`info: successfully gave "${user.username}" boards`);
+
+  await user.save();
+  console.log("info: successfully saved user");
 
   console.log(`info: seed complete`);
 }

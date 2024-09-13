@@ -11,7 +11,7 @@ async function createReply(quantity = 1) {
     replies.push(reply);
   }
 
-  return quantity === 1 ? replies[0] : replies;
+  return replies;
 }
 
 module.exports = createReply;

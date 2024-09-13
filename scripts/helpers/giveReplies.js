@@ -10,9 +10,9 @@ async function giveReplies(userDoc) {
   const userReplies = await createReply(replyCount);
 
   for (let i = 0; i < replyCount; i++) {
-    const replyThread = await createThread();
-    replyThread.board = (await createBoard())._id;
-    replyThread.author = (await createReply())._id;
+    const [replyThread] = await createThread();
+    replyThread.board = (await createBoard())[0]._id;
+    replyThread.author = (await createReply())[0]._id;
     await replyThread.save();
     userReplies[i].thread = replyThread._id;
 
@@ -22,8 +22,8 @@ async function giveReplies(userDoc) {
     );
 
     if (Math.random() < 0.75) {
-      const parentReply = await createReply();
-      parentReply.author = (await createUser())._id;
+      const [parentReply] = await createReply();
+      parentReply.author = (await createUser())[0]._id;
       await parentReply.save();
       userReplies[i].parent = parentReply._id;
     }

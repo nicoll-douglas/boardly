@@ -8,7 +8,7 @@ async function giveThreads(userDoc) {
   const userThreads = await createThread(threadCount);
 
   for (let i = 0; i < threadCount; i++) {
-    userThreads[i].board = (await createBoard())._id;
+    userThreads[i].board = (await createBoard())[0]._id;
     userThreads[i].replies = Array.from(
       { length: faker.number.int({ min: 0, max: 10 }) },
       () => new mongoose.Types.ObjectId()
