@@ -4,7 +4,7 @@ const reply = new mongoose.Schema(
   {
     body: String,
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    replies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reply" }],
+    children: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reply" }],
     thread: { type: mongoose.Schema.Types.ObjectId, ref: "Thread" },
     parent: { type: mongoose.Schema.Types.ObjectId, ref: "Reply" },
   },
