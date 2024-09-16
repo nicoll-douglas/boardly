@@ -25,7 +25,7 @@ export default function useNewPwd(form, token) {
           title: "Password Successfully Reset",
           description: "You will be redirected to login shortly.",
         });
-        setTimeout(navigate, 3000, "/");
+        setTimeout(navigate, 3000, "/auth/login");
       },
       401: () =>
         toast({
