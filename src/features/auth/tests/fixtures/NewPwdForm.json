@@ -1,0 +1,12 @@
+{
+  "responses": {
+    "200": {
+      "statusCode": 200
+    }
+  },
+  "password": {
+    "default": "password123",
+    "different": "password1234"
+  },
+  "token": "12345"
+}
