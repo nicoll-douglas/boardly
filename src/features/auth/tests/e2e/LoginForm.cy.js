@@ -34,11 +34,20 @@ describe("LoginForm", () => {
     cy.scope(key, "username").type(login.username);
     cy.scope(key, "password").type(login.password);
     cy.scope(key, "submit").click();
+    cy.wait("@login");
+    cy.contains("Successfully logged in");
+    cy.url().should("include", "/home");
+  });
+
+  it("Should show structure login request correctly", () => {
+    cy.intercept("POST", "/api/auth/login", responses["200"]).as("login");
+    cy.scope(key, "open").click();
+    cy.scope(key, "username").type(login.username);
+    cy.scope(key, "password").type(login.password);
+    cy.scope(key, "submit").click();
     cy.wait("@login").then(({ request }) => {
       expect(request.headers["content-type"]).to.include("application/json");
       expect(request.body).to.deep.equal(login);
     });
-    cy.contains("Successfully logged in");
-    cy.url().should("include", "/home");
   });
 });

@@ -24,7 +24,9 @@ describe("NewPwdForm", () => {
     cy.scope(key, "password").type(password.default);
     cy.scope(key, "confirmPassword").type(password.default);
     cy.scope(key, "submit").click();
-    cy.wait("@reset");
+    cy.wait("@reset").then(({ response }) => {
+      expect(response.statusCode).to.equal(401);
+    });
     cy.contains("Failed to Reset Password");
     cy.contains("The link is either invalid or expired.");
   });

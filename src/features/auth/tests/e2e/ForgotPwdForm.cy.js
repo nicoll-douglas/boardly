@@ -24,6 +24,18 @@ describe("ForgotPwdForm", () => {
     cy.scope(key, "email").type(email.default);
     cy.scope(key, "confirmEmail").type(email.default);
     cy.scope(key, "submit").click();
+    cy.wait("@forgot");
+    cy.scope(key, "email-error").should(
+      "contain",
+      "Could not find a user with this email address"
+    );
+  });
+
+  it("Should structure forgot request correctly", () => {
+    cy.intercept("POST", "/api/auth/forgot", responses["200"]).as("forgot");
+    cy.scope(key, "email").type(email.default);
+    cy.scope(key, "confirmEmail").type(email.default);
+    cy.scope(key, "submit").click();
     cy.wait("@forgot").then(({ request }) => {
       expect(request.headers["content-type"]).to.include("application/json");
       expect(request.body).to.deep.equal({
@@ -31,10 +43,6 @@ describe("ForgotPwdForm", () => {
         confirmEmail: email.default,
       });
     });
-    cy.scope(key, "email-error").should(
-      "contain",
-      "Could not find a user with this email address"
-    );
   });
 
   it("Should show correct message on 200 response", () => {

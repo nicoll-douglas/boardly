@@ -137,7 +137,22 @@ describe("RegisterForm", () => {
 
   // make sure backend server is running
   // clear database when written to
-  it("Should create account on successful validation", () => {
+  it.only("Should create account on successful validation", () => {
+    cy.scope(key, "open").click();
+    cy.wait(250);
+    cy.scope(key, "email").type(email.default);
+    cy.scope(key, "confirmEmail").type(email.default);
+    cy.scope(key, "username").type(username.default);
+    cy.scope(key, "password").type(password.default);
+    cy.scope(key, "submit").click();
+    cy.wait("@register");
+    cy.contains("Account Created");
+    cy.contains(
+      "Please check your email and click the link to verify your account."
+    );
+  });
+
+  it.only("Should structure register request correctly", () => {
     cy.scope(key, "open").click();
     cy.wait(250);
     cy.scope(key, "email").type(email.default);
@@ -154,9 +169,5 @@ describe("RegisterForm", () => {
       });
       expect(request.headers["content-type"]).to.include("application/json");
     });
-    cy.contains("Account Created");
-    cy.contains(
-      "Please check your email and click the link to verify your account."
-    );
   });
 });
