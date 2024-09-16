@@ -18,7 +18,6 @@ export default function NewPwdForm({ token }) {
         label="Password"
         helperText={helperText.newPwd}
         type="password"
-        data-testid="reset-password"
         {...form.register("password", passwordValidation)}
       />
       <FormControl
@@ -27,19 +26,13 @@ export default function NewPwdForm({ token }) {
         placeholder="Re-enter password"
         label="Confirm password"
         type="password"
-        data-testid="reset-confirm-password"
         {...form.register("confirmPassword", {
           required: "Please confirm your new password",
           validate: (value) =>
             value === form.getValues("password") || "Passwords do not match",
         })}
       />
-      <Button
-        type="submit"
-        w="full"
-        data-testid="reset-submit"
-        isLoading={form.formState.isSubmitting}
-      >
+      <Button type="submit" w="full" isLoading={form.formState.isSubmitting}>
         Submit
       </Button>
     </form>

@@ -43,11 +43,7 @@ export default function Index() {
           <Spacer />
           <ToggleThemeBtn />
           <LoginBtn ml={4} onClick={openLoginForm} />
-          <RegisterBtn
-            ml={6}
-            data-testid="register-btn"
-            onClick={openRegisterForm}
-          />
+          <RegisterBtn ml={6} onClick={openRegisterForm} />
           <ToggleableForm
             isOpen={isOpen}
             isLoginForm={isLoginForm}
