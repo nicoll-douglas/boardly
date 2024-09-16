@@ -3,7 +3,7 @@ import { TooMany, NotFound, ServerError } from "@/components/status-pages";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getProtectedData } from "@/services";
-import { useNotif } from "@/hooks/ui";
+import { useNotif } from "@/hooks";
 
 import Loader from "@/components/common/Loader";
 import config from "@/config";

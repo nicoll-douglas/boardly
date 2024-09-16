@@ -1,6 +1,5 @@
-import { useSubmitHandlers } from "@/hooks/service";
+import { useSubmitHandlers, useNotif } from "@/hooks";
 import register from "../services/register";
-import { useNotif } from "@/hooks/ui";
 import { useMemo } from "react";
 
 export default function useRegister(form, onClose) {

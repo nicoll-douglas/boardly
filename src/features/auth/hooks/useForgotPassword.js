@@ -1,6 +1,5 @@
-import { useSubmitHandlers } from "@/hooks/service";
+import { useSubmitHandlers, useNotif } from "@/hooks";
 import submitEmail from "../services/requestPwdReset";
-import { useNotif } from "@/hooks/ui";
 import { useMemo } from "react";
 
 export default function useForgotPassword(form) {

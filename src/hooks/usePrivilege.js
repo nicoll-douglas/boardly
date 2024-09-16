@@ -1,12 +1,14 @@
 import { refresh } from "@/services";
 import { useQuery } from "@tanstack/react-query";
-import useNotif from "../ui/useNotif";
-import { useEffect } from "react";
+import useNotif from "./useNotif";
 import config from "@/config";
+import { useAuth } from "@/features/auth";
+import useQueryHandlers from "./useQueryHandlers";
 
 export default function usePrivilege() {
   const notifs = useNotif();
   const privilegeEnabled = config.fetch.privilegeEnabled;
+  const { setCurrentUser } = useAuth();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["GET /refresh"],
@@ -16,24 +18,23 @@ export default function usePrivilege() {
     enabled: privilegeEnabled,
   });
 
-  useEffect(() => {
-    if (!data) return;
-    switch (data.status) {
+  const onError = () => {
+    switch (error.status) {
       case 500:
         notifs.serverError();
         break;
       case 429:
         notifs.tooMany();
         break;
+      case 0:
+        notifs.networkError();
     }
-  }, [data]);
+  };
+  const onData = () => setCurrentUser(data.user);
 
-  useEffect(() => {
-    if (!error) return;
-    notifs.networkError();
-  }, [error]);
+  useQueryHandlers(error, data, onError, onData);
 
   if (!privilegeEnabled) return { elevated: false, isLoading: false };
 
-  return { elevated: data?.ok, isLoading };
+  return { elevated: !!data, isLoading };
 }

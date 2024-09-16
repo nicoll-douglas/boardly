@@ -1,4 +1,4 @@
-import { usePrivilege } from "@/hooks/service";
+import { usePrivilege } from "@/hooks";
 import { Navigate } from "react-router-dom";
 import Loader from "../common/Loader";
 
