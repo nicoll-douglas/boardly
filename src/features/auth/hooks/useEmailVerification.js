@@ -1,13 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import verify from "../services/verify";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useNotif } from "@/hooks/ui";
+import { useNotif, useQueryHandlers } from "@/hooks";
+import useAuth from "./useAuth";
 
 export default function useEmailVerification(token) {
   const [UIFeedback, setUIFeedback] = useState(null);
   const navigate = useNavigate();
   const { toast, ...notifs } = useNotif();
+  const { setCurrentUser } = useAuth();
 
   const { error, data, isLoading } = useQuery({
     queryKey: ["POST /api/auth/verify"],
@@ -16,14 +18,8 @@ export default function useEmailVerification(token) {
     retry: false,
   });
 
-  useEffect(() => {
-    if (!error) return;
-    notifs.networkError();
-  }, [error]);
-
-  useEffect(() => {
-    if (!data) return;
-    switch (data.status) {
+  const onError = () => {
+    switch (error.status) {
       case 401:
         setUIFeedback({
           heading: "Failed to Verify",
@@ -36,22 +32,28 @@ export default function useEmailVerification(token) {
       case 429:
         notifs.tooMany15();
         break;
-      case 200: {
-        setUIFeedback({
-          heading: "Email Verified",
-          text: "You will be redirected shortly, welcome to Lorem!",
-        });
-        const timeout = setTimeout(() => {
-          navigate("/home");
-          toast({
-            status: "success",
-            title: "Successfully logged in",
-          });
-        }, 3000);
-        return () => clearTimeout(timeout);
-      }
+      case 0:
+        notifs.networkError();
     }
-  }, [data]);
+  };
+
+  const onData = () => {
+    setUIFeedback({
+      heading: "Email Verified",
+      text: "You will be redirected shortly, welcome to Lorem!",
+    });
+    setCurrentUser(data.user);
+    const timeout = setTimeout(() => {
+      navigate("/home");
+      toast({
+        status: "success",
+        title: "Successfully logged in",
+      });
+    }, 3000);
+    return () => clearTimeout(timeout);
+  };
+
+  useQueryHandlers(error, data, onError, onData);
 
   return { isLoading, UIFeedback };
 }

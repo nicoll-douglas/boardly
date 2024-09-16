@@ -1,5 +1,4 @@
-import formatISOString from "./formatISOString";
-import isDigits from "./isDigits";
-import timeAgo from "./timeAgo";
-
-export { formatISOString, isDigits, timeAgo };
+export { default as formatISOString } from "./formatISOString";
+export { default as isDigits } from "./isDigits";
+export { default as timeAgo } from "./timeAgo";
+export { default as safeFetch } from "./safeFetch";
