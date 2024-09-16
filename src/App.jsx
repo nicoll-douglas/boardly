@@ -10,6 +10,7 @@ import Reset from "./pages/auth/reset";
 import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
 import User from "./pages/users/[username]";
+import Home from "./pages/home";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
       <Route path="/auth/register" element={<Register />} />
 
       <Route path="/users/:username" element={<User />} />
+      <Route path="/home" element={<Home />} />
     </Routes>
   );
 }
