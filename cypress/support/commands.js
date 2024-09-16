@@ -1,3 +1,3 @@
-Cypress.Commands.add("cyId", (id) => {
-  return cy.get(`[data-cy="${id}"]`);
+Cypress.Commands.add("scope", (key, id) => {
+  return cy.get(`[data-cy="${key}-${id}"]`);
 });

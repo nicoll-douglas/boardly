@@ -1,0 +1,19 @@
+{
+  "email": {
+    "default": "email@example.com",
+    "different": "different.email@example.com"
+  },
+  "username": {
+    "default": "username123",
+    "longerThan20": "usernameusernameusername",
+    "invalidCharacter": "username*"
+  },
+  "password": {
+    "default": "password123",
+    "lessThan8": "pass",
+    "longerThan30": "passwordpasswordpasswordpassword123",
+    "noLetter": "1234567890",
+    "noNumber": "password",
+    "invalidCharacter": "password123😀"
+  }
+}
