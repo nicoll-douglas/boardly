@@ -1,12 +1,11 @@
 import fixture from "../fixtures/RegisterForm.json";
 
-const { email, username, password } = fixture;
+const { email, username, password, responses } = fixture;
 const key = "RegisterForm";
 
 describe("RegisterForm", () => {
   beforeEach(() => {
     cy.visit("/");
-    cy.intercept("POST", "/api/auth/register").as("register");
   });
 
   it("Should show error for mismatched emails", () => {
@@ -137,7 +136,8 @@ describe("RegisterForm", () => {
 
   // make sure backend server is running
   // clear database when written to
-  it.only("Should create account on successful validation", () => {
+  it("Should create account on successful validation", () => {
+    cy.intercept("POST", "/api/auth/register").as("register");
     cy.scope(key, "open").click();
     cy.wait(250);
     cy.scope(key, "email").type(email.default);
@@ -152,7 +152,8 @@ describe("RegisterForm", () => {
     );
   });
 
-  it.only("Should structure register request correctly", () => {
+  it("Should structure register request correctly", () => {
+    cy.intercept("POST", "/api/auth/register").as("register");
     cy.scope(key, "open").click();
     cy.wait(250);
     cy.scope(key, "email").type(email.default);
@@ -169,5 +170,21 @@ describe("RegisterForm", () => {
       });
       expect(request.headers["content-type"]).to.include("application/json");
     });
+  });
+
+  it.only("Should show correct error on 409 response", () => {
+    cy.intercept("POST", "/api/auth/register", responses["409"]).as("register");
+    cy.scope(key, "open").click();
+    cy.wait(250);
+    cy.scope(key, "email").type(email.default);
+    cy.scope(key, "confirmEmail").type(email.default);
+    cy.scope(key, "username").type(username.default);
+    cy.scope(key, "password").type(password.default);
+    cy.scope(key, "submit").click();
+    cy.wait("@register");
+    cy.scope(key, "username-error").should(
+      "contain",
+      responses["409"].body.feedback[0].message
+    );
   });
 });

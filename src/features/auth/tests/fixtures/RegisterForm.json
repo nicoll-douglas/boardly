@@ -15,5 +15,21 @@
     "noLetter": "1234567890",
     "noNumber": "password",
     "invalidCharacter": "password123😀"
+  },
+  "responses": {
+    "409": {
+      "statusCode": 409,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": {
+        "feedback": [
+          {
+            "subject": "username",
+            "message": "Username is taken"
+          }
+        ]
+      }
+    }
   }
 }
