@@ -10,7 +10,7 @@ export default function useForgotPassword(form) {
     () => ({
       404: () =>
         form.setError("email", {
-          message: "Count not find a user with this email address",
+          message: "Could not find a user with this email address",
         }),
       429: () => notifs.tooMany15(),
       500: () => notifs.serverError(),
