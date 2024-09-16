@@ -19,12 +19,16 @@ export default function RegisterForm({ onClose }) {
         label="Email"
         helperText="We'll use your email to help you sign up"
         helpersAsList={false}
+        inputTestId="RegisterForm-email"
+        errorTestId="RegisterForm-email-error"
         {...form.register("email", { required: "Email is required" })}
       />
       <FormControl
         formRef={form}
         registerKey={"confirmEmail"}
         placeholder="Re-enter email"
+        inputTestId="RegisterForm-confirmEmail"
+        errorTestId="RegisterForm-confirmEmail-error"
         label="Confirm email"
         {...form.register("confirmEmail", {
           required: "Please confirm your email",
@@ -36,6 +40,8 @@ export default function RegisterForm({ onClose }) {
         formRef={form}
         registerKey={"username"}
         placeholder="Enter username"
+        inputTestId="RegisterForm-username"
+        errorTestId="RegisterForm-username-error"
         label="Username"
         helperText={helperText.newUn}
         {...form.register("username", usernameValidation)}
@@ -45,11 +51,18 @@ export default function RegisterForm({ onClose }) {
         registerKey="password"
         placeholder="Enter password"
         label="Password"
+        inputTestId="RegisterForm-password"
+        errorTestId="RegisterForm-password-error"
         helperText={helperText.newPwd}
         password={true}
         {...form.register("password", passwordValidation)}
       />
-      <Button type="submit" w={"full"} isLoading={form.formState.isSubmitting}>
+      <Button
+        type="submit"
+        data-cy="RegisterForm-submit"
+        w={"full"}
+        isLoading={form.formState.isSubmitting}
+      >
         Submit
       </Button>
     </form>
