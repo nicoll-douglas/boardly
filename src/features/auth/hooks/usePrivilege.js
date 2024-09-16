@@ -1,9 +1,8 @@
-import { refresh } from "@/services";
+import refresh from "../services/refresh";
 import { useQuery } from "@tanstack/react-query";
-import useNotif from "./useNotif";
+import { useNotif, useQueryHandlers } from "@/hooks";
 import config from "@/config";
 import { useAuth } from "@/features/auth";
-import useQueryHandlers from "./useQueryHandlers";
 
 export default function usePrivilege() {
   const notifs = useNotif();
