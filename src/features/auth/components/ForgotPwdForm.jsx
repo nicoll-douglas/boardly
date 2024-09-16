@@ -13,6 +13,8 @@ export default function ForgotPwdForm() {
         formRef={form}
         registerKey="email"
         placeholder="Enter email"
+        inputTestId="ForgotPwdForm-email"
+        errorTestId="ForgotPwdForm-email-error"
         label="Email"
         helperText="We'll send you an email to help you reset your password."
         helpersAsList={false}
@@ -22,6 +24,8 @@ export default function ForgotPwdForm() {
         formRef={form}
         registerKey="confirmEmail"
         placeholder="Re-enter email"
+        inputTestId="ForgotPwdForm-confirmEmail"
+        errorTestId="ForgotPwdForm-confirmEmail-error"
         label="Confirm email"
         {...form.register("confirmEmail", {
           required: "Please confirm your email",
@@ -29,7 +33,12 @@ export default function ForgotPwdForm() {
             value === form.getValues("email") || "Emails do not match",
         })}
       />
-      <Button type="submit" w={"full"} isLoading={form.formState.isSubmitting}>
+      <Button
+        data-cy="ForgotPwdForm-submit"
+        type="submit"
+        w={"full"}
+        isLoading={form.formState.isSubmitting}
+      >
         Submit
       </Button>
     </form>
