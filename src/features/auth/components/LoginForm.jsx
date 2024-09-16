@@ -13,6 +13,8 @@ export default function LoginForm() {
         label="Username"
         formRef={form}
         registerKey="username"
+        inputTestId="LoginForm-username"
+        errorTestId="LoginForm-username-error"
         placeholder="Enter username"
         {...form.register("username", { required: "Username is required" })}
       />
@@ -20,11 +22,18 @@ export default function LoginForm() {
         label="Password"
         formRef={form}
         registerKey="password"
+        inputTestId="LoginForm-password"
+        errorTestId="LoginForm-password-error"
         placeholder="Enter password"
         password={{ forgot: true }}
         {...form.register("password", { required: "Password is required" })}
       />
-      <Button type="submit" w={"full"} isLoading={form.formState.isSubmitting}>
+      <Button
+        type="submit"
+        w={"full"}
+        data-cy="LoginForm-submit"
+        isLoading={form.formState.isSubmitting}
+      >
         Submit
       </Button>
     </form>

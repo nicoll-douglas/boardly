@@ -42,7 +42,7 @@ export default function Index() {
           <Logo to="/" />
           <Spacer />
           <ToggleThemeBtn />
-          <LoginBtn ml={4} onClick={openLoginForm} />
+          <LoginBtn ml={4} data-cy="LoginForm-open" onClick={openLoginForm} />
           <RegisterBtn
             ml={6}
             data-cy="RegisterForm-open"
