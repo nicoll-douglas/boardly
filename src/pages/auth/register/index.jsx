@@ -1,6 +1,5 @@
 import { FormModal } from "@/components/common";
-import { RegisterForm } from "@/features/auth";
-import { Optimistic } from "@/components/utility";
+import { RegisterForm, Optimistic } from "@/features/auth";
 
 export default function Register() {
   return (

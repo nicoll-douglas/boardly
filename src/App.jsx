@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import "./assets/css/styles.css";
 
 import { NotFound } from "./components/status-pages";
-import { Optimistic } from "./components/utility";
+import { Optimistic } from "./features/auth";
 import Index from "./pages";
 import Verify from "./pages/auth/verify";
 import Forgot from "./pages/auth/forgot";

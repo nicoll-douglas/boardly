@@ -13,10 +13,9 @@ import {
 import { useState } from "react";
 
 import { Container, Logo, Header } from "@/components/common";
-import { Optimistic } from "@/components/utility";
 
 import ToggleableForm from "@/features/ui/formToggle";
-import { RegisterBtn, LoginBtn } from "@/features/auth";
+import { RegisterBtn, LoginBtn, Optimistic } from "@/features/auth";
 import ToggleThemeBtn from "@/features/ui/dark-mode";
 
 import chattingUrl from "@/assets/images/chatting.svg";

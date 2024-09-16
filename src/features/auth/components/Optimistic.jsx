@@ -1,6 +1,6 @@
-import { usePrivilege } from "@/hooks";
+import usePrivilege from "../hooks/usePrivilege";
 import { Navigate } from "react-router-dom";
-import Loader from "../common/Loader";
+import { Loader } from "@/components/common";
 
 export default function Optimistic({ redirect = "/home", children }) {
   const { elevated, isLoading } = usePrivilege();
