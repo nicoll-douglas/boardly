@@ -6,3 +6,4 @@ export { default as RegisterBtn } from "./components/RegisterBtn";
 export { default as RegisterForm } from "./components/RegisterForm";
 export { default as useEmailVerification } from "./hooks/useEmailVerification";
 export { AuthProvider } from "./contexts/AuthContext";
+export { default as useAuth } from "./hooks/useAuth";
