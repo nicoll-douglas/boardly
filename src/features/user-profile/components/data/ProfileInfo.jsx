@@ -9,15 +9,14 @@ import {
   Text,
   Stack,
   StackDivider,
-  CardFooter,
   Divider,
-  Button,
 } from "@chakra-ui/react";
-import ProfileField from "../ui/ProfileField";
-import { EditIcon } from "@chakra-ui/icons";
 import { formatISOString } from "@/lib/utils";
 import useProfile from "../../hooks/useProfile";
+import AgeEditable from "./AgeEditable";
+import PronounEditable from "./PronounEditable";
 import config from "@/config";
+import ProfileField from "../ui/ProfileField";
 
 export default function ProfileInfo() {
   const { data } = useProfile();
@@ -48,24 +47,20 @@ export default function ProfileInfo() {
       <Divider my={{ base: 4, md: 0 }} />
       <CardBody>
         <Stack divider={<StackDivider />} gap={1}>
-          <ProfileField value={profile.age ?? "-"} title={"Age"} />
-          <ProfileField value={profile.pronouns || "-"} title="Pronouns" />
+          <AgeEditable
+            defaultValue={profile.age}
+            isDisabled={userPrivilege === config.userPrivilege.basic}
+          />
+          <PronounEditable
+            defaultValue={profile.pronouns}
+            isDisabled={userPrivilege === config.userPrivilege.basic}
+          />
           <ProfileField
+            title="Joined On"
             value={formatISOString(profile.createdAt)}
-            title={"Joined"}
           />
         </Stack>
       </CardBody>
-      {userPrivilege === config.userPrivilege.self && (
-        <>
-          <Divider my={{ base: 4, md: 0 }} />
-          <CardFooter>
-            <Button variant={"ghost"} size={"sm"} leftIcon={<EditIcon />}>
-              Edit
-            </Button>
-          </CardFooter>
-        </>
-      )}
     </Card>
   );
 }
