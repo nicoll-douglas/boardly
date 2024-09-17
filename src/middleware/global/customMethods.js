@@ -38,6 +38,14 @@ function customMethods(req, res, next) {
     return res;
   };
 
+  res._authUser = (userDoc = req.user) => {
+    res._append("user", {
+      id: userDoc._id.toString(),
+      username: userDoc.username,
+    });
+    return res;
+  };
+
   res._end = () => {
     req.log("sent");
     return res.json(body);

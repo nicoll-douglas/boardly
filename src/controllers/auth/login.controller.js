@@ -39,7 +39,8 @@ module.exports = async (req, res, next) => {
       .status(200)
       ._accessToken(accessToken)
       ._refreshToken(refreshToken)
-      .end();
+      ._authUser(foundUser)
+      ._end();
   } catch (err) {
     return next(err);
   }
