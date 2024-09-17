@@ -13,10 +13,10 @@ import {
   Divider,
   Button,
 } from "@chakra-ui/react";
-import ProfileField from "./ProfileField";
+import ProfileField from "../ui/ProfileField";
 import { EditIcon } from "@chakra-ui/icons";
 import { formatISOString } from "@/lib/utils";
-import useProfile from "../hooks/useProfile";
+import useProfile from "../../hooks/useProfile";
 import config from "@/config";
 
 export default function ProfileInfo() {

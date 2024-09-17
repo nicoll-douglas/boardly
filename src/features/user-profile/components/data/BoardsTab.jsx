@@ -1,9 +1,9 @@
-import NoData from "./NoData";
+import NoData from "../ui/NoData";
 import BoardPreview from "./BoardPreview";
 import boardUrl from "@/assets/images/board.svg";
 import { useContext } from "react";
-import { BoardsTabContext } from "../contexts/BoardsTabContext";
-import Loader from "./Loader";
+import { BoardsTabContext } from "../../contexts/BoardsTabContext";
+import Loader from "../ui/Loader";
 
 export default function BoardsTab() {
   const { data, isLoading } = useContext(BoardsTabContext);

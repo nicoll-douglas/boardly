@@ -14,11 +14,11 @@ import {
 import { Link } from "react-router-dom";
 import { timeAgo } from "@/lib/utils";
 import config from "@/config";
-import Tag from "./Tag";
-import CardLabel from "./CardLabel";
+import Tag from "../ui/Tag";
+import CardLabel from "../ui/CardLabel";
 import { useCompactView } from "@/features/ui/compactView";
 import { noWrap } from "@/lib/constants";
-import useProfile from "../hooks/useProfile";
+import useProfile from "../../hooks/useProfile";
 
 export default function ReplyPreview({ reply, userPrivilege }) {
   const parent = reply.parent || reply.thread;

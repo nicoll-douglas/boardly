@@ -14,8 +14,8 @@ import {
 import { Link } from "react-router-dom";
 import { timeAgo } from "@/lib/utils";
 import { useCompactView } from "@/features/ui/compactView";
-import Tag from "./Tag";
-import CardLabel from "./CardLabel";
+import Tag from "../ui/Tag";
+import CardLabel from "../ui/CardLabel";
 import { noWrap } from "@/lib/constants";
 
 export default function ThreadPreview({ thread }) {

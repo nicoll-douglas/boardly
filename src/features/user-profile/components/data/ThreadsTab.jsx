@@ -1,7 +1,7 @@
-import NoData from "./NoData";
+import NoData from "../ui/NoData";
 import ThreadPreview from "./ThreadPreview";
-import Loader from "./Loader";
-import { ThreadsTabContext } from "../contexts/ThreadsTabContext";
+import Loader from "../ui/Loader";
+import { ThreadsTabContext } from "../../contexts/ThreadsTabContext";
 import { useContext } from "react";
 
 export default function ThreadsTab() {

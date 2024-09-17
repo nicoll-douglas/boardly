@@ -1,7 +1,7 @@
 import { Flex, Button, Spacer } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { CompactViewBtn } from "@/features/ui/compactView";
-import useProfile from "../hooks/useProfile";
+import useProfile from "../../hooks/useProfile";
 import config from "@/config";
 
 export default function ControlBar() {

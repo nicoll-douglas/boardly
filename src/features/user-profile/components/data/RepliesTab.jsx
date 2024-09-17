@@ -1,8 +1,8 @@
-import NoData from "./NoData";
+import NoData from "../ui/NoData";
 import ReplyPreview from "./ReplyPreview";
-import Loader from "./Loader";
+import Loader from "../ui/Loader";
 import chatting2Url from "@/assets/images/chatting-2.svg";
-import { RepliesTabContext } from "../contexts/RepliesTabContext";
+import { RepliesTabContext } from "../../contexts/RepliesTabContext";
 import { useContext } from "react";
 
 export default function RepliesTab() {

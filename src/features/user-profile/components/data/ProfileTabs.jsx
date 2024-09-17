@@ -10,13 +10,13 @@ import {
   TabPanel,
   VStack,
 } from "@chakra-ui/react";
-import ControlBar from "./ControlBar";
+import ControlBar from "../ui/ControlBar";
 import ThreadsTab from "./ThreadsTab";
-import { ThreadsTabProvider } from "../contexts/ThreadsTabContext";
+import { ThreadsTabProvider } from "../../contexts/ThreadsTabContext";
 import RepliesTab from "./RepliesTab";
-import { RepliesTabProvider } from "../contexts/RepliesTabContext";
+import { RepliesTabProvider } from "../../contexts/RepliesTabContext";
 import BoardsTab from "./BoardsTab";
-import { BoardsTabProvider } from "../contexts/BoardsTabContext";
+import { BoardsTabProvider } from "../../contexts/BoardsTabContext";
 import { useCompactView } from "@/features/ui/compactView";
 
 export default function ProfileTabs() {
