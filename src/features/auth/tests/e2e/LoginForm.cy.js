@@ -10,6 +10,10 @@ describe("LoginForm", () => {
     cy.visit("/");
   });
 
+  afterEach(() => {
+    cy.clearCookies();
+  });
+
   // make sure backend server is running
   it("Should reject with 404 response and show errors by default", () => {
     cy.intercept("POST", "/api/auth/login").as("login");
