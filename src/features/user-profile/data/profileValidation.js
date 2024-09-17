@@ -30,7 +30,7 @@ const validation = {
       message: "Bio must be no longer than 100 characters",
     },
     validate: (value) =>
-      regex.lax.whitespace.test(value) || "Bio contains an invalid character",
+      regex.lax.whiteSpace.test(value) || "Bio contains an invalid character",
   },
 };
 

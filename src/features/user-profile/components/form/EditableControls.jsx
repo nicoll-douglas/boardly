@@ -1,7 +1,7 @@
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { Flex, IconButton, useEditableControls, Fade } from "@chakra-ui/react";
 
-export default function EditableControls() {
+export default function EditableControls(props) {
   const { isEditing, getSubmitButtonProps, getCancelButtonProps } =
     useEditableControls();
 
@@ -9,7 +9,7 @@ export default function EditableControls() {
 
   return (
     <Fade in={isEditing}>
-      <Flex gap={1}>
+      <Flex gap={1} {...props}>
         <IconButton
           variant={"ghost"}
           size={"xs"}

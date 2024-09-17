@@ -6,7 +6,6 @@ import {
   Flex,
   Heading,
   Box,
-  Text,
   Stack,
   StackDivider,
   Divider,
@@ -17,11 +16,12 @@ import AgeEditable from "../form/AgeEditable";
 import PronounEditable from "../form/PronounEditable";
 import config from "@/config";
 import ProfileField from "../ui/ProfileField";
+import BioEditable from "../form/BioEditable";
 
 export default function ProfileInfo() {
   const { data } = useProfile();
   const profile = data.profile;
-  const userPrivilege = data.userPrivilege;
+  const editingDisabled = data.userPrivilege === config.userPrivilege.basic;
 
   return (
     <Card
@@ -34,13 +34,16 @@ export default function ProfileInfo() {
       overflowY={"auto"}
     >
       <CardHeader>
-        <Flex gap={4} alignItems={"center"} flexWrap={"wrap"}>
+        <Flex gap={2} flexDir={"column"}>
           <Avatar size={"lg"} src={profile.avatar} name={profile.username} />
           <Box>
             <Heading size={"md"} as={"h1"}>
               {profile.username}
             </Heading>
-            {profile.bio && <Text>{profile.bio}</Text>}
+            <BioEditable
+              defaultValue={profile.bio}
+              isDisabled={editingDisabled}
+            />
           </Box>
         </Flex>
       </CardHeader>
@@ -49,11 +52,11 @@ export default function ProfileInfo() {
         <Stack divider={<StackDivider />} gap={1}>
           <AgeEditable
             defaultValue={profile.age}
-            isDisabled={userPrivilege === config.userPrivilege.basic}
+            isDisabled={editingDisabled}
           />
           <PronounEditable
             defaultValue={profile.pronouns}
-            isDisabled={userPrivilege === config.userPrivilege.basic}
+            isDisabled={editingDisabled}
           />
           <ProfileField
             title="Joined On"
