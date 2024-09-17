@@ -35,5 +35,6 @@ export default function usePrivilege() {
 
   if (!privilegeEnabled) return { elevated: false, isLoading: false };
 
-  return { elevated: !!data, isLoading };
+  const dataExists = !!data;
+  return { elevated: dataExists, isLoading };
 }
