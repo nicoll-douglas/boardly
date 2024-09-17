@@ -1,7 +1,6 @@
 const User = require("@/models/User");
 
 exports._get = async (req, res, next) => {
-  const userPrivilege = req.userPrivilege;
   const { username } = req.params;
 
   req.log("query for user");
@@ -25,12 +24,8 @@ exports._get = async (req, res, next) => {
     req.log("user to object");
     user = user.toObject();
 
-    req.log("200, appended threads, appended privilege, sent");
-    return res
-      .status(200)
-      ._append("threads", user.threads)
-      ._append("userPrivilege", userPrivilege)
-      ._end();
+    req.log("200, appended threads, sent");
+    return res.status(200)._append("threads", user.threads)._end();
   } catch (err) {
     next(err);
   }

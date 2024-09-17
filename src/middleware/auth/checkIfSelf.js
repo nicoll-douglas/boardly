@@ -6,8 +6,8 @@ function checkIfSelf(options) {
     const user = req.user;
 
     if (user.username === username) {
-      req.userPrivilege = config.userPrivilege.self;
-      req.log("user is self");
+      req.log("user is self, appended privilege");
+      res._append("userPrivilege", config.userPrivilege.self);
       return next();
     }
 
@@ -17,8 +17,8 @@ function checkIfSelf(options) {
       return res.status(401).end();
     }
 
-    req.log("user is basic");
-    req.userPrivilege = config.userPrivilege.basic;
+    req.log("user is basic, appended privilege");
+    res._append("userPrivilege", config.userPrivilege.basic);
     return next();
   };
 }

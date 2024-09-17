@@ -39,7 +39,7 @@ const register = Joi.object({
 const login = Joi.object({
   password: fieldSchemas.existing.password,
   username: fieldSchemas.existing.username,
-});
+}).unknown();
 
 const forgot = Joi.object({
   email: fieldSchemas.existing.email,
