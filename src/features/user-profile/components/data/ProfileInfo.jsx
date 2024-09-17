@@ -13,8 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { formatISOString } from "@/lib/utils";
 import useProfile from "../../hooks/useProfile";
-import AgeEditable from "./AgeEditable";
-import PronounEditable from "./PronounEditable";
+import AgeEditable from "../form/AgeEditable";
+import PronounEditable from "../form/PronounEditable";
 import config from "@/config";
 import ProfileField from "../ui/ProfileField";
 
