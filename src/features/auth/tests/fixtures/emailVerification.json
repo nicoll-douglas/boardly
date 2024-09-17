@@ -1,0 +1,17 @@
+{
+  "token": "12345",
+  "responses": {
+    "200": {
+      "statusCode": 200,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": {
+        "user": {
+          "id": "12345",
+          "username": "username12345"
+        }
+      }
+    }
+  }
+}

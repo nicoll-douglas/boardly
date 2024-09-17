@@ -23,10 +23,17 @@ export default function Verify() {
       >
         {UIFeedback && (
           <>
-            <Heading as={"h1"} size={"3xl"} mb={6}>
+            <Heading
+              data-cy="emailVerification-feedback-heading"
+              as={"h1"}
+              size={"3xl"}
+              mb={6}
+            >
               {UIFeedback.heading}
             </Heading>
-            <Text fontSize={"xl"}>{UIFeedback.text}</Text>
+            <Text data-cy="emailVerification-feedback-text" fontSize={"xl"}>
+              {UIFeedback.text}
+            </Text>
           </>
         )}
         {isLoading && <Spinner size={"xl"} />}

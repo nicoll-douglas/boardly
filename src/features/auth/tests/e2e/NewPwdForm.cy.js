@@ -1,3 +1,5 @@
+// in config.js, make sure config.fetch.privilegeEnabled === false
+
 import fixture from "../fixtures/NewPwdForm.json";
 
 const { responses, password, token } = fixture;

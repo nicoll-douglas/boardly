@@ -1,3 +1,5 @@
+// in config.js, make sure config.fetch.privilegeEnabled === false
+
 import fixture from "../fixtures/LoginForm.json";
 const { login, responses } = fixture;
 
