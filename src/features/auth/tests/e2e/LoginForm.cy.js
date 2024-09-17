@@ -30,7 +30,7 @@ describe("LoginForm", () => {
     );
   });
 
-  it("Should show correct message and navigate to home on 200 response", () => {
+  it("Should show correct message, store response cookie and navigate to home on 200 response", () => {
     cy.intercept("POST", "/api/auth/login", responses["200"]).as("login");
     cy.scope(key, "open").click();
     cy.scope(key, "username").type(login.username);
@@ -38,6 +38,9 @@ describe("LoginForm", () => {
     cy.scope(key, "submit").click();
     cy.wait("@login");
     cy.contains("Successfully logged in");
+    const [cookieName, cookieValue] =
+      responses["200"].headers["Set-Cookie"].split("=");
+    cy.getCookie(cookieName).should("have.property", "value", cookieValue);
     cy.url().should("include", "/home");
   });
 
