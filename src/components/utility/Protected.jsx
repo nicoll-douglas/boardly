@@ -1,12 +1,13 @@
 import { Navigate } from "react-router-dom";
 import { TooMany, NotFound, ServerError } from "@/components/status-pages";
-import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getProtectedData } from "@/services";
 import { useNotif } from "@/hooks";
 
 import Loader from "@/components/common/Loader";
 import config from "@/config";
+import { useQueryHandlers } from "@/hooks";
+import { useAuth } from "@/features/auth";
 
 export default function Protected({
   children,
@@ -16,6 +17,7 @@ export default function Protected({
   preventEarlyRender = true,
 }) {
   const notifs = useNotif();
+  const { setCurrentUser } = useAuth();
 
   const { data, isLoading, error } = useQuery({
     queryKey: [`GET ${endpoint}`],
@@ -25,16 +27,20 @@ export default function Protected({
     enabled: config.fetch.queriesEnabled,
   });
 
-  useEffect(() => {
-    if (!error) return;
+  const onError = () => {
     if (error.status === 0) notifs.networkError();
-  }, [error]);
+  };
+
+  const onData = () => {
+    setCurrentUser(data.user);
+  };
+
+  useQueryHandlers(error, data, onError, onData);
 
   let contextValue;
-
   if (preventEarlyRender) {
     if (isLoading) return <Loader />;
-    contextValue = config.fetch.queriesEnabled ? data : mockData;
+    contextValue = config.fetch.queriesEnabled ? { data } : { data: mockData };
   } else {
     contextValue = config.fetch.queriesEnabled
       ? { data, isLoading }

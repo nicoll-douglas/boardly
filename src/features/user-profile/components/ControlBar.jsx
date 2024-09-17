@@ -5,11 +5,11 @@ import useProfile from "../hooks/useProfile";
 import config from "@/config";
 
 export default function ControlBar() {
-  const { userPrivilege } = useProfile();
+  const { data } = useProfile();
 
   return (
     <Flex gap={2}>
-      {userPrivilege === config.userPrivilege.self && (
+      {data.userPrivilege === config.userPrivilege.self && (
         <>
           <Button variant={"ghost"} size={"sm"} leftIcon={<AddIcon />}>
             New Thread

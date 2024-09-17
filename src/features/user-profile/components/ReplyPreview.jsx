@@ -23,7 +23,7 @@ import useProfile from "../hooks/useProfile";
 export default function ReplyPreview({ reply, userPrivilege }) {
   const parent = reply.parent || reply.thread;
   const { compactView } = useCompactView();
-  const data = useProfile();
+  const { data } = useProfile();
 
   return (
     <LinkBox w={"full"}>

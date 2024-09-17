@@ -20,7 +20,7 @@ import useProfile from "../hooks/useProfile";
 import config from "@/config";
 
 export default function ProfileInfo() {
-  const data = useProfile();
+  const { data } = useProfile();
   const profile = data.profile;
   const userPrivilege = data.userPrivilege;
 
