@@ -18,7 +18,7 @@ export default function BoardPreview({ board, userPrivilege }) {
 
   return (
     <LinkBox w={"full"}>
-      <Card size={"sm"} w={"full"}>
+      <Card size={"sm"} w={"full"} variant={"filled"}>
         <CardBody py={compactView ? 2 : 3}>
           <Flex justifyContent={"space-between"} alignItems={"center"} gap={4}>
             <LinkOverlay
@@ -26,7 +26,7 @@ export default function BoardPreview({ board, userPrivilege }) {
               to={`/boards/${board._id}`}
               maxW={{ base: "calc(100% - 40px)", sm: "calc(100% - 165px)" }}
             >
-              <Heading size={"md"} {...noWrap}>
+              <Heading size={{ base: "sm", md: "md" }} {...noWrap}>
                 {board.name}
               </Heading>
             </LinkOverlay>

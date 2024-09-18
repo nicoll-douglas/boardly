@@ -12,23 +12,25 @@ import {
 import EditableControls from "./EditableControls";
 import useProfileEditable from "../../hooks/useProfileEditable";
 import validation from "../../data/profileValidation";
+import useProfile from "../../hooks/useProfile";
+import config from "@/config";
 
-export default function PronounEditable({ defaultValue, isDisabled }) {
+export default function PronounEditable() {
+  const { data } = useProfile();
   const { form, onSubmit, onCancel, value } = useProfileEditable(
     "pronouns",
-    defaultValue
+    data.profile.pronouns
   );
   const error = form.formState.errors.pronouns;
 
   return (
     <FormControl isInvalid={error}>
       <Editable
-        defaultValue={defaultValue}
         h={14}
         value={value}
         onSubmit={onSubmit}
         onCancel={onCancel}
-        isDisabled={isDisabled}
+        isDisabled={data.userPrivilege === config.userPrivilege.basic}
         placeholder="-"
       >
         <Flex>

@@ -14,11 +14,14 @@ import EditableControls from "./EditableControls";
 import { isDigits } from "@/lib/utils";
 import useProfileEditable from "../../hooks/useProfileEditable";
 import validation from "../../data/profileValidation";
+import useProfile from "../../hooks/useProfile";
+import config from "@/config";
 
-export default function AgeEditable({ defaultValue, isDisabled }) {
+export default function AgeEditable() {
+  const { data } = useProfile();
   const { form, onSubmit, onCancel, value } = useProfileEditable(
     "age",
-    defaultValue
+    data.profile.age
   );
   const error = form.formState.errors.age;
 
@@ -29,7 +32,7 @@ export default function AgeEditable({ defaultValue, isDisabled }) {
         onSubmit={onSubmit}
         onCancel={onCancel}
         h={14}
-        isDisabled={isDisabled}
+        isDisabled={data.userPrivilege === config.userPrivilege.basic}
         placeholder="-"
       >
         <Flex>

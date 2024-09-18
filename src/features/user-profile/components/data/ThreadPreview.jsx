@@ -42,13 +42,21 @@ export default function ThreadPreview({ thread }) {
         <Divider />
         <CardBody>
           <LinkOverlay as={Link} to={`/threads/${_id}`}>
-            <Heading as={"h1"} size={"md"} {...(compactView ? noWrap : {})}>
+            <Heading
+              as={"h1"}
+              size={{ base: "sm", md: "md" }}
+              {...(compactView ? noWrap : {})}
+            >
               {title}
             </Heading>
           </LinkOverlay>
           {body && (
             <Collapse in={!compactView} animateOpacity>
-              <Text mt={2} whiteSpace={"pre-wrap"} lineHeight={1.25}>
+              <Text
+                mt={{ base: 1, md: 2 }}
+                whiteSpace={"pre-wrap"}
+                lineHeight={1.25}
+              >
                 {body}
               </Text>
             </Collapse>

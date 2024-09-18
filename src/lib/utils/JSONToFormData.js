@@ -1,11 +1,7 @@
 export default function JSONToFormData(object) {
   const formData = new FormData();
   Object.entries(object).forEach(([field, value]) => {
-    if (value instanceof FileList) {
-      formData.append(field, value[0]);
-    } else {
-      formData.append(field, value);
-    }
+    formData.append(field, value instanceof FileList ? value[0] : value);
   });
   return formData;
 }

@@ -57,7 +57,7 @@ export default function ProfileTabs() {
               </VStack>
             </TabPanel>
             <TabPanel px={{ base: 0, lg: 4 }}>
-              <VStack gap={2}>
+              <VStack gap={compactView ? 1 : 2}>
                 <BoardsTabProvider>
                   <BoardsTab />
                 </BoardsTabProvider>

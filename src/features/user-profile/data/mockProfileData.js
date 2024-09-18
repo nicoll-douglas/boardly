@@ -14,7 +14,10 @@ const profileData = {
     pronouns: pronounValues[faker.number.int({ min: 0, max: 3 })],
     createdAt: faker.date.past(),
   },
-  userPrivilege: config.userPrivilege.self, // self or basic
+  userPrivilege:
+    Math.random() < 0.75
+      ? config.userPrivilege.self
+      : config.userPrivilege.basic,
 };
 
 export default profileData;

@@ -1,4 +1,5 @@
 import { regex } from "@/lib/constants";
+import config from "@/config";
 
 const validation = {
   age: {
@@ -31,6 +32,41 @@ const validation = {
     },
     validate: (value) =>
       regex.lax.whiteSpace.test(value) || "Bio contains an invalid character",
+  },
+  avatar: {
+    required: false,
+    validate: {
+      size: ([firstFile]) => {
+        return (
+          firstFile.size <= config.imgUploads.maxSize ||
+          "Avatar size must be no more than 2MB"
+        );
+      },
+      dimensions: async ([firstFile]) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          const url = URL.createObjectURL(firstFile);
+          img.src = url;
+          const { maxDimensions } = config.imgUploads;
+
+          img.onload = () => {
+            URL.revokeObjectURL(url);
+            const sizeOK =
+              img.width < maxDimensions.width &&
+              img.height < maxDimensions.height;
+            resolve(
+              sizeOK ||
+                `Avatar dimensions must be no more than ${maxDimensions.width}x${maxDimensions.height}`
+            );
+          };
+
+          img.onerror = () => {
+            URL.revokeObjectURL(url);
+            resolve("Avatar file could not be loaded");
+          };
+        });
+      },
+    },
   },
 };
 

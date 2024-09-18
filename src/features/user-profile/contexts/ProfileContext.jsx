@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 const ProfileContext = createContext();
 
-function ProfileProvider({ children }) {
+function ProfileProvider({ children, preventEarlyRender }) {
   const { username } = useParams();
 
   return (
@@ -13,6 +13,7 @@ function ProfileProvider({ children }) {
       endpoint={`/api/users/${username}`}
       mockData={mockProfileData}
       Context={ProfileContext}
+      preventEarlyRender={preventEarlyRender}
     >
       {children}
     </Protected>
