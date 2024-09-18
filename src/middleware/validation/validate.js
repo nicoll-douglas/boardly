@@ -14,7 +14,7 @@ exports.body = (schema) => {
     req.log(`${error.name}: ${error.details[0].message}`);
     req.log("status is 400");
 
-    return res.status(400).end();
+    return res.status(400)._end();
   };
 };
 
@@ -42,7 +42,7 @@ exports.image = (options = {}) => {
   const { optional = true } = options;
   return (req, res, next) => {
     if (!req.file) {
-      return optional ? next() : res.status(400).end();
+      return optional ? next() : res.status(400)._end();
     }
 
     const allowedType = config.imgUploads.allowedTypes.includes(
