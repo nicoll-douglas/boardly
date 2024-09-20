@@ -12,9 +12,19 @@ const user = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    age: Number,
-    pronouns: String,
-    bio: String,
+    age: {
+      type: mongoose.Schema.Types.Mixed,
+      default: "",
+      enum: [String, Number],
+    },
+    pronouns: {
+      type: String,
+      default: "",
+    },
+    bio: {
+      type: String,
+      default: "",
+    },
     hasAvatar: {
       type: mongoose.Schema.Types.Mixed,
       default: false,

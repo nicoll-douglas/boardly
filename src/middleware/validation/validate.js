@@ -38,11 +38,10 @@ exports.auth = () => {
   };
 };
 
-exports.image = (options = {}) => {
-  const { optional = true } = options;
+exports.image = (options = { optional: true }) => {
   return (req, res, next) => {
     if (!req.file) {
-      return optional ? next() : res.status(400)._end();
+      return options.optional ? next() : res.status(400)._end();
     }
 
     const allowedType = config.imgUploads.allowedTypes.includes(
