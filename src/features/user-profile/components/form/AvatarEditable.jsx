@@ -10,15 +10,18 @@ import useProfile from "../../hooks/useProfile";
 import config from "@/config";
 import { CloseIcon, CheckIcon } from "@chakra-ui/icons";
 import useEditAvatar from "../../hooks/useEditAvatar";
+import useIsMe from "../../hooks/useIsMe";
+import DeleteAvatarBtn from "./DeleteAvatarBtn";
 
 export default function AvatarEditable() {
   const { data } = useProfile();
   const profile = data.profile;
   const { form, avatarSrc, handleReset, handleEdit, inputProps, onSubmit } =
-    useEditAvatar(profile.avatar);
+    useEditAvatar();
   const error = form.formState.errors.avatar;
+  const [isMe] = useIsMe();
 
-  if (data.userPrivilege === config.userPrivilege.basic) {
+  if (!isMe) {
     return <Avatar size={"lg"} src={profile.avatar} name={profile.username} />;
   }
 
@@ -35,11 +38,12 @@ export default function AvatarEditable() {
           type="file"
           multiple={false}
           accept={config.imgUploads.allowedTypes.join()}
+          data-cy="Profile-editable-input"
           {...inputProps}
         />
       </Avatar>
       <Flex flexDir={"column"} gap={1} my={"auto"}>
-        {avatarSrc !== profile.avatar && (
+        {avatarSrc !== profile.avatar ? (
           <Flex gap={1}>
             <IconButton
               variant={"ghost"}
@@ -56,6 +60,8 @@ export default function AvatarEditable() {
               onClick={handleReset}
             />
           </Flex>
+        ) : (
+          profile.avatar && <DeleteAvatarBtn />
         )}
         <FormErrorMessage mt={0}>{error?.message}</FormErrorMessage>
       </Flex>

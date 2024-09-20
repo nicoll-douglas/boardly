@@ -1,5 +1,4 @@
 import { faker } from "@faker-js/faker";
-import config from "@/config";
 
 // mock data associated with /api/users/:username/replies
 
@@ -47,7 +46,10 @@ const replyData = {
   replies: Array.from({ length: faker.number.int({ min: 0, max: 30 }) }, () =>
     newReply()
   ), // replies array
-  userPrivilege: config.userPrivilege.self, // self or basic
+  user: {
+    username: "username123",
+    id: "123",
+  },
 };
 
 export default replyData;

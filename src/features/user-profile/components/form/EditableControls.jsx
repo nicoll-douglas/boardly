@@ -9,7 +9,13 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-export default function EditableControls({ withLength, maxLength, ...rest }) {
+export default function EditableControls({
+  withLength,
+  maxLength,
+  submitId,
+  cancelId,
+  ...rest
+}) {
   const { isEditing, getSubmitButtonProps, getCancelButtonProps } =
     useEditableControls();
   const errorTextColor = useColorModeValue("red.500", "red.300");
@@ -24,12 +30,14 @@ export default function EditableControls({ withLength, maxLength, ...rest }) {
           size={"xs"}
           icon={<CheckIcon />}
           colorScheme="green"
+          data-cy={submitId}
           {...getSubmitButtonProps()}
         />
         <IconButton
           variant={"ghost"}
           size={"xs"}
           colorScheme="red"
+          data-cy={cancelId}
           icon={<CloseIcon boxSize={"10px"} />}
           {...getCancelButtonProps()}
         />

@@ -1,16 +1,16 @@
 import { createContext } from "react";
 import { Protected } from "@/components/utility";
 import { mockBoardData } from "../data";
-import { useParams } from "react-router-dom";
+import useIsMe from "../hooks/useIsMe";
 
 const BoardsTabContext = createContext();
 
 function BoardsTabProvider({ children }) {
-  const { username } = useParams();
+  const [isMe, username] = useIsMe();
 
   return (
     <Protected
-      endpoint={`/api/users/${username}/boards`}
+      endpoint={isMe ? "/api/me/boards" : `/api/users/${username}/boards`}
       mockData={mockBoardData}
       Context={BoardsTabContext}
       preventEarlyRender={false}

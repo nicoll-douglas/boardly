@@ -1,16 +1,16 @@
 import { createContext } from "react";
 import { Protected } from "@/components/utility";
 import { mockProfileData } from "../data";
-import { useParams } from "react-router-dom";
+import useIsMe from "../hooks/useIsMe";
 
 const ProfileContext = createContext();
 
 function ProfileProvider({ children, preventEarlyRender }) {
-  const { username } = useParams();
+  const [isMe, username] = useIsMe();
 
   return (
     <Protected
-      endpoint={`/api/users/${username}`}
+      endpoint={isMe ? "/api/me" : `/api/users/${username}`}
       mockData={mockProfileData}
       Context={ProfileContext}
       preventEarlyRender={preventEarlyRender}

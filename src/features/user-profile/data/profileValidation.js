@@ -4,7 +4,11 @@ import config from "@/config";
 const validation = {
   age: {
     required: false,
-    valueAsNumber: true,
+    setValueAs: (v) => {
+      if (v === "0") return 0;
+      if (v === "") return "";
+      return Number(v);
+    },
     min: {
       value: 0,
       message: "Age must be greater than 0",

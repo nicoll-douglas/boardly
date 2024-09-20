@@ -10,27 +10,22 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/react";
 import EditableControls from "./EditableControls";
-import useProfileEditable from "../../hooks/useProfileEditable";
 import validation from "../../data/profileValidation";
-import useProfile from "../../hooks/useProfile";
-import config from "@/config";
+import useIsMe from "../../hooks/useIsMe";
 
-export default function PronounEditable() {
-  const { data } = useProfile();
-  const { form, onSubmit, onCancel, value } = useProfileEditable(
-    "pronouns",
-    data.profile.pronouns
-  );
+export default function PronounEditable({ editor }) {
+  const { form, onSubmit, onCancel, values } = editor;
   const error = form.formState.errors.pronouns;
+  const [isMe] = useIsMe();
 
   return (
     <FormControl isInvalid={error}>
       <Editable
         h={14}
-        value={value}
+        value={values.pronouns}
         onSubmit={onSubmit}
         onCancel={onCancel}
-        isDisabled={data.userPrivilege === config.userPrivilege.basic}
+        isDisabled={!isMe}
         placeholder="-"
       >
         <Flex>
@@ -43,6 +38,7 @@ export default function PronounEditable() {
           as={EditableInput}
           height={8}
           variant={"flushed"}
+          data-cy="Profile-editable-input"
           {...form.register("pronouns", validation.pronouns)}
         />
       </Editable>

@@ -19,11 +19,7 @@ export default function RepliesTab() {
         />
       ) : (
         data.replies.map((reply) => (
-          <ReplyPreview
-            key={reply._id}
-            reply={reply}
-            userPrivilege={data.userPrivilege}
-          />
+          <ReplyPreview key={reply._id} reply={reply} />
         ))
       )}
     </>

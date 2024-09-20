@@ -12,6 +12,7 @@ export default function useProtectedSubmission(onSuccess) {
     () => ({
       401: () => {
         notifs.unauthorized();
+        setCurrentUser(null);
         setTimeout(navigate, 250, "/");
       },
       500: () => notifs.serverError(),
@@ -19,7 +20,7 @@ export default function useProtectedSubmission(onSuccess) {
       200: async (response) => {
         const { user } = await response.json();
         setCurrentUser(user);
-        onSuccess();
+        if (onSuccess) onSuccess();
       },
     }),
     []

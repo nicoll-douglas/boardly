@@ -1,16 +1,16 @@
 import { createContext } from "react";
 import { Protected } from "@/components/utility";
 import { mockReplyData } from "../data";
-import { useParams } from "react-router-dom";
+import useIsMe from "../hooks/useIsMe";
 
 const RepliesTabContext = createContext();
 
 function RepliesTabProvider({ children }) {
-  const { username } = useParams();
+  const [isMe, username] = useIsMe();
 
   return (
     <Protected
-      endpoint={`/api/users/${username}/replies`}
+      endpoint={isMe ? "/api/me/replies" : `/api/users/${username}/replies`}
       mockData={mockReplyData}
       Context={RepliesTabContext}
       preventEarlyRender={false}

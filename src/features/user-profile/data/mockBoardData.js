@@ -1,5 +1,4 @@
 import { faker } from "@faker-js/faker";
-import config from "@/config";
 
 // mock data associated with /api/users/:username/boards
 
@@ -15,7 +14,10 @@ const boardData = {
   boards: Array.from({ length: faker.number.int({ min: 0, max: 10 }) }, () =>
     newBoard()
   ), // boards array
-  userPrivilege: config.userPrivilege.self, // self or basic
+  user: {
+    username: "username123",
+    id: "123",
+  },
 };
 
 export default boardData;

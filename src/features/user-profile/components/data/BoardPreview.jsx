@@ -9,12 +9,13 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { EditIcon } from "@chakra-ui/icons";
-import config from "@/config";
 import { noWrap } from "@/lib/constants";
 import { useCompactView } from "@/features/ui/compactView";
+import useIsMe from "../../hooks/useIsMe";
 
-export default function BoardPreview({ board, userPrivilege }) {
+export default function BoardPreview({ board }) {
   const { compactView } = useCompactView();
+  const [isMe] = useIsMe();
 
   return (
     <LinkBox w={"full"}>
@@ -30,7 +31,7 @@ export default function BoardPreview({ board, userPrivilege }) {
                 {board.name}
               </Heading>
             </LinkOverlay>
-            {userPrivilege === config.userPrivilege.self && (
+            {isMe && (
               <Flex gap={2} minW={"fit-content"}>
                 <IconButton icon={<EditIcon />} variant={"ghost"} size={"xs"} />
               </Flex>

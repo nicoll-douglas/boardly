@@ -2,17 +2,19 @@ import { useForm } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
 import validation from "../data/profileValidation";
 import editAvatar from "../services/editAvatar";
-import { useAuth } from "@/features/auth";
 import { useSubmitHandlers, useProtectedSubmission } from "@/hooks";
 import { useQueryClient } from "@tanstack/react-query";
+import useProfile from "./useProfile";
+import { useToast } from "@chakra-ui/react";
 
-export default function useEditAvatar(initialSrc) {
+export default function useEditAvatar() {
+  const { data } = useProfile();
   const queryClient = useQueryClient();
-  const [avatarSrc, setAvatarSrc] = useState(initialSrc);
+  const [avatarSrc, setAvatarSrc] = useState(data.profile.avatar);
   const form = useForm();
   const elementRef = useRef(null);
   const { ref, ...rest } = form.register("avatar", validation.avatar);
-  const { currentUser } = useAuth();
+  const toast = useToast();
 
   const files = form.watch("avatar");
 
@@ -25,7 +27,7 @@ export default function useEditAvatar(initialSrc) {
 
   const handleReset = () => {
     form.reset();
-    setAvatarSrc(initialSrc);
+    setAvatarSrc(data.profile.avatar);
     elementRef.current.value = "";
   };
 
@@ -33,18 +35,29 @@ export default function useEditAvatar(initialSrc) {
     elementRef.current.click();
   };
 
-  const onSuccess = () => {
-    queryClient.invalidateQueries([`GET /api/users/${currentUser.username}`]);
-  };
-  const submit = async () => editAvatar(currentUser.username, files?.[0]);
-  const handlers = useProtectedSubmission(onSuccess);
+  const submit = async () => editAvatar(files?.[0]);
+  const handlers = useProtectedSubmission(() => {
+    queryClient.invalidateQueries({ queryKey: ["GET /api/me"] });
+    toast({
+      status: "success",
+      title: "Successfully updated avatar",
+    });
+  });
   const onSubmit = useSubmitHandlers(submit, handlers);
+
+  useEffect(() => {
+    form.reset();
+    setAvatarSrc(data.profile.avatar);
+    if (elementRef.current) {
+      elementRef.current.value = "";
+    }
+  }, [data]);
 
   useEffect(() => {
     URL.revokeObjectURL(avatarSrc);
 
     if (!files?.[0]) {
-      setAvatarSrc(initialSrc);
+      setAvatarSrc(data.profile.avatar);
       return;
     }
 
@@ -54,5 +67,12 @@ export default function useEditAvatar(initialSrc) {
     return () => URL.revokeObjectURL(uploadedUrl);
   }, [files]);
 
-  return { avatarSrc, handleReset, handleEdit, form, inputProps, onSubmit };
+  return {
+    avatarSrc,
+    handleReset,
+    handleEdit,
+    form,
+    inputProps,
+    onSubmit: form.handleSubmit(onSubmit),
+  };
 }

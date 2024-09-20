@@ -8,6 +8,7 @@ import Loader from "@/components/common/Loader";
 import config from "@/config";
 import { useQueryHandlers } from "@/hooks";
 import { useAuth } from "@/features/auth";
+import { useEffect } from "react";
 
 export default function Protected({
   children,
@@ -28,21 +29,32 @@ export default function Protected({
   });
 
   const onError = () => {
-    if (error.status === 0) notifs.networkError();
+    switch (error.status) {
+      case 0:
+        notifs.networkError();
+        break;
+      case 401:
+        setCurrentUser(null);
+    }
   };
 
   const onData = () => {
     setCurrentUser(data.user);
   };
 
+  useEffect(() => {
+    if (!fetchEnabled) setCurrentUser(mockData.user);
+  }, []);
+
   useQueryHandlers(error, data, onError, onData);
 
   let contextValue;
+  const fetchEnabled = config.fetch.queriesEnabled;
   if (preventEarlyRender) {
     if (isLoading) return <Loader />;
-    contextValue = config.fetch.queriesEnabled ? { data } : { data: mockData };
+    contextValue = fetchEnabled ? { data } : { data: mockData };
   } else {
-    contextValue = config.fetch.queriesEnabled
+    contextValue = fetchEnabled
       ? { data, isLoading }
       : { data: mockData, isLoading: false };
   }

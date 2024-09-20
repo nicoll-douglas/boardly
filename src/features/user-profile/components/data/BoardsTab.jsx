@@ -19,11 +19,7 @@ export default function BoardsTab() {
         />
       ) : (
         data.boards.map((board) => (
-          <BoardPreview
-            key={board._id}
-            board={board}
-            userPrivilege={data.userPrivilege}
-          />
+          <BoardPreview key={board._id} board={board} />
         ))
       )}
     </>

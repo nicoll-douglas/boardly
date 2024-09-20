@@ -7,39 +7,47 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import EditableControls from "./EditableControls";
-import useProfileEditable from "../../hooks/useProfileEditable";
 import validation from "../../data/profileValidation";
-import useProfile from "../../hooks/useProfile";
-import config from "@/config";
+import useIsMe from "../../hooks/useIsMe";
 
-export default function BioEditable() {
-  const { data } = useProfile();
-  const { form, onSubmit, onCancel, value } = useProfileEditable(
-    "bio",
-    data.profile.bio
-  );
+export default function BioEditable({ editor }) {
+  const { form, onSubmit, onCancel, values } = editor;
   const error = form.formState.errors.bio;
+  const [isMe] = useIsMe();
 
   return (
     <FormControl isInvalid={error}>
       <Editable
-        value={value}
+        value={values.bio}
         onSubmit={onSubmit}
         onCancel={onCancel}
-        isDisabled={data.userPrivilege === config.userPrivilege.basic}
+        isDisabled={!isMe}
         placeholder="-"
       >
-        <EditablePreview minH={8} lineHeight={"22px"} w={"full"} />
+        <EditablePreview
+          data-cy="Profile-bio-editable-preview"
+          minH={8}
+          lineHeight={"22px"}
+          w={"full"}
+        />
         <Textarea
           as={EditableTextarea}
           variant={"flushed"}
           py={1}
           resize={"none"}
           rows={3}
+          id="bio-editable-input"
+          data-cy="Profile-editable-input"
           spellCheck={false}
           {...form.register("bio", validation.bio)}
         />
-        <EditableControls mt={1} withLength={value.length} maxLength={100} />
+        <EditableControls
+          mt={1}
+          withLength={values.bio.length}
+          maxLength={100}
+          submitId={"Profile-bio-submit"}
+          cancelId={"Profile-bio-cancel"}
+        />
       </Editable>
       <FormErrorMessage mt={1}>{error?.message}</FormErrorMessage>
     </FormControl>

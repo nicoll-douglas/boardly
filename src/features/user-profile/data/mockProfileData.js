@@ -1,9 +1,8 @@
 import { faker } from "@faker-js/faker";
-import config from "@/config";
 
 const pronounValues = [undefined, "he/him", "she/her", "they/them"];
 
-// mock data associated with /api/users/:username
+// mock data associated with /api/users/:username and /api/me
 
 const profileData = {
   profile: {
@@ -14,10 +13,10 @@ const profileData = {
     pronouns: pronounValues[faker.number.int({ min: 0, max: 3 })],
     createdAt: faker.date.past(),
   },
-  userPrivilege:
-    Math.random() < 0.75
-      ? config.userPrivilege.self
-      : config.userPrivilege.basic,
+  user: {
+    username: "username123",
+    id: "123",
+  },
 };
 
 export default profileData;

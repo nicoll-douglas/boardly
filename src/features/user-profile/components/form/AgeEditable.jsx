@@ -12,27 +12,22 @@ import {
 } from "@chakra-ui/react";
 import EditableControls from "./EditableControls";
 import { isDigits } from "@/lib/utils";
-import useProfileEditable from "../../hooks/useProfileEditable";
 import validation from "../../data/profileValidation";
-import useProfile from "../../hooks/useProfile";
-import config from "@/config";
+import useIsMe from "../../hooks/useIsMe";
 
-export default function AgeEditable() {
-  const { data } = useProfile();
-  const { form, onSubmit, onCancel, value } = useProfileEditable(
-    "age",
-    data.profile.age
-  );
+export default function AgeEditable({ editor }) {
+  const { form, onSubmit, onCancel, values } = editor;
   const error = form.formState.errors.age;
+  const [isMe] = useIsMe();
 
   return (
     <FormControl isInvalid={error}>
       <Editable
-        value={value}
+        value={values.age}
         onSubmit={onSubmit}
         onCancel={onCancel}
         h={14}
-        isDisabled={data.userPrivilege === config.userPrivilege.basic}
+        isDisabled={!isMe}
         placeholder="-"
       >
         <Flex>
@@ -45,6 +40,7 @@ export default function AgeEditable() {
           <NumberInputField
             as={EditableInput}
             height={8}
+            data-cy="Profile-editable-input"
             {...form.register("age", validation.age)}
           />
         </NumberInput>

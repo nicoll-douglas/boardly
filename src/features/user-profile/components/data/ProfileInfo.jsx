@@ -16,10 +16,12 @@ import PronounEditable from "../form/PronounEditable";
 import ProfileField from "../ui/ProfileField";
 import BioEditable from "../form/BioEditable";
 import AvatarEditable from "../form/AvatarEditable";
+import useEditProfile from "../../hooks/useEditProfile";
 
 export default function ProfileInfo() {
   const { data } = useProfile();
   const profile = data.profile;
+  const editor = useEditProfile();
 
   return (
     <Card
@@ -38,15 +40,15 @@ export default function ProfileInfo() {
             <Heading size={"md"} as={"h1"}>
               {profile.username}
             </Heading>
-            <BioEditable />
+            <BioEditable editor={editor} />
           </Box>
         </Flex>
       </CardHeader>
       <Divider my={{ base: 4, md: 0 }} />
       <CardBody>
         <Stack divider={<StackDivider />} gap={1}>
-          <AgeEditable />
-          <PronounEditable />
+          <AgeEditable editor={editor} />
+          <PronounEditable editor={editor} />
           <ProfileField
             title="Joined On"
             value={formatISOString(profile.createdAt)}

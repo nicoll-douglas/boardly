@@ -1,10 +1,6 @@
 import { Container, Header, Logo } from "@/components/common";
-import { Flex, Divider, Spacer } from "@chakra-ui/react";
-import {
-  ProfileProvider,
-  ProfileInfo,
-  ProfileTabs,
-} from "@/features/user-profile";
+import { Spacer } from "@chakra-ui/react";
+import { ProfileProvider, Profile } from "@/features/user-profile";
 import ToggleThemeBtn from "@/features/ui/dark-mode";
 
 export default function User() {
@@ -16,17 +12,7 @@ export default function User() {
           <Spacer />
           <ToggleThemeBtn />
         </Header>
-        <Flex
-          flex={1}
-          pb={4}
-          px={4}
-          gap={4}
-          flexDir={{ base: "column", md: "row" }}
-        >
-          <ProfileInfo />
-          <Divider display={{ md: "none" }} />
-          <ProfileTabs />
-        </Flex>
+        <Profile />
       </Container>
     </ProfileProvider>
   );
