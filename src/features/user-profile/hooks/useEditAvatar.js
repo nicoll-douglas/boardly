@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
-import validation from "../data/profileValidation";
 import editAvatar from "../services/editAvatar";
+import deleteAvatar from "../services/deleteAvatar";
 import { useSubmitHandlers, useProtectedSubmission } from "@/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import useProfile from "./useProfile";
@@ -9,70 +9,71 @@ import { useToast } from "@chakra-ui/react";
 
 export default function useEditAvatar() {
   const { data } = useProfile();
-  const queryClient = useQueryClient();
   const [avatarSrc, setAvatarSrc] = useState(data.profile.avatar);
+  const [editHidden, setEditHidden] = useState(true);
+
+  const queryClient = useQueryClient();
   const form = useForm();
-  const elementRef = useRef(null);
-  const { ref, ...rest } = form.register("avatar", validation.avatar);
-  const toast = useToast();
-
+  const inputRef = useRef(null);
   const files = form.watch("avatar");
-
-  const inputRef = (e) => {
-    ref(e);
-    elementRef.current = e;
-  };
-
-  const inputProps = { ref: inputRef, ...rest };
 
   const handleReset = () => {
     form.reset();
     setAvatarSrc(data.profile.avatar);
-    elementRef.current.value = "";
+    setEditHidden(true);
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
   };
+  const handleEdit = () => inputRef.current.click();
 
-  const handleEdit = () => {
-    elementRef.current.click();
-  };
+  const toast = useToast();
 
-  const submit = async () => editAvatar(files?.[0]);
-  const handlers = useProtectedSubmission(() => {
+  const editHandlers = useProtectedSubmission(() => {
     queryClient.invalidateQueries({ queryKey: ["GET /api/me"] });
+    setEditHidden(true);
+    setAvatarSrc(data.profile.avatar);
     toast({
       status: "success",
       title: "Successfully updated avatar",
     });
   });
-  const onSubmit = useSubmitHandlers(submit, handlers);
 
-  useEffect(() => {
-    form.reset();
+  const deleteHandlers = useProtectedSubmission(() => {
+    queryClient.invalidateQueries({ queryKey: ["GET /api/me"] });
+    setEditHidden(true);
     setAvatarSrc(data.profile.avatar);
-    if (elementRef.current) {
-      elementRef.current.value = "";
-    }
-  }, [data]);
+    toast({
+      status: "success",
+      title: "Successfully removed avatar",
+    });
+  });
+
+  const onDelete = useSubmitHandlers(deleteAvatar, deleteHandlers);
+  const onEdit = useSubmitHandlers(
+    async () => editAvatar(files?.[0]),
+    editHandlers
+  );
 
   useEffect(() => {
     URL.revokeObjectURL(avatarSrc);
-
     if (!files?.[0]) {
-      setAvatarSrc(data.profile.avatar);
-      return;
+      handleReset();
+    } else {
+      setAvatarSrc(URL.createObjectURL(files[0]));
+      setEditHidden(false);
     }
-
-    const uploadedUrl = URL.createObjectURL(files[0]);
-    setAvatarSrc(uploadedUrl);
-
-    return () => URL.revokeObjectURL(uploadedUrl);
+    return () => URL.revokeObjectURL(avatarSrc);
   }, [files]);
 
   return {
     avatarSrc,
+    editHidden,
+    inputRef,
+    form,
     handleReset,
     handleEdit,
-    form,
-    inputProps,
-    onSubmit: form.handleSubmit(onSubmit),
+    onEdit: form.handleSubmit(onEdit),
+    onDelete,
   };
 }

@@ -8,21 +8,35 @@ import {
 } from "@chakra-ui/react";
 import useProfile from "../../hooks/useProfile";
 import config from "@/config";
-import { CloseIcon, CheckIcon } from "@chakra-ui/icons";
+import { CloseIcon, CheckIcon, DeleteIcon } from "@chakra-ui/icons";
 import useEditAvatar from "../../hooks/useEditAvatar";
 import useIsMe from "../../hooks/useIsMe";
-import DeleteAvatarBtn from "./DeleteAvatarBtn";
+import validation from "../../data/profileValidation";
 
 export default function AvatarEditable() {
   const { data } = useProfile();
-  const profile = data.profile;
-  const { form, avatarSrc, handleReset, handleEdit, inputProps, onSubmit } =
-    useEditAvatar();
-  const error = form.formState.errors.avatar;
+  const {
+    form,
+    inputRef,
+    avatarSrc,
+    editHidden,
+    handleReset,
+    handleEdit,
+    onEdit,
+    onDelete,
+  } = useEditAvatar();
   const [isMe] = useIsMe();
+  const { ref, ...inputProps } = form.register("avatar", validation.avatar);
+  const error = form.formState.errors.avatar;
 
   if (!isMe) {
-    return <Avatar size={"lg"} src={profile.avatar} name={profile.username} />;
+    return (
+      <Avatar
+        size={"lg"}
+        src={data.profile.avatar}
+        name={data.profile.username}
+      />
+    );
   }
 
   return (
@@ -30,7 +44,7 @@ export default function AvatarEditable() {
       <Avatar
         size={"lg"}
         src={avatarSrc}
-        name={profile.username}
+        name={data.profile.username}
         onClick={handleEdit}
         cursor={"pointer"}
       >
@@ -39,18 +53,32 @@ export default function AvatarEditable() {
           multiple={false}
           accept={config.imgUploads.allowedTypes.join()}
           data-cy="Profile-editable-input"
+          ref={(e) => {
+            ref(e);
+            inputRef.current = e;
+          }}
           {...inputProps}
         />
       </Avatar>
       <Flex flexDir={"column"} gap={1} my={"auto"}>
-        {avatarSrc !== profile.avatar ? (
+        {editHidden ? (
+          data.profile.hasAvatar && (
+            <IconButton
+              size={"xs"}
+              variant={"ghost"}
+              colorScheme="red"
+              icon={<DeleteIcon />}
+              onClick={onDelete}
+            />
+          )
+        ) : (
           <Flex gap={1}>
             <IconButton
               variant={"ghost"}
               size={"xs"}
               icon={<CheckIcon />}
               colorScheme="green"
-              onClick={onSubmit}
+              onClick={onEdit}
             />
             <IconButton
               variant={"ghost"}
@@ -60,8 +88,6 @@ export default function AvatarEditable() {
               onClick={handleReset}
             />
           </Flex>
-        ) : (
-          profile.avatar && <DeleteAvatarBtn />
         )}
         <FormErrorMessage mt={0}>{error?.message}</FormErrorMessage>
       </Flex>
