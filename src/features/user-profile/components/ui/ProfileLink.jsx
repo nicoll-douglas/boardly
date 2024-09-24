@@ -15,8 +15,8 @@ export default function ProfileLink(props) {
           size={"sm"}
           // src={currentUser?.avatar}
           // name={currentUser?.username}
-          src={data.user?.avatar}
-          name={data.user?.username}
+          src={data?.user.avatar}
+          name={data?.user.username}
         />
       </SkeletonCircle>
     </ChakraLink>
