@@ -38,7 +38,6 @@ const user = new mongoose.Schema(
 );
 
 user.virtual("avatar").get(function () {
-  if (!this.hasAvatar) return null;
   if (typeof this.hasAvatar === "string") return this.hasAvatar;
   return bucket.file(`avatar-${this._id.toString()}`).publicUrl();
 });

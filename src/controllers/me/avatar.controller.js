@@ -2,13 +2,9 @@ const bucket = require("@/services/firebaseStorage");
 
 exports._put = async (req, res, next) => {
   const imgFile = req.file;
-  const user = req.user;
-  const file = bucket.file(`avatar-${user._id}`);
+  if (!imgFile) return res.status(400)._end();
 
-  if (!imgFile) {
-    return res.status(400)._end();
-  }
-
+  const file = bucket.file(`avatar-${req.user._id}`);
   req.log("new write stream");
   const stream = file.createWriteStream({
     metadata: {
@@ -23,10 +19,6 @@ exports._put = async (req, res, next) => {
         req.log("making file public...");
         await file.makePublic();
 
-        user.hasAvatar = true;
-        await user.save();
-        req.log("saved user.hasAvatar = true");
-
         req.log("200, sent");
         return res.status(200)._end();
       } catch (err) {
@@ -39,8 +31,7 @@ exports._put = async (req, res, next) => {
 };
 
 exports._delete = async (req, res, next) => {
-  const user = req.user;
-  const file = bucket.file(`avatar-${user._id}`);
+  const file = bucket.file(`avatar-${req.user._id}`);
 
   try {
     req.log(`does avatar file exist?`);
@@ -49,10 +40,6 @@ exports._delete = async (req, res, next) => {
     if (exists) {
       await file.delete();
       req.log("file exists, deleted");
-
-      user.hasAvatar = false;
-      await user.save();
-      req.log("saved user.hasAvatar = true");
 
       req.log("200, sent");
       return res.status(200)._end();

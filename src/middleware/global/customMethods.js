@@ -39,9 +39,11 @@ function customMethods(req, res, next) {
   };
 
   res._authUser = (userDoc = req.user) => {
+    const user = userDoc.toObject();
     res._append("user", {
-      id: userDoc._id.toString(),
-      username: userDoc.username,
+      _id: user._id,
+      username: user.username,
+      avatar: user.avatar,
     });
     return res;
   };
