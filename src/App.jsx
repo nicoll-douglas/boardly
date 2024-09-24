@@ -1,33 +1,39 @@
 import { Routes, Route } from "react-router-dom";
+import { Suspense, lazy } from "react";
+import { Loader } from "./components/common";
 import "./assets/css/styles.css";
 
 import { NotFound } from "./components/status-pages";
-import Index from "./pages";
-import Verify from "./pages/auth/verify";
-import Forgot from "./pages/auth/forgot";
-import Reset from "./pages/auth/reset";
-import Login from "./pages/auth/login";
-import Register from "./pages/auth/register";
-import User from "./pages/users/[username]";
-import Home from "./pages/home";
-import Me from "./pages/me";
+const Index = lazy(() => import("./pages"));
+const Verify = lazy(() => import("./pages/auth/verify"));
+const Forgot = lazy(() => import("./pages/auth/forgot"));
+const Reset = lazy(() => import("./pages/auth/reset"));
+const Login = lazy(() => import("./pages/auth/login"));
+const Register = lazy(() => import("./pages/auth/register"));
+const User = lazy(() => import("./pages/users/[username]"));
+const Home = lazy(() => import("./pages/home"));
+const Me = lazy(() => import("./pages/me"));
+const Board = lazy(() => import("./pages/boards/[boardName]"));
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="*" element={<NotFound />} />
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="*" element={<NotFound />} />
 
-      <Route path="/auth/verify" element={<Verify />} />
-      <Route path="/auth/forgot" element={<Forgot />} />
-      <Route path="/auth/reset" element={<Reset />} />
-      <Route path="/auth/login" element={<Login />} />
-      <Route path="/auth/register" element={<Register />} />
+        <Route path="/auth/verify" element={<Verify />} />
+        <Route path="/auth/forgot" element={<Forgot />} />
+        <Route path="/auth/reset" element={<Reset />} />
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/register" element={<Register />} />
 
-      <Route path="/users/:username" element={<User />} />
-      <Route path="/me" element={<Me />} />
-      <Route path="/home" element={<Home />} />
-    </Routes>
+        <Route path="/users/:username" element={<User />} />
+        <Route path="/boards/:boardName" element={<Board />} />
+        <Route path="/me" element={<Me />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </Suspense>
   );
 }
 
