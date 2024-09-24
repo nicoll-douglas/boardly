@@ -7,7 +7,7 @@ function newBoard() {
   const adminUsername = faker.internet.userName();
 
   return {
-    _id: `board-${boardName}`,
+    _id: `board-${boardName}-${faker.string.uuid()}`,
     name: boardName, // board name
     createdAt: faker.date.past(), // creation date
     admin: {

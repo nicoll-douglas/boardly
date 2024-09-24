@@ -1,8 +1,8 @@
 import { Container, Header, Logo } from "@/components/common";
 import ToggleThemeBtn from "@/features/ui/dark-mode";
-import { Spacer } from "@chakra-ui/react";
+import { Spacer, Flex } from "@chakra-ui/react";
 import { ProfileLink, ProfileProvider } from "@/features/user-profile";
-import { BoardsListProvider } from "@/features/boards";
+import { BoardsListProvider, BoardsList } from "@/features/boards";
 
 export default function Home() {
   return (
@@ -16,6 +16,15 @@ export default function Home() {
           </ProfileProvider>
           <ToggleThemeBtn />
         </Header>
+        <Flex
+          flex={1}
+          pb={4}
+          px={4}
+          gap={4}
+          flexDir={{ base: "column", md: "row" }}
+        >
+          <BoardsList />
+        </Flex>
       </Container>
     </BoardsListProvider>
   );
