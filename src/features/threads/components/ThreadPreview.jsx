@@ -14,12 +14,11 @@ import {
 import { Link } from "react-router-dom";
 import { timeAgo } from "@/lib/utils";
 import { useCompactView } from "@/features/ui/compactView";
-import Tag from "../ui/Tag";
-import CardLabel from "../ui/CardLabel";
+import { CardLabel, Tag } from "@/components/common";
 import { noWrap } from "@/lib/constants";
 
-export default function ThreadPreview({ thread }) {
-  const { createdAt, title, body, _id, board } = thread;
+export default function ThreadPreview({ thread, isInProfile = true }) {
+  const { createdAt, title, body, _id, board, author } = thread;
   const { compactView } = useCompactView();
 
   return (
@@ -29,9 +28,13 @@ export default function ThreadPreview({ thread }) {
           <Flex w={"full"} gap={4}>
             <Box w={"calc(100% - 180px)"} flex={1}>
               <CardLabel
-                preText={"On"}
-                linkText={board.name}
-                link={`/boards/${board.name}`}
+                preText={isInProfile ? "On" : "By"}
+                linkText={isInProfile ? board.name : author.username}
+                link={
+                  isInProfile
+                    ? `/boards/${board.name}`
+                    : `/users/${author.username}`
+                }
               />
             </Box>
             <Flex gap={2} minW={"fit-content"} alignItems={"start"}>

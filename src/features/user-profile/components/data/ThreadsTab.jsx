@@ -1,5 +1,5 @@
 import NoData from "../ui/NoData";
-import ThreadPreview from "./ThreadPreview";
+import { ThreadPreview } from "@/features/threads";
 import Loader from "../ui/Loader";
 import { ThreadsTabContext } from "../../contexts/ThreadsTabContext";
 import { useContext } from "react";

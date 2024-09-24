@@ -14,8 +14,7 @@ import {
 import { Link } from "react-router-dom";
 import { timeAgo } from "@/lib/utils";
 import config from "@/config";
-import Tag from "../ui/Tag";
-import CardLabel from "../ui/CardLabel";
+import { Tag, CardLabel } from "@/components/common";
 import { useCompactView } from "@/features/ui/compactView";
 import { noWrap } from "@/lib/constants";
 import useProfile from "../../hooks/useProfile";
