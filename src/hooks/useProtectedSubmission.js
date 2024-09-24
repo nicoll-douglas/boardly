@@ -13,7 +13,7 @@ export default function useProtectedSubmission(onSuccess) {
       401: () => {
         notifs.unauthorized();
         setCurrentUser(null);
-        setTimeout(navigate, 250, "/");
+        navigate("/auth/login");
       },
       500: () => notifs.serverError(),
       429: () => notifs.tooMany15(),
