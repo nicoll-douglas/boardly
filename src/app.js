@@ -33,6 +33,7 @@ app.use(limiter(100, 0.6));
 app.use(verifyAuth);
 app.use("/api/users", require("./routers/users.router"));
 app.use("/api/me", require("./routers/me.router"));
+app.use("/api/boards", require("./routers/boards.router"));
 
 app.use(notFoundHandler);
 app.use(errorHandler);
