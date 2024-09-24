@@ -14,11 +14,16 @@ import {
   AccordionIcon,
   AccordionPanel,
   AccordionItem,
+  Image,
+  Flex,
+  Text,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import useBoardsList from "../hooks/useBoardsList";
 import BoardLink from "./BoardLink";
 import { useState } from "react";
+import boardUrl from "@/assets/images/board.svg";
+import alienUrl from "@/assets/images/alien.svg";
 
 export default function BoardsList() {
   const { data } = useBoardsList();
@@ -61,7 +66,7 @@ export default function BoardsList() {
           <Divider />
         </Box>
         <CardBody maxW={"full"}>
-          <BoardLinkMap boardsList={boardsList} />
+          <BoardLinkMap filteredList={boardsList} dataList={data.boards} />
         </CardBody>
       </Card>
       <Accordion allowToggle display={{ base: "block", md: "none" }}>
@@ -74,7 +79,7 @@ export default function BoardsList() {
           </AccordionButton>
           <AccordionPanel>
             <SearchInput onChange={handleSearch} value={value} />
-            <BoardLinkMap boardsList={boardsList} />
+            <BoardLinkMap filteredList={boardsList} dataList={data.boards} />
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
@@ -82,13 +87,44 @@ export default function BoardsList() {
   );
 }
 
-function BoardLinkMap({ boardsList }) {
+function BoardLinkMap({ filteredList, dataList }) {
+  if (dataList.length === 0)
+    return (
+      <NothingToShow
+        imageSrc={boardUrl}
+        heading="Nothing to show"
+        text="Be the first to create a board!"
+      />
+    );
+
   return (
-    <VStack gap={1}>
-      {boardsList.map((board) => (
-        <BoardLink key={board._id} board={board} />
-      ))}
-    </VStack>
+    <>
+      {filteredList.length === 0 ? (
+        <NothingToShow
+          imageSrc={alienUrl}
+          heading={"Could not find this board"}
+          text={"Try something else"}
+        />
+      ) : (
+        <VStack gap={1}>
+          {filteredList.map((board) => (
+            <BoardLink key={board._id} board={board} />
+          ))}
+        </VStack>
+      )}
+    </>
+  );
+}
+
+function NothingToShow({ imageSrc, heading, text }) {
+  return (
+    <Flex flexDir={"column"} alignItems={"center"} textAlign={"center"}>
+      <Image src={imageSrc} w={220} h={220} />
+      <Heading size={"sm"} mb={1}>
+        {heading}
+      </Heading>
+      <Text>{text}</Text>
+    </Flex>
   );
 }
 

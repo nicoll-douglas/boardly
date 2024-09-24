@@ -22,6 +22,7 @@ const boardListData = {
   boards: Array.from({ length: faker.number.int({ min: 0, max: 20 }) }, () =>
     newBoard()
   ), // boards array
+  // boards: [],
   user: {
     username: "username123",
     id: "123",
