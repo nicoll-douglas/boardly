@@ -2,12 +2,12 @@ import refresh from "../services/refresh";
 import { useQuery } from "@tanstack/react-query";
 import { useNotif, useQueryHandlers } from "@/hooks";
 import config from "@/config";
-import { useAuth } from "@/features/auth";
+// import { useAuth } from "@/features/auth";
 
 export default function usePrivilege() {
   const notifs = useNotif();
   const privilegeEnabled = config.fetch.privilegeEnabled;
-  const { setCurrentUser } = useAuth();
+  // const { setCurrentUser } = useAuth();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["GET /refresh"],
@@ -29,9 +29,10 @@ export default function usePrivilege() {
         notifs.networkError();
     }
   };
-  const onData = () => setCurrentUser(data.user);
+  // const onData = () => setCurrentUser(data.user);
 
-  useQueryHandlers(error, data, onError, onData);
+  // useQueryHandlers(error, data, onError, onData);
+  useQueryHandlers(error, data, onError);
 
   if (!privilegeEnabled) return { elevated: false, isLoading: false };
 

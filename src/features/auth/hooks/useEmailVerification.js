@@ -3,13 +3,13 @@ import verify from "../services/verify";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useNotif, useQueryHandlers } from "@/hooks";
-import useAuth from "./useAuth";
+// import useAuth from "./useAuth";
 
 export default function useEmailVerification(token) {
   const [UIFeedback, setUIFeedback] = useState(null);
   const navigate = useNavigate();
   const { toast, ...notifs } = useNotif();
-  const { setCurrentUser } = useAuth();
+  // const { setCurrentUser } = useAuth();
 
   const { error, data, isLoading } = useQuery({
     queryKey: ["POST /api/auth/verify"],
@@ -42,7 +42,7 @@ export default function useEmailVerification(token) {
       heading: "Email Verified",
       text: "You will be redirected shortly, welcome to Lorem!",
     });
-    setCurrentUser(data.user);
+    // setCurrentUser(data.user);
     const timeout = setTimeout(() => {
       navigate("/home");
       toast({

@@ -16,6 +16,7 @@ const profileData = {
   user: {
     username: "username123",
     id: "123",
+    avatar: faker.image.avatar(),
   },
 };
 

@@ -2,13 +2,13 @@ import login from "../services/login";
 import { useSubmitHandlers, useNotif } from "@/hooks";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
-import useAuth from "./useAuth";
+// import useAuth from "./useAuth";
 
 export default function useLogin(form) {
   const submit = async () => login(form);
   const navigate = useNavigate();
   const { toast, ...notifs } = useNotif();
-  const { setCurrentUser } = useAuth();
+  // const { setCurrentUser } = useAuth();
 
   const handlers = useMemo(
     () => ({
@@ -35,9 +35,16 @@ export default function useLogin(form) {
       },
       429: () => notifs.tooMany15(),
       500: () => notifs.serverError(),
-      200: async (response) => {
-        const { user } = await response.json();
-        setCurrentUser(user);
+      // 200: async (response) => {
+      //   const { user } = await response.json();
+      //   setCurrentUser(user);
+      //   toast({
+      //     status: "success",
+      //     title: "Successfully logged in",
+      //   });
+      //   navigate("/home");
+      // },
+      200: () => {
         toast({
           status: "success",
           title: "Successfully logged in",

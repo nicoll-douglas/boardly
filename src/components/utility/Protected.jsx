@@ -7,8 +7,8 @@ import { useNotif } from "@/hooks";
 import Loader from "@/components/common/Loader";
 import config from "@/config";
 import { useQueryHandlers } from "@/hooks";
-import { useAuth } from "@/features/auth";
-import { useEffect } from "react";
+// import { useAuth } from "@/features/auth";
+// import { useEffect } from "react";
 
 export default function Protected({
   children,
@@ -18,7 +18,7 @@ export default function Protected({
   preventEarlyRender = true,
 }) {
   const notifs = useNotif();
-  const { setCurrentUser } = useAuth();
+  // const { setCurrentUser } = useAuth();
 
   const { data, isLoading, error } = useQuery({
     queryKey: [`GET ${endpoint}`],
@@ -33,20 +33,16 @@ export default function Protected({
       case 0:
         notifs.networkError();
         break;
-      case 401:
-        setCurrentUser(null);
+      // case 401:
+      //   setCurrentUser(null);
     }
   };
+  // useEffect(() => {
+  //   if (!fetchEnabled) setCurrentUser(mockData.user);
+  // }, []);
 
-  const onData = () => {
-    setCurrentUser(data.user);
-  };
-
-  useEffect(() => {
-    if (!fetchEnabled) setCurrentUser(mockData.user);
-  }, []);
-
-  useQueryHandlers(error, data, onError, onData);
+  // useQueryHandlers(error, data, onError, onData);
+  useQueryHandlers(error, data, onError);
 
   let contextValue;
   const fetchEnabled = config.fetch.queriesEnabled;

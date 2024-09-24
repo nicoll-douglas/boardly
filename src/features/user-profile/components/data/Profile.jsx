@@ -4,15 +4,16 @@ import ProfileTabs from "./ProfileTabs";
 import useProfile from "../../hooks/useProfile";
 import { Navigate } from "react-router-dom";
 import useIsMe from "../../hooks/useIsMe";
-import { useAuth } from "@/features/auth";
+// import { useAuth } from "@/features/auth";
 
 export default function Profile() {
   const { data } = useProfile();
   const [isMe] = useIsMe();
-  const { currentUser } = useAuth();
+  // const { currentUser } = useAuth();
 
   if (!isMe) {
-    if (data.profile.username === currentUser?.username)
+    // if (data.profile.username === currentUser?.username)
+    if (data.profile.username === data.user.username)
       return <Navigate to={"/me"} />;
   }
 
