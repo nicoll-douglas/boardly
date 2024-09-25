@@ -11,7 +11,7 @@ class SimpleAuthor {
 class SimpleReply {
   constructor() {
     this.author = new SimpleAuthor();
-    this.body = faker.lorem.sentence();
+    this.body = faker.lorem.paragraphs({ min: 1, max: 2 }, "\n\n");
     this.createdAt = faker.date.recent({ days: 30 });
     this._id = `reply-${faker.string.uuid()}`;
   }
@@ -20,7 +20,7 @@ class SimpleReply {
 class Reply extends SimpleReply {
   constructor() {
     super();
-    this.parent = Math.random() < 0.5 ? new SimpleReply() : null;
+    this.parent = Math.random() < 0.75 ? new SimpleReply() : null;
   }
 }
 
@@ -56,7 +56,7 @@ const threadData = {
       username: faker.internet.userName(),
       avatar: faker.image.avatar(),
     },
-    replies: getReplies(5),
+    replies: getReplies(10),
   },
   user: {
     username: "username123",
