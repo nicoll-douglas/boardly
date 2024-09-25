@@ -34,10 +34,6 @@ function newReply() {
             },
           }
         : null, // parent may be reply, otherwise it is implicitly the thread
-    children: Array.from(
-      { length: faker.number.int({ min: 0, max: 10 }) },
-      () => faker.string.uuid()
-    ), // we may or may not want to know the children of the reply (i.e replies to the reply)
   };
 }
 

@@ -10,13 +10,16 @@ function getIdArray(n) {
   );
 }
 
+const hasAvatar = Math.random() < 0.75;
+
 const profileData = {
   profile: {
     username: faker.internet.userName(),
-    avatar: Math.random() < 0.75 ? faker.image.avatar() : null,
+    avatar: hasAvatar ? faker.image.avatar() : null,
     age: Math.random() < 0.75 ? faker.number.int({ min: 18, max: 28 }) : null,
     bio: Math.random() < 0.75 ? faker.lorem.sentence() : null,
     pronouns: pronounValues[faker.number.int({ min: 0, max: 3 })],
+    hasAvatar: hasAvatar,
     createdAt: faker.date.past(),
     threads: getIdArray(20),
     replies: getIdArray(20),
