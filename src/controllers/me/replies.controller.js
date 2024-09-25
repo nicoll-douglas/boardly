@@ -12,11 +12,11 @@ exports._get = (options = { me: true }) => {
         .select("replies")
         .populate({
           path: "replies",
-          select: "body createdAt thread children parent",
+          select: "body createdAt thread parent",
           populate: [
             {
               path: "thread",
-              select: "title body board author",
+              select: "title body board author createdAt",
               populate: [
                 {
                   path: "board",
@@ -30,7 +30,7 @@ exports._get = (options = { me: true }) => {
             },
             {
               path: "parent",
-              select: "body author",
+              select: "body author createdAt",
               populate: {
                 path: "author",
                 select: "username",

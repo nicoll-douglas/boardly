@@ -9,7 +9,7 @@ exports._get = (options = { me: true }) => {
     req.log("query for requested user profile");
     try {
       let requestedUser = await User.findOne(query).select(
-        "username age bio hasAvatar pronouns createdAt"
+        "username age bio hasAvatar pronouns createdAt threads boards replies"
       );
 
       if (!requestedUser) {
