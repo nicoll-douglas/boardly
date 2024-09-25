@@ -43,7 +43,8 @@ export default function BoardsList() {
     <>
       <Card
         variant={{ base: "unstyled", md: "outline" }}
-        w={{ base: "full", md: 64, lg: 80 }}
+        w={{ base: "full", md: 64, lg: 72 }}
+        minW={{ base: "full", md: 64, lg: 72 }}
         position={{ base: "static", md: "sticky" }}
         top={"72px"}
         h={{ md: "calc(100vh - 88px)" }}

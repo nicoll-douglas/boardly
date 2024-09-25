@@ -1,6 +1,6 @@
 import { Container, Header, Logo } from "@/components/common";
 import ToggleThemeBtn from "@/features/ui/dark-mode";
-import { Spacer, Flex, VStack, Box, Card } from "@chakra-ui/react";
+import { Spacer, Flex, Card } from "@chakra-ui/react";
 import { ProfileLink, ProfileProvider } from "@/features/user-profile";
 import {
   BoardsListProvider,
@@ -35,10 +35,22 @@ export default function Board() {
         >
           <BoardsList />
           <BoardProvider boardName={boardName}>
-            <Flex flexDir={"column"} flex={1} as={Card}>
+            <Flex
+              flexDir={"column"}
+              gap={4}
+              flex={1}
+              as={Card}
+              variant={"unstyled"}
+            >
+              <BoardInfo
+                display={{ base: "flex", xl: "none" }}
+                position="static"
+                h="fit"
+                w="full"
+              />
               <BoardFeed />
             </Flex>
-            <BoardInfo />
+            <BoardInfo display={{ base: "none", xl: "flex" }} />
           </BoardProvider>
         </Flex>
       </Container>

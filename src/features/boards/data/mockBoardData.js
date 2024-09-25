@@ -23,9 +23,17 @@ function newThread() {
 
 // response body will look like this
 const boardData = {
-  threads: Array.from({ length: faker.number.int({ min: 0, max: 30 }) }, () =>
-    newThread()
-  ), // threads array
+  board: {
+    name: faker.word.noun(),
+    threads: Array.from({ length: faker.number.int({ min: 0, max: 30 }) }, () =>
+      newThread()
+    ), // threads array
+    // threads: [],
+    createdAt: faker.date.recent(),
+    admin: {
+      username: faker.internet.userName(),
+    },
+  },
   user: {
     username: "username123",
     id: "123",

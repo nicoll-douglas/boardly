@@ -14,7 +14,7 @@ export default function BoardLink({ board }) {
       pt={2}
       to={`/boards/${board.name}`}
     >
-      {board.name}
+      {`/${board.name}`}
     </Button>
   );
 }
