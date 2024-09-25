@@ -2,17 +2,16 @@ import { Container, Header, Logo } from "@/components/common";
 import ToggleThemeBtn from "@/features/ui/dark-mode";
 import { Spacer, Flex, Card } from "@chakra-ui/react";
 import { ProfileLink, ProfileProvider } from "@/features/user-profile";
+import { BoardsListProvider, BoardsList } from "@/features/boards";
 import {
-  BoardsListProvider,
-  BoardsList,
-  BoardProvider,
+  ThreadProvider,
+  Thread as ThreadData,
   BoardInfo,
-} from "@/features/boards";
-import { ThreadProvider, Thread as ThreadData } from "@/features/threads";
+} from "@/features/threads";
 import { useParams } from "react-router-dom";
 
 export default function Thread() {
-  const { boardName } = useParams();
+  const { threadId } = useParams();
 
   return (
     <BoardsListProvider>
@@ -34,7 +33,7 @@ export default function Thread() {
           w={"full"}
         >
           <BoardsList />
-          <BoardProvider boardName={boardName}>
+          <ThreadProvider threadId={threadId}>
             <Flex
               flexDir={"column"}
               gap={4}
@@ -43,12 +42,10 @@ export default function Thread() {
               variant={"unstyled"}
             >
               <BoardInfo variant="base" />
-              <ThreadProvider>
-                <ThreadData />
-              </ThreadProvider>
+              <ThreadData />
             </Flex>
             <BoardInfo variant="xl" />
-          </BoardProvider>
+          </ThreadProvider>
         </Flex>
       </Container>
     </BoardsListProvider>
