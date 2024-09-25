@@ -6,12 +6,19 @@ export default function CardLabel({
   linkText,
   link,
   postText,
+  overlay,
   ...props
 }) {
   return (
     <Flex gap={1} alignItems={"center"} maxW="full">
       {preText && <Text>{preText}</Text>}
-      <ButtonLink to={link} py={0} h={"fit-content"} {...props}>
+      <ButtonLink
+        overlay={overlay}
+        to={link}
+        py={0}
+        h={"fit-content"}
+        {...props}
+      >
         {linkText}
       </ButtonLink>
       {postText && <Text>{postText}</Text>}

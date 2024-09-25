@@ -2,7 +2,6 @@ import {
   Card,
   CardHeader,
   LinkBox,
-  LinkOverlay,
   Box,
   Text,
   CardBody,
@@ -10,7 +9,6 @@ import {
   Divider,
   Collapse,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import { timeAgo } from "@/lib/utils";
 import { Tag, CardLabel } from "@/components/common";
 import { useCompactView } from "@/features/ui/compactView";
@@ -45,6 +43,7 @@ export default function ReplyPreview({ reply }) {
                 link={`/threads/${reply.thread._id}`}
                 fontSize="md"
                 pb={"1px"}
+                overlay
               />
             </Box>
             <Flex gap={2} alignItems={"start"} minW={"fit-content"}>
@@ -54,44 +53,39 @@ export default function ReplyPreview({ reply }) {
         </CardHeader>
         <Divider />
         <CardBody>
-          <LinkOverlay
-            as={Link}
-            to={`/threads/${reply.thread._id}#${reply._id}`}
+          <CardLabel
+            postText="said:"
+            linkText={`${parent.author.username}`}
+            link={`/users/${parent.author.username}`}
+            fontSize="md"
+          />
+          <Text
+            {...(compactView ? noWrap : {})}
+            whiteSpace={compactView ? "nowrap" : "pre-wrap"}
+            lineHeight={1.25}
           >
+            {parent.body || parent.title}
+          </Text>
+          <Divider my={compactView ? 2 : 3} />
+          {isMe ? (
+            <Text size={"sm"} h={"21px"}>
+              You replied:
+            </Text>
+          ) : (
             <CardLabel
-              postText="said:"
-              linkText={`${parent.author.username}`}
-              link={`/users/${parent.author.username}`}
+              postText="replied:"
+              linkText={data.profile.username}
+              link={`/users/${data.profile.username}`}
               fontSize="md"
             />
-            <Text
-              {...(compactView ? noWrap : {})}
-              whiteSpace={compactView ? "nowrap" : "pre-wrap"}
-              lineHeight={1.25}
-            >
-              {parent.body || parent.title}
-            </Text>
-            <Divider my={compactView ? 1 : 2} />
-            {isMe ? (
-              <Text size={"sm"} h={"21px"}>
-                You replied:
-              </Text>
-            ) : (
-              <CardLabel
-                postText="replied:"
-                linkText={data.profile.username}
-                link={`/users/${data.profile.username}`}
-                fontSize="md"
-              />
-            )}
-            <Text
-              {...(compactView ? noWrap : {})}
-              whiteSpace={compactView ? "nowrap" : "pre-wrap"}
-              lineHeight={1.25}
-            >
-              {reply.body}
-            </Text>
-          </LinkOverlay>
+          )}
+          <Text
+            {...(compactView ? noWrap : {})}
+            whiteSpace={compactView ? "nowrap" : "pre-wrap"}
+            lineHeight={1.25}
+          >
+            {reply.body}
+          </Text>
         </CardBody>
       </Card>
     </LinkBox>
