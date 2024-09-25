@@ -1,6 +1,6 @@
 import { Container, Header, Logo } from "@/components/common";
 import ToggleThemeBtn from "@/features/ui/dark-mode";
-import { Spacer, Flex, Card } from "@chakra-ui/react";
+import { Spacer, Flex, Card, Divider } from "@chakra-ui/react";
 import { ProfileLink, ProfileProvider } from "@/features/user-profile";
 import { BoardsListProvider, BoardsList } from "@/features/boards";
 import {
@@ -42,6 +42,7 @@ export default function Thread() {
               variant={"unstyled"}
             >
               <BoardInfo variant="base" />
+              <Divider display={{ base: "flex", md: "none" }} />
               <ThreadData />
             </Flex>
             <BoardInfo variant="xl" />

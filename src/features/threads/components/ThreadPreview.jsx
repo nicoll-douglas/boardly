@@ -29,20 +29,20 @@ export default function ThreadPreview({ thread, isInProfile = true }) {
             <Box w={"calc(100% - 180px)"} flex={1}>
               <CardLabel
                 preText={isInProfile ? "On" : "By"}
-                linkText={isInProfile ? board.name : author.username}
+                linkText={isInProfile ? `/${board.name}` : author.username}
                 link={
                   isInProfile
                     ? `/boards/${board.name}`
                     : `/users/${author.username}`
                 }
+                pb="1px"
+                fontSize="md"
               />
             </Box>
             <Flex gap={2} minW={"fit-content"} alignItems={"start"}>
-              {!isInProfile && (
-                <Tag
-                  display={{ base: "none", sm: "flex" }}
-                >{`${replies.length} replies`}</Tag>
-              )}
+              <Tag display={{ base: "none", sm: "flex" }}>{`${
+                replies.length
+              } repl${replies.length === 1 ? "y" : "ies"}`}</Tag>
               <Tag>{timeAgo(createdAt)}</Tag>
             </Flex>
           </Flex>

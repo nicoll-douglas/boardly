@@ -23,7 +23,7 @@ export default function BoardFeed() {
   const { compactView } = useCompactView();
 
   return (
-    <Card variant={"outline"} flex={1} size={"sm"}>
+    <Card variant={{ base: "unstyled", md: "outline" }} flex={1} size={"sm"}>
       {isLoading ? (
         <Center p={4} flex={1}>
           <Spinner size={"lg"} />
@@ -38,7 +38,7 @@ export default function BoardFeed() {
               <CompactViewBtn />
             </Flex>
           </CardHeader>
-          <Divider />
+          <Divider my={{ base: 4, md: 0 }} />
           <CardBody>
             {data.board.threads.length === 0 ? (
               <VStack gap={0} textAlign={"center"}>

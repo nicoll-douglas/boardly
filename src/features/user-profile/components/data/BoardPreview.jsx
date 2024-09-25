@@ -28,7 +28,7 @@ export default function BoardPreview({ board }) {
               maxW={{ base: "calc(100% - 40px)", sm: "calc(100% - 165px)" }}
             >
               <Heading size={{ base: "sm", md: "md" }} {...noWrap}>
-                {board.name}
+                {`/${board.name}`}
               </Heading>
             </LinkOverlay>
             {isMe && (
