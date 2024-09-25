@@ -18,7 +18,7 @@ import { CardLabel, Tag } from "@/components/common";
 import { noWrap } from "@/lib/constants";
 
 export default function ThreadPreview({ thread, isInProfile = true }) {
-  const { createdAt, title, body, _id, board, author } = thread;
+  const { createdAt, title, body, _id, board, author, replies } = thread;
   const { compactView } = useCompactView();
 
   return (
@@ -38,6 +38,11 @@ export default function ThreadPreview({ thread, isInProfile = true }) {
               />
             </Box>
             <Flex gap={2} minW={"fit-content"} alignItems={"start"}>
+              {!isInProfile && (
+                <Tag
+                  display={{ base: "none", sm: "flex" }}
+                >{`${replies.length} replies`}</Tag>
+              )}
               <Tag>{timeAgo(createdAt)}</Tag>
             </Flex>
           </Flex>
