@@ -68,12 +68,14 @@ export default function ReplyPreview({ reply }) {
               {...(compactView ? noWrap : {})}
               whiteSpace={compactView ? "nowrap" : "pre-wrap"}
               lineHeight={1.25}
-              mb={compactView ? 1 : 4}
             >
               {parent.body || parent.title}
             </Text>
+            <Divider my={compactView ? 1 : 2} />
             {isMe ? (
-              <Text size={"sm"}>You replied:</Text>
+              <Text size={"sm"} h={"21px"}>
+                You replied:
+              </Text>
             ) : (
               <CardLabel
                 postText="replied:"

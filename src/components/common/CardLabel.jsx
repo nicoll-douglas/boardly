@@ -8,23 +8,21 @@ export default function CardLabel({
   postText,
   ...props
 }) {
-  const { fontSize = "sm", ...rest } = props;
-
   return (
     <Flex gap={1} alignItems={"center"} maxW="full">
-      {preText && <Text fontSize={fontSize}>{preText}</Text>}
-      <ButtonLink to={link} py={0} h={"fit-content"} size={fontSize} {...rest}>
+      {preText && <Text>{preText}</Text>}
+      <ButtonLink to={link} py={0} h={"fit-content"} {...props}>
         {linkText}
       </ButtonLink>
-      {postText && <Text fontSize={fontSize}>{postText}</Text>}
+      {postText && <Text>{postText}</Text>}
     </Flex>
   );
 }
 
-function Text({ children, fontSize }) {
+function Text({ children }) {
   return (
     <ChakraText
-      fontSize={fontSize}
+      fontSize={"md"}
       h={"19px"}
       display={"flex"}
       alignItems={"center"}

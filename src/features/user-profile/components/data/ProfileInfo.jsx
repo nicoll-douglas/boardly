@@ -53,6 +53,9 @@ export default function ProfileInfo() {
             name="Joined On"
             value={formatISOString(profile.createdAt)}
           />
+          <StackData name="Threads" value={profile.threads.length} />
+          <StackData name="Replies" value={profile.replies.length} />
+          <StackData name="Boards" value={profile.boards.length} />
         </Stack>
       </CardBody>
     </Card>

@@ -4,6 +4,7 @@ class SimpleAuthor {
   constructor() {
     this._id = `user-${faker.string.uuid()}`;
     this.username = faker.internet.userName();
+    this.avatar = faker.image.avatar();
   }
 }
 
@@ -40,17 +41,27 @@ const threadData = {
     board: {
       _id: `board-${faker.string.uuid()}`,
       name: faker.word.noun(),
+      admin: {
+        _id: faker.string.uuid(),
+        username: faker.internet.userName(),
+      },
+      threads: Array.from(
+        { length: faker.number.int({ min: 0, max: 30 }) },
+        () => faker.string.uuid()
+      ),
+      createdAt: faker.date.recent({ days: 45 }),
     },
     author: {
       _id: `user-${faker.string.uuid()}`,
       username: faker.internet.userName(),
+      avatar: faker.image.avatar(),
     },
     replies: getReplies(5),
   },
-  // user: {
-  //   username: "username123",
-  //   id: "123",
-  // },
+  user: {
+    username: "username123",
+    id: "123",
+  },
 };
 
 export default threadData;

@@ -4,10 +4,10 @@ import threadData from "../data/mockThreadData";
 
 const ThreadContext = createContext();
 
-function ThreadProvider({ children, threadName }) {
+function ThreadProvider({ children, threadId }) {
   return (
     <Protected
-      endpoint={`/api/threads/${threadName}`}
+      endpoint={`/api/threads/${threadId}`}
       Context={ThreadContext}
       preventEarlyRender={false}
       mockData={threadData}

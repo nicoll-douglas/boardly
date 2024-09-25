@@ -4,6 +4,12 @@ const pronounValues = [undefined, "he/him", "she/her", "they/them"];
 
 // mock data associated with /api/users/:username and /api/me
 
+function getIdArray(n) {
+  return Array.from({ length: faker.number.int({ min: 0, max: n }) }, () =>
+    faker.string.uuid()
+  );
+}
+
 const profileData = {
   profile: {
     username: faker.internet.userName(),
@@ -12,6 +18,9 @@ const profileData = {
     bio: Math.random() < 0.75 ? faker.lorem.sentence() : null,
     pronouns: pronounValues[faker.number.int({ min: 0, max: 3 })],
     createdAt: faker.date.past(),
+    threads: getIdArray(20),
+    replies: getIdArray(20),
+    boards: getIdArray(20),
   },
   user: {
     username: "username123",

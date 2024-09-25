@@ -14,6 +14,7 @@ const User = lazy(() => import("./pages/users/[username]"));
 const Home = lazy(() => import("./pages/home"));
 const Me = lazy(() => import("./pages/me"));
 const Board = lazy(() => import("./pages/boards/[boardName]"));
+const Thread = lazy(() => import("./pages/threads/[threadName]"));
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
 
         <Route path="/users/:username" element={<User />} />
         <Route path="/boards/:boardName" element={<Board />} />
+        <Route path="/threads/:threadId" element={<Thread />} />
         <Route path="/me" element={<Me />} />
         <Route path="/home" element={<Home />} />
       </Routes>
