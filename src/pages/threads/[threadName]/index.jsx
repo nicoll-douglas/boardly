@@ -42,17 +42,12 @@ export default function Thread() {
               as={Card}
               variant={"unstyled"}
             >
+              <BoardInfo variant="base" />
               <ThreadProvider>
                 <ThreadData />
               </ThreadProvider>
-              <BoardInfo
-                display={{ base: "flex", xl: "none" }}
-                position="static"
-                h="fit"
-                w="full"
-              />
             </Flex>
-            <BoardInfo display={{ base: "none", xl: "flex" }} />
+            <BoardInfo variant="xl" />
           </BoardProvider>
         </Flex>
       </Container>

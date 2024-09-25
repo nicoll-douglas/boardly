@@ -42,15 +42,10 @@ export default function Board() {
               as={Card}
               variant={"unstyled"}
             >
-              <BoardInfo
-                display={{ base: "flex", xl: "none" }}
-                position="static"
-                h="fit"
-                w="full"
-              />
+              <BoardInfo variant="base" />
               <BoardFeed />
             </Flex>
-            <BoardInfo display={{ base: "none", xl: "flex" }} />
+            <BoardInfo variant="xl" />
           </BoardProvider>
         </Flex>
       </Container>

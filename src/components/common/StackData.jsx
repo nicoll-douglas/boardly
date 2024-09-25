@@ -1,6 +1,8 @@
-import { Text, Heading, Box } from "@chakra-ui/react";
+import { Text, Heading, Box, Link as ChakraLink } from "@chakra-ui/react";
+import { noWrap } from "@/lib/constants";
+import { Link } from "react-router-dom";
 
-export default function StackData({ name, value }) {
+export default function StackData({ name, value, link }) {
   return (
     <Box>
       <Heading
@@ -12,7 +14,20 @@ export default function StackData({ name, value }) {
       >
         {name}
       </Heading>
-      <Text py={1}>{value}</Text>
+      {link ? (
+        <ChakraLink
+          variant={"link"}
+          as={Link}
+          to={link}
+          maxW={"fit-content"}
+          py={1}
+          {...noWrap}
+        >
+          {value}
+        </ChakraLink>
+      ) : (
+        <Text py={1}>{value}</Text>
+      )}
     </Box>
   );
 }
