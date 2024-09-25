@@ -1,6 +1,6 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Text, Heading, Box } from "@chakra-ui/react";
 
-export default function ProfileField({ title, value }) {
+export default function StackData({ name, value }) {
   return (
     <Box>
       <Heading
@@ -10,7 +10,7 @@ export default function ProfileField({ title, value }) {
         fontWeight={500}
         size={"sm"}
       >
-        {title}
+        {name}
       </Heading>
       <Text py={1}>{value}</Text>
     </Box>

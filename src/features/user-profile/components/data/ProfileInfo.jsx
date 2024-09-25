@@ -13,10 +13,10 @@ import { formatISOString } from "@/lib/utils";
 import useProfile from "../../hooks/useProfile";
 import AgeEditable from "../form/AgeEditable";
 import PronounEditable from "../form/PronounEditable";
-import ProfileField from "../ui/ProfileField";
 import BioEditable from "../form/BioEditable";
 import AvatarEditable from "../form/AvatarEditable";
 import useEditProfile from "../../hooks/useEditProfile";
+import { StackData } from "@/components/common";
 
 export default function ProfileInfo() {
   const { data } = useProfile();
@@ -49,8 +49,8 @@ export default function ProfileInfo() {
         <Stack divider={<StackDivider />} gap={1}>
           <AgeEditable editor={editor} />
           <PronounEditable editor={editor} />
-          <ProfileField
-            title="Joined On"
+          <StackData
+            name="Joined On"
             value={formatISOString(profile.createdAt)}
           />
         </Stack>

@@ -8,3 +8,4 @@ export { default as NothingToShow } from "./NothingToShow";
 export { default as Separator } from "./Separator";
 export { default as Tag } from "./Tag";
 export { default as CardLabel } from "./CardLabel";
+export { default as StackData } from "./StackData";
