@@ -27,7 +27,7 @@ export default function BoardInfo({ variant = "xl", board, isLoading }) {
     base: {
       display: { base: "flex", xl: "none" },
       position: "static",
-      variant: { base: "unstyled", md: "outline" },
+      variant: "outline",
       h: "fit",
       w: "full",
     },
@@ -48,7 +48,7 @@ export default function BoardInfo({ variant = "xl", board, isLoading }) {
               to={`/boards/${board.name}`}
             >{`/${board.name}`}</Heading>
           </CardHeader>
-          <Divider my={{ base: 4, md: 0 }} />
+          <Divider />
           <CardBody>
             <Stack divider={<StackDivider />}>
               <StackData

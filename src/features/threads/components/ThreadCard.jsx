@@ -17,7 +17,7 @@ export default function ThreadCard({ thread }) {
       <Heading size={"md"}>{thread.title}</Heading>
       {thread.body && (
         <>
-          <Text whiteSpace={"pre-wrap"} lineHeight={1.25}>
+          <Text whiteSpace={"pre-wrap"} mt={2} lineHeight={1.25}>
             {thread.body}
           </Text>
         </>

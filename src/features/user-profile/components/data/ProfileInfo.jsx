@@ -25,7 +25,7 @@ export default function ProfileInfo() {
 
   return (
     <Card
-      variant={{ base: "unstyled", md: "outline" }}
+      variant={"outline"}
       w={{ base: "full", md: 64, lg: 80 }}
       position={{ base: "static", md: "sticky" }}
       top={"72px"}

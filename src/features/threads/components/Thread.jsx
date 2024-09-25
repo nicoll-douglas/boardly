@@ -39,7 +39,7 @@ export default function Thread() {
                 </Text>
               </VStack>
             ) : (
-              <VStack gap={4} mt={4}>
+              <VStack gap={{ base: 2, sm: 4 }} mt={4}>
                 {thread.replies
                   .sort(
                     (a, b) =>

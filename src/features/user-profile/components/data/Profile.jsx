@@ -1,4 +1,4 @@
-import { Flex, Divider } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import ProfileInfo from "./ProfileInfo";
 import ProfileTabs from "./ProfileTabs";
 import useProfile from "../../hooks/useProfile";
@@ -26,7 +26,6 @@ export default function Profile() {
       flexDir={{ base: "column", md: "row" }}
     >
       <ProfileInfo />
-      <Divider display={{ md: "none" }} />
       <ProfileTabs />
     </Flex>
   );
