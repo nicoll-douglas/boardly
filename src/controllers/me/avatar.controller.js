@@ -1,6 +1,7 @@
 const bucket = require("@/services/firebaseStorage");
 
 exports._put = async (req, res, next) => {
+  const user = req.user;
   const imgFile = req.file;
   if (!imgFile) return res.status(400)._end();
 
@@ -17,6 +18,8 @@ exports._put = async (req, res, next) => {
     .on("finish", async () => {
       try {
         req.log("making file public...");
+        user.hasAvatar = true;
+        await user.save();
         await file.makePublic();
 
         req.log("200, sent");
@@ -31,6 +34,7 @@ exports._put = async (req, res, next) => {
 };
 
 exports._delete = async (req, res, next) => {
+  const user = req.user;
   const file = bucket.file(`avatar-${req.user._id}`);
 
   try {
@@ -40,6 +44,8 @@ exports._delete = async (req, res, next) => {
     if (exists) {
       await file.delete();
       req.log("file exists, deleted");
+      user.hasAvatar = false;
+      await user.save();
 
       req.log("200, sent");
       return res.status(200)._end();

@@ -38,7 +38,9 @@ const user = new mongoose.Schema(
 );
 
 user.virtual("avatar").get(function () {
-  if (process.env.SEED_DB) return this.hasAvatar;
+  if (process.env.NODE_ENV === "development") {
+    if (this.username !== process.env.SEED_USER) return this.hasAvatar;
+  }
   return bucket.file(`avatar-${this._id.toString()}`).publicUrl();
 });
 

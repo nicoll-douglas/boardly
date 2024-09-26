@@ -21,7 +21,7 @@ exports._get = async (req, res, next) => {
       })
       .populate({
         path: "author",
-        select: "username",
+        select: "username hasAvatar",
       })
       .populate({
         path: "replies",
