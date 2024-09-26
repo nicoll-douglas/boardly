@@ -1,16 +1,15 @@
 const { User } = require("@/models");
 
-async function createSelf(username, password) {
-  let user = await User.findOne({ username });
-  if (!user) {
-    user = new User({
-      email: "user123@example.com",
-      username: username,
-      verified: true,
-    });
-  }
+async function createSelf() {
+  console.log("info: creating self...");
+  const username = process.env.SEED_USER;
+  const password = process.env.SEED_PASS;
+
+  const user = new User({ username, verified: true });
   await user.setPassword(password);
-  return user.save();
+  await user.save();
+
+  console.log(`info: self created. USER=${username} PASS=${password}`);
 }
 
 module.exports = createSelf;

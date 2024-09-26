@@ -38,7 +38,7 @@ const user = new mongoose.Schema(
 );
 
 user.virtual("avatar").get(function () {
-  if (typeof this.hasAvatar === "string") return this.hasAvatar;
+  if (process.env.SEED_DB) return this.hasAvatar;
   return bucket.file(`avatar-${this._id.toString()}`).publicUrl();
 });
 

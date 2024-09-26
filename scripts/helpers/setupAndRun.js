@@ -3,10 +3,11 @@ const clearDB = require("./clearDB");
 
 const MONGO_URI = process.env.MONGO_URI;
 
-async function runScript(script) {
+async function setupAndRun(script) {
   try {
     await mongoose.connect(MONGO_URI);
     console.log(`info: connected to ${MONGO_URI}`);
+    await clearDB();
     await script();
   } catch (err) {
     console.log(err);
@@ -17,4 +18,4 @@ async function runScript(script) {
   }
 }
 
-module.exports = runScript;
+module.exports = setupAndRun;

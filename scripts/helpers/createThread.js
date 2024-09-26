@@ -1,17 +1,35 @@
 const { faker } = require("@faker-js/faker");
 const { Thread } = require("@/models");
+const createUser = require("./createUser");
+const createReply = require("./createReply");
 
-async function createThread(quantity = 1) {
+async function createThread(quantity = 1, boardId) {
   const threads = [];
 
   for (let i = 0; i < quantity; i++) {
-    const thread = await new Thread({
+    const [author] = await createUser();
+
+    let thread = await new Thread({
       title: faker.lorem.sentence(),
       body:
-        Math.random() < 0.5
-          ? faker.lorem.paragraphs({ min: 1, max: 5 }, "\n\n")
+        Math.random() < 0.75
+          ? faker.lorem.paragraphs({ min: 1, max: 4 }, "\n\n")
           : undefined,
+      author: author._id,
+      board: boardId,
     }).save();
+
+    author.threads.push(thread._id);
+    await author.save();
+
+    const replies = await createReply(
+      faker.number.int({ min: 0, max: 20 }),
+      thread._id,
+      true
+    );
+    thread.replies = replies.map((reply) => reply._id);
+    thread = await thread.save();
+
     threads.push(thread);
   }
 
