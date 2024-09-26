@@ -15,8 +15,10 @@ const Home = lazy(() => import("./pages/home"));
 const Me = lazy(() => import("./pages/me"));
 const Board = lazy(() => import("./pages/boards/[boardName]"));
 const Thread = lazy(() => import("./pages/threads/[threadName]"));
+import { useScrollRestoration } from "./hooks";
 
 function App() {
+  useScrollRestoration();
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
