@@ -8,6 +8,7 @@ import {
   Flex,
   Box,
   Button,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import Header from "@/components/common/Header";
 import Logo from "@/components/common/Logo";
@@ -21,8 +22,18 @@ export default function StatusPage({
   link = "/home",
   linkText = "Go back",
 }) {
+  const bgColor = useColorModeValue("white", "gray.800");
+
   return (
-    <Box position={"fixed"} minW={"100vw"} minH={"100vh"} zIndex={100}>
+    <Box
+      position={"fixed"}
+      minW={"100vw"}
+      minH={"100vh"}
+      zIndex={100}
+      top={0}
+      left={0}
+      bg={bgColor}
+    >
       <Box overflowY={"auto"} maxH={"100vh"}>
         <Container>
           <Header>

@@ -1,7 +1,7 @@
 import { Container, Header, Logo } from "@/components/common";
 import ToggleThemeBtn from "@/features/ui/dark-mode";
 import { Spacer, Flex, Card } from "@chakra-ui/react";
-import { ProfileLink, ProfileProvider } from "@/features/user-profile";
+import { ProfileLink } from "@/features/user-profile";
 import {
   BoardsListProvider,
   BoardsList,
@@ -20,9 +20,7 @@ export default function Board() {
         <Header>
           <Logo to="/home" />
           <Spacer />
-          <ProfileProvider user={{ isMe: true }} preventEarlyRender={false}>
-            <ProfileLink mr={3} />
-          </ProfileProvider>
+          <ProfileLink mr={3} />
           <ToggleThemeBtn />
         </Header>
         <Flex
