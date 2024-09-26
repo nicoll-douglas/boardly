@@ -1,7 +1,12 @@
 const { Thread } = require("@/models");
+const mongoose = require("mongoose");
 
 exports._get = async (req, res, next) => {
   const { threadId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(threadId)) {
+    return res.status(404)._end();
+  }
 
   try {
     let thread = await Thread.findById(threadId)
