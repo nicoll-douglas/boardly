@@ -18,16 +18,22 @@ async function createReply(quantity = 1, threadId, parentify) {
     await author.save();
 
     if (parentify) {
-      const parent =
-        replies[faker.number.int({ min: 0, max: replies.length - 1 })];
-      reply.parent = Math.random() < 0.5 ? parent._id : undefined;
-      reply = await reply.save();
+      if (replies.length > 0) {
+        const parent =
+          replies[
+            faker.number.int({
+              min: 0,
+              max: replies.length - 1,
+            })
+          ];
+        reply.parent = Math.random() < 0.5 ? parent._id : undefined;
+        reply = await reply.save();
+      }
     }
 
     replies.push(reply);
   }
 
-  console.log(`info: `);
   return replies;
 }
 
