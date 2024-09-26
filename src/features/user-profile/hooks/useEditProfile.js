@@ -2,7 +2,6 @@ import { useSubmitHandlers, useProtectedSubmission } from "@/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import editProfile from "../services/editProfile";
-import useProfile from "./useProfile";
 import { useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
 
@@ -19,12 +18,11 @@ function valuesChanged(currentValues, defaultValues) {
   return changed;
 }
 
-export default function useEditProfile() {
-  const { data } = useProfile();
+export default function useEditProfile(profile) {
   const defaultValues = {
-    bio: data?.profile.bio || "",
-    pronouns: data?.profile.pronouns || "",
-    age: data?.profile.age ?? "",
+    bio: profile.bio || "",
+    pronouns: profile.pronouns || "",
+    age: profile.age ?? "",
   };
   const form = useForm({ defaultValues });
   const queryClient = useQueryClient();
@@ -34,7 +32,7 @@ export default function useEditProfile() {
 
   useEffect(() => {
     form.reset(defaultValues);
-  }, [data]);
+  }, [profile]);
 
   const handlers = useProtectedSubmission(() => {
     queryClient.invalidateQueries({ queryKey: ["GET /api/me"] });
