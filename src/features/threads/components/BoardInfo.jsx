@@ -6,7 +6,7 @@ export default function BoardInfo({ variant }) {
 
   return (
     <BoardInfoCommon
-      board={data.thread.board}
+      board={data?.thread.board}
       isLoading={isLoading}
       variant={variant}
     />

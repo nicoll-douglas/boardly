@@ -7,7 +7,7 @@ export default function BoardInfo({ variant }) {
   return (
     <BoardInfoCommon
       variant={variant}
-      board={data.board}
+      board={data?.board}
       isLoading={isLoading}
     />
   );
