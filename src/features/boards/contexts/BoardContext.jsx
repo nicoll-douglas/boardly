@@ -10,7 +10,6 @@ function BoardProvider({ children, boardName }) {
       endpoint={`/api/boards/${boardName}`}
       Context={BoardContext}
       mockData={{ ...mockBoardData }}
-      preventEarlyRender={true}
     >
       {children}
     </Protected>

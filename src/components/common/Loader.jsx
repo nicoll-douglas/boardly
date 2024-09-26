@@ -1,6 +1,8 @@
-import { Center, Spinner } from "@chakra-ui/react";
+import { Center, Spinner, useColorModeValue } from "@chakra-ui/react";
 
 export default function Loader() {
+  const bgColor = useColorModeValue("white", "gray.800");
+
   return (
     <Center
       pos={"fixed"}
@@ -9,6 +11,7 @@ export default function Loader() {
       w={"100vw"}
       minH={"100vh"}
       zIndex={150}
+      bg={bgColor}
     >
       <Spinner size={"xl"} />
     </Center>

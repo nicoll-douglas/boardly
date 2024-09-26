@@ -6,6 +6,7 @@ import {
   Box,
   AccordionIcon,
   AccordionPanel,
+  SlideFade,
 } from "@chakra-ui/react";
 import BoardSearchInput from "./BoardSearchInput";
 import BoardLinks from "./BoardLinks";
@@ -17,18 +18,20 @@ export default function BoardsListAccordion({ boards }) {
 
   return (
     <Accordion allowToggle display={{ base: "block", md: "none" }}>
-      <AccordionItem>
-        <AccordionButton>
-          <Box flex={1} textAlign={"left"}>
-            <Heading size={"md"}>Boards</Heading>
-          </Box>
-          <AccordionIcon />
-        </AccordionButton>
-        <AccordionPanel>
-          <BoardSearchInput onChange={handleSearch} value={searchValue} />
-          <BoardLinks filteredList={filteredList} dataList={list} />
-        </AccordionPanel>
-      </AccordionItem>
+      <SlideFade in={!!boards} offsetY={10}>
+        <AccordionItem>
+          <AccordionButton>
+            <Box flex={1} textAlign={"left"}>
+              <Heading size={"md"}>Boards</Heading>
+            </Box>
+            <AccordionIcon />
+          </AccordionButton>
+          <AccordionPanel>
+            <BoardSearchInput onChange={handleSearch} value={searchValue} />
+            <BoardLinks filteredList={filteredList} dataList={list} />
+          </AccordionPanel>
+        </AccordionItem>
+      </SlideFade>
     </Accordion>
   );
 }

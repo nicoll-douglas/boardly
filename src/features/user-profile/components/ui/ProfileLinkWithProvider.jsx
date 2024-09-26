@@ -3,7 +3,7 @@ import { ProfileProvider } from "../../contexts/ProfileContext";
 
 export default function ProfileLinkWithProvider(props) {
   return (
-    <ProfileProvider user={{ isMe: true }} preventEarlyRender={false}>
+    <ProfileProvider user={{ isMe: true }}>
       <ProfileLink {...props} />
     </ProfileProvider>
   );

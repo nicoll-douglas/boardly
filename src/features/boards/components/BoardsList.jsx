@@ -1,8 +1,8 @@
 import useBoardsList from "../hooks/useBoardsList";
-import { Card } from "@chakra-ui/react";
+import { Card, SlideFade } from "@chakra-ui/react";
 import BoardsListAccordion from "./BoardsListAccordion";
 import BoardsListCard from "./BoardsListCard";
-import Loader from "./Loader";
+import { Spinner } from "@/components/common";
 
 export default function BoardsList() {
   const { data, isLoading } = useBoardsList();
@@ -21,13 +21,15 @@ export default function BoardsList() {
         display={{ base: "none", md: "flex" }}
       >
         {isLoading ? (
-          <Loader display={{ base: "none", md: "flex" }} />
+          <Spinner display={{ base: "none", md: "flex" }} p={4} />
         ) : (
-          <BoardsListCard boards={data.boards} />
+          <SlideFade in={!!data} offsetY={10}>
+            <BoardsListCard boards={data.boards} />
+          </SlideFade>
         )}
       </Card>
       {isLoading ? (
-        <Loader display={{ base: "flex", md: "none" }} />
+        <Spinner display={{ base: "flex", md: "none" }} p={4} />
       ) : (
         <BoardsListAccordion boards={data.boards} />
       )}

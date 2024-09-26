@@ -4,7 +4,7 @@ import { mockProfileData } from "../data";
 
 const ProfileContext = createContext();
 
-function ProfileProvider({ children, preventEarlyRender, user }) {
+function ProfileProvider({ children, user }) {
   const { isMe, username } = user;
 
   return (
@@ -12,7 +12,6 @@ function ProfileProvider({ children, preventEarlyRender, user }) {
       endpoint={isMe ? "/api/me" : `/api/users/${username}`}
       mockData={mockProfileData}
       Context={ProfileContext}
-      preventEarlyRender={preventEarlyRender}
     >
       {children}
     </Protected>

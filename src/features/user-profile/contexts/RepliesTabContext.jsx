@@ -13,7 +13,6 @@ function RepliesTabProvider({ children }) {
       endpoint={isMe ? "/api/me/replies" : `/api/users/${username}/replies`}
       mockData={mockReplyData}
       Context={RepliesTabContext}
-      preventEarlyRender={false}
     >
       {children}
     </Protected>

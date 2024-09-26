@@ -4,19 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { getProtectedData } from "@/services";
 import { useNotif } from "@/hooks";
 
-import Loader from "@/components/common/Loader";
 import config from "@/config";
 import { useQueryHandlers } from "@/hooks";
 // import { useAuth } from "@/features/auth";
 // import { useEffect } from "react";
 
-export default function Protected({
-  children,
-  Context,
-  endpoint,
-  mockData,
-  preventEarlyRender = true,
-}) {
+export default function Protected({ children, Context, endpoint, mockData }) {
   const notifs = useNotif();
   // const { setCurrentUser } = useAuth();
 
@@ -44,16 +37,9 @@ export default function Protected({
   // useQueryHandlers(error, data, onError, onData);
   useQueryHandlers(error, data, onError);
 
-  let contextValue;
-  const fetchEnabled = config.fetch.queriesEnabled;
-  if (preventEarlyRender) {
-    if (isLoading) return <Loader />;
-    contextValue = fetchEnabled ? { data } : { data: mockData };
-  } else {
-    contextValue = fetchEnabled
-      ? { data, isLoading }
-      : { data: mockData, isLoading: false };
-  }
+  const contextValue = config.fetch.queriesEnabled
+    ? { data, isLoading }
+    : { data: mockData, isLoading: false };
 
   switch (error?.status) {
     case 404:

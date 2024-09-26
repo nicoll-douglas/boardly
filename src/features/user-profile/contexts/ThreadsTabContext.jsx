@@ -13,7 +13,6 @@ function ThreadsTabProvider({ children }) {
       endpoint={isMe ? "/api/me/threads" : `/api/users/${username}/threads`}
       mockData={mockThreadData}
       Context={ThreadsTabContext}
-      preventEarlyRender={false}
     >
       {children}
     </Protected>

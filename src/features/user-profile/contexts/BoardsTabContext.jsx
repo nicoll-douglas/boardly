@@ -13,7 +13,6 @@ function BoardsTabProvider({ children }) {
       endpoint={isMe ? "/api/me/boards" : `/api/users/${username}/boards`}
       mockData={mockBoardData}
       Context={BoardsTabContext}
-      preventEarlyRender={false}
     >
       {children}
     </Protected>

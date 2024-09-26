@@ -22,9 +22,9 @@ function valuesChanged(currentValues, defaultValues) {
 export default function useEditProfile() {
   const { data } = useProfile();
   const defaultValues = {
-    bio: data.profile.bio || "",
-    pronouns: data.profile.pronouns || "",
-    age: data.profile.age ?? "",
+    bio: data?.profile.bio || "",
+    pronouns: data?.profile.pronouns || "",
+    age: data?.profile.age ?? "",
   };
   const form = useForm({ defaultValues });
   const queryClient = useQueryClient();

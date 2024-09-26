@@ -9,7 +9,6 @@ function ThreadProvider({ children, threadId }) {
     <Protected
       endpoint={`/api/threads/${threadId}`}
       Context={ThreadContext}
-      preventEarlyRender={true}
       mockData={threadData}
     >
       {children}

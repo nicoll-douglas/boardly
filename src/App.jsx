@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
-import { Loader } from "./components/common";
+import { DelayFallback } from "./components/common";
 import "./assets/css/styles.css";
 
 import { NotFound } from "./components/status-pages";
@@ -15,12 +15,14 @@ const Home = lazy(() => import("./pages/home"));
 const Me = lazy(() => import("./pages/me"));
 const Board = lazy(() => import("./pages/boards/[boardName]"));
 const Thread = lazy(() => import("./pages/threads/[threadName]"));
+const HeaderLayout = lazy(() => import("./layouts/Header.layout"));
+const BoardsListLayout = lazy(() => import("./layouts/BoardsList.layout"));
 import { useScrollRestoration } from "./hooks";
 
 function App() {
   useScrollRestoration();
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={<DelayFallback />}>
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="*" element={<NotFound />} />
@@ -31,11 +33,16 @@ function App() {
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<Register />} />
 
-        <Route path="/users/:username" element={<User />} />
-        <Route path="/boards/:boardName" element={<Board />} />
-        <Route path="/threads/:threadId" element={<Thread />} />
-        <Route path="/me" element={<Me />} />
-        <Route path="/home" element={<Home />} />
+        <Route element={<HeaderLayout />}>
+          <Route path="/users/:username" element={<User />} />
+          <Route path="/me" element={<Me />} />
+
+          <Route element={<BoardsListLayout />}>
+            <Route path="/boards/:boardName" element={<Board />} />
+            <Route path="/threads/:threadId" element={<Thread />} />
+            <Route path="/home" element={<Home />} />
+          </Route>
+        </Route>
       </Routes>
     </Suspense>
   );

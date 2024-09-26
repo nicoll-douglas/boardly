@@ -11,7 +11,7 @@ export default function Profile() {
   const [isMe] = useIsMe();
   // const { currentUser } = useAuth();
 
-  if (!isMe) {
+  if (!isMe && data) {
     // if (data.profile.username === currentUser?.username)
     if (data.profile.username === data.user.username)
       return <Navigate to={"/me"} />;
@@ -20,8 +20,7 @@ export default function Profile() {
   return (
     <Flex
       flex={1}
-      pb={4}
-      px={4}
+      maxW={"full"}
       gap={4}
       flexDir={{ base: "column", md: "row" }}
     >
