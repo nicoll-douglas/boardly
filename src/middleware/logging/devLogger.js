@@ -4,6 +4,10 @@ const winston = require("winston");
 const logsFolder = path.join(__dirname, "../../../logs");
 
 module.exports = (req, res, next) => {
+  if (process.env.NODE_ENV === "production") {
+    req.log = () => {};
+    return next();
+  }
   const logFileName = path.join(logsFolder, "requests", `${Date.now()}.log`);
 
   const logger = winston.createLogger({
@@ -16,9 +20,7 @@ module.exports = (req, res, next) => {
   res.on("finish", () => logger.info("request end"));
 
   req.log = (message) => {
-    if (process.env.NODE_ENV === "development") {
-      logger.info(message);
-    }
+    logger.info(message);
   };
   next();
 };
