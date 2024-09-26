@@ -1,35 +1,11 @@
-import {
-  Box,
-  Card,
-  CardBody,
-  CardHeader,
-  Divider,
-  Heading,
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionPanel,
-  AccordionItem,
-} from "@chakra-ui/react";
 import useBoardsList from "../hooks/useBoardsList";
-import { useState } from "react";
-import BoardSearchInput from "./BoardSearchInput";
-import BoardLinks from "./BoardLinks";
+import { Card } from "@chakra-ui/react";
+import BoardsListAccordion from "./BoardsListAccordion";
+import BoardsListCard from "./BoardsListCard";
 import Loader from "./Loader";
 
 export default function BoardsList() {
   const { data, isLoading } = useBoardsList();
-  const [boardsList, setBoardsList] = useState(data?.boards);
-  const [searchValue, setSearchValue] = useState("");
-
-  function handleSearch(e) {
-    setSearchValue(e.target.value);
-    const query = e.target.value.toLowerCase();
-    const newList = data?.boards.filter((board) =>
-      board.name.toLowerCase().includes(query)
-    );
-    setBoardsList(newList);
-  }
 
   return (
     <>
@@ -45,46 +21,15 @@ export default function BoardsList() {
         display={{ base: "none", md: "flex" }}
       >
         {isLoading ? (
-          <Loader />
+          <Loader display={{ base: "none", md: "flex" }} />
         ) : (
-          <>
-            <Box
-              position={"sticky"}
-              top={0}
-              style={{ backdropFilter: "blur(20px)" }}
-              zIndex={100}
-            >
-              <CardHeader>
-                <Heading mb={3} size={"md"}>
-                  Boards
-                </Heading>
-                <BoardSearchInput value={searchValue} onChange={handleSearch} />
-              </CardHeader>
-              <Divider />
-            </Box>
-            <CardBody maxW={"full"}>
-              <BoardLinks filteredList={boardsList} dataList={data.boards} />
-            </CardBody>
-          </>
+          <BoardsListCard boards={data.boards} />
         )}
       </Card>
       {isLoading ? (
-        <Loader />
+        <Loader display={{ base: "flex", md: "none" }} />
       ) : (
-        <Accordion allowToggle display={{ base: "block", md: "none" }}>
-          <AccordionItem>
-            <AccordionButton>
-              <Box flex={1} textAlign={"left"}>
-                <Heading size={"md"}>Boards</Heading>
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel>
-              <BoardSearchInput onChange={handleSearch} value={searchValue} />
-              <BoardLinks filteredList={boardsList} dataList={data.boards} />
-            </AccordionPanel>
-          </AccordionItem>
-        </Accordion>
+        <BoardsListAccordion boards={data.boards} />
       )}
     </>
   );
