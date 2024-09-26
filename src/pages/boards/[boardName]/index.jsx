@@ -15,7 +15,7 @@ export default function Board() {
   const { boardName } = useParams();
 
   return (
-    <BoardsListProvider>
+    <BoardProvider boardName={boardName}>
       <Container>
         <Header>
           <Logo to="/home" />
@@ -31,22 +31,22 @@ export default function Board() {
           flexDir={{ base: "column", md: "row" }}
           w={"full"}
         >
-          <BoardsList />
-          <BoardProvider boardName={boardName}>
-            <Flex
-              flexDir={"column"}
-              gap={4}
-              flex={1}
-              as={Card}
-              variant={"unstyled"}
-            >
-              <BoardInfo variant="base" />
-              <BoardFeed />
-            </Flex>
-            <BoardInfo variant="xl" />
-          </BoardProvider>
+          <BoardsListProvider>
+            <BoardsList />
+          </BoardsListProvider>
+          <Flex
+            flexDir={"column"}
+            gap={4}
+            flex={1}
+            as={Card}
+            variant={"unstyled"}
+          >
+            <BoardInfo variant="base" />
+            <BoardFeed />
+          </Flex>
+          <BoardInfo variant="xl" />
         </Flex>
       </Container>
-    </BoardsListProvider>
+    </BoardProvider>
   );
 }

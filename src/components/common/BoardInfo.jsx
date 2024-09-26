@@ -2,10 +2,8 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Center,
   Divider,
   Heading,
-  Spinner,
   Stack,
   StackDivider,
 } from "@chakra-ui/react";
@@ -13,7 +11,7 @@ import { Link } from "react-router-dom";
 import { formatISOString } from "@/lib/utils";
 import StackData from "./StackData";
 
-export default function BoardInfo({ variant = "xl", board, isLoading }) {
+export default function BoardInfo({ variant = "xl", board }) {
   const variantStyles = {
     xl: {
       display: { base: "none", xl: "flex" },
@@ -35,36 +33,28 @@ export default function BoardInfo({ variant = "xl", board, isLoading }) {
 
   return (
     <Card size={"sm"} overflowY={"auto"} {...variantStyles[variant]}>
-      {isLoading ? (
-        <Center p={4} flex={1}>
-          <Spinner size={"lg"} />
-        </Center>
-      ) : (
-        <>
-          <CardHeader>
-            <Heading
-              size={"md"}
-              as={Link}
-              to={`/boards/${board.name}`}
-            >{`/${board.name}`}</Heading>
-          </CardHeader>
-          <Divider />
-          <CardBody>
-            <Stack divider={<StackDivider />}>
-              <StackData
-                name="Admin"
-                value={board.admin.username}
-                link={`/users/${board.admin.username}`}
-              />
-              <StackData name="Threads" value={board.threads.length} />
-              <StackData
-                name="Created On"
-                value={formatISOString(board.createdAt)}
-              />
-            </Stack>
-          </CardBody>
-        </>
-      )}
+      <CardHeader>
+        <Heading
+          size={"md"}
+          as={Link}
+          to={`/boards/${board.name}`}
+        >{`/${board.name}`}</Heading>
+      </CardHeader>
+      <Divider />
+      <CardBody>
+        <Stack divider={<StackDivider />}>
+          <StackData
+            name="Admin"
+            value={board.admin.username}
+            link={`/users/${board.admin.username}`}
+          />
+          <StackData name="Threads" value={board.threads.length} />
+          <StackData
+            name="Created On"
+            value={formatISOString(board.createdAt)}
+          />
+        </Stack>
+      </CardBody>
     </Card>
   );
 }

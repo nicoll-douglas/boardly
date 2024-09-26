@@ -14,38 +14,38 @@ export default function Thread() {
   const { threadId } = useParams();
 
   return (
-    <BoardsListProvider>
-      <Container>
-        <Header>
-          <Logo to="/home" />
-          <Spacer />
-          <ProfileLink mr={3} />
-          <ToggleThemeBtn />
-        </Header>
-        <Flex
-          flex={1}
-          pb={4}
-          px={4}
-          gap={4}
-          flexDir={{ base: "column", md: "row" }}
-          w={"full"}
-        >
+    <Container>
+      <Header>
+        <Logo to="/home" />
+        <Spacer />
+        <ProfileLink mr={3} />
+        <ToggleThemeBtn />
+      </Header>
+      <Flex
+        flex={1}
+        pb={4}
+        px={4}
+        gap={4}
+        flexDir={{ base: "column", md: "row" }}
+        w={"full"}
+      >
+        <BoardsListProvider>
           <BoardsList />
-          <ThreadProvider threadId={threadId}>
-            <Flex
-              flexDir={"column"}
-              gap={4}
-              flex={1}
-              as={Card}
-              variant={"unstyled"}
-            >
-              <BoardInfo variant="base" />
-              <ThreadData />
-            </Flex>
-            <BoardInfo variant="xl" />
-          </ThreadProvider>
-        </Flex>
-      </Container>
-    </BoardsListProvider>
+        </BoardsListProvider>
+        <ThreadProvider threadId={threadId}>
+          <Flex
+            flexDir={"column"}
+            gap={4}
+            flex={1}
+            as={Card}
+            variant={"unstyled"}
+          >
+            <BoardInfo variant="base" />
+            <ThreadData />
+          </Flex>
+          <BoardInfo variant="xl" />
+        </ThreadProvider>
+      </Flex>
+    </Container>
   );
 }

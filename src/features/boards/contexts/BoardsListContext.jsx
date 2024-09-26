@@ -10,6 +10,7 @@ function BoardsListProvider({ children }) {
       endpoint={"/api/boards"}
       Context={BoardsListContext}
       mockData={boardListData}
+      preventEarlyRender={false}
     >
       {children}
     </Protected>

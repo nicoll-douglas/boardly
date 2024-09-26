@@ -2,13 +2,7 @@ import { BoardInfo as BoardInfoCommon } from "@/components/common";
 import useThread from "../hooks/useThread";
 
 export default function BoardInfo({ variant }) {
-  const { data, isLoading } = useThread();
+  const { data } = useThread();
 
-  return (
-    <BoardInfoCommon
-      board={data?.thread.board}
-      isLoading={isLoading}
-      variant={variant}
-    />
-  );
+  return <BoardInfoCommon board={data.thread.board} variant={variant} />;
 }
