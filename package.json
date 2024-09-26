@@ -5,7 +5,7 @@
     "dev": "nodemon ./src/server.js",
     "fb:emulators": "firebase emulators:start",
     "mongo:clear": "node scripts/clearDB.script.js",
-    "seed": "SEED_DB=true node scripts/seed.script.js"
+    "seed": "node scripts/seed.script.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
