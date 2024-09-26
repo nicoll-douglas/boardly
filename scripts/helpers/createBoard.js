@@ -18,7 +18,7 @@ async function createBoard(quantity = 1) {
     await admin.save();
 
     const threads = await createThread(
-      faker.number.int({ min: 0, max: 20 }),
+      faker.number.int({ min: 0, max: 10 }),
       board._id
     );
     board.threads = threads.map((thread) => thread._id);

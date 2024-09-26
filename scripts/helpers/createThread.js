@@ -23,7 +23,7 @@ async function createThread(quantity = 1, boardId) {
     await author.save();
 
     const replies = await createReply(
-      faker.number.int({ min: 0, max: 20 }),
+      faker.number.int({ min: 0, max: 10 }),
       thread._id,
       true
     );
