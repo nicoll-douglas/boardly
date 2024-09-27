@@ -14,7 +14,7 @@ exports._get = async (req, res, next) => {
         select: "title body createdAt replies author",
         populate: {
           path: "author",
-          select: "username",
+          select: "username hasAvatar",
         },
       });
 

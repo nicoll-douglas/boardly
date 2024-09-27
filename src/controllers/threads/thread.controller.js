@@ -29,14 +29,14 @@ exports._get = async (req, res, next) => {
         populate: [
           {
             path: "author",
-            select: "username",
+            select: "username hasAvatar",
           },
           {
             path: "parent",
             select: "author body createdAt",
             populate: {
               path: "author",
-              select: "username",
+              select: "username hasAvatar",
             },
           },
         ],
