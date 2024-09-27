@@ -1,5 +1,5 @@
 import { Heading, Text } from "@chakra-ui/react";
-import { formatISOString } from "@/lib/utils";
+import { timeAgo } from "@/lib/utils";
 import AvatarCard from "./AvatarCard";
 
 export default function ThreadCard({ thread }) {
@@ -9,7 +9,7 @@ export default function ThreadCard({ thread }) {
         `${thread.replies.length} repl${
           thread.replies.length === 1 ? "y" : "ies"
         }`,
-        formatISOString(thread.createdAt),
+        timeAgo(thread.createdAt),
       ]}
       user={thread.author}
       mb={4}
