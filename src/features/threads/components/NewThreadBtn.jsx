@@ -2,8 +2,9 @@ import { Button, IconButton, useDisclosure } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { FormModal } from "@/components/common";
 import NewThreadForm from "./NewThreadForm";
+import { BoardsListProvider } from "@/features/boards";
 
-export default function NewThreadBtn({ btnStyle, ...rest }) {
+export default function NewThreadBtn({ btnStyle, currentBoardName, ...rest }) {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   if (btnStyle === "icon") {
@@ -16,7 +17,11 @@ export default function NewThreadBtn({ btnStyle, ...rest }) {
           onClick={onOpen}
           {...rest}
         />
-        <Modal onClose={onClose} isOpen={isOpen} />
+        <Modal
+          currentBoardName={currentBoardName}
+          onClose={onClose}
+          isOpen={isOpen}
+        />
       </>
     );
   }
@@ -32,15 +37,26 @@ export default function NewThreadBtn({ btnStyle, ...rest }) {
       >
         New Thread
       </Button>
-      <Modal onClose={onClose} isOpen={isOpen} />
+      <Modal
+        currentBoardName={currentBoardName}
+        onClose={onClose}
+        isOpen={isOpen}
+      />
     </>
   );
 }
 
-function Modal({ isOpen, onClose }) {
+function Modal({ isOpen, onClose, currentBoardName }) {
   return (
     <FormModal isOpen={isOpen} onClose={onClose} heading="New Thread" size="lg">
-      <NewThreadForm closeFormModal={onClose} />
+      {isOpen && (
+        <BoardsListProvider>
+          <NewThreadForm
+            closeFormModal={onClose}
+            currentBoardName={currentBoardName}
+          />
+        </BoardsListProvider>
+      )}
     </FormModal>
   );
 }

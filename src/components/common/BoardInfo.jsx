@@ -50,7 +50,10 @@ export default function BoardInfo({ variant = "xl", data, isLoading }) {
                 to={`/boards/${data.board.name}`}
               >{`/${data.board.name}`}</Heading>
               <Spacer />
-              <NewThreadBtn btnStyle={"text"} board={data.board.name} />
+              <NewThreadBtn
+                btnStyle={"text"}
+                currentBoardName={data.board.name}
+              />
             </Flex>
           </CardHeader>
           <Divider />

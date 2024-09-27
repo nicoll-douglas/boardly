@@ -2,23 +2,29 @@ import * as Ch from "@chakra-ui/react";
 import { LabelWithCounter } from "@/components/form";
 import { useForm } from "react-hook-form";
 import validation from "../data/threadValidation";
-import data from "@/features/boards/data/mockBoardListData";
 import createPost from "../services/createPost";
 import { useProtectedSubmission, useSubmitHandlers } from "@/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import { useBoardsList } from "@/features/boards";
 
-export default function NewThreadForm({ closeFormModal, board }) {
-  const defaultValues = {};
+export default function NewThreadForm({ closeFormModal, currentBoardName }) {
+  const { data } = useBoardsList();
+  const toast = Ch.useToast();
+
+  const defaultValues = {
+    title: "",
+    body: "",
+  };
   const { boardName } = useParams();
-  if (board) {
-    defaultValues.board = board;
+  if (currentBoardName) {
+    defaultValues.board = currentBoardName;
   } else if (boardName) {
     defaultValues.board = boardName;
   }
   const form = useForm({
     shouldUnregister: true,
-    ...(defaultValues.board ? { defaultValues } : {}),
+    defaultValues,
   });
   const values = form.watch();
 
@@ -31,6 +37,10 @@ export default function NewThreadForm({ closeFormModal, board }) {
       queryKey: [`GET /api/me/threads`],
     });
     closeFormModal();
+    toast({
+      title: "Successfully posted",
+      status: "success",
+    });
   });
   const onSubmit = useSubmitHandlers(
     async () => createPost(form.getValues()),
@@ -48,11 +58,15 @@ export default function NewThreadForm({ closeFormModal, board }) {
             : {})}
           {...form.register("board", validation.board)}
         >
-          {data.boards.map(({ name, _id }) => (
-            <option key={_id} value={name}>
-              {`/${name}`}
-            </option>
-          ))}
+          {data && (
+            <>
+              {data.boards.map(({ name, _id }) => (
+                <option key={_id} value={name}>
+                  {`/${name}`}
+                </option>
+              ))}
+            </>
+          )}
         </Ch.Select>
       </Ch.FormControl>
       <Ch.FormControl isRequired isInvalid={form.formState.errors.title} mb={6}>
