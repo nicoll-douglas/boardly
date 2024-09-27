@@ -6,3 +6,4 @@ export { default as useNotif } from "./useNotif";
 export { default as useScrollRestoration } from "./useScrollRestoration";
 export { default as useSearchList } from "./useSearchList";
 export { default as useShowDelay } from "./useShowDelay";
+export { default as usePriorityList } from "./usePriorityList";

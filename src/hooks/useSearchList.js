@@ -13,5 +13,5 @@ export default function useSearchList(list) {
     setFilteredList(newList);
   }
 
-  return { handleSearch, searchValue, filteredList, list };
+  return { handleSearch, searchValue, setSearchValue, filteredList, list };
 }
