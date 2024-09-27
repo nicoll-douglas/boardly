@@ -45,9 +45,8 @@ export default function EditableControls({
         {Number.isInteger(withLength) && (
           <Flex fontSize={"13px"}>
             <Text color={withLength > maxLength && errorTextColor}>
-              {withLength}
+              {maxLength - withLength}
             </Text>
-            /{maxLength}
           </Flex>
         )}
       </Flex>

@@ -9,7 +9,7 @@ export default function LabelWithCounter({ maxLength, length, children }) {
         mb={2}
         color={length > maxLength ? "red.400" : "inherit"}
       >
-        {length}
+        {maxLength - length}
       </Text>
     </Flex>
   );
