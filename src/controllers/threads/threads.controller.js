@@ -10,12 +10,16 @@ exports._post = async (req, res, next) => {
       return res.status(400)._end();
     }
 
-    await new Thread({
+    const newThread = await new Thread({
       title,
       body,
       board: boardDoc._id,
       author: user._id,
     }).save();
+    boardDoc.threads.push(newThread._id);
+    user.threads.push(newThread._id);
+    await boardDoc.save();
+    await user.save();
 
     return res.status(200)._end();
   } catch (err) {
