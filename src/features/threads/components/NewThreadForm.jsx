@@ -16,16 +16,19 @@ export default function NewThreadForm({ closeFormModal, board }) {
   } else if (boardName) {
     defaultValues.board = boardName;
   }
-
-  const queryClient = useQueryClient();
   const form = useForm({
     shouldUnregister: true,
     ...(defaultValues.board ? { defaultValues } : {}),
   });
   const values = form.watch();
+
+  const queryClient = useQueryClient();
   const handlers = useProtectedSubmission(() => {
     queryClient.invalidateQueries({
       queryKey: [`GET /api/boards/${form.getValues("board")}`],
+    });
+    queryClient.invalidateQueries({
+      queryKey: [`GET /api/me/threads`],
     });
     closeFormModal();
   });
