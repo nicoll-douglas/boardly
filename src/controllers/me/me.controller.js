@@ -2,7 +2,8 @@ const User = require("@/models/User");
 
 exports._get = (options = { me: true }) => {
   return async (req, res, next) => {
-    const query = options.me
+    const isMe = options.me;
+    const query = isMe
       ? { _id: req.user._id }
       : { username: req.params.username };
 
@@ -19,7 +20,11 @@ exports._get = (options = { me: true }) => {
 
       req.log("user to object");
       requestedUser = requestedUser.toObject();
-
+      if (!isMe) {
+        res._append("user", {
+          username: req.user.username,
+        });
+      }
       req.log("200, appended user, sent");
       return res.status(200)._append("profile", requestedUser)._end();
     } catch (err) {

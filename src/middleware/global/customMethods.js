@@ -38,16 +38,6 @@ function customMethods(req, res, next) {
     return res;
   };
 
-  res._authUser = (userDoc = req.user) => {
-    const user = userDoc.toObject();
-    res._append("user", {
-      _id: user._id,
-      username: user.username,
-      avatar: user.avatar,
-    });
-    return res;
-  };
-
   res._end = () => {
     req.log("sent");
     return res.json(body);

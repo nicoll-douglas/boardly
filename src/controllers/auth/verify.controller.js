@@ -14,7 +14,7 @@ module.exports = async (req, res, next) => {
       return res.status(401).end();
     }
 
-    if (user.verified) return res.status(200)._authUser(user)._end();
+    if (user.verified) return res.status(200)._end();
 
     const accessToken = issueAccessToken(user._id);
     const refreshToken = issueRefreshToken(user._id);
@@ -27,7 +27,6 @@ module.exports = async (req, res, next) => {
       .status(200)
       ._accessToken(accessToken)
       ._refreshToken(refreshToken)
-      ._authUser(user)
       ._end();
   } catch (err) {
     return next(err);
