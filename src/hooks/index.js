@@ -4,6 +4,5 @@ export { default as useQueryHandlers } from "./useQueryHandlers";
 export { default as useMaxLength } from "./useMaxLength";
 export { default as useNotif } from "./useNotif";
 export { default as useScrollRestoration } from "./useScrollRestoration";
-export { default as useSearchList } from "./useSearchList";
 export { default as useShowDelay } from "./useShowDelay";
 export { default as usePriorityList } from "./usePriorityList";

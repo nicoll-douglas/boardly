@@ -10,10 +10,10 @@ import {
 } from "@chakra-ui/react";
 import BoardSearchInput from "./BoardSearchInput";
 import BoardLinks from "./BoardLinks";
-import { useSearchList } from "@/hooks";
+import useSearchBoards from "../hooks/useSearchBoards";
 
 export default function BoardsListAccordion({ boards }) {
-  const { onChange, filteredList, value, list } = useSearchList(boards);
+  const { onChange, filteredList, value, list } = useSearchBoards(boards);
 
   return (
     <Accordion allowToggle display={{ base: "block", md: "none" }}>

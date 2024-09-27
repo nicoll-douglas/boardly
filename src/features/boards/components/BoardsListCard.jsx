@@ -1,10 +1,10 @@
 import { Box, CardBody, CardHeader, Divider, Heading } from "@chakra-ui/react";
 import BoardSearchInput from "./BoardSearchInput";
 import BoardLinks from "./BoardLinks";
-import { useSearchList } from "@/hooks";
+import useSearchBoards from "../hooks/useSearchBoards";
 
 export default function BoardsListCard({ boards }) {
-  const { onChange, filteredList, list, value } = useSearchList(boards);
+  const { onChange, filteredList, list, value } = useSearchBoards(boards);
 
   return (
     <>
