@@ -1,4 +1,4 @@
-require("dotenv").config({ override: true });
+require("dotenv").config({ path: ".env.development" });
 require("module-alias/register");
 
 const setupAndRun = require("./helpers/setupAndRun");

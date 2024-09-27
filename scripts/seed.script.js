@@ -1,5 +1,4 @@
-require("dotenv").config();
-require("dotenv").config({ path: "./scripts/.env.seed" });
+require("dotenv").config({ path: ".env.development" });
 require("module-alias/register");
 
 const { faker } = require("@faker-js/faker");

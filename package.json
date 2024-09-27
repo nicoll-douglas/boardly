@@ -4,7 +4,7 @@
     "start": "node ./src/server.js",
     "dev": "nodemon ./src/server.js",
     "fb:emulators": "firebase emulators:start",
-    "mongo:clear": "node scripts/clearDB.script.js",
+    "seed:clear": "node scripts/clearDB.script.js",
     "seed": "node scripts/seed.script.js"
   },
   "dependencies": {

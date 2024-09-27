@@ -1,4 +1,8 @@
-require("dotenv").config({ override: true });
+const dotenv = require("dotenv");
+
+dotenv.config();
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+
 const app = require("./app");
 const mongoose = require("mongoose");
 const logger = require("@/middleware/logging/logger");

@@ -1,4 +1,3 @@
-require("dotenv").config({ override: true });
 require("module-alias/register");
 require("./models");
 
