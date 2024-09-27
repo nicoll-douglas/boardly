@@ -4,8 +4,7 @@ import BoardLinks from "./BoardLinks";
 import { useSearchList } from "@/hooks";
 
 export default function BoardsListCard({ boards }) {
-  const { handleSearch, filteredList, list, searchValue } =
-    useSearchList(boards);
+  const { onChange, filteredList, list, value } = useSearchList(boards);
 
   return (
     <>
@@ -19,7 +18,7 @@ export default function BoardsListCard({ boards }) {
           <Heading mb={3} size={"md"}>
             Boards
           </Heading>
-          <BoardSearchInput value={searchValue} onChange={handleSearch} />
+          <BoardSearchInput value={value} onChange={onChange} />
         </CardHeader>
         <Divider />
       </Box>

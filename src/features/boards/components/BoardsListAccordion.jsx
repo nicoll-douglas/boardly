@@ -13,8 +13,7 @@ import BoardLinks from "./BoardLinks";
 import { useSearchList } from "@/hooks";
 
 export default function BoardsListAccordion({ boards }) {
-  const { handleSearch, filteredList, searchValue, list } =
-    useSearchList(boards);
+  const { onChange, filteredList, value, list } = useSearchList(boards);
 
   return (
     <Accordion allowToggle display={{ base: "block", md: "none" }}>
@@ -27,7 +26,7 @@ export default function BoardsListAccordion({ boards }) {
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel>
-            <BoardSearchInput onChange={handleSearch} value={searchValue} />
+            <BoardSearchInput onChange={onChange} value={value} />
             <BoardLinks filteredList={filteredList} dataList={list} />
           </AccordionPanel>
         </AccordionItem>
