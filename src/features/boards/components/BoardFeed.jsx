@@ -14,7 +14,6 @@ import {
 } from "@chakra-ui/react";
 import useBoard from "../hooks/useBoard";
 import { CompactViewBtn, useCompactView } from "@/features/ui/compactView";
-import { NewThreadBtn } from "@/features/threads";
 import creativeUrl from "@/assets/images/creative.svg";
 import { Spinner } from "@/components/common";
 
@@ -32,7 +31,6 @@ export default function BoardFeed() {
             <Flex alignItems={"center"} gap={2}>
               <Heading size={"md"}>Threads</Heading>
               <Spacer />
-              <NewThreadBtn />
               <CompactViewBtn />
             </Flex>
           </CardHeader>

@@ -7,11 +7,14 @@ import {
   Stack,
   StackDivider,
   SlideFade,
+  Spacer,
+  Flex,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { formatISOString } from "@/lib/utils";
 import StackData from "./StackData";
 import { Spinner } from "@/components/common";
+import { NewThreadBtn } from "@/features/threads";
 
 export default function BoardInfo({ variant = "xl", data, isLoading }) {
   const variantStyles = {
@@ -40,11 +43,15 @@ export default function BoardInfo({ variant = "xl", data, isLoading }) {
       ) : (
         <SlideFade in={!!data} offsetY={10}>
           <CardHeader>
-            <Heading
-              size={"md"}
-              as={Link}
-              to={`/boards/${data.board.name}`}
-            >{`/${data.board.name}`}</Heading>
+            <Flex alignItems={"center"}>
+              <Heading
+                size={"md"}
+                as={Link}
+                to={`/boards/${data.board.name}`}
+              >{`/${data.board.name}`}</Heading>
+              <Spacer />
+              <NewThreadBtn btnStyle={"text"} board={data.board.name} />
+            </Flex>
           </CardHeader>
           <Divider />
           <CardBody>
