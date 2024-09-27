@@ -31,7 +31,7 @@ describe("Profile", () => {
     cy.scope(key, "editable-input").should("not.be.disabled");
   });
 
-  it.only("Should structure requests correctly when submitting profile edit and set new edit", () => {
+  it("Should structure requests correctly when submitting profile edit and set new edit", () => {
     let requestCount = 0;
     cy.intercept("GET", "/api/me", (req) => {
       req.reply(responses[200][requestCount]);
