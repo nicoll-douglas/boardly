@@ -7,5 +7,5 @@ export default function useMaxLength(initial) {
     setLength(e.target.value.length);
   }
 
-  return { length, onChange };
+  return { length, onChange, setLength };
 }

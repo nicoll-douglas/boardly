@@ -3,7 +3,6 @@ import {
   Heading,
   CardBody,
   Text,
-  Textarea,
   VStack,
   Image,
   SlideFade,
@@ -13,6 +12,7 @@ import chatting2Url from "@/assets/images/chatting-2.svg";
 import ReplyCard from "./ReplyCard";
 import ThreadCard from "./ThreadCard";
 import { Spinner } from "@/components/common";
+import { ReplyTextarea } from "@/features/replies";
 
 export default function Thread() {
   const { data, isLoading } = useThread();
@@ -25,7 +25,7 @@ export default function Thread() {
         <SlideFade in={!!data} offsetY={10}>
           <CardBody>
             <ThreadCard thread={data.thread} />
-            <Textarea rows={4} placeholder="What are your thoughts?" />
+            <ReplyTextarea threadId={data.thread._id} />
             {data.thread.replies.length === 0 ? (
               <VStack gap={0} textAlign={"center"} mb={10}>
                 <Image src={chatting2Url} width={240} height={240} />
