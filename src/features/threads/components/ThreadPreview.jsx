@@ -19,7 +19,11 @@ import { noWrap } from "@/lib/constants";
 import DeleteThreadBtn from "./DeleteThreadBtn";
 import { useIsMe } from "@/features/user-profile";
 
-export default function ThreadPreview({ thread, isInProfile = true }) {
+export default function ThreadPreview({
+  thread,
+  isInProfile = true,
+  authorLabel,
+}) {
   const { createdAt, title, body, _id, board, author, replies } = thread;
   const { compactView } = useCompactView();
   const [isMe] = useIsMe();
@@ -30,6 +34,17 @@ export default function ThreadPreview({ thread, isInProfile = true }) {
         <CardHeader>
           <Flex w={"full"} gap={4}>
             <Box w={"calc(100% - 180px)"} flex={1}>
+              {authorLabel && (
+                <Collapse in={!compactView} animateOpacity>
+                  <CardLabel
+                    preText={"By"}
+                    linkText={`${author.username}`}
+                    link={`/users/${author.username}`}
+                    fontSize="md"
+                    pb="1px"
+                  />
+                </Collapse>
+              )}
               <CardLabel
                 preText={isInProfile ? "On" : "By"}
                 linkText={isInProfile ? `/${board.name}` : author.username}
