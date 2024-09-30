@@ -42,7 +42,7 @@ exports.getThread = async (req, res, next) => {
         ],
       });
 
-    if (!thread) return res.status(404)._end();
+    if (!thread || thread.deleted) return res.status(404)._end();
 
     thread = thread.toObject();
     return res.status(200)._append("thread", thread)._end();
