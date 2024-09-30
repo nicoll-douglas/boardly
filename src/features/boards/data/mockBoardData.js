@@ -18,6 +18,7 @@ function newThread() {
       _id: `user-${faker.string.uuid()}`,
       username: faker.internet.userName(),
     }, // author info
+    deleted: false,
   };
 }
 

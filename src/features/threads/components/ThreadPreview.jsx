@@ -16,10 +16,13 @@ import { timeAgo } from "@/lib/utils";
 import { useCompactView } from "@/features/ui/compactView";
 import { CardLabel, Tag } from "@/components/common";
 import { noWrap } from "@/lib/constants";
+import DeleteThreadBtn from "./DeleteThreadBtn";
+import { useIsMe } from "@/features/user-profile";
 
 export default function ThreadPreview({ thread, isInProfile = true }) {
   const { createdAt, title, body, _id, board, author, replies } = thread;
   const { compactView } = useCompactView();
+  const [isMe] = useIsMe();
 
   return (
     <LinkBox w={"full"}>
@@ -44,6 +47,9 @@ export default function ThreadPreview({ thread, isInProfile = true }) {
                 replies.length
               } repl${replies.length === 1 ? "y" : "ies"}`}</Tag>
               <Tag>{timeAgo(createdAt)}</Tag>
+              {isInProfile && isMe && (
+                <DeleteThreadBtn threadId={_id} boardName={board.name} />
+              )}
             </Flex>
           </Flex>
         </CardHeader>

@@ -13,9 +13,9 @@ export default function ReplyCard({ reply }) {
               postText="said:"
               link={`/users/${reply.parent.author.username}`}
               linkText={reply.parent.author.username}
-              fontSize="md"
+              fontSize="sm"
             />
-            <Text whiteSpace={"pre-wrap"} lineHeight={1.25}>
+            <Text fontSize={"sm"} whiteSpace={"pre-wrap"} lineHeight={1.25}>
               {reply.parent.body}
             </Text>
           </Box>

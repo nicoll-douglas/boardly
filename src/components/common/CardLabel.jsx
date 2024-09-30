@@ -11,7 +11,7 @@ export default function CardLabel({
 }) {
   return (
     <Flex gap={1} alignItems={"center"} maxW="full">
-      {preText && <Text>{preText}</Text>}
+      {preText && <Text {...props}>{preText}</Text>}
       <ButtonLink
         overlay={overlay}
         to={link}
@@ -21,12 +21,12 @@ export default function CardLabel({
       >
         {linkText}
       </ButtonLink>
-      {postText && <Text>{postText}</Text>}
+      {postText && <Text {...props}>{postText}</Text>}
     </Flex>
   );
 }
 
-function Text({ children }) {
+function Text({ children, ...rest }) {
   return (
     <ChakraText
       fontSize={"md"}
@@ -34,6 +34,7 @@ function Text({ children }) {
       display={"flex"}
       alignItems={"center"}
       justifyContent={"center"}
+      {...rest}
     >
       {children}
     </ChakraText>

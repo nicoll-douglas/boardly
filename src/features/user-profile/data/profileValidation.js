@@ -1,4 +1,3 @@
-import { regex } from "@/lib/constants";
 import config from "@/config";
 
 const validation = {
@@ -24,9 +23,6 @@ const validation = {
       value: 10,
       message: "Pronouns must be no longer than 10 characters",
     },
-    validate: (value) =>
-      regex.lax.noWhiteSpace.test(value) ||
-      "Pronouns contain an invalid character",
   },
   bio: {
     required: false,
@@ -34,8 +30,6 @@ const validation = {
       value: 100,
       message: "Bio must be no longer than 100 characters",
     },
-    validate: (value) =>
-      regex.lax.whiteSpace.test(value) || "Bio contains an invalid character",
   },
   avatar: {
     required: false,

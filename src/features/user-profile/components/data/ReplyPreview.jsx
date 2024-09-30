@@ -22,6 +22,8 @@ export default function ReplyPreview({ reply }) {
   const { data } = useProfile();
   const [isMe] = useIsMe();
 
+  const threadDeleted = reply.thread.deleted;
+
   return (
     <LinkBox w={"full"}>
       <Card size={"sm"} variant={"filled"}>
@@ -37,14 +39,23 @@ export default function ReplyPreview({ reply }) {
                   pb="1px"
                 />
               </Collapse>
-              <CardLabel
-                preText="In"
-                linkText={reply.thread.title}
-                link={`/threads/${reply.thread._id}`}
-                fontSize="md"
-                pb={"1px"}
-                overlay
-              />
+              {threadDeleted ? (
+                <Flex gap={1} alignItems={"center"}>
+                  In{" "}
+                  <Text fontStyle={"italic"} color={"gray.500"}>
+                    deleted thread
+                  </Text>
+                </Flex>
+              ) : (
+                <CardLabel
+                  preText="In"
+                  linkText={reply.thread.title}
+                  link={`/threads/${reply.thread._id}`}
+                  fontSize="md"
+                  pb={"1px"}
+                  overlay
+                />
+              )}
             </Box>
             <Flex gap={2} alignItems={"start"} minW={"fit-content"}>
               <Tag>{timeAgo(reply.createdAt)}</Tag>
@@ -53,20 +64,24 @@ export default function ReplyPreview({ reply }) {
         </CardHeader>
         <Divider />
         <CardBody>
-          <CardLabel
-            postText="said:"
-            linkText={`${parent.author.username}`}
-            link={`/users/${parent.author.username}`}
-            fontSize="md"
-          />
-          <Text
-            {...(compactView ? noWrap : {})}
-            whiteSpace={compactView ? "nowrap" : "pre-wrap"}
-            lineHeight={1.25}
-          >
-            {parent.body || parent.title}
-          </Text>
-          <Divider my={compactView ? 2 : 3} />
+          {parent.deleted || (
+            <>
+              <CardLabel
+                postText="said:"
+                linkText={`${parent.author.username}`}
+                link={`/users/${parent.author.username}`}
+                fontSize="md"
+              />
+              <Text
+                {...(compactView ? noWrap : {})}
+                whiteSpace={compactView ? "nowrap" : "pre-wrap"}
+                lineHeight={1.25}
+              >
+                {parent.body || parent.title}
+              </Text>
+              <Divider my={compactView ? 2 : 3} />
+            </>
+          )}
           {isMe ? (
             <Text size={"sm"} h={"21px"}>
               You replied:

@@ -57,6 +57,7 @@ const threadData = {
       avatar: faker.image.avatar(),
     },
     replies: getReplies(10),
+    deleted: false,
   },
   user: {
     username: "username123",

@@ -18,6 +18,7 @@ function newThread() {
     replies: Array.from({ length: faker.number.int({ min: 0, max: 10 }) }, () =>
       faker.string.uuid()
     ), // we may or may not want to know the id's of the replies
+    deleted: false,
   };
 }
 

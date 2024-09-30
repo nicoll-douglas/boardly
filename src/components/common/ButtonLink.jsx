@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function ButtonLink({ to, children, bold, overlay, ...rest }) {
   return overlay ? (
-    <LinkOverlay as={Link} to={to} maxW="full">
+    <LinkOverlay as={Link} to={to} maxW="calc(100% - 16px)">
       <ButtonLinkStyled bold={bold} {...rest}>
         {children}
       </ButtonLinkStyled>
