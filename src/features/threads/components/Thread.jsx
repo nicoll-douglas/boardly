@@ -13,12 +13,9 @@ import chatting2Url from "@/assets/images/chatting-2.svg";
 import ReplyCard from "./ReplyCard";
 import ThreadCard from "./ThreadCard";
 import { Spinner } from "@/components/common";
-import { NotFound } from "@/components/status-pages";
 
 export default function Thread() {
   const { data, isLoading } = useThread();
-
-  if (data?.thread.deleted) return <NotFound />;
 
   return (
     <Card variant={{ base: "unstyled", md: "outline" }} flex={1} size={"sm"}>
