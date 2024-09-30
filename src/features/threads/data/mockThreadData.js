@@ -14,6 +14,7 @@ class SimpleReply {
     this.body = faker.lorem.paragraphs({ min: 1, max: 2 }, "\n\n");
     this.createdAt = faker.date.recent({ days: 30 });
     this._id = `reply-${faker.string.uuid()}`;
+    this.deleted = Math.random() < 0.15;
   }
 }
 

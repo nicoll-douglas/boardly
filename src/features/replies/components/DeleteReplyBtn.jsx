@@ -16,27 +16,26 @@ import {
 import { useRef } from "react";
 import { useProtectedSubmission, useSubmitHandlers } from "@/hooks";
 import { useQueryClient } from "@tanstack/react-query";
-import deleteThread from "../services/deleteThread";
+import deleteReply from "../services/deleteReply";
 
-export default function DeleteThreadBtn({ threadId, boardName }) {
+export default function DeleteReplyBtn({ replyId, threadId }) {
   const queryClient = useQueryClient();
   const cancelRef = useRef();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handlers = useProtectedSubmission(() => {
-    queryClient.invalidateQueries({ queryKey: ["GET /api/me/threads"] });
     queryClient.invalidateQueries({ queryKey: ["GET /api/me/replies"] });
     queryClient.invalidateQueries({
-      queryKey: [`GET /api/boards/${boardName}`],
+      queryKey: [`GET /api/threads/${threadId}`],
     });
     onClose();
     toast({
       status: "success",
-      title: "Successfully deleted thread",
+      title: "Successfully deleted reply",
     });
   });
   const onSubmit = useSubmitHandlers(
-    async () => deleteThread(threadId),
+    async () => deleteReply(replyId),
     handlers
   );
 
@@ -53,10 +52,10 @@ export default function DeleteThreadBtn({ threadId, boardName }) {
       <AlertDialog isOpen={isOpen} onClose={onClose} size={"sm"}>
         <AlertDialogOverlay />
         <AlertDialogContent mx={4}>
-          <AlertDialogHeader>Delete Thread?</AlertDialogHeader>
+          <AlertDialogHeader>Delete Reply?</AlertDialogHeader>
           <AlertDialogCloseButton />
           <AlertDialogBody>
-            Are you sure you want to delete this thread? This action cannot be
+            Are you sure you want to delete this reply? This action cannot be
             undone.
           </AlertDialogBody>
           <AlertDialogFooter>

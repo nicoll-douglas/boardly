@@ -13,6 +13,7 @@ import { timeAgo } from "@/lib/utils";
 import { Tag, CardLabel } from "@/components/common";
 import { useCompactView } from "@/features/ui/compactView";
 import { noWrap } from "@/lib/constants";
+import { DeleteReplyBtn } from "@/features/replies";
 import useProfile from "../../hooks/useProfile";
 import useIsMe from "../../hooks/useIsMe";
 
@@ -41,7 +42,7 @@ export default function ReplyPreview({ reply }) {
               </Collapse>
               {threadDeleted ? (
                 <Flex gap={1} alignItems={"center"}>
-                  In{" "}
+                  In
                   <Text fontStyle={"italic"} color={"gray.500"}>
                     deleted thread
                   </Text>
@@ -59,12 +60,26 @@ export default function ReplyPreview({ reply }) {
             </Box>
             <Flex gap={2} alignItems={"start"} minW={"fit-content"}>
               <Tag>{timeAgo(reply.createdAt)}</Tag>
+              {isMe && (
+                <DeleteReplyBtn
+                  replyId={reply._id}
+                  threadId={reply.thread._id}
+                />
+              )}
             </Flex>
           </Flex>
         </CardHeader>
         <Divider />
         <CardBody>
-          {parent.deleted || (
+          {reply.parent?.deleted && (
+            <>
+              <Text fontStyle={"italic"} color={"gray.500"}>
+                Reply was deleted
+              </Text>
+              <Divider my={compactView ? 2 : 3} />
+            </>
+          )}
+          {!parent.deleted && (
             <>
               <CardLabel
                 postText="said:"

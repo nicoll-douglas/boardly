@@ -33,6 +33,7 @@ function newReply() {
               _id: `author-${faker.string.uuid()}`, // parent author id
               username: faker.internet.userName(), // parent author username
             },
+            deleted: true,
           }
         : null, // parent may be reply, otherwise it is implicitly the thread
   };
