@@ -6,6 +6,10 @@ const reply = new mongoose.Schema(
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     thread: { type: mongoose.Schema.Types.ObjectId, ref: "Thread" },
     parent: { type: mongoose.Schema.Types.ObjectId, ref: "Reply" },
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );

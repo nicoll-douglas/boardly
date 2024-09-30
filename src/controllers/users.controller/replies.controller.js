@@ -12,11 +12,11 @@ exports.getAllReplies = (options = { me: false }) => {
         .select("replies")
         .populate({
           path: "replies",
-          select: "body createdAt thread parent",
+          select: "body createdAt thread parent deleted",
           populate: [
             {
               path: "thread",
-              select: "title body board author createdAt",
+              select: "title body board author createdAt deleted",
               populate: [
                 {
                   path: "board",
@@ -30,7 +30,7 @@ exports.getAllReplies = (options = { me: false }) => {
             },
             {
               path: "parent",
-              select: "body author createdAt",
+              select: "body author createdAt deleted",
               populate: {
                 path: "author",
                 select: "username",

@@ -37,3 +37,21 @@ exports.createReply = async (req, res, next) => {
     return next(err);
   }
 };
+
+exports.deleteReply = async (req, res, next) => {
+  const user = req.user;
+  const { replyId } = req.params;
+
+  try {
+    const reply = await Reply.findById(replyId);
+    if (!reply.author.equals(user._id)) return res.status(401)._end();
+
+    reply.body = "";
+    reply.deleted = true;
+    await reply.save();
+
+    return res.status(200)._end();
+  } catch (err) {
+    return next(err);
+  }
+};

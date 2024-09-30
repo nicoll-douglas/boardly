@@ -25,7 +25,7 @@ exports.getThread = async (req, res, next) => {
       })
       .populate({
         path: "replies",
-        select: "author body createdAt parent",
+        select: "author body createdAt parent deleted",
         populate: [
           {
             path: "author",
@@ -33,7 +33,7 @@ exports.getThread = async (req, res, next) => {
           },
           {
             path: "parent",
-            select: "author body createdAt",
+            select: "author body createdAt deleted",
             populate: {
               path: "author",
               select: "username hasAvatar",
@@ -52,6 +52,7 @@ exports.getThread = async (req, res, next) => {
 };
 
 exports.deleteThread = async (req, res, next) => {
+  const user = req.user;
   const { threadId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(threadId)) {
@@ -60,6 +61,8 @@ exports.deleteThread = async (req, res, next) => {
 
   try {
     const thread = await Thread.findById(threadId);
+    if (!thread.author.equals(user._id)) return res.status(401)._end();
+
     thread.deleted = true;
     thread.title = "";
     thread.body = "";
