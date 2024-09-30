@@ -24,7 +24,7 @@ export default function DeleteThreadBtn({ threadId, boardName }) {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handlers = useProtectedSubmission(() => {
-    queryClient.invalidateQueries({ queryKey: ["GET /api/me"] });
+    queryClient.invalidateQueries({ queryKey: ["GET /api/me/threads"] });
     queryClient.invalidateQueries({
       queryKey: [`GET /api/boards/${boardName}`],
     });
