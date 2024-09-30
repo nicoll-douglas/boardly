@@ -1,6 +1,6 @@
 const bucket = require("@/services/firebaseStorage");
 
-exports._put = async (req, res, next) => {
+exports.updateAvatar = async (req, res, next) => {
   const user = req.user;
   const imgFile = req.file;
   if (!imgFile) return res.status(400)._end();
@@ -33,7 +33,7 @@ exports._put = async (req, res, next) => {
   stream.end(imgFile.buffer);
 };
 
-exports._delete = async (req, res, next) => {
+exports.deleteAvatar = async (req, res, next) => {
   const user = req.user;
   const file = bucket.file(`avatar-${req.user._id}`);
 

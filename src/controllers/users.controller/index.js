@@ -1,6 +1,11 @@
 const User = require("@/models/User");
 
-exports._get = (options = { me: true }) => {
+exports.avatar = require("./avatar.controller");
+exports.replies = require("./replies.controller");
+exports.boards = require("./boards.controller");
+exports.threads = require("./threads.controller");
+
+exports.getUser = (options = { me: false }) => {
   return async (req, res, next) => {
     const isMe = options.me;
     const query = isMe
@@ -33,7 +38,7 @@ exports._get = (options = { me: true }) => {
   };
 };
 
-exports._patch = async (req, res, next) => {
+exports.updateUser = async (req, res, next) => {
   const user = req.user;
   const { pronouns, age, bio } = req.body;
 

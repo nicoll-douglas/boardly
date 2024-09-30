@@ -1,6 +1,6 @@
 const { User } = require("@/models");
 
-exports._get = (options = { me: true }) => {
+exports.getAllBoards = (options = { me: false }) => {
   return async (req, res, next) => {
     const query = options.me
       ? { _id: req.user._id }

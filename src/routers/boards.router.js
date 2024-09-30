@@ -1,9 +1,8 @@
 const express = require("express");
-const boardsController = require("@/controllers/boards/boards.controller");
-const boardController = require("@/controllers/boards/board.controller");
+const { getBoard, getAllBoards } = require("@/controllers/boards.controller");
 
 const router = express.Router();
 
-router.get("/", boardsController._get).get("/:boardName", boardController._get);
+router.get("/", getAllBoards).get("/:boardName", getBoard);
 
 module.exports = router;

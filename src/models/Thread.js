@@ -7,6 +7,10 @@ const thread = new mongoose.Schema(
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     replies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reply" }],
     board: { type: mongoose.Schema.Types.ObjectId, ref: "Board" },
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );

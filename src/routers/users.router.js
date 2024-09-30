@@ -1,21 +1,12 @@
 const express = require("express");
-const userController = require("@/controllers/users/user.controller");
+const userController = require("@/controllers/users.controller");
 
 const router = express.Router();
 
 router
-  .get("/:username", userController._get)
-  .get(
-    "/:username/boards",
-    require("@/controllers/users/boards.controller")._get
-  )
-  .get(
-    "/:username/replies",
-    require("@/controllers/users/replies.controller")._get
-  )
-  .get(
-    "/:username/threads",
-    require("@/controllers/users/threads.controller")._get
-  );
+  .get("/:username", userController.getUser())
+  .get("/:username/boards", userController.boards.getAllBoards())
+  .get("/:username/replies", userController.replies.getAllReplies())
+  .get("/:username/threads", userController.threads.getAllThreads());
 
 module.exports = router;

@@ -3,6 +3,13 @@ const validate = require("@/middleware/validation/validate");
 const limiter = require("@/middleware/common/limiter");
 const authSchemas = require("@/validation/auth.schema");
 const verifyAuth = require("@/middleware/auth/verifyAuth");
+const {
+  handleForgotPwd,
+  handleLogin,
+  handleRegister,
+  handleEmailVerification,
+  handleResetPwd,
+} = require("@/controllers/auth.controller");
 
 const router = express.Router();
 
@@ -11,32 +18,22 @@ router
     "/register",
     limiter(),
     validate.body(authSchemas.register),
-    require("@/controllers/auth/register.controller")
+    handleRegister
   )
-  .post(
-    "/login",
-    limiter(),
-    validate.body(authSchemas.login),
-    require("@/controllers/auth/login.controller")
-  )
-  .post(
-    "/verify",
-    limiter(),
-    validate.auth(),
-    require("@/controllers/auth/verify.controller")
-  )
+  .post("/login", limiter(), validate.body(authSchemas.login), handleLogin)
+  .post("/verify", limiter(), validate.auth(), handleEmailVerification)
   .post(
     "/forgot",
     limiter(),
     validate.body(authSchemas.forgot),
-    require("@/controllers/auth/forgot.controller")
+    handleForgotPwd
   )
   .post(
     "/reset",
     limiter(),
     validate.auth(),
     validate.body(authSchemas.reset),
-    require("@/controllers/auth/reset.controller")
+    handleResetPwd
   )
   .get("/refresh", limiter(100, 0.6), verifyAuth, (req, res) =>
     res.status(200)._end()

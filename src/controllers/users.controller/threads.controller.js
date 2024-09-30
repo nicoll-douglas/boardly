@@ -1,6 +1,6 @@
 const User = require("@/models/User");
 
-exports._get = (options = { me: true }) => {
+exports.getAllThreads = (options = { me: false }) => {
   return async (req, res, next) => {
     const query = options.me
       ? { _id: req.user._id }
@@ -12,7 +12,7 @@ exports._get = (options = { me: true }) => {
         .select("threads")
         .populate({
           path: "threads",
-          select: "title body createdAt board replies",
+          select: "title body createdAt board replies deleted",
           populate: {
             path: "board",
             select: "name",
