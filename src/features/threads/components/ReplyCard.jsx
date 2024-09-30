@@ -6,7 +6,12 @@ import AvatarCard from "./AvatarCard";
 export default function ReplyCard({ reply }) {
   return (
     <SlideFade in={true}>
-      <AvatarCard tagValues={[timeAgo(reply.createdAt)]} user={reply.author}>
+      <AvatarCard
+        tagValues={[timeAgo(reply.createdAt)]}
+        user={reply.author}
+        reply={reply}
+        replyBtn
+      >
         {reply.parent && (
           <>
             {reply.parent.deleted ? (

@@ -6,6 +6,7 @@ import {
   ModalOverlay,
   ModalCloseButton,
   Heading,
+  Divider,
 } from "@chakra-ui/react";
 
 export default function FormModal({
@@ -31,6 +32,7 @@ export default function FormModal({
             {heading}
           </Heading>
         </ModalHeader>
+        <Divider />
         <ModalBody pb={6} px={{ base: 4, sm: 6 }}>
           {children}
         </ModalBody>

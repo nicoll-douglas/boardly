@@ -10,13 +10,18 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import createReply from "../services/createReply";
 
-export default function ReplyTextarea({ threadId }) {
+export default function ReplyTextarea({
+  threadId,
+  parentId = null,
+  onSuccess,
+}) {
   const queryClient = useQueryClient();
   const toast = Ch.useToast();
   const form = useForm();
   const { onChange, ...rest } = form.register("body", replyValidation);
   const { length, onChange: onLengthChange, setLength } = useMaxLength();
   const handlers = useProtectedSubmission(() => {
+    if (onSuccess) onSuccess();
     queryClient.invalidateQueries({ queryKey: ["GET /api/me/replies"] });
     queryClient.invalidateQueries({
       queryKey: [`GET /api/threads/${threadId}`],
@@ -29,7 +34,7 @@ export default function ReplyTextarea({ threadId }) {
     });
   });
   const onSubmit = useSubmitHandlers(
-    async () => createReply(form.getValues("body"), threadId, null),
+    async () => createReply(form.getValues("body"), threadId, parentId),
     handlers
   );
 

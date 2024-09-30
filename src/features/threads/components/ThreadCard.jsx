@@ -12,7 +12,7 @@ export default function ThreadCard({ thread }) {
         timeAgo(thread.createdAt),
       ]}
       user={thread.author}
-      mb={4}
+      mb={2}
     >
       <Heading size={"md"}>{thread.title}</Heading>
       {thread.body && (

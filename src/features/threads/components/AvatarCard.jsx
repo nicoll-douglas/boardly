@@ -9,22 +9,27 @@ import {
 } from "@chakra-ui/react";
 import { Tag, ButtonLink } from "@/components/common";
 import { Link } from "react-router-dom";
+import { ReplyBtn } from "@/features/replies";
 
-export default function AvatarCard({ tagValues, user, children, ...props }) {
+export default function AvatarCard({
+  tagValues,
+  user,
+  children,
+  replyBtn,
+  reply,
+  ...props
+}) {
   return (
     <Card variant={"filled"} size={"sm"} w={"full"} {...props}>
-      {tagValues && (
-        <>
-          <CardHeader>
-            <Flex gap={2}>
-              {tagValues.map((value, index) => (
-                <Tag key={index}>{value}</Tag>
-              ))}
-            </Flex>
-          </CardHeader>
-          <Divider />
-        </>
-      )}
+      <CardHeader>
+        <Flex gap={2}>
+          {tagValues?.map((value, index) => (
+            <Tag key={index}>{value}</Tag>
+          ))}
+          {replyBtn && <ReplyBtn ml="auto" reply={reply} />}
+        </Flex>
+      </CardHeader>
+      <Divider />
       <CardBody>
         <Flex gap={{ base: 2, sm: 3 }} flexDir={{ base: "column", sm: "row" }}>
           <Flex
