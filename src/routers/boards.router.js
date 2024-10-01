@@ -4,16 +4,21 @@ const {
   getAllBoards,
   createBoard,
   deleteBoard,
+  updateBoard,
 } = require("@/controllers/boards.controller");
 const validate = require("@/middleware/validation/validate");
-const boardSchema = require("@/validation/board.schema");
+const {
+  newBoardSchema,
+  updateBoardSchema,
+} = require("@/validation/board.schema");
 
 const router = express.Router();
 
 router
   .get("/", getAllBoards)
   .get("/:boardName", getBoard)
-  .post("/", validate.body(boardSchema), createBoard)
-  .delete("/:boardId", deleteBoard);
+  .post("/", validate.body(newBoardSchema), createBoard)
+  .delete("/:boardId", deleteBoard)
+  .patch("/:boardId", validate.body(updateBoardSchema), updateBoard);
 
 module.exports = router;

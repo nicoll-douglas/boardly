@@ -1,9 +1,18 @@
 const Joi = require("joi");
 const regex = require("@/lib/constants/regex");
 
-const boardSchema = Joi.object({
+const rules = Joi.string().max(100).allow("").optional();
+
+const newBoardSchema = Joi.object({
   name: Joi.string().max(20).pattern(regex.restricted).required(),
-  rules: Joi.string().max(100).allow("").optional(),
+  rules,
 }).unknown();
 
-module.exports = boardSchema;
+const updateBoardSchema = Joi.object({
+  rules,
+}).unknown();
+
+module.exports = {
+  newBoardSchema,
+  updateBoardSchema,
+};

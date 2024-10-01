@@ -96,3 +96,26 @@ exports.deleteBoard = async (req, res, next) => {
     return next(err);
   }
 };
+
+exports.updateBoard = async (req, res, next) => {
+  const user = req.user;
+  const { boardId } = req.params;
+  const { rules } = req.body;
+
+  try {
+    if (!mongoose.Types.ObjectId.isValid(boardId)) {
+      return res.status(404)._end();
+    }
+
+    const board = await Board.findOne({ _id: board, deleted: false });
+    if (!board) return res.status(400)._end();
+    if (!board.admin.equals(user._id)) return res.status(401)._end();
+
+    board.rules = rules;
+    await board.save();
+
+    return res.status(200)._end();
+  } catch (err) {
+    return next(err);
+  }
+};
