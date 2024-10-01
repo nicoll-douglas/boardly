@@ -6,19 +6,15 @@ import {
   FormLabel,
   Input,
   ListItem,
-  Textarea,
   UnorderedList,
 } from "@chakra-ui/react";
 import { helperText } from "@/lib/constants";
 import validation from "../data/boardValidation";
-import { LabelWithCounter } from "@/components/form";
-import { useMaxLength } from "@/hooks";
 import useCreateBoard from "../hooks/useCreateBoard";
+import RulesFormControl from "./RulesFormControl";
 
 export default function NewBoardForm({ onClose }) {
   const { form, onSubmit } = useCreateBoard(onClose);
-  const { onChange, ...rest } = form.register("rules", validation.rules);
-  const { length, onChange: onLengthChange } = useMaxLength();
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -41,24 +37,7 @@ export default function NewBoardForm({ onClose }) {
           </UnorderedList>
         </FormHelperText>
       </FormControl>
-      <FormControl isInvalid={form.formState.errors.rules} mb={6}>
-        <LabelWithCounter
-          length={length}
-          maxLength={validation.rules.maxLength.value}
-        >
-          Rules
-        </LabelWithCounter>
-        <Textarea
-          resize={"none"}
-          placeholder="Enter rules..."
-          rows={8}
-          onChange={(e) => {
-            onChange(e);
-            onLengthChange(e);
-          }}
-          {...rest}
-        />
-      </FormControl>
+      <RulesFormControl form={form} initialLength={0} />
       <Button w={"full"} type="submit">
         Create
       </Button>
