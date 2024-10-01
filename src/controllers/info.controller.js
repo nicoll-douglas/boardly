@@ -2,10 +2,10 @@ const { Board, Thread, User, Reply } = require("@/models");
 
 exports.getInfo = async (req, res, next) => {
   try {
-    const boardCount = await Board.countDocuments({});
-    const threadCount = await Thread.countDocuments({});
-    const userCount = await User.countDocuments({});
-    const replyCount = await Reply.countDocuments({});
+    const boardCount = await Board.countDocuments({ deleted: false });
+    const threadCount = await Thread.countDocuments({ deleted: false });
+    const userCount = await User.countDocuments({ deleted: false });
+    const replyCount = await Reply.countDocuments({ deleted: false });
 
     return res
       .status(200)
