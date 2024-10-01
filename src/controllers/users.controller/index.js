@@ -14,9 +14,22 @@ exports.getUser = (options = { me: false }) => {
 
     req.log("query for requested user profile");
     try {
-      let requestedUser = await User.findOne(query).select(
-        "username age bio hasAvatar pronouns createdAt threads boards replies deleted"
-      );
+      let requestedUser = await User.findOne(query)
+        .select(
+          "username age bio hasAvatar pronouns createdAt threads boards replies deleted"
+        )
+        .populate({
+          path: "threads",
+          select: "deleted",
+        })
+        .populate({
+          path: "replies",
+          select: "deleted",
+        })
+        .populate({
+          path: "boards",
+          select: "deleted",
+        });
 
       if (!requestedUser || requestedUser.deleted) {
         req.log("not found, 404, sent");
@@ -25,6 +38,16 @@ exports.getUser = (options = { me: false }) => {
 
       req.log("user to object");
       requestedUser = requestedUser.toObject();
+      requestedUser.boards = requestedUser.boards.filter(
+        (board) => !board.deleted
+      );
+      requestedUser.replies = requestedUser.replies.filter(
+        (reply) => !reply.deleted
+      );
+      requestedUser.threads = requestedUser.threads.filter(
+        (thread) => !thread.deleted
+      );
+
       if (!isMe) {
         res._append("user", {
           username: req.user.username,
