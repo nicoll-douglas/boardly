@@ -11,7 +11,7 @@ exports.createReply = async (req, res, next) => {
       return res.status(400)._end();
 
     const parentThread = await Thread.findOne({ _id: thread, deleted: false })
-      .select("board")
+      .select("board replies")
       .populate({
         path: "board",
         select: "deleted",
