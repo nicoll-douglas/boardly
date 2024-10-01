@@ -81,10 +81,8 @@ exports.createThread = async (req, res, next) => {
   const { board, title, body } = req.body;
 
   try {
-    const boardDoc = await Board.findOne({ name: board });
-    if (!boardDoc) {
-      return res.status(400)._end();
-    }
+    const boardDoc = await Board.findOne({ name: board, deleted: false });
+    if (!boardDoc) return res.status(404)._end();
 
     const newThread = await new Thread({
       title,
@@ -92,8 +90,10 @@ exports.createThread = async (req, res, next) => {
       board: boardDoc._id,
       author: user._id,
     }).save();
+
     boardDoc.threads.push(newThread._id);
     user.threads.push(newThread._id);
+
     await boardDoc.save();
     await user.save();
 
@@ -107,7 +107,7 @@ exports.getLatestThreads = async (req, res, next) => {
   try {
     let threads = await Thread.find({})
       .sort({ createdAt: -1 })
-      .limit(50)
+      .limit(25)
       .select("title body createdAt board author deleted replies deleted")
       .populate({
         path: "board",
