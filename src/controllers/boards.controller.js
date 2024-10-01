@@ -1,25 +1,28 @@
 const { Board } = require("@/models");
+const mongoose = require("mongoose");
 
 exports.getBoard = async (req, res, next) => {
   const { boardName } = req.params;
   try {
     let board = await Board.findOne({ name: boardName })
-      .select("name threads createdAt admin rules")
+      .select("name threads createdAt admin rules deleted")
       .populate({
         path: "admin",
-        select: "username",
+        select: "username deleted",
       })
       .populate({
         path: "threads",
         select: "title body createdAt replies author deleted",
         populate: {
           path: "author",
-          select: "username hasAvatar",
+          select: "username hasAvatar deleted",
         },
       });
 
-    if (!board) return res.status(404)._end();
+    if (!board || board.deleted) return res.status(404)._end();
+
     board = board.toObject();
+    board.threads = board.threads.filter((thread) => !thread.deleted);
     return res.status(200)._append("board", board)._end();
   } catch (err) {
     return next(err);
@@ -28,11 +31,17 @@ exports.getBoard = async (req, res, next) => {
 
 exports.getAllBoards = async (req, res, next) => {
   try {
-    let boards = await Board.find().select("admin createdAt name").populate({
-      path: "admin",
-      select: "username",
-    });
-    boards = boards.map((board) => board.toObject());
+    let boards = await Board.find()
+      .select("admin createdAt name deleted")
+      .populate({
+        path: "admin",
+        select: "username deleted",
+      });
+
+    boards = boards
+      .map((board) => board.toObject())
+      .filter((board) => !board.deleted);
+
     return res.status(200)._append("boards", boards)._end();
   } catch (err) {
     return next(err);
@@ -62,6 +71,10 @@ exports.createBoard = async (req, res, next) => {
 exports.deleteBoard = async (req, res, next) => {
   const user = req.user;
   const { boardId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(boardId)) {
+    return res.status(404)._end();
+  }
 
   try {
     const board = await Board.findById(boardId);

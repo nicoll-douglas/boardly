@@ -9,7 +9,7 @@ exports.getAllReplies = (options = { me: false }) => {
     req.log("query for user");
     try {
       let user = await User.findOne(query)
-        .select("replies")
+        .select("replies deleted")
         .populate({
           path: "replies",
           select: "body createdAt thread parent deleted",
@@ -20,11 +20,11 @@ exports.getAllReplies = (options = { me: false }) => {
               populate: [
                 {
                   path: "board",
-                  select: "name",
+                  select: "name deleted",
                 },
                 {
                   path: "author",
-                  select: "username",
+                  select: "username deleted",
                 },
               ],
             },
@@ -33,13 +33,13 @@ exports.getAllReplies = (options = { me: false }) => {
               select: "body author createdAt deleted",
               populate: {
                 path: "author",
-                select: "username",
+                select: "username deleted",
               },
             },
           ],
         });
 
-      if (!user) {
+      if (!user || user.deleted) {
         req.log("not found, 404, sent");
         return res.status(404).end();
       }
@@ -48,7 +48,13 @@ exports.getAllReplies = (options = { me: false }) => {
       user = user.toObject();
 
       req.log("200, appended replies, sent");
-      return res.status(200)._append("replies", user.replies)._end();
+      return res
+        .status(200)
+        ._append(
+          "replies",
+          user.replies.filter((reply) => !reply.deleted)
+        )
+        ._end();
     } catch (err) {
       next(err);
     }

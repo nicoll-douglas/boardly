@@ -43,7 +43,12 @@ exports.deleteReply = async (req, res, next) => {
   const { replyId } = req.params;
 
   try {
+    if (!mongoose.Types.ObjectId.isValid(replyId)) {
+      return res.status(404)._end();
+    }
+
     const reply = await Reply.findById(replyId);
+    if (!reply) return res.status(404)._end();
     if (!reply.author.equals(user._id)) return res.status(401)._end();
 
     reply.body = "";

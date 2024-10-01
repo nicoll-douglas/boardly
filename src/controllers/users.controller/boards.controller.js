@@ -8,12 +8,12 @@ exports.getAllBoards = (options = { me: false }) => {
 
     req.log("query for user");
     try {
-      let user = await User.findOne(query).select("boards").populate({
+      let user = await User.findOne(query).select("boards deleted").populate({
         path: "boards",
-        select: "name createdAt rules",
+        select: "name createdAt rules deleted",
       });
 
-      if (!user) {
+      if (!user || user.deleted) {
         req.log("not found, 404, sent");
         return res.status(404).end();
       }
@@ -22,7 +22,13 @@ exports.getAllBoards = (options = { me: false }) => {
       user = user.toObject();
 
       req.log("200, appended boards, sent");
-      return res.status(200)._append("boards", user.boards)._end();
+      return res
+        .status(200)
+        ._append(
+          "boards",
+          user.boards.filter((board) => !board.deleted)
+        )
+        ._end();
     } catch (err) {
       next(err);
     }

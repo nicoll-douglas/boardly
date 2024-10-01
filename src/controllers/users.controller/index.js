@@ -15,10 +15,10 @@ exports.getUser = (options = { me: false }) => {
     req.log("query for requested user profile");
     try {
       let requestedUser = await User.findOne(query).select(
-        "username age bio hasAvatar pronouns createdAt threads boards replies"
+        "username age bio hasAvatar pronouns createdAt threads boards replies deleted"
       );
 
-      if (!requestedUser) {
+      if (!requestedUser || requestedUser.deleted) {
         req.log("not found, 404, sent");
         return res.status(404)._end();
       }

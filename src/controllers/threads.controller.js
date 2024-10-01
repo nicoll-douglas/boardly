@@ -13,15 +13,15 @@ exports.getThread = async (req, res, next) => {
       .select("title body createdAt board author replies deleted")
       .populate({
         path: "board",
-        select: "name admin threads createdAt rules",
+        select: "name admin threads createdAt rules deleted",
         populate: {
           path: "admin",
-          select: "username",
+          select: "username deleted",
         },
       })
       .populate({
         path: "author",
-        select: "username hasAvatar",
+        select: "username hasAvatar deleted",
       })
       .populate({
         path: "replies",
@@ -29,14 +29,14 @@ exports.getThread = async (req, res, next) => {
         populate: [
           {
             path: "author",
-            select: "username hasAvatar",
+            select: "username hasAvatar deleted",
           },
           {
             path: "parent",
             select: "author body createdAt deleted",
             populate: {
               path: "author",
-              select: "username hasAvatar",
+              select: "username hasAvatar deleted",
             },
           },
         ],
@@ -45,6 +45,7 @@ exports.getThread = async (req, res, next) => {
     if (!thread || thread.deleted) return res.status(404)._end();
 
     thread = thread.toObject();
+    thread.replies = thread.replies.filter((reply) => !reply.deleted);
     return res.status(200)._append("thread", thread)._end();
   } catch (err) {
     return next(err);
@@ -106,7 +107,7 @@ exports.getLatestThreads = async (req, res, next) => {
     let threads = await Thread.find({})
       .sort({ createdAt: -1 })
       .limit(50)
-      .select("title body createdAt board author deleted replies")
+      .select("title body createdAt board author deleted replies deleted")
       .populate({
         path: "board",
         select: "name",
@@ -116,7 +117,9 @@ exports.getLatestThreads = async (req, res, next) => {
         select: "username hasAvatar",
       });
 
-    threads = threads.map((thread) => thread.toObject());
+    threads = threads
+      .map((thread) => thread.toObject())
+      .filter((thread) => !thread.deleted);
     return res.status(200)._append("threads", threads)._end();
   } catch (err) {
     return next(err);

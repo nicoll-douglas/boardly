@@ -33,6 +33,10 @@ const user = new mongoose.Schema(
     threads: [{ type: mongoose.Schema.Types.ObjectId, ref: "Thread" }],
     replies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reply" }],
     boards: [{ type: mongoose.Schema.Types.ObjectId, ref: "Board" }],
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
