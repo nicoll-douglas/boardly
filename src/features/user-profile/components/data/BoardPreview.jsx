@@ -12,6 +12,7 @@ import { EditIcon } from "@chakra-ui/icons";
 import { noWrap } from "@/lib/constants";
 import { useCompactView } from "@/features/ui/compactView";
 import useIsMe from "../../hooks/useIsMe";
+import { DeleteBoardBtn } from "@/features/boards";
 
 export default function BoardPreview({ board }) {
   const { compactView } = useCompactView();
@@ -24,7 +25,7 @@ export default function BoardPreview({ board }) {
           <Flex justifyContent={"space-between"} alignItems={"center"} gap={4}>
             <LinkOverlay
               as={Link}
-              to={`/boards/${board._id}`}
+              to={`/boards/${board.name}`}
               maxW={{ base: "calc(100% - 40px)", sm: "calc(100% - 165px)" }}
             >
               <Heading size={{ base: "sm", md: "md" }} {...noWrap}>
@@ -34,6 +35,7 @@ export default function BoardPreview({ board }) {
             {isMe && (
               <Flex gap={2} minW={"fit-content"}>
                 <IconButton icon={<EditIcon />} variant={"ghost"} size={"xs"} />
+                <DeleteBoardBtn board={board} />
               </Flex>
             )}
           </Flex>
