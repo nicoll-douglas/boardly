@@ -2,7 +2,7 @@ import { safeFetch } from "@/lib/utils";
 
 export default async function getProtectedData(endpoint) {
   const fetchFn = async () =>
-    fetch(`${import.meta.env.API_URL}${endpoint}`, {
+    fetch(`${import.meta.env.VITE_API_URL}${endpoint}`, {
       method: "GET",
       credentials: "include",
     });

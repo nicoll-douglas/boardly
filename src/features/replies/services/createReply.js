@@ -1,5 +1,5 @@
 export default async function createReply(replyBody, threadId, parentId) {
-  return fetch(`${import.meta.env.API_URL}/api/replies`, {
+  return fetch(`${import.meta.env.VITE_API_URL}/api/replies`, {
     method: "POST",
     credentials: "include",
     headers: {

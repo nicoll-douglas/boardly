@@ -1,5 +1,5 @@
 export default async function createBoard(formValues) {
-  return fetch(`${import.meta.env.API_URL}/api/boards`, {
+  return fetch(`${import.meta.env.VITE_API_URL}/api/boards`, {
     method: "POST",
     credentials: "include",
     headers: {

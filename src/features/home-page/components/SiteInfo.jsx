@@ -62,7 +62,7 @@ export default function SiteInfo({ variant = "xl" }) {
               <StackData name="Replies" value={data.site.replyCount} />
               <StackData
                 name="Created On"
-                value={formatISOString(data.site.createdAt)}
+                value={formatISOString(import.meta.env.VITE_CREATED_AT)}
               />
             </Stack>
           </CardBody>
