@@ -35,7 +35,15 @@ export default function useNotif() {
     toast({
       status: "error",
       title: "Not Found",
-      description: "The requested resource could not be found or was deleted.",
+      description:
+        "The requested resources or associated resources could not be found or were deleted.",
+    });
+
+  const badRequest = () =>
+    toast({
+      status: "error",
+      title: "Bad Request",
+      description: "The request was malformed and could not be processed.",
     });
 
   const unauthorized = () =>
@@ -59,6 +67,7 @@ export default function useNotif() {
     unauthorized,
     genericError,
     notFound,
+    badRequest,
     toast,
   };
 }

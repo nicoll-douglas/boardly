@@ -23,6 +23,7 @@ export default function useProtectedSubmission(onSuccess) {
       //   if (onSuccess) onSuccess();
       // },
       404: () => notifs.notFound(),
+      400: () => notifs.badRequest(),
       200: () => {
         if (onSuccess) onSuccess();
       },
