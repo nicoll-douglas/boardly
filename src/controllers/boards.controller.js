@@ -38,3 +38,23 @@ exports.getAllBoards = async (req, res, next) => {
     return next(err);
   }
 };
+
+exports.createBoard = async (req, res, next) => {
+  const user = req.user;
+  const { name, rules } = req.body;
+
+  try {
+    const duplicateName = await Board.findOne({ name });
+    if (duplicateName) {
+      return res.status(409)._feedback(["name", "This board already exists"]);
+    }
+
+    const board = await new Board({ name, rules, admin: user._id }).save();
+    user.boards.push(board._id);
+    await user.save();
+
+    return res.status(200)._end();
+  } catch (err) {
+    return next(err);
+  }
+};
