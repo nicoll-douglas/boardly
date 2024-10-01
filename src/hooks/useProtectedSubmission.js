@@ -22,6 +22,7 @@ export default function useProtectedSubmission(onSuccess) {
       //   setCurrentUser(user);
       //   if (onSuccess) onSuccess();
       // },
+      404: () => notifs.notFound(),
       200: () => {
         if (onSuccess) onSuccess();
       },

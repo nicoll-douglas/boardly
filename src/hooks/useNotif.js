@@ -31,6 +31,13 @@ export default function useNotif() {
       title: "Too many requests",
     });
 
+  const notFound = () =>
+    toast({
+      status: "error",
+      title: "Not Found",
+      description: "The requested resource could not be found.",
+    });
+
   const unauthorized = () =>
     toast({
       status: "warning",
@@ -51,6 +58,7 @@ export default function useNotif() {
     tooMany,
     unauthorized,
     genericError,
+    notFound,
     toast,
   };
 }
