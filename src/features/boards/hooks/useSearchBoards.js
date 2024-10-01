@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function useSearchBoards(list) {
   const [filteredList, setFilteredList] = useState(list);
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setFilteredList(list);
+    setValue("");
+  }, [list]);
 
   function onChange(e) {
     setValue(e.target.value);
