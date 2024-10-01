@@ -100,3 +100,25 @@ exports.createThread = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getLatestThreads = async (req, res, next) => {
+  try {
+    let threads = await Thread.find({})
+      .sort({ createdAt: -1 })
+      .limit(50)
+      .select("title body createdAt board author deleted replies")
+      .populate({
+        path: "board",
+        select: "name",
+      })
+      .populate({
+        path: "author",
+        select: "username hasAvatar",
+      });
+
+    threads = threads.map((thread) => thread.toObject());
+    return res.status(200)._append("threads", threads)._end();
+  } catch (err) {
+    return next(err);
+  }
+};

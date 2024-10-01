@@ -35,6 +35,7 @@ app.use("/api/me", require("./routers/me.router"));
 app.use("/api/boards", require("./routers/boards.router"));
 app.use("/api/threads", require("./routers/threads.router"));
 app.use("/api/replies", require("./routers/replies.router"));
+app.use("/api/info", require("./controllers/info.controller").getInfo);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
