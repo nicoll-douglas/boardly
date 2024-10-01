@@ -58,3 +58,28 @@ exports.createBoard = async (req, res, next) => {
     return next(err);
   }
 };
+
+exports.deleteBoard = async (req, res, next) => {
+  const user = req.user;
+  const { boardId } = req.params;
+
+  try {
+    const board = await Board.findById(boardId);
+    if (!board) {
+      return res.status(400)._end();
+    }
+
+    if (!board.admin.equals(user._id)) {
+      return res.status(401)._end();
+    }
+
+    board.name = "";
+    board.deleted = true;
+    board.rules = "";
+    await board.save();
+
+    return res.status(200)._end();
+  } catch (err) {
+    return next(err);
+  }
+};
