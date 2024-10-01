@@ -1,5 +1,5 @@
 export default async function resetPwd(form, token) {
-  return fetch(`${import.meta.env.VITE_API_URL}/api/auth/reset`, {
+  return fetch(`${import.meta.env.API_URL}/api/auth/reset`, {
     method: "POST",
     credentials: "include",
     headers: {

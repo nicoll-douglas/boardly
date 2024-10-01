@@ -1,5 +1,5 @@
 export default async function register(form) {
-  return fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
+  return fetch(`${import.meta.env.API_URL}/api/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
