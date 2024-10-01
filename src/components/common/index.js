@@ -13,3 +13,4 @@ export { default as BoardInfo } from "./BoardInfo";
 export { default as ButtonLink } from "./ButtonLink";
 export { default as DelayFallback } from "./DelayFallback";
 export { default as Spinner } from "./Spinner";
+export { default as DeletedLabel } from "./DeletedLabel";

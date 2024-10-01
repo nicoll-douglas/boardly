@@ -14,6 +14,7 @@ function newThread() {
     board: {
       _id: `board-${faker.string.uuid()}`, // board id for new fetch
       name: faker.word.noun(), // board name where thread lives
+      deleted: Math.random() < 0.1,
     },
     replies: Array.from({ length: faker.number.int({ min: 0, max: 10 }) }, () =>
       faker.string.uuid()

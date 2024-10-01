@@ -10,6 +10,7 @@ import {
 import { Tag, ButtonLink } from "@/components/common";
 import { Link } from "react-router-dom";
 import { ReplyBtn } from "@/features/replies";
+import useThread from "../hooks/useThread";
 
 export default function AvatarCard({
   tagValues,
@@ -19,6 +20,8 @@ export default function AvatarCard({
   reply,
   ...props
 }) {
+  const { data } = useThread();
+
   return (
     <Card variant={"filled"} size={"sm"} w={"full"} {...props}>
       <CardHeader>
@@ -26,7 +29,9 @@ export default function AvatarCard({
           {tagValues?.map((value, index) => (
             <Tag key={index}>{value}</Tag>
           ))}
-          {replyBtn && <ReplyBtn ml="auto" reply={reply} />}
+          {replyBtn && !data.thread.board.deleted && (
+            <ReplyBtn ml="auto" reply={reply} />
+          )}
         </Flex>
       </CardHeader>
       <Divider />

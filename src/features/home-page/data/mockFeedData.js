@@ -21,6 +21,7 @@ function newThread() {
     board: {
       _id: faker.string.uuid(),
       name: faker.word.noun(),
+      deleted: Math.random() < 0.1,
     },
     deleted: false,
   };

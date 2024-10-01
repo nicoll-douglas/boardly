@@ -17,6 +17,7 @@ function newReply() {
       board: {
         _id: `board-${faker.string.uuid()}`, // board id where thread/reply lives for new fetch
         name: faker.word.noun(), // board name
+        deleted: Math.random() < 0.1,
       },
       author: {
         _id: `author-${faker.string.uuid()}`, // thread author id for new fetch (reply might be to author)

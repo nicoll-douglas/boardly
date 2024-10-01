@@ -14,7 +14,7 @@ import {
 import { Link } from "react-router-dom";
 import { timeAgo } from "@/lib/utils";
 import { useCompactView } from "@/features/ui/compactView";
-import { CardLabel, Tag } from "@/components/common";
+import { CardLabel, Tag, DeletedLabel } from "@/components/common";
 import { noWrap } from "@/lib/constants";
 import DeleteThreadBtn from "./DeleteThreadBtn";
 import { useIsMe } from "@/features/user-profile";
@@ -45,18 +45,32 @@ export default function ThreadPreview({
                   />
                 </Collapse>
               )}
-              <CardLabel
-                preText={isInProfile ? "On" : "By"}
-                linkText={isInProfile ? `/${board.name}` : author.username}
-                link={
-                  isInProfile
-                    ? `/boards/${board.name}`
-                    : `/users/${author.username}`
-                }
-                pb="1px"
-                fontSize="md"
-              />
+
+              {isInProfile ? (
+                <>
+                  {board.deleted ? (
+                    <DeletedLabel preText="On">deleted board</DeletedLabel>
+                  ) : (
+                    <CardLabel
+                      preText={"On"}
+                      linkText={`/${board.name}`}
+                      link={`/boards/${board.name}`}
+                      pb="1px"
+                      fontSize="md"
+                    />
+                  )}
+                </>
+              ) : (
+                <CardLabel
+                  preText={"By"}
+                  linkText={author.username}
+                  link={`/users/${author.username}`}
+                  pb="1px"
+                  fontSize="md"
+                />
+              )}
             </Box>
+
             <Flex gap={2} minW={"fit-content"} alignItems={"start"}>
               <Tag display={{ base: "none", sm: "flex" }}>{`${
                 replies.length

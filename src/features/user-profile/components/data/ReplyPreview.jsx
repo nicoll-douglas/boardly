@@ -10,7 +10,7 @@ import {
   Collapse,
 } from "@chakra-ui/react";
 import { timeAgo } from "@/lib/utils";
-import { Tag, CardLabel } from "@/components/common";
+import { Tag, CardLabel, DeletedLabel } from "@/components/common";
 import { useCompactView } from "@/features/ui/compactView";
 import { noWrap } from "@/lib/constants";
 import { DeleteReplyBtn } from "@/features/replies";
@@ -24,6 +24,7 @@ export default function ReplyPreview({ reply }) {
   const [isMe] = useIsMe();
 
   const threadDeleted = reply.thread.deleted;
+  const boardDeleted = reply.thread.board.deleted;
 
   return (
     <LinkBox w={"full"}>
@@ -32,21 +33,20 @@ export default function ReplyPreview({ reply }) {
           <Flex w={"full"} alignItems={"start"} gap={4}>
             <Box w={"calc(100% - 210px)"} flex={1}>
               <Collapse in={!compactView} animateOpacity>
-                <CardLabel
-                  preText={"On"}
-                  linkText={`/${reply.thread.board.name}`}
-                  link={`/boards/${reply.thread.board.name}`}
-                  fontSize="md"
-                  pb="1px"
-                />
+                {boardDeleted ? (
+                  <DeletedLabel preText="On">deleted board</DeletedLabel>
+                ) : (
+                  <CardLabel
+                    preText={"On"}
+                    linkText={`/${reply.thread.board.name}`}
+                    link={`/boards/${reply.thread.board.name}`}
+                    fontSize="md"
+                    pb="1px"
+                  />
+                )}
               </Collapse>
               {threadDeleted ? (
-                <Flex gap={1} alignItems={"center"}>
-                  In
-                  <Text fontStyle={"italic"} color={"gray.500"}>
-                    deleted thread
-                  </Text>
-                </Flex>
+                <DeletedLabel preText="In">deleted thread</DeletedLabel>
               ) : (
                 <CardLabel
                   preText="In"

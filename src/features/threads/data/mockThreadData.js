@@ -52,6 +52,7 @@ const threadData = {
       ),
       createdAt: faker.date.recent({ days: 45 }),
       rules: faker.lorem.paragraphs({ min: 1, max: 3 }, "\n\n"),
+      deleted: Math.random() < 0.4,
     },
     author: {
       _id: `user-${faker.string.uuid()}`,
