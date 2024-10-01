@@ -24,6 +24,7 @@ function ButtonLinkStyled({ bold, children, ...rest }) {
       h={8}
       maxW={"full"}
       borderRadius={0}
+      minW={"fit-content"}
       fontWeight={bold ? 600 : 400}
       {...noWrap}
       {...rest}

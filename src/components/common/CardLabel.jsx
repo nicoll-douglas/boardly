@@ -17,6 +17,7 @@ export default function CardLabel({
         to={link}
         py={0}
         h={"fit-content"}
+        minW="fit-content"
         {...props}
       >
         {linkText}
