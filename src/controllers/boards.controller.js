@@ -107,7 +107,7 @@ exports.updateBoard = async (req, res, next) => {
       return res.status(404)._end();
     }
 
-    const board = await Board.findOne({ _id: board, deleted: false });
+    const board = await Board.findOne({ _id: boardId, deleted: false });
     if (!board) return res.status(400)._end();
     if (!board.admin.equals(user._id)) return res.status(401)._end();
 
