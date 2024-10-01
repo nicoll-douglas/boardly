@@ -51,6 +51,7 @@ const threadData = {
         () => faker.string.uuid()
       ),
       createdAt: faker.date.recent({ days: 45 }),
+      rules: faker.lorem.paragraphs({ min: 1, max: 3 }, "\n\n"),
     },
     author: {
       _id: `user-${faker.string.uuid()}`,

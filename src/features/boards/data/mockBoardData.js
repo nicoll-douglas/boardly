@@ -34,6 +34,7 @@ const boardData = {
     admin: {
       username: faker.internet.userName(),
     },
+    rules: faker.lorem.paragraphs({ min: 1, max: 3 }, "\n\n"),
   },
   user: {
     username: "username123",

@@ -16,7 +16,7 @@ export default function useProtectedSubmission(onSuccess) {
         navigate("/auth/login");
       },
       500: () => notifs.serverError(),
-      429: () => notifs.tooMany15(),
+      429: () => notifs.tooMany(),
       // 200: async (response) => {
       //   const { user } = await response.json();
       //   setCurrentUser(user);

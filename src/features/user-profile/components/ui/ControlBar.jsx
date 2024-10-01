@@ -1,8 +1,8 @@
-import { Flex, Button, Heading } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+import { Flex, Heading } from "@chakra-ui/react";
 import { CompactViewBtn } from "@/features/ui/compactView";
 import useIsMe from "../../hooks/useIsMe";
 import { NewThreadBtn } from "@/features/threads";
+import { NewBoardBtn } from "@/features/boards";
 
 export default function ControlBar() {
   const [isMe] = useIsMe();
@@ -19,9 +19,7 @@ export default function ControlBar() {
         {isMe && (
           <>
             <NewThreadBtn />
-            <Button variant={"ghost"} size={"sm"} leftIcon={<AddIcon />}>
-              New Board
-            </Button>
+            <NewBoardBtn />
           </>
         )}
         <CompactViewBtn />

@@ -69,6 +69,7 @@ export default function BoardInfo({ variant = "xl", data, isLoading }) {
                 name="Created On"
                 value={formatISOString(data.board.createdAt)}
               />
+              <StackData name="Rules" value={data.board.rules} />
             </Stack>
           </CardBody>
         </SlideFade>

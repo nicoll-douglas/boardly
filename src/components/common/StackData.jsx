@@ -6,7 +6,7 @@ import {
 } from "@chakra-ui/react";
 import ButtonLink from "./ButtonLink";
 
-export default function StackData({ name, value, link }) {
+export default function StackData({ name, value, link, ...rest }) {
   return (
     <Box>
       <Heading
@@ -21,7 +21,9 @@ export default function StackData({ name, value, link }) {
       {link ? (
         <ButtonLink to={link}>{value}</ButtonLink>
       ) : (
-        <Text py={1}>{value}</Text>
+        <Text py={1} whiteSpace={"pre-wrap"} {...rest}>
+          {value}
+        </Text>
       )}
     </Box>
   );

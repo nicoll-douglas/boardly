@@ -7,7 +7,7 @@ const helperText = {
   ],
   newUn: [
     "Must be no more than 20 characters long",
-    "May only contain letters, numbers, underscores and hyphens",
+    "May only contain letters, numbers, underscores, hyphens and periods",
   ],
   imgUpload: [
     "File size must not exceed 2MB",
