@@ -35,7 +35,7 @@ export default function StatusPage({
       left={0}
       bg={bgColor}
     >
-      <ScaleFade in={true} transition={{ enter: { duration: 0.4 } }}>
+      <ScaleFade in={true} transition={{ enter: { duration: 0.2 } }}>
         <Box overflowY={"auto"} maxH={"100vh"}>
           <Container>
             <Header>

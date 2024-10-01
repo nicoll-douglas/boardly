@@ -44,7 +44,11 @@ export default function WelcomeCard() {
     <Popover isOpen={isOpen} closeOnBlur>
       <Card size={"sm"} variant={"outline"}>
         <CardBody>
-          <SlideFade in={true} offsetY={10}>
+          <SlideFade
+            in={true}
+            offsetY={10}
+            transition={{ enter: { delay: 0.05 } }}
+          >
             <Center>
               <Flex
                 gap={4}

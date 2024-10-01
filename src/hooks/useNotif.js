@@ -35,7 +35,7 @@ export default function useNotif() {
     toast({
       status: "error",
       title: "Not Found",
-      description: "The requested resource could not be found.",
+      description: "The requested resource could not be found or was deleted.",
     });
 
   const unauthorized = () =>
