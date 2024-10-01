@@ -13,7 +13,7 @@ exports.getThread = async (req, res, next) => {
       .select("title body createdAt board author replies deleted")
       .populate({
         path: "board",
-        select: "name admin threads createdAt",
+        select: "name admin threads createdAt rules",
         populate: {
           path: "admin",
           select: "username",

@@ -4,7 +4,7 @@ exports.getBoard = async (req, res, next) => {
   const { boardName } = req.params;
   try {
     let board = await Board.findOne({ name: boardName })
-      .select("name threads createdAt admin")
+      .select("name threads createdAt admin rules")
       .populate({
         path: "admin",
         select: "username",

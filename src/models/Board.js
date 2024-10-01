@@ -5,6 +5,7 @@ const board = new mongoose.Schema(
     name: String,
     admin: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     threads: [{ type: mongoose.Schema.Types.ObjectId, ref: "Thread" }],
+    rules: String,
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );

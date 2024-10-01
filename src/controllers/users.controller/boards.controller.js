@@ -10,7 +10,7 @@ exports.getAllBoards = (options = { me: false }) => {
     try {
       let user = await User.findOne(query).select("boards").populate({
         path: "boards",
-        select: "name createdAt",
+        select: "name createdAt rules",
       });
 
       if (!user) {
