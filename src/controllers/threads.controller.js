@@ -62,6 +62,7 @@ exports.deleteThread = async (req, res, next) => {
 
   try {
     const thread = await Thread.findById(threadId);
+    if (!thread) return res.status(404)._end();
     if (!thread.author.equals(user._id)) return res.status(401)._end();
 
     thread.deleted = true;

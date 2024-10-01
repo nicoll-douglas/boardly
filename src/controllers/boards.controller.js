@@ -79,7 +79,7 @@ exports.deleteBoard = async (req, res, next) => {
   try {
     const board = await Board.findById(boardId);
     if (!board) {
-      return res.status(400)._end();
+      return res.status(404)._end();
     }
 
     if (!board.admin.equals(user._id)) {
