@@ -20,7 +20,6 @@ import { Spinner } from "@/components/common";
 export default function BoardFeed() {
   const { data, isLoading } = useBoard();
   const { compactView } = useCompactView();
-  const filtered = data?.board.threads.filter((thread) => !thread.deleted);
 
   return (
     <Card variant={{ base: "unstyled", md: "outline" }} flex={1} size={"sm"}>
@@ -37,7 +36,7 @@ export default function BoardFeed() {
           </CardHeader>
           <Divider my={{ base: 4, md: 0 }} />
           <CardBody>
-            {filtered.length === 0 ? (
+            {data.board.threads.length === 0 ? (
               <VStack gap={0} textAlign={"center"}>
                 <Image src={creativeUrl} width={230} height={230} />
                 <Heading size={"md"}>Nothing to show</Heading>
@@ -47,7 +46,7 @@ export default function BoardFeed() {
               </VStack>
             ) : (
               <VStack gap={compactView ? 2 : 3}>
-                {filtered
+                {data.board.threads
                   .sort(
                     (a, b) =>
                       new Date(b.createdAt).valueOf() -

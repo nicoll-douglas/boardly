@@ -16,7 +16,6 @@ import { ReplyTextarea } from "@/features/replies";
 
 export default function Thread() {
   const { data, isLoading } = useThread();
-  const filtered = data?.thread.replies.filter((reply) => !reply.deleted);
 
   return (
     <Card variant={{ base: "unstyled", md: "outline" }} flex={1} size={"sm"}>
@@ -27,7 +26,7 @@ export default function Thread() {
           <CardBody>
             <ThreadCard thread={data.thread} />
             <ReplyTextarea threadId={data.thread._id} />
-            {filtered.length === 0 ? (
+            {data.thread.replies.length === 0 ? (
               <VStack gap={0} textAlign={"center"} mb={10}>
                 <Image src={chatting2Url} width={240} height={240} />
                 <Heading size={"md"}>Nothing to show</Heading>
@@ -38,7 +37,7 @@ export default function Thread() {
               </VStack>
             ) : (
               <VStack gap={{ base: 2, sm: 3 }} mt={4} alignItems={"stretch"}>
-                {filtered
+                {data.thread.replies
                   .sort(
                     (a, b) =>
                       new Date(a.createdAt).valueOf() -

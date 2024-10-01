@@ -15,6 +15,7 @@ function newBoard() {
       username: adminUsername,
       avatar: Math.random() < 0.75 ? faker.image.avatar() : null,
     },
+    deleted: false,
   };
 }
 

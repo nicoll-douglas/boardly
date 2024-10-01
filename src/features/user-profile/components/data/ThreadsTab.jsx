@@ -13,12 +13,11 @@ export default function ThreadsTab() {
   const { compactView } = useCompactView();
 
   if (isLoading) return <Spinner flex={1} />;
-  const list = data.threads.filter((thread) => !thread.deleted);
 
   return (
     <SlideFade in={!!data} offsetY={10}>
       <VStack gap={compactView ? 2 : 3} flex={1}>
-        {list.length === 0 ? (
+        {data.threads.length === 0 ? (
           <NoData
             text={
               isMe
@@ -27,7 +26,7 @@ export default function ThreadsTab() {
             }
           />
         ) : (
-          list.map((thread) => (
+          data.threads.map((thread) => (
             <ThreadPreview key={thread._id} thread={thread} />
           ))
         )}

@@ -14,12 +14,11 @@ export default function RepliesTab() {
   const { compactView } = useCompactView();
 
   if (isLoading) return <Spinner p={4} />;
-  const filtered = data.replies.filter((reply) => !reply.deleted);
 
   return (
     <SlideFade in={!!data} offsetY={10}>
       <VStack gap={compactView ? 2 : 3} flex={1}>
-        {filtered.length === 0 ? (
+        {data.replies.length === 0 ? (
           <NoData
             text={
               isMe
@@ -29,7 +28,7 @@ export default function RepliesTab() {
             imageUrl={chatting2Url}
           />
         ) : (
-          filtered.map((reply) => (
+          data.replies.map((reply) => (
             <ReplyPreview key={reply._id} reply={reply} />
           ))
         )}
