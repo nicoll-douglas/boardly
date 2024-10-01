@@ -7,3 +7,4 @@ export { default as BoardSearchInput } from "./components/BoardSearchInput";
 export { default as useBoardsList } from "./hooks/useBoardsList";
 export { default as NewBoardBtn } from "./components/NewBoardBtn";
 export { default as DeleteBoardBtn } from "./components/DeleteBoardBtn";
+export { default as EditBoardBtn } from "./components/EditBoardBtn";

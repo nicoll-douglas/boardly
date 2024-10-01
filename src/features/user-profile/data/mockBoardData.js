@@ -7,6 +7,7 @@ function newBoard() {
     _id: `board-${faker.string.uuid()}`, // board id for a subsequent fetch
     name: faker.word.noun(), // board name
     createdAt: faker.date.past(), // creation date
+    rules: faker.lorem.paragraphs({ min: 1, max: 3 }, "\n\n"),
   };
 }
 

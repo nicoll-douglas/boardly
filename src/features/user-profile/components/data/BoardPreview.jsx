@@ -5,14 +5,12 @@ import {
   Heading,
   LinkBox,
   LinkOverlay,
-  IconButton,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { EditIcon } from "@chakra-ui/icons";
 import { noWrap } from "@/lib/constants";
 import { useCompactView } from "@/features/ui/compactView";
 import useIsMe from "../../hooks/useIsMe";
-import { DeleteBoardBtn } from "@/features/boards";
+import { DeleteBoardBtn, EditBoardBtn } from "@/features/boards";
 
 export default function BoardPreview({ board }) {
   const { compactView } = useCompactView();
@@ -34,7 +32,7 @@ export default function BoardPreview({ board }) {
             </LinkOverlay>
             {isMe && (
               <Flex gap={2} minW={"fit-content"}>
-                <IconButton icon={<EditIcon />} variant={"ghost"} size={"xs"} />
+                <EditBoardBtn board={board} />
                 <DeleteBoardBtn board={board} />
               </Flex>
             )}
