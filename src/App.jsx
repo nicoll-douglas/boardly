@@ -34,12 +34,20 @@ function App() {
         <Route path="/auth/register" element={<Register />} />
 
         <Route element={<HeaderLayout />}>
-          <Route path="/users/:username" element={<User />} />
+          <Route caseSensitive path="/users/:username" element={<User />} />
           <Route path="/me" element={<Me />} />
 
           <Route element={<BoardsListLayout />}>
-            <Route path="/boards/:boardName" element={<Board />} />
-            <Route path="/threads/:threadId" element={<Thread />} />
+            <Route
+              caseSensitive
+              path="/boards/:boardName"
+              element={<Board />}
+            />
+            <Route
+              caseSensitive
+              path="/threads/:threadId"
+              element={<Thread />}
+            />
             <Route path="/home" element={<Home />} />
           </Route>
         </Route>
