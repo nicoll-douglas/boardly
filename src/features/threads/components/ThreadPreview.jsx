@@ -35,15 +35,21 @@ export default function ThreadPreview({
           <Flex w={"full"} gap={4}>
             <Box w={"calc(100% - 180px)"} flex={1}>
               {authorLabel && (
-                <Collapse in={!compactView} animateOpacity>
-                  <CardLabel
-                    preText={"By"}
-                    linkText={`${author.username}`}
-                    link={`/users/${author.username}`}
-                    fontSize="md"
-                    pb="1px"
-                  />
-                </Collapse>
+                <>
+                  <Collapse in={!compactView} animateOpacity>
+                    {author.deleted ? (
+                      <DeletedLabel preText="By">deleted user</DeletedLabel>
+                    ) : (
+                      <CardLabel
+                        preText={"By"}
+                        linkText={`${author.username}`}
+                        link={`/users/${author.username}`}
+                        fontSize="md"
+                        pb="1px"
+                      />
+                    )}
+                  </Collapse>
+                </>
               )}
 
               {isInProfile ? (
@@ -61,13 +67,19 @@ export default function ThreadPreview({
                   )}
                 </>
               ) : (
-                <CardLabel
-                  preText={"By"}
-                  linkText={author.username}
-                  link={`/users/${author.username}`}
-                  pb="1px"
-                  fontSize="md"
-                />
+                <>
+                  {author.deleted ? (
+                    <DeletedLabel preText="By">deleted user</DeletedLabel>
+                  ) : (
+                    <CardLabel
+                      preText={"By"}
+                      linkText={author.username}
+                      link={`/users/${author.username}`}
+                      pb="1px"
+                      fontSize="md"
+                    />
+                  )}
+                </>
               )}
             </Box>
 

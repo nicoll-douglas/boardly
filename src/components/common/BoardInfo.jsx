@@ -61,8 +61,16 @@ export default function BoardInfo({ variant = "xl", data, isLoading }) {
             <Stack divider={<StackDivider />}>
               <StackData
                 name="Admin"
-                value={data.board.admin.username}
-                link={`/users/${data.board.admin.username}`}
+                {...(data.board.admin.deleted
+                  ? {
+                      color: "gray.500",
+                      fontStyle: "italic",
+                      value: "deleted user",
+                    }
+                  : {
+                      value: data.board.admin.username,
+                      link: `/users/${data.board.admin.username}`,
+                    })}
               />
               <StackData name="Threads" value={data.board.threads.length} />
               <StackData

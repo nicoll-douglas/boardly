@@ -1,6 +1,6 @@
 import { Box, Text, Divider, SlideFade } from "@chakra-ui/react";
 import { timeAgo } from "@/lib/utils";
-import { CardLabel } from "@/components/common";
+import { CardLabel, DeletedLabel } from "@/components/common";
 import AvatarCard from "./AvatarCard";
 
 export default function ReplyCard({ reply }) {
@@ -21,12 +21,18 @@ export default function ReplyCard({ reply }) {
             ) : (
               <>
                 <Box>
-                  <CardLabel
-                    postText="said:"
-                    link={`/users/${reply.parent.author.username}`}
-                    linkText={reply.parent.author.username}
-                    fontSize="sm"
-                  />
+                  {reply.parent.author.deleted ? (
+                    <DeletedLabel postText="said:" size="sm">
+                      deleted user
+                    </DeletedLabel>
+                  ) : (
+                    <CardLabel
+                      postText="said:"
+                      link={`/users/${reply.parent.author.username}`}
+                      linkText={reply.parent.author.username}
+                      fontSize="sm"
+                    />
+                  )}
                   <Text
                     fontSize={"sm"}
                     whiteSpace={"pre-wrap"}

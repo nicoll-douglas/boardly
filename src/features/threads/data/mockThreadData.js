@@ -5,6 +5,7 @@ class SimpleAuthor {
     this._id = `user-${faker.string.uuid()}`;
     this.username = faker.internet.userName();
     this.avatar = faker.image.avatar();
+    this.deleted = true;
   }
 }
 
@@ -45,6 +46,7 @@ const threadData = {
       admin: {
         _id: faker.string.uuid(),
         username: faker.internet.userName(),
+        deleted: true,
       },
       threads: Array.from(
         { length: faker.number.int({ min: 0, max: 30 }) },
@@ -58,6 +60,7 @@ const threadData = {
       _id: `user-${faker.string.uuid()}`,
       username: faker.internet.userName(),
       avatar: faker.image.avatar(),
+      deleted: true,
     },
     replies: getReplies(10),
     deleted: false,

@@ -22,6 +22,7 @@ function newReply() {
       author: {
         _id: `author-${faker.string.uuid()}`, // thread author id for new fetch (reply might be to author)
         username: faker.internet.userName(), // author name
+        deleted: true,
       },
       deleted: Math.random() > 0.8,
     },
@@ -33,6 +34,7 @@ function newReply() {
             author: {
               _id: `author-${faker.string.uuid()}`, // parent author id
               username: faker.internet.userName(), // parent author username
+              deleted: true,
             },
             deleted: true,
           }

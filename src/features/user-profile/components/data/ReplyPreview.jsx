@@ -81,12 +81,16 @@ export default function ReplyPreview({ reply }) {
           )}
           {!parent.deleted && (
             <>
-              <CardLabel
-                postText="said:"
-                linkText={`${parent.author.username}`}
-                link={`/users/${parent.author.username}`}
-                fontSize="md"
-              />
+              {parent.author.deleted ? (
+                <DeletedLabel postText="said:">deleted user</DeletedLabel>
+              ) : (
+                <CardLabel
+                  postText="said:"
+                  linkText={`${parent.author.username}`}
+                  link={`/users/${parent.author.username}`}
+                  fontSize="md"
+                />
+              )}
               <Text
                 {...(compactView ? noWrap : {})}
                 whiteSpace={compactView ? "nowrap" : "pre-wrap"}
