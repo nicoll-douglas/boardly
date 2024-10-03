@@ -56,7 +56,11 @@ export default function EditBoardBtn({ board, ...props }) {
             initialLength={board.rules?.length ?? 0}
             form={form}
           />
-          <Button w={"full"} type="submit">
+          <Button
+            w={"full"}
+            type="submit"
+            isLoading={form.formState.isSubmitting}
+          >
             Save
           </Button>
         </form>

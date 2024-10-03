@@ -56,7 +56,11 @@ export default function ReplyTextarea({
         </Ch.FormErrorMessage>
       </Ch.FormControl>
       <Ch.Flex gap={2}>
-        <Ch.Button type="submit" size={"sm"}>
+        <Ch.Button
+          type="submit"
+          size={"sm"}
+          isLoading={form.formState.isSubmitting}
+        >
           Submit
         </Ch.Button>
         <LengthCounter

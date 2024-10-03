@@ -67,7 +67,11 @@ export default function ResetPwdForm() {
             {form.formState.errors.confirmNewPassword?.message}
           </Ch.FormErrorMessage>
         </Ch.FormControl>
-        <Ch.Button type="submit" w={"full"}>
+        <Ch.Button
+          type="submit"
+          w={"full"}
+          isLoading={form.formState.isSubmitting}
+        >
           Submit
         </Ch.Button>
       </form>

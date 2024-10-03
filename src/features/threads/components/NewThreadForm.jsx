@@ -103,7 +103,11 @@ export default function NewThreadForm({ closeFormModal, currentBoardName }) {
           {form.formState.errors.body?.message}
         </Ch.FormErrorMessage>
       </Ch.FormControl>
-      <Ch.Button w={"full"} type="submit">
+      <Ch.Button
+        w={"full"}
+        type="submit"
+        isLoading={form.formState.isSubmitting}
+      >
         Post
       </Ch.Button>
     </form>

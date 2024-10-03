@@ -38,7 +38,7 @@ export default function NewBoardForm({ onClose }) {
         </FormHelperText>
       </FormControl>
       <RulesFormControl form={form} initialLength={0} />
-      <Button w={"full"} type="submit">
+      <Button w={"full"} type="submit" isLoading={form.formState.isSubmitting}>
         Create
       </Button>
     </form>
