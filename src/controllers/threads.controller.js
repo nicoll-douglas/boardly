@@ -108,14 +108,14 @@ exports.getLatestThreads = async (req, res, next) => {
     let threads = await Thread.find({})
       .sort({ createdAt: -1 })
       .limit(25)
-      .select("title body createdAt board author deleted replies deleted")
+      .select("title body createdAt board author replies deleted")
       .populate({
         path: "board",
-        select: "name",
+        select: "name deleted",
       })
       .populate({
         path: "author",
-        select: "username hasAvatar",
+        select: "username hasAvatar deleted",
       });
 
     threads = threads
