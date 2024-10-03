@@ -2,6 +2,7 @@ import * as Ch from "@chakra-ui/react";
 import PanelItem from "./PanelItem";
 import ResetPwdForm from "./ResetPwdForm";
 import DeleteAccountForm from "./DeleteAccountForm";
+import { LogoutBtn } from "@/features/logout";
 
 export default function UserSettingsPanel() {
   return (
@@ -24,6 +25,9 @@ export default function UserSettingsPanel() {
             </PanelItem>
             <PanelItem heading={"Delete Account"}>
               <DeleteAccountForm />
+            </PanelItem>
+            <PanelItem heading={"Logout"}>
+              <LogoutBtn variant="text" />
             </PanelItem>
           </Ch.Accordion>
         </Ch.SlideFade>

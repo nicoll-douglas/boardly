@@ -3,14 +3,20 @@ import { useRef } from "react";
 import { MdLogout } from "react-icons/md";
 import useLogout from "../hooks/useLogout";
 
-export default function LogoutBtn() {
+export default function LogoutBtn({ variant }) {
   const { isOpen, onClose, onOpen } = Ch.useDisclosure();
   const cancelRef = useRef();
   const onSubmit = useLogout();
 
   return (
     <>
-      <Ch.IconButton icon={<MdLogout />} variant={"ghost"} onClick={onOpen} />
+      {variant !== "text" ? (
+        <Ch.IconButton icon={<MdLogout />} variant={"ghost"} onClick={onOpen} />
+      ) : (
+        <Ch.Button rightIcon={<MdLogout />} onClick={onOpen}>
+          Logout
+        </Ch.Button>
+      )}
       <Ch.AlertDialog isOpen={isOpen} onClose={onClose} size={"xs"}>
         <Ch.AlertDialogOverlay />
         <Ch.AlertDialogContent mx={4}>
