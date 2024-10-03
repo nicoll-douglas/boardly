@@ -4,6 +4,7 @@ import { Spacer, Flex } from "@chakra-ui/react";
 import { ProfileLink } from "@/features/user-profile";
 import { Outlet } from "react-router-dom";
 import { UserSettingsBtn } from "@/features/user-settings";
+import { LogoutBtn } from "@/features/logout";
 
 export default function HeaderLayout() {
   return (
@@ -13,7 +14,8 @@ export default function HeaderLayout() {
         <Spacer />
         <UserSettingsBtn mr={3} />
         <ProfileLink mr={3} />
-        <ToggleThemeBtn />
+        <ToggleThemeBtn mr={1} />
+        <LogoutBtn />
       </Header>
       <Flex
         flex={1}

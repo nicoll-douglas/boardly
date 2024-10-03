@@ -11,7 +11,7 @@ export default function PanelItem({ heading, children }) {
       </Ch.AccordionButton>
       <Ch.AccordionPanel>
         <Ch.Card
-          variant={{ base: "unstyled", sm: "filled" }}
+          variant={{ base: "unstyled", sm: "outline" }}
           size={{ base: "sm", sm: "md" }}
         >
           <Ch.CardBody>{children}</Ch.CardBody>
