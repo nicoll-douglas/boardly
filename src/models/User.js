@@ -8,10 +8,6 @@ const user = new mongoose.Schema(
     email: String,
     hashedPassword: String,
     refreshToken: String,
-    refreshTokenVersion: {
-      type: Number,
-      default: 0,
-    },
     verified: {
       type: Boolean,
       default: false,

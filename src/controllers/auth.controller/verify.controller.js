@@ -16,12 +16,9 @@ module.exports = async (req, res, next) => {
 
     if (user.verified) return res.status(200)._end();
 
-    const newRefreshTokenVersion = user.refreshTokenVersion + 1;
-
     const accessToken = issueAccessToken(user._id);
-    const refreshToken = issueRefreshToken(user._id, newRefreshTokenVersion);
+    const refreshToken = issueRefreshToken(user._id);
     user.refreshToken = refreshToken;
-    user.refreshTokenVersion = newRefreshTokenVersion;
     user.verified = true;
     await user.save();
 

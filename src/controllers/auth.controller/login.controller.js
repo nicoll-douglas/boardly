@@ -31,15 +31,9 @@ module.exports = async (req, res, next) => {
       return res.status(401).end();
     }
 
-    const newRefreshTokenVersion = foundUser.refreshTokenVersion + 1;
-
     const accessToken = issueAccessToken(foundUser._id);
-    const refreshToken = issueRefreshToken(
-      foundUser._id,
-      newRefreshTokenVersion
-    );
+    const refreshToken = issueRefreshToken(foundUser._id);
     foundUser.refreshToken = refreshToken;
-    foundUser.refreshTokenVersion = newRefreshTokenVersion;
     await foundUser.save();
 
     req.log("200");
