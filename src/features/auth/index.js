@@ -8,3 +8,4 @@ export { default as Verification } from "./components/Verification";
 export { default as Optimistic } from "./components/Optimistic";
 export { AuthProvider } from "./contexts/AuthContext";
 export { default as useAuth } from "./hooks/useAuth";
+export { default as passwordValidation } from "./data/passwordValidation";

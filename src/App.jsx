@@ -18,6 +18,7 @@ const Thread = lazy(() => import("./pages/threads/[threadName]"));
 const HeaderLayout = lazy(() => import("./layouts/Header.layout"));
 const BoardsListLayout = lazy(() => import("./layouts/BoardsList.layout"));
 const ProfileInfoLayout = lazy(() => import("./layouts/ProfileInfo.layout"));
+const Settings = lazy(() => import("./pages/settings"));
 import { useScrollRestoration } from "./hooks";
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
           <Route element={<ProfileInfoLayout />}>
             <Route caseSensitive path="/users/:username" element={<User />} />
             <Route path="/me" element={<Me />} />
-            <Route path="/settings" />
+            <Route path="/settings" element={<Settings />} />
           </Route>
 
           <Route element={<BoardsListLayout />}>
