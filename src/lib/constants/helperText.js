@@ -1,6 +1,6 @@
 const helperText = {
   newPwd: [
-    "Must be at least 5 characters long",
+    "Must be at least 8 characters long",
     "Must be no more than 30 characters long",
     "Must contain at least one letter",
     "Must contain at least one number",
