@@ -32,7 +32,9 @@ export default function DeleteAccountForm() {
           </Ch.AlertDialogBody>
           <Ch.AlertDialogFooter>
             <Ch.HStack gap={3}>
-              <Ch.Button ref={cancelRef}>Cancel</Ch.Button>
+              <Ch.Button ref={cancelRef} onClick={onClose}>
+                Cancel
+              </Ch.Button>
               <Ch.Button
                 colorScheme="red"
                 onClick={() => {
