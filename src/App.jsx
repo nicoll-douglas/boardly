@@ -19,6 +19,7 @@ const HeaderLayout = lazy(() => import("./layouts/Header.layout"));
 const BoardsListLayout = lazy(() => import("./layouts/BoardsList.layout"));
 const ProfileInfoLayout = lazy(() => import("./layouts/ProfileInfo.layout"));
 const Settings = lazy(() => import("./pages/settings"));
+const Optimistic = lazy(() => import("./features/auth/components/Optimistic"));
 import { useScrollRestoration } from "./hooks";
 
 function App() {
@@ -26,14 +27,16 @@ function App() {
   return (
     <Suspense fallback={<DelayFallback />}>
       <Routes>
-        <Route path="/" element={<Index />} />
         <Route path="*" element={<NotFound />} />
 
-        <Route path="/auth/verify" element={<Verify />} />
-        <Route path="/auth/forgot" element={<Forgot />} />
-        <Route path="/auth/reset" element={<Reset />} />
-        <Route path="/auth/login" element={<Login />} />
-        <Route path="/auth/register" element={<Register />} />
+        <Route element={<Optimistic />}>
+          <Route path="/" element={<Index />} />
+          <Route path="/auth/verify" element={<Verify />} />
+          <Route path="/auth/forgot" element={<Forgot />} />
+          <Route path="/auth/reset" element={<Reset />} />
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/register" element={<Register />} />
+        </Route>
 
         <Route element={<HeaderLayout />}>
           <Route element={<ProfileInfoLayout />}>
