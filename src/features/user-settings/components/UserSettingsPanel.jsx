@@ -1,6 +1,7 @@
 import * as Ch from "@chakra-ui/react";
 import PanelItem from "./PanelItem";
 import ResetPwdForm from "./ResetPwdForm";
+import DeleteAccountForm from "./DeleteAccountForm";
 
 export default function UserSettingsPanel() {
   return (
@@ -17,9 +18,12 @@ export default function UserSettingsPanel() {
       <Ch.Divider my={{ base: 4, md: 0 }} />
       <Ch.CardBody>
         <Ch.SlideFade in={true} offsetY={10}>
-          <Ch.Accordion allowMultiple>
+          <Ch.Accordion allowToggle>
             <PanelItem heading={"Change Password"}>
               <ResetPwdForm />
+            </PanelItem>
+            <PanelItem heading={"Delete Account"}>
+              <DeleteAccountForm />
             </PanelItem>
           </Ch.Accordion>
         </Ch.SlideFade>

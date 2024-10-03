@@ -1,8 +1,8 @@
 import * as Ch from "@chakra-ui/react";
 import { passwordValidation } from "@/features/auth";
 import { helperText } from "@/lib/constants";
-import { PasswordInput } from "@/components/form";
 import useResetPwd from "../hooks/useResetPwd";
+import CurrentPasswordField from "./CurrentPasswordField";
 
 export default function ResetPwdForm() {
   const { form, onSubmit } = useResetPwd();
@@ -10,22 +10,7 @@ export default function ResetPwdForm() {
   return (
     <Ch.Box maxW={96}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <Ch.FormControl
-          isRequired
-          isInvalid={form.formState.errors.currentPassword}
-          mb={6}
-        >
-          <Ch.FormLabel>Current Password</Ch.FormLabel>
-          <PasswordInput
-            placeholder="Enter current password"
-            {...form.register("currentPassword", {
-              required: "Please enter your current password",
-            })}
-          />
-          <Ch.FormErrorMessage>
-            {form.formState.errors.currentPassword?.message}
-          </Ch.FormErrorMessage>
-        </Ch.FormControl>
+        <CurrentPasswordField form={form} />
         <Ch.FormControl
           isRequired
           isInvalid={form.formState.errors.newPassword}
