@@ -1,12 +1,12 @@
 import { Flex } from "@chakra-ui/react";
 import ProfileInfo from "./ProfileInfo";
-import ProfileTabs from "./ProfileTabs";
+// import ProfileTabs from "./ProfileTabs";
 import useProfile from "../../hooks/useProfile";
 import { Navigate } from "react-router-dom";
 import useIsMe from "../../hooks/useIsMe";
 // import { useAuth } from "@/features/auth";
 
-export default function Profile() {
+export default function Profile({ children }) {
   const { data } = useProfile();
   const [isMe] = useIsMe();
   // const { currentUser } = useAuth();
@@ -25,7 +25,8 @@ export default function Profile() {
       flexDir={{ base: "column", md: "row" }}
     >
       <ProfileInfo />
-      <ProfileTabs />
+      {/* <ProfileTabs /> */}
+      {children}
     </Flex>
   );
 }

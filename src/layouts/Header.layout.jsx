@@ -3,6 +3,7 @@ import ToggleThemeBtn from "@/features/ui/dark-mode";
 import { Spacer, Flex } from "@chakra-ui/react";
 import { ProfileLink } from "@/features/user-profile";
 import { Outlet } from "react-router-dom";
+import { UserSettingsBtn } from "@/features/user-settings";
 
 export default function HeaderLayout() {
   return (
@@ -10,6 +11,7 @@ export default function HeaderLayout() {
       <Header>
         <Logo to="/home" />
         <Spacer />
+        <UserSettingsBtn mr={3} />
         <ProfileLink mr={3} />
         <ToggleThemeBtn />
       </Header>
