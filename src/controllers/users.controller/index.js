@@ -4,6 +4,7 @@ exports.avatar = require("./avatar.controller");
 exports.replies = require("./replies.controller");
 exports.boards = require("./boards.controller");
 exports.threads = require("./threads.controller");
+exports.password = require("./password.controller");
 
 exports.getUser = (options = { me: false }) => {
   return async (req, res, next) => {

@@ -3,6 +3,7 @@ const validate = require("@/middleware/validation/validate");
 const profileSchema = require("@/validation/profile.schema");
 const handleImage = require("@/middleware/common/handleImage");
 const userController = require("@/controllers/users.controller");
+const authSchemas = require("@/validation/auth.schema");
 
 const router = express.Router();
 
@@ -18,6 +19,11 @@ router
     validate.image(),
     userController.avatar.updateAvatar
   )
-  .delete("/avatar", userController.avatar.deleteAvatar);
+  .delete("/avatar", userController.avatar.deleteAvatar)
+  .patch(
+    "/password",
+    validate.body(authSchemas.change),
+    userController.password.changePassword
+  );
 
 module.exports = router;

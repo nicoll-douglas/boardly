@@ -49,9 +49,15 @@ const reset = Joi.object({
   password: fieldSchemas.new.password,
 }).unknown();
 
+const change = Joi.object({
+  currentPassword: fieldSchemas.existing.password,
+  newPassword: fieldSchemas.new.password,
+}).unknown();
+
 module.exports = {
   register,
   login,
   forgot,
   reset,
+  change,
 };
