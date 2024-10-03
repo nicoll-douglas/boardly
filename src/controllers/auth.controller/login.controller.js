@@ -15,6 +15,8 @@ module.exports = async (req, res, next) => {
       return res.status(404).end();
     }
 
+    if (foundUser.deleted) return res.status(404).end();
+
     const passwordMatch = await bcrypt.compare(
       password,
       foundUser.hashedPassword
@@ -29,9 +31,15 @@ module.exports = async (req, res, next) => {
       return res.status(401).end();
     }
 
+    const newRefreshTokenVersion = foundUser.refreshTokenVersion + 1;
+
     const accessToken = issueAccessToken(foundUser._id);
-    const refreshToken = issueRefreshToken(foundUser._id);
+    const refreshToken = issueRefreshToken(
+      foundUser._id,
+      newRefreshTokenVersion
+    );
     foundUser.refreshToken = refreshToken;
+    foundUser.refreshTokenVersion = newRefreshTokenVersion;
     await foundUser.save();
 
     req.log("200");

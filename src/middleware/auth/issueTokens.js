@@ -12,10 +12,11 @@ function issueAccessToken(id) {
   return accessToken;
 }
 
-function issueRefreshToken(id) {
+function issueRefreshToken(id, refreshTokenVersion) {
   const refreshToken = jwt.sign(
     {
       id,
+      refreshTokenVersion,
       exp: Math.floor((Date.now() + config.jwt.refreshDuration) / 1000),
     },
     process.env.JWT_SECRET
