@@ -9,6 +9,7 @@ const {
   handleRegister,
   handleEmailVerification,
   handleResetPwd,
+  handleLogout,
 } = require("@/controllers/auth.controller");
 
 const router = express.Router();
@@ -37,6 +38,7 @@ router
   )
   .get("/refresh", limiter(100, 0.6), verifyAuth, (req, res) =>
     res.status(200)._end()
-  );
+  )
+  .post("/logout", limiter(100, 0.6), handleLogout);
 
 module.exports = router;
