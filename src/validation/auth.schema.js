@@ -54,10 +54,15 @@ const change = Joi.object({
   newPassword: fieldSchemas.new.password,
 }).unknown();
 
+const deleteAccount = Joi.object({
+  currentPassword: fieldSchemas.existing.password,
+});
+
 module.exports = {
   register,
   login,
   forgot,
   reset,
   change,
+  deleteAccount,
 };

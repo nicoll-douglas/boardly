@@ -9,6 +9,7 @@ async function verifyAuth(req, res, next) {
     let user = await verifyJWT(accessToken);
 
     if (user) {
+      if (user.deleted) return res.status(401).end();
       req.user = user;
       req.log("auth valid");
       return next();
@@ -23,6 +24,8 @@ async function verifyAuth(req, res, next) {
       req.log("auth invalid, 401, sent");
       return res.status(401).end();
     }
+
+    if (user.deleted) return res.status(401).end();
 
     req.log("auth valid");
     req.user = user;

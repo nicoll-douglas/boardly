@@ -1,4 +1,6 @@
 const User = require("@/models/User");
+const bcrypt = require("bcrypt");
+const bucket = require("@/services/firebaseStorage");
 
 exports.avatar = require("./avatar.controller");
 exports.replies = require("./replies.controller");
@@ -57,7 +59,7 @@ exports.getUser = (options = { me: false }) => {
       req.log("200, appended user, sent");
       return res.status(200)._append("profile", requestedUser)._end();
     } catch (err) {
-      next(err);
+      return next(err);
     }
   };
 };
@@ -73,8 +75,45 @@ exports.updateUser = async (req, res, next) => {
     user.pronouns = pronouns;
     await user.save();
     req.log("user saved, 200, sent");
-    res.status(200)._end();
+    return res.status(200)._end();
   } catch (err) {
     next(err);
+  }
+};
+
+exports.deleteUser = async (req, res, next) => {
+  const user = req.user;
+  const { currentPassword } = req.body;
+
+  try {
+    const passwordMatch = await bcrypt.compare(
+      currentPassword,
+      user.hashedPassword
+    );
+
+    if (!passwordMatch) {
+      return res
+        .status(400)
+        ._feedback(["currentPassword", "Password is incorrect"]);
+    }
+
+    user.deleted = true;
+    user.refreshToken = "";
+    user.bio = "";
+    user.pronouns = "";
+    user.age = "";
+    user.email = "";
+    user.hasAvatar = false;
+    await user.save();
+
+    const avatar = bucket.file(`avatar-${user._id}`);
+    const [exists] = await avatar.exists();
+    if (exists) {
+      await avatar.delete();
+    }
+
+    return res.status(200)._end();
+  } catch (err) {
+    return next(err);
   }
 };

@@ -4,6 +4,7 @@ const profileSchema = require("@/validation/profile.schema");
 const handleImage = require("@/middleware/common/handleImage");
 const userController = require("@/controllers/users.controller");
 const authSchemas = require("@/validation/auth.schema");
+const limiter = require("@/middleware/common/limiter");
 
 const router = express.Router();
 
@@ -22,8 +23,15 @@ router
   .delete("/avatar", userController.avatar.deleteAvatar)
   .patch(
     "/password",
+    limiter(),
     validate.body(authSchemas.change),
     userController.password.changePassword
+  )
+  .delete(
+    "/",
+    limiter(),
+    validate.body(authSchemas.deleteAccount),
+    userController.deleteUser
   );
 
 module.exports = router;
