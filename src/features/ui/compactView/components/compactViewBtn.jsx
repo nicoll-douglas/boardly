@@ -5,7 +5,7 @@ import useCompactView from "../hooks/useCompactView";
 
 export default function CompactViewBtn() {
   const { compactView, setCompactView } = useCompactView();
-
+  //
   return (
     <IconButton
       variant={"ghost"}
