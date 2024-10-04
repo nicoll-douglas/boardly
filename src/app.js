@@ -11,7 +11,6 @@ const errorHandler = require("./middleware/global/errorHandler");
 const notFoundHandler = require("./middleware/global/notFoundHandler");
 const devLogger = require("./middleware/logging/devLogger");
 
-const limiter = require("@/middleware/common/limiter");
 const verifyAuth = require("@/middleware/auth/verifyAuth");
 
 const app = express();
@@ -28,7 +27,6 @@ app.use(customMethods);
 app.use("/api/auth", require("./routers/auth.router"));
 
 // protected routes
-app.use(limiter(100, 0.6));
 app.use(verifyAuth);
 app.use("/api/users", require("./routers/users.router"));
 app.use("/api/me", require("./routers/me.router"));
