@@ -17,7 +17,7 @@ async function sendVerificationEmail(email, id) {
     from: process.env.EMAIL_USER,
     to: email,
     subject: "Lorem Email Verification",
-    html: `<a target="_blank" href="${process.env.HTTP_CLIENT}/auth/verify?token=${token}">verify</a>`,
+    html: `<a target="_blank" href="${process.env.HTTP_CLIENT}${process.env.HTTP_CLIENT_PATH}/auth/verify?token=${token}">verify</a>`,
   });
 }
 

@@ -15,7 +15,7 @@ async function sendResetPasswordEmail(email, id) {
     from: process.env.EMAIL_USER,
     to: email,
     subject: "Lorem Password Reset",
-    html: `<a target="_blank" href="${process.env.HTTP_CLIENT}/auth/reset?token=${token}">reset password</a>`,
+    html: `<a target="_blank" href="${process.env.HTTP_CLIENT}${process.env.HTTP_CLIENT_PATH}/auth/reset?token=${token}">reset password</a>`,
   });
 }
 
