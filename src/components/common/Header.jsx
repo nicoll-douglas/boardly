@@ -7,8 +7,12 @@ export default function Header({ children }) {
       height={"72px"}
       position={"sticky"}
       top={0}
-      bg={"gray.800"}
+      px={4}
       as={"header"}
+      zIndex={100}
+      style={{
+        backdropFilter: "blur(10px)",
+      }}
     >
       {children}
     </Flex>

@@ -1,0 +1,66 @@
+{
+  "responses": {
+    "200": [
+      {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "profile": {
+            "_id": "123",
+            "username": "username123",
+            "avatar": null,
+            "age": 24,
+            "bio": "Hello, I am username123",
+            "pronouns": "they/them",
+            "createdAt": "2024-09-19T18:41:23.430Z",
+            "threads": [],
+            "replies": [],
+            "boards": []
+          },
+          "user": {
+            "id": "123",
+            "username": "username123"
+          }
+        }
+      },
+      {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "profile": {
+            "_id": "123",
+            "username": "username123",
+            "avatar": null,
+            "age": 24,
+            "bio": "This is my new bio!",
+            "pronouns": "they/them",
+            "createdAt": "2024-09-19T18:41:23.430Z",
+            "threads": [],
+            "replies": [],
+            "boards": []
+          },
+          "user": {
+            "id": "123",
+            "username": "username123"
+          }
+        }
+      }
+    ],
+    "200User": {
+      "statusCode": 200,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": {
+        "user": {
+          "id": "123",
+          "username": "username123"
+        }
+      }
+    }
+  }
+}

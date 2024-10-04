@@ -24,6 +24,8 @@ const FormControl = forwardRef(
       helperText,
       helpersAsList = true,
       password,
+      inputTestId,
+      errorTestId,
       ...rest
     },
     ref
@@ -36,12 +38,22 @@ const FormControl = forwardRef(
       >
         <FormLabel>{label}</FormLabel>
         {password ? (
-          <PasswordInput placeholder={placeholder} ref={ref} {...rest} />
+          <PasswordInput
+            data-cy={inputTestId}
+            placeholder={placeholder}
+            ref={ref}
+            {...rest}
+          />
         ) : (
-          <Input placeholder={placeholder} ref={ref} {...rest} />
+          <Input
+            data-cy={inputTestId}
+            placeholder={placeholder}
+            ref={ref}
+            {...rest}
+          />
         )}
         <Flex alignItems={"start"} gap={2}>
-          <FormErrorMessage>
+          <FormErrorMessage data-cy={errorTestId}>
             {formRef.formState.errors[registerKey]?.message}
           </FormErrorMessage>
           {password?.forgot && (

@@ -1,0 +1,11 @@
+{
+  "email": {
+    "default": "email@gmail.com",
+    "different": "different.email@gmail.com"
+  },
+  "responses": {
+    "200": {
+      "statusCode": 200
+    }
+  }
+}

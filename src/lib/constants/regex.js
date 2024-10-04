@@ -1,5 +1,9 @@
-const lax = /^[A-Za-z0-9!@#$%^&*()\-_=+[\]{}|;:'",.<>?/~]+$/;
-const restricted = /^[a-zA-Z0-9_-]+$/;
-const laxAndWhitespace = /^[A-Za-z0-9!@#$%^&*()\-_=+[\]{}|;:'",.<>?/~\s]+$/;
+const regex = {
+  lax: {
+    noWhiteSpace: /^[A-Za-z0-9!@#$%^&*()\-_=+[\]{}|;:'",.<>?/~]*$/,
+    whiteSpace: /^[A-Za-z0-9!@#$%^&*()\-_=+[\]{}|;:'",.<>?/~\s]*$/,
+  },
+  restricted: /^[a-zA-Z0-9_.-]*$/,
+};
 
-export { lax, restricted, laxAndWhitespace };
+export default regex;

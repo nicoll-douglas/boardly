@@ -1,0 +1,21 @@
+{
+  "login": {
+    "username": "username1234",
+    "password": "password1234"
+  },
+  "responses": {
+    "200": {
+      "statusCode": 200,
+      "headers": {
+        "content-type": "application/json",
+        "Set-Cookie": "some_cookie=123456"
+      },
+      "body": {
+        "user": {
+          "id": 1234,
+          "username": "username1234"
+        }
+      }
+    }
+  }
+}
