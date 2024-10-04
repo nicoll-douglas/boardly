@@ -1,4 +1,4 @@
-import { ThreadPreview } from "@/features/Threads";
+import { ThreadPreview } from "@/features/threads";
 import {
   Card,
   CardBody,
