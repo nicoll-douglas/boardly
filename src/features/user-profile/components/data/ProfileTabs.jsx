@@ -25,6 +25,8 @@ export default function ProfileTabs() {
       size={"sm"}
       minH={{ md: "calc(100vh - 88px)" }}
       maxW={"full"}
+      as={"section"}
+      aria-label="Activity"
     >
       <CardHeader>
         <ControlBar />

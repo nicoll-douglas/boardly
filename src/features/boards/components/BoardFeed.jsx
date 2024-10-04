@@ -11,6 +11,7 @@ import {
   Image,
   Text,
   SlideFade,
+  UnorderedList,
 } from "@chakra-ui/react";
 import useBoard from "../hooks/useBoard";
 import { CompactViewBtn, useCompactView } from "@/features/ui/compactView";
@@ -22,7 +23,13 @@ export default function BoardFeed() {
   const { compactView } = useCompactView();
 
   return (
-    <Card variant={{ base: "unstyled", md: "outline" }} flex={1} size={"sm"}>
+    <Card
+      variant={{ base: "unstyled", md: "outline" }}
+      flex={1}
+      size={"sm"}
+      as={"section"}
+      aria-label="Threads"
+    >
       {isLoading ? (
         <Spinner p={4} />
       ) : (
@@ -45,7 +52,13 @@ export default function BoardFeed() {
                 </Text>
               </VStack>
             ) : (
-              <VStack gap={compactView ? 2 : 3}>
+              <UnorderedList
+                gap={compactView ? 2 : 3}
+                display={"flex"}
+                flexDir={"column"}
+                listStyleType={"none"}
+                mx={0}
+              >
                 {data.board.threads
                   .sort(
                     (a, b) =>
@@ -59,7 +72,7 @@ export default function BoardFeed() {
                       isInProfile={false}
                     />
                   ))}
-              </VStack>
+              </UnorderedList>
             )}
           </CardBody>
         </SlideFade>

@@ -11,7 +11,7 @@ export default function RegisterForm({ onClose }) {
   const onSubmit = useRegister(form, onClose);
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form onSubmit={form.handleSubmit(onSubmit)} aria-label="Registration Form">
       <FormControl
         formRef={form}
         registerKey={"email"}

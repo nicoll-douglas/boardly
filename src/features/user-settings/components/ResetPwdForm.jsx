@@ -9,7 +9,10 @@ export default function ResetPwdForm() {
 
   return (
     <Ch.Box maxW={96}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        aria-label="Change Password Form"
+      >
         <CurrentPasswordField form={form} />
         <Ch.FormControl
           isRequired

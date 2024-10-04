@@ -31,6 +31,7 @@ export default function EditableControls({
           icon={<CheckIcon />}
           colorScheme="green"
           data-cy={submitId}
+          aria-label="Confirm"
           {...getSubmitButtonProps()}
         />
         <IconButton
@@ -39,6 +40,7 @@ export default function EditableControls({
           colorScheme="red"
           data-cy={cancelId}
           icon={<CloseIcon boxSize={"10px"} />}
+          aria-label="Cancel"
           {...getCancelButtonProps()}
         />
         <Spacer />

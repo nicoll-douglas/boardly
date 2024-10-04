@@ -9,6 +9,8 @@ export default function ToggleThemeBtn(props) {
       onClick={toggleColorMode}
       icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
       variant={"ghost"}
+      aria-label="Toggle dark mode"
+      aria-pressed={colorMode === "dark"}
       {...props}
     />
   );

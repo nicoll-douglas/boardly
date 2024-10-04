@@ -9,6 +9,7 @@ export default function UserSettingsBtn(props) {
       variant={"ghost"}
       as={Link}
       to={"/settings"}
+      aria-label="User Settings"
       {...props}
     />
   );

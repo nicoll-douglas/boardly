@@ -11,6 +11,7 @@ export default function ReplyCard({ reply }) {
         user={reply.author}
         reply={reply}
         replyBtn
+        as="li"
       >
         {reply.parent && (
           <>

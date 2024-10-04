@@ -29,7 +29,7 @@ export default function ThreadPreview({
   const [isMe] = useIsMe();
 
   return (
-    <LinkBox w={"full"}>
+    <LinkBox w={"full"} as={"li"}>
       <Card size={"sm"} variant={"filled"}>
         <CardHeader>
           <Flex w={"full"} gap={4}>

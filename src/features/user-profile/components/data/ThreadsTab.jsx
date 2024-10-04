@@ -16,7 +16,12 @@ export default function ThreadsTab() {
 
   return (
     <SlideFade in={!!data} offsetY={10}>
-      <VStack gap={compactView ? 2 : 3} flex={1}>
+      <VStack
+        gap={compactView ? 2 : 3}
+        flex={1}
+        as={"ul"}
+        listStyleType={"none"}
+      >
         {data.threads.length === 0 ? (
           <NoData
             text={

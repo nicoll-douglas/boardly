@@ -17,7 +17,12 @@ export default function RepliesTab() {
 
   return (
     <SlideFade in={!!data} offsetY={10}>
-      <VStack gap={compactView ? 2 : 3} flex={1}>
+      <VStack
+        gap={compactView ? 2 : 3}
+        flex={1}
+        as={"ul"}
+        listStyleType={"none"}
+      >
         {data.replies.length === 0 ? (
           <NoData
             text={

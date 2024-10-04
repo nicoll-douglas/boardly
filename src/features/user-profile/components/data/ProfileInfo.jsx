@@ -15,6 +15,8 @@ export default function ProfileInfo() {
       h={{ md: "calc(100vh - 88px)" }}
       size={"sm"}
       overflowY={"auto"}
+      as={"section"}
+      aria-label="Profile Info"
     >
       {isLoading ? (
         <Spinner p={4} flex={1} />

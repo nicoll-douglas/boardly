@@ -69,6 +69,7 @@ export default function AvatarEditable() {
               colorScheme="red"
               icon={<DeleteIcon />}
               onClick={onDelete}
+              aria-label="Remove avatar"
             />
           )
         ) : (
@@ -79,6 +80,7 @@ export default function AvatarEditable() {
               icon={<CheckIcon />}
               colorScheme="green"
               onClick={onEdit}
+              aria-label="Confirm"
             />
             <IconButton
               variant={"ghost"}
@@ -86,6 +88,7 @@ export default function AvatarEditable() {
               colorScheme="red"
               icon={<CloseIcon boxSize={"10px"} />}
               onClick={handleReset}
+              aria-label="Cancel"
             />
           </Flex>
         )}

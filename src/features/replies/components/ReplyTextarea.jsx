@@ -39,7 +39,7 @@ export default function ReplyTextarea({
   );
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form onSubmit={form.handleSubmit(onSubmit)} aria-label="Reply to thread">
       <Ch.FormControl isRequired isInvalid={form.formState.errors.body} mb={2}>
         <Ch.Textarea
           rows={4}

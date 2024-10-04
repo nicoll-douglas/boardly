@@ -37,7 +37,13 @@ export default function BoardInfo({ variant = "xl", data, isLoading }) {
   };
 
   return (
-    <Card size={"sm"} overflowY={"auto"} {...variantStyles[variant]}>
+    <Card
+      size={"sm"}
+      overflowY={"auto"}
+      {...variantStyles[variant]}
+      as={"section"}
+      aria-label="Board Info"
+    >
       {isLoading ? (
         <Spinner />
       ) : (

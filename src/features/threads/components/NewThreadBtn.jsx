@@ -15,6 +15,7 @@ export default function NewThreadBtn({ btnStyle, currentBoardName, ...rest }) {
           variant="ghost"
           size={"sm"}
           onClick={onOpen}
+          aria-label="New Thread"
           {...rest}
         />
         <Modal

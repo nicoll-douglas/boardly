@@ -49,6 +49,7 @@ export default function DeleteThreadBtn({ threadId, boardName }) {
         size={"xs"}
         onClick={onOpen}
         zIndex={80}
+        aria-label="Delete thread"
       />
       <AlertDialog isOpen={isOpen} onClose={onClose} size={"sm"}>
         <AlertDialogOverlay />

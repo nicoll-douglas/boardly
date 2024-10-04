@@ -22,7 +22,13 @@ export default function Feed() {
   const { compactView } = useCompactView();
 
   return (
-    <Card variant={{ base: "unstyled", md: "outline" }} flex={1} size={"sm"}>
+    <Card
+      variant={{ base: "unstyled", md: "outline" }}
+      flex={1}
+      size={"sm"}
+      as={"section"}
+      aria-label="Recent Threads"
+    >
       {isLoading ? (
         <Spinner p={4} />
       ) : (
@@ -45,7 +51,11 @@ export default function Feed() {
                 </Text>
               </VStack>
             ) : (
-              <VStack gap={compactView ? 2 : 3}>
+              <VStack
+                gap={compactView ? 2 : 3}
+                as={"ul"}
+                listStyleType={"none"}
+              >
                 {data.threads
                   .sort(
                     (a, b) =>

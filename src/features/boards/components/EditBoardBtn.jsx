@@ -44,6 +44,7 @@ export default function EditBoardBtn({ board, ...props }) {
         size={"xs"}
         icon={<EditIcon />}
         onClick={onOpen}
+        aria-label="Edit board"
         {...props}
       />
       <FormModal
@@ -51,7 +52,10 @@ export default function EditBoardBtn({ board, ...props }) {
         isOpen={isOpen}
         onClose={onClose}
       >
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          aria-label="Edit Board Form"
+        >
           <RulesFormControl
             initialLength={board.rules?.length ?? 0}
             form={form}

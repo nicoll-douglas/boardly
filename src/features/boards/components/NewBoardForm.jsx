@@ -17,7 +17,7 @@ export default function NewBoardForm({ onClose }) {
   const { form, onSubmit } = useCreateBoard(onClose);
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form onSubmit={form.handleSubmit(onSubmit)} aria-label="New Board Form">
       <FormControl isRequired isInvalid={form.formState.errors.name} mb={6}>
         <FormLabel>Name</FormLabel>
         <Input

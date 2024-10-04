@@ -13,6 +13,8 @@ export default function ThreadCard({ thread }) {
       ]}
       user={thread.author}
       mb={2}
+      as="main"
+      aria-label="Thread"
     >
       <Heading size={"md"}>{thread.title}</Heading>
       {thread.body && (

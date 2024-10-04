@@ -19,6 +19,8 @@ export default function BoardsList() {
         size={"sm"}
         overflowY={"auto"}
         display={{ base: "none", md: "flex" }}
+        aria-label="Boards"
+        as={"section"}
       >
         {isLoading ? (
           <Spinner display={{ base: "none", md: "flex" }} p={4} />

@@ -8,7 +8,7 @@ export default function LoginForm() {
   const onSubmit = useLogin(form);
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form onSubmit={form.handleSubmit(onSubmit)} aria-label="Login Form">
       <FormControl
         label="Username"
         formRef={form}

@@ -8,7 +8,10 @@ export default function ForgotPwdForm() {
   const onSubmit = useForgotPassword(form);
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form
+      onSubmit={form.handleSubmit(onSubmit)}
+      aria-label="Forgort Password Form"
+    >
       <FormControl
         formRef={form}
         registerKey="email"

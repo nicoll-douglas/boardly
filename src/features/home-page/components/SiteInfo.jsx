@@ -38,7 +38,13 @@ export default function SiteInfo({ variant = "xl" }) {
   };
 
   return (
-    <Card size={"sm"} overflowY={"auto"} {...variantStyles[variant]}>
+    <Card
+      size={"sm"}
+      overflowY={"auto"}
+      {...variantStyles[variant]}
+      as={"section"}
+      aria-label="Site Info"
+    >
       {isLoading ? (
         <Spinner />
       ) : (

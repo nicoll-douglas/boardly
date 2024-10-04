@@ -48,6 +48,7 @@ export default function DeleteReplyBtn({ replyId, threadId }) {
         size={"xs"}
         onClick={onOpen}
         zIndex={80}
+        aria-label="Delete reply"
       />
       <AlertDialog isOpen={isOpen} onClose={onClose} size={"sm"}>
         <AlertDialogOverlay />

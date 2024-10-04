@@ -42,7 +42,12 @@ export default function WelcomeCard() {
 
   return (
     <Popover isOpen={isOpen} closeOnBlur>
-      <Card size={"sm"} variant={"outline"}>
+      <Card
+        size={"sm"}
+        variant={"outline"}
+        as={"section"}
+        aria-labelledby="welcome-heading"
+      >
         <CardBody>
           <SlideFade
             in={true}
@@ -56,16 +61,24 @@ export default function WelcomeCard() {
                 minW={"fit-content"}
                 flexDir={{ base: "column", lg: "row" }}
               >
-                <Image height={275} width={275} src={welcomeUrl} />
+                <Image
+                  height={275}
+                  width={275}
+                  src={welcomeUrl}
+                  alt="Welcome"
+                />
                 <Flex flexDir={"column"}>
-                  <Heading mb={1}>Welcome to Lorem!</Heading>
+                  <Heading mb={1} id="welcome-heading">
+                    Welcome to Lorem!
+                  </Heading>
                   <Text mb={2} fontSize={fontSize}>
                     Lorem is a small-scale messaging board where you can post
                     threads to variant different boards, reply to users,
-                    customise your profile and more. This application was worked
-                    on for 3-4 months, and today marks its completion.
+                    customise your profile and more. This proof-of-concept
+                    application was worked on for 3-4 months and was built
+                    React, MongoDB, NodeJS and ExpressJS.
                   </Text>
-                  <Text fontSize={fontSize} mb={2}>
+                  <Text fontSize={fontSize} mb={2} lineHeight={0.9}>
                     Check out my{" "}
                     <Button
                       fontSize={fontSize}

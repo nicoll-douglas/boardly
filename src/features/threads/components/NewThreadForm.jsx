@@ -48,7 +48,7 @@ export default function NewThreadForm({ closeFormModal, currentBoardName }) {
   );
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form onSubmit={form.handleSubmit(onSubmit)} aria-label="New Thead Form">
       <Ch.FormControl isRequired mb={6} isInvalid={form.formState.errors.board}>
         <Ch.FormLabel>Board</Ch.FormLabel>
         <Ch.Select

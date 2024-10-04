@@ -17,7 +17,12 @@ export default function BoardsTab() {
 
   return (
     <SlideFade in={!!data} offsetY={10}>
-      <VStack gap={compactView ? 1 : 2} flex={1}>
+      <VStack
+        gap={compactView ? 1 : 2}
+        flex={1}
+        as={"ul"}
+        listStyleType={"none"}
+      >
         {data.boards.length === 0 ? (
           <NoData
             text={

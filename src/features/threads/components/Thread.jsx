@@ -43,6 +43,8 @@ export default function Thread() {
                 gap={{ base: 2, sm: 3 }}
                 mt={{ base: 2, sm: 3 }}
                 alignItems={"stretch"}
+                as={"ul"}
+                aria-label="Thread Replies"
               >
                 {data.thread.replies
                   .sort(

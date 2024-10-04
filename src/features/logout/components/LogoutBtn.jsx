@@ -11,7 +11,12 @@ export default function LogoutBtn({ variant }) {
   return (
     <>
       {variant !== "text" ? (
-        <Ch.IconButton icon={<MdLogout />} variant={"ghost"} onClick={onOpen} />
+        <Ch.IconButton
+          icon={<MdLogout />}
+          variant={"ghost"}
+          onClick={onOpen}
+          aria-label="Logout"
+        />
       ) : (
         <Ch.Button rightIcon={<MdLogout />} onClick={onOpen}>
           Logout

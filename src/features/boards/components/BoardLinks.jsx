@@ -1,4 +1,4 @@
-import { VStack } from "@chakra-ui/react";
+import { ListItem, UnorderedList } from "@chakra-ui/react";
 import BoardLink from "./BoardLink";
 import NothingToShow from "./NothingToShow";
 import boardUrl from "@/assets/images/board.svg";
@@ -23,11 +23,19 @@ export default function BoardLinks({ filteredList, dataList }) {
           text={"Try something else"}
         />
       ) : (
-        <VStack gap={1}>
+        <UnorderedList
+          gap={1}
+          display={"flex"}
+          flexDir={"column"}
+          listStyleType={"none"}
+          mx={0}
+        >
           {filteredList.map((board) => (
-            <BoardLink key={board._id} board={board} />
+            <ListItem key={board._id}>
+              <BoardLink board={board} />
+            </ListItem>
           ))}
-        </VStack>
+        </UnorderedList>
       )}
     </>
   );

@@ -10,7 +10,7 @@ export default function NewPwdForm({ token }) {
   const onSubmit = useNewPwd(form, token);
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form onSubmit={form.handleSubmit(onSubmit)} aria-label="New Password Form">
       <FormControl
         formRef={form}
         registerKey="password"
