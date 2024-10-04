@@ -3,8 +3,8 @@ const config = {
     accessTime: 5 * 60 * 1000,
   },
   fetch: {
-    queriesEnabled: false,
-    privilegeEnabled: false,
+    queriesEnabled: true,
+    privilegeEnabled: true,
   },
   userPrivilege: {
     basic: 0,
