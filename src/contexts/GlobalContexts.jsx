@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import theme from "@/theme";
@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 
 export default function GlobalContexts({ children }) {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <QueryClientProvider client={queryClient}>
         <ChakraProvider theme={theme}>
           <AuthProvider>
@@ -17,6 +17,6 @@ export default function GlobalContexts({ children }) {
           </AuthProvider>
         </ChakraProvider>
       </QueryClientProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
