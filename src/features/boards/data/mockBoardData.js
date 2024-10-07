@@ -17,7 +17,7 @@ function newThread() {
     author: {
       _id: `user-${faker.string.uuid()}`,
       username: faker.internet.userName(),
-      deleted: true,
+      deleted: false,
     }, // author info
     deleted: false,
   };
@@ -34,7 +34,7 @@ const boardData = {
     createdAt: faker.date.recent(),
     admin: {
       username: faker.internet.userName(),
-      deleted: true,
+      deleted: false,
     },
     rules: faker.lorem.paragraphs({ min: 1, max: 3 }, "\n\n"),
   },

@@ -17,14 +17,14 @@ function newReply() {
       board: {
         _id: `board-${faker.string.uuid()}`, // board id where thread/reply lives for new fetch
         name: faker.word.noun(), // board name
-        deleted: Math.random() < 0.1,
+        deleted: false,
       },
       author: {
         _id: `author-${faker.string.uuid()}`, // thread author id for new fetch (reply might be to author)
         username: faker.internet.userName(), // author name
-        deleted: true,
+        deleted: false,
       },
-      deleted: Math.random() > 0.8,
+      deleted: false,
     },
     parent:
       Math.random() < 0.5
@@ -34,9 +34,9 @@ function newReply() {
             author: {
               _id: `author-${faker.string.uuid()}`, // parent author id
               username: faker.internet.userName(), // parent author username
-              deleted: true,
+              deleted: false,
             },
-            deleted: true,
+            deleted: false,
           }
         : null, // parent may be reply, otherwise it is implicitly the thread
   };

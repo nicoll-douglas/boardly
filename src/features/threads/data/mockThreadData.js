@@ -46,7 +46,7 @@ const threadData = {
       admin: {
         _id: faker.string.uuid(),
         username: faker.internet.userName(),
-        deleted: true,
+        deleted: false,
       },
       threads: Array.from(
         { length: faker.number.int({ min: 0, max: 30 }) },
@@ -54,13 +54,13 @@ const threadData = {
       ),
       createdAt: faker.date.recent({ days: 45 }),
       rules: faker.lorem.paragraphs({ min: 1, max: 3 }, "\n\n"),
-      deleted: Math.random() < 0.4,
+      deleted: false,
     },
     author: {
       _id: `user-${faker.string.uuid()}`,
       username: faker.internet.userName(),
       avatar: faker.image.avatar(),
-      deleted: true,
+      deleted: false,
     },
     replies: getReplies(10),
     deleted: false,

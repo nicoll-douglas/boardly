@@ -17,7 +17,7 @@ function newThread() {
     author: {
       _id: `user-${faker.string.uuid()}`,
       username: faker.internet.userName(),
-      deleted: true,
+      deleted: false,
     }, // author info
     board: {
       _id: faker.string.uuid(),
