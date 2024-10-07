@@ -52,6 +52,10 @@ Some features I plan to add when I have more time to work on this project and fu
 
 If you have any feedback, please send me an email at dev.nicoll.douglas@gmail.com. I'm constantly looking for ways in which I can improve as a developer!
 
+## Related
+
+[Lorem (Backend)](https://github.com/nicoll-douglas/lorem-backend)
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
