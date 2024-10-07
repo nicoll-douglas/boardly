@@ -12,6 +12,7 @@ async function createBoard(quantity = 1) {
     let board = await new Board({
       name: faker.word.noun(),
       admin: admin._id,
+      rules: faker.lorem.paragraphs({ min: 1, max: 3 }, "\n\n"),
     }).save();
 
     admin.boards.push(board._id);

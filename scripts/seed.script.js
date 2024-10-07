@@ -10,8 +10,8 @@ async function seed() {
   faker.seed(process.env.FAKER_SEED);
   await createSelf();
   console.log("info: creating boards...");
-  await createBoard(5);
-  console.log("info: successfully created 5 boards");
+  await createBoard(10);
+  console.log("info: successfully created 10 boards");
 }
 
 setupAndRun(seed);
