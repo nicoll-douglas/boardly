@@ -27,7 +27,7 @@ Lorem is a messaging board app where users can connect through user-created boar
 
 ## Demo
 
-![Demo](https://github.com/nicoll-douglas/portfolio-website/blob/main/public/projects/lorem.lorem-demo.gif?raw=true)
+![Demo](https://github.com/nicoll-douglas/portfolio-website/blob/main/public/projects/lorem/lorem-demo.gif?raw=true)
 
 ## Technologies (Frontend)
 
