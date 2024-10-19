@@ -42,7 +42,7 @@ Lorem is a messaging board app where users can connect through user-created boar
 
 - Scalability
 
-  - Design with RESTful principles and MVC in mind, ensuring scalability and flexibility in API consumption.
+  - Designed with RESTful principles and MVC in mind, ensuring scalability and flexibility in API consumption.
 
 ## Feedback
 
