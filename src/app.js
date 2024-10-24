@@ -10,10 +10,12 @@ const customMethods = require("./middleware/global/customMethods");
 const errorHandler = require("./middleware/global/errorHandler");
 const notFoundHandler = require("./middleware/global/notFoundHandler");
 const devLogger = require("./middleware/logging/devLogger");
+const createDemo = require("./middleware/global/createDemo");
 
 const verifyAuth = require("@/middleware/auth/verifyAuth");
 
 const app = express();
+createDemo();
 
 app.use(cors(config.corsOptions));
 app.use(cookieParser());
@@ -25,6 +27,7 @@ app.use(customMethods);
 
 // unprotected routes
 app.use("/api/auth", require("./routers/auth.router"));
+app.use("/api/demo", require("./routers/demo.router"));
 
 // protected routes
 app.use(verifyAuth);
