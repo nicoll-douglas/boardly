@@ -74,9 +74,7 @@ export default function WelcomeCard() {
                   <Text mb={2} fontSize={fontSize}>
                     Lorem is a small-scale messaging board where you can post
                     threads to varous different boards, reply to users,
-                    customise your profile and more. This application was worked
-                    on for 3-4 months and was built with React, MongoDB, NodeJS
-                    and ExpressJS.
+                    customise your profile and more. Try it out!
                   </Text>
                   <Text fontSize={fontSize} mb={2} lineHeight={0.9}>
                     Check out my{" "}

@@ -3,9 +3,11 @@ import { passwordValidation } from "@/features/auth";
 import { helperText } from "@/lib/constants";
 import useResetPwd from "../hooks/useResetPwd";
 import CurrentPasswordField from "./CurrentPasswordField";
+import { useProfile } from "@/features/user-profile";
 
 export default function ResetPwdForm() {
   const { form, onSubmit } = useResetPwd();
+  const { data } = useProfile();
 
   return (
     <Ch.Box maxW={96}>
@@ -59,6 +61,7 @@ export default function ResetPwdForm() {
           type="submit"
           w={"full"}
           isLoading={form.formState.isSubmitting}
+          isDisabled={data?.profile.username === "DEMO_USER"}
         >
           Submit
         </Ch.Button>

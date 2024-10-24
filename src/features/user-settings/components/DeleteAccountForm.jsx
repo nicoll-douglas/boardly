@@ -3,11 +3,13 @@ import CurrentPasswordField from "./CurrentPasswordField";
 import useDeleteAccount from "../hooks/useDeleteAccount";
 import { useRef } from "react";
 import { DeleteIcon } from "@chakra-ui/icons";
+import { useProfile } from "@/features/user-profile";
 
 export default function DeleteAccountForm() {
   const { form, onSubmit } = useDeleteAccount();
   const { isOpen, onOpen, onClose } = Ch.useDisclosure();
   const cancelRef = useRef();
+  const { data } = useProfile();
 
   return (
     <Ch.Box maxW={96}>
@@ -18,6 +20,7 @@ export default function DeleteAccountForm() {
         w={"full"}
         onClick={form.handleSubmit(onOpen)}
         isLoading={form.formState.isSubmitting}
+        isDisabled={data?.profile.username === "DEMO_USER"}
       >
         Submit
       </Ch.Button>

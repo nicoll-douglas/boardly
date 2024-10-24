@@ -49,6 +49,7 @@ export default function DeleteBoardBtn({ board }) {
         onClick={onOpen}
         zIndex={80}
         aria-label="Delete board"
+        isDisabled={board.name === "DEMO_BOARD"}
       />
       <AlertDialog isOpen={isOpen} onClose={onClose} size={"sm"}>
         <AlertDialogOverlay />

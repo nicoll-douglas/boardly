@@ -45,6 +45,7 @@ export default function EditBoardBtn({ board, ...props }) {
         icon={<EditIcon />}
         onClick={onOpen}
         aria-label="Edit board"
+        isDisabled={board.name === "DEMO_BOARD"}
         {...props}
       />
       <FormModal
