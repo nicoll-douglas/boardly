@@ -17,6 +17,8 @@ import { Container, Logo, Header } from "@/components/common";
 import ToggleableForm from "@/features/ui/formToggle";
 import { RegisterBtn, LoginBtn } from "@/features/auth";
 import ToggleThemeBtn from "@/features/ui/dark-mode";
+import { TryDemoBtn } from "@/features/demo";
+import MobileMenu from "@/features/ui/mobileMenu";
 
 import chattingUrl from "@/assets/images/chatting.svg";
 
@@ -39,12 +41,18 @@ export default function Index() {
       <Header>
         <Logo to="/" />
         <Spacer />
-        <ToggleThemeBtn />
-        <LoginBtn ml={4} data-cy="LoginForm-open" onClick={openLoginForm} />
+        <TryDemoBtn display={{ base: "none", md: "flex" }} />
+        <LoginBtn
+          ml={6}
+          data-cy="LoginForm-open"
+          onClick={openLoginForm}
+          display={{ base: "none", md: "flex" }}
+        />
         <RegisterBtn
           ml={6}
           data-cy="RegisterForm-open"
           onClick={openRegisterForm}
+          display={{ base: "none", md: "flex" }}
         />
         <ToggleableForm
           isOpen={isOpen}
@@ -52,6 +60,8 @@ export default function Index() {
           onClose={onClose}
           onToggle={() => setIsLoginForm(!isLoginForm)}
         />
+        <ToggleThemeBtn ml={3} />
+        <MobileMenu display={{ base: "flex", md: "none" }} ml={1} />
       </Header>
       <Center flex={1} mt={12} px={4}>
         <VStack gap={4} maxW={"2xl"} as={"main"}>
