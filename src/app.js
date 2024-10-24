@@ -10,12 +10,12 @@ const customMethods = require("./middleware/global/customMethods");
 const errorHandler = require("./middleware/global/errorHandler");
 const notFoundHandler = require("./middleware/global/notFoundHandler");
 const devLogger = require("./middleware/logging/devLogger");
-const createDemo = require("./middleware/global/createDemo");
+const seed = require("../scripts/helpers/seed");
 
 const verifyAuth = require("@/middleware/auth/verifyAuth");
 
 const app = express();
-createDemo();
+seed();
 
 app.use(cors(config.corsOptions));
 app.use(cookieParser());

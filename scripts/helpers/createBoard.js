@@ -12,16 +12,13 @@ async function createBoard(quantity = 1) {
     let board = await new Board({
       name: faker.word.noun(),
       admin: admin._id,
-      rules: faker.lorem.paragraphs({ min: 1, max: 3 }, "\n\n"),
+      rules: faker.lorem.paragraphs({ min: 1, max: 2 }, "\n\n"),
     }).save();
 
     admin.boards.push(board._id);
     await admin.save();
 
-    const threads = await createThread(
-      faker.number.int({ min: 0, max: 10 }),
-      board._id
-    );
+    const threads = await createThread(3, board._id);
     board.threads = threads.map((thread) => thread._id);
     board = await board.save();
 

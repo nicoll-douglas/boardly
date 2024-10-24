@@ -1,15 +1,14 @@
-const { User } = require("@/models");
+const { User, Board } = require("@/models");
 
 async function createSelf() {
-  console.log("info: creating self...");
-  const username = process.env.SEED_USER;
-  const password = process.env.SEED_PASS;
+  await User.deleteOne({ username: "DEMO_USER" });
+  await Board.deleteOne({ name: "DEMO_BOARD" });
 
-  const user = new User({ username, verified: true });
-  await user.setPassword(password);
-  await user.save();
+  await new User({
+    username: "DEMO_USER",
+  }).save();
 
-  console.log(`info: self created. USER=${username} PASS=${password}`);
+  console.log("info: created demo user");
 }
 
 module.exports = createSelf;

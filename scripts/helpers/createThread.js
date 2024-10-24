@@ -13,7 +13,7 @@ async function createThread(quantity = 1, boardId) {
       title: faker.lorem.sentence(),
       body:
         Math.random() < 0.75
-          ? faker.lorem.paragraphs({ min: 1, max: 4 }, "\n\n")
+          ? faker.lorem.paragraphs({ min: 1, max: 2 }, "\n\n")
           : undefined,
       author: author._id,
       board: boardId,
@@ -23,7 +23,7 @@ async function createThread(quantity = 1, boardId) {
     await author.save();
 
     const replies = await createReply(
-      faker.number.int({ min: 0, max: 10 }),
+      faker.number.int({ min: 0, max: 2 }),
       thread._id,
       true
     );
