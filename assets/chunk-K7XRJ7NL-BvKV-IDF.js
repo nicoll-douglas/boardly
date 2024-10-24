@@ -1,0 +1,1 @@
+import{h as o,al as t,o as l,j as c,i as k,k as m}from"./index-BGfUVu-S.js";var x=o(function(a,e){const n=t("Link",a),{className:i,isExternal:s,...r}=l(a);return c.jsx(k.a,{target:s?"_blank":void 0,rel:s?"noopener":void 0,ref:e,className:m("chakra-link",i),...r,__css:n})});x.displayName="Link";export{x as L};
