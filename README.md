@@ -1,56 +1,46 @@
-# Lorem (Backend)
+# Boardly (Backend)
 
-Lorem is a messaging board app where users can connect through user-created boards, threads and replies. This is the backend/API that powers the core features of the application.
+Boardly is a demo messaging board app where users can connect through user-created boards, threads, and replies whilst experiencing a modern and intuitive UI/UX. This is the backend/API of the project that powers the application.
 
-## Technologies
-
-- MongoDB + Mongoose
-- Node.js + Express.js
-- Firebase/Google Cloud
-- JWT Auth
+[![Link](https://img.shields.io/badge/Live_At-https://demo.boardly.nicolldouglas.dev-fbd38d)](https://demo.boardly.nicolldouglas.dev)
 
 ## Features
 
 - User Authentication & Security
 
-  - Implements JWT-based authentication for secure user login and session management.
-  - Ensures secure handling of user inputs through validation and sanitization.
-  - Protects routes with authentication middleware for sensitive operations.
+  - JWT-based authentication for secure user login and session management 🪙.
+  - Secure handling of user inputs through validation and sanitization 🧼.
+  - Protects sensitive routes with authentication middleware 🔒.
 
-- User Accounts
+- Account Management
 
-  - **Registration**: Facilitates the creation of new accounts with validation for secure signup.
-  - **Login**: Authenticated users can log in securely using JWT and access protected resources.
-  - **Password Management**: Implements routes for changing and resetting passwords.
-  - **Account Deletion**: Users can permanently delete their accounts along with associated data.
+  - Facilitates the creation of new accounts with email verification ✉️.
+  - Includes routes for changing and resetting passwords 🔐.
+  - Implements a route to facilitate account deletion 🗑️.
 
-- Data Persistence with MongoDB
+- Data Persistence
 
-  - Integrates with MongoDB for efficient data storage and retrieval.
-  - Implements schema validation and model-based operations using Mongoose.
+  - Integrates with MongoDB for efficient data storage and retrieval using Mongoose 📊.
+  - Utilizes Firebase Admin SDK to integrate media storage, enhancing user profile management and customisation 🖼️.
 
-- Firebase Integration
+- Scalable Architecture
 
-  - Utilizes Firebase Admin SDK for handling media storage.
-  - Stores user-uploaded profile pictures and other media securely in Firebase Storage.
-  - Easily retrieves and manages media files for user profiles, enhancing account management and customisation.
+  - Produces consistent and informative error responses for all API endpoints 🔔.
+  - Designed with RESTful principles and MVC in mind, ensuring scalability and flexibility in API consumption ⚒️.
 
-- Error Handling & Response Standardization
+## Technologies
 
-  - Consistent and informative error responses for all API endpoints.
-  - Custom middleware for centralized error handling and logging.
+This project is built with the MERN stack. Some key packages used on the backend include Mongoose, Joi, and Express.js.
 
-- Scalability
+### Stack
 
-  - Designed with RESTful principles and MVC in mind, ensuring scalability and flexibility in API consumption.
-
-## Feedback
-
-If you have any feedback about this project, please send me an email at dev.nicoll.douglas@gmail.com!
+[![Stack](https://skillicons.dev/icons?i=js,react,nodejs,expressjs,mongodb,firebase)](https://skillicons.dev)
 
 ## Related
 
-[Lorem (Frontend)](https://github.com/nicoll-douglas/lorem-frontend)
+Check out the frontend repo which facilitates the application client:
+
+[boardly-frontend](https://github.com/nicoll-douglas/boardly-frontend)
 
 ## License
 
