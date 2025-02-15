@@ -40,7 +40,7 @@ export default function useEmailVerification(token) {
   const onData = () => {
     setUIFeedback({
       heading: "Email Verified",
-      text: "You will be redirected shortly, welcome to Lorem!",
+      text: "You will be redirected shortly, welcome to Boardly!",
     });
     // setCurrentUser(data.user);
     const timeout = setTimeout(() => {

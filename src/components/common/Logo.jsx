@@ -15,7 +15,7 @@ export default function Logo(props) {
       as={Link}
       {...props}
     >
-      Lorem
+      Boardly
     </Button>
   );
 }

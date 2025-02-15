@@ -26,7 +26,7 @@ describe("emailVerification", () => {
     cy.scope(key, "feedback-heading").should("contain", "Email Verified");
     cy.scope(key, "feedback-text").should(
       "contain",
-      "You will be redirected shortly, welcome to Lorem!"
+      "You will be redirected shortly, welcome to Boardly!"
     );
     cy.wait(3000);
     cy.url().should("include", "/home");

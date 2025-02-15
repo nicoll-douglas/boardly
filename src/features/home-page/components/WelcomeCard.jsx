@@ -69,12 +69,13 @@ export default function WelcomeCard() {
                 />
                 <Flex flexDir={"column"}>
                   <Heading mb={1} id="welcome-heading">
-                    Welcome to Lorem!
+                    Welcome to Boardly!
                   </Heading>
                   <Text mb={2} fontSize={fontSize}>
-                    Lorem is a small-scale messaging board where you can post
-                    threads to varous different boards, reply to users,
-                    customise your profile and more. Try it out!
+                    Boardly is a demo messaging board where you can post threads
+                    to various different boards, reply to users, customise your
+                    profile and more. This is a non-production environment so
+                    try it out!
                   </Text>
                   <Text fontSize={fontSize} mb={2} lineHeight={0.9}>
                     Check out my{" "}
@@ -94,7 +95,7 @@ export default function WelcomeCard() {
                         variant={"link"}
                         onClick={handleCopyEmail}
                       >
-                        dev.nicoll.douglas@gmail.com
+                        me@nicolldouglas.dev
                       </Button>
                     </PopoverTrigger>
                     .
