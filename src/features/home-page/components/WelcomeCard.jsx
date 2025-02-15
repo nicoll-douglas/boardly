@@ -27,7 +27,7 @@ export default function WelcomeCard() {
     if (!isOpen) {
       onOpen();
       try {
-        navigator.clipboard.writeText("dev.nicoll.douglas@gmail.com");
+        navigator.clipboard.writeText("me@nicolldouglas.dev");
       } catch (err) {
         console.log(err);
       }
