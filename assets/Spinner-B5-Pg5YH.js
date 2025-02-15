@@ -1,0 +1,1 @@
+import{az as o,j as e,w as r,S as a}from"./index-CfX38i0E.js";const p={display:"block",textOverflow:"ellipsis",overflow:"hidden",whiteSpace:"nowrap"};function l({size:s="lg",...n}){return o()&&e.jsx(r,{p:4,flex:1,...n,children:e.jsx(a,{size:s})})}export{l as S,p as n};

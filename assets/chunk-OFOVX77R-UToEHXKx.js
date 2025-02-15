@@ -1,1 +1,0 @@
-import{u as l,h as m}from"./chunk-4FCEGNGT-CWNR6xLH.js";import{h as n,r as u,k as y,j as f,i}from"./index-BGfUVu-S.js";var x=n((a,o)=>{const{className:e,...t}=a,{bodyId:r,setBodyMounted:s}=l();u.useEffect(()=>(s(!0),()=>s(!1)),[s]);const d=y("chakra-modal__body",e),c=m();return f.jsx(i.div,{ref:o,className:d,id:r,...t,__css:c.body})});x.displayName="ModalBody";export{x as M};
