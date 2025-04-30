@@ -1,0 +1,12 @@
+# Frontend Development Dockerfile
+FROM node:23-alpine
+
+WORKDIR /app
+
+COPY . .
+
+EXPOSE 5173
+
+USER node
+
+CMD ["npm", "run", "dev", "--", "--host"]

@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  frontend:
+    container_name: ${FRONTEND_APP_NAME}
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    env_file:
+      - frontend/.env.development
+    networks:
+      - boardly_network
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5173:5173"
+    volumes:
+      - ./frontend:/app
+
+  backend:
+    container_name: ${BACKEND_APP_NAME}
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    env_file:
+      - backend/.env.development
+    networks:
+      - boardly_network
+    ports:
+      - "127.0.0.1:4000:4000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6.0
+    container_name: boardly_mongo
+    volumes:
+      - boardly_mongo_data:/data/db
+    networks:
+      - boardly_network
+    ports:
+      - "127.0.0.1:27017:27017"
+
+volumes:
+  boardly_mongo_data:
+
+networks:
+  boardly_network:
+    driver: bridge
