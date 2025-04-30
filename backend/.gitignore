@@ -3,6 +3,5 @@ node_modules
 .env.development
 .env.production
 .env.test
-firebase-service-account.json
 *.log
 *.local
