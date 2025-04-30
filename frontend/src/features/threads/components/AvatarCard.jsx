@@ -68,7 +68,15 @@ export default function AvatarCard({
               <Link to={`/users/${user.username}`}>
                 <Avatar
                   name={user.username}
-                  src={user.avatar}
+                  src={
+                    user.hasAvatar
+                      ? user.hasAvatar.startsWith("http")
+                        ? user.hasAvatar // Use direct URL if it's already a full URL
+                        : `${import.meta.env.VITE_API_URL}/public/avatars/${
+                            user.hasAvatar
+                          }`
+                      : undefined
+                  }
                   borderLeftRadius={{ base: "full", sm: 0 }}
                   borderRightRadius={{ base: "full", sm: 0 }}
                   borderRadius={{ base: "full", sm: 0 }}

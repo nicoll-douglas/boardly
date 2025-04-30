@@ -13,13 +13,21 @@ exports.updateAvatar = async (req, res, next) => {
   if (!imgFile) return res.status(400)._end();
 
   try {
-    const avatarPath = path.join(AVATARS_DIR, `${user._id}`);
+    // Get file extension from mimetype
+    const fileExt = imgFile.mimetype.split('/')[1];
+    
+    // Create filename with user ID and extension
+    const filename = `${user._id}.${fileExt}`;
+    const avatarPath = path.join(AVATARS_DIR, filename);
+    
+    // Save the file with extension
     await fs.writeFile(avatarPath, imgFile.buffer);
 
-    user.hasAvatar = true;
+    // Store the filename (with extension) in the user model
+    user.hasAvatar = filename;
     await user.save();
 
-    req.log("Avatar saved to public/avatars");
+    req.log(`Avatar saved to public/avatars as ${filename}`);
     return res.status(200)._end();
   } catch (err) {
     next(err);
@@ -28,19 +36,29 @@ exports.updateAvatar = async (req, res, next) => {
 
 exports.deleteAvatar = async (req, res, next) => {
   const user = req.user;
-  const avatarPath = path.join(AVATARS_DIR, `${user._id}`);
-
+  
   try {
     req.log(`does avatar file exist?`);
-    try {
-      await fs.access(avatarPath);
-    } catch {
+    
+    // Check if user has an avatar
+    if (!user.hasAvatar) {
       req.log("doesn't exist, 404, sent");
       return res.status(404)._end();
     }
-    await fs.unlink(avatarPath);
-    req.log("file exists, deleted");
-    user.hasAvatar = false;
+    
+    // Get the avatar path using the stored filename
+    const avatarPath = path.join(AVATARS_DIR, user.hasAvatar);
+    
+    try {
+      await fs.access(avatarPath);
+      await fs.unlink(avatarPath);
+      req.log("file exists, deleted");
+    } catch (error) {
+      req.log(`File not found: ${error.message}`);
+      // Continue anyway to update user model
+    }
+    
+    user.hasAvatar = "";
     await user.save();
     req.log("200, sent");
     return res.status(200)._end();

@@ -33,7 +33,12 @@ export default function AvatarEditable() {
     return (
       <Avatar
         size={"lg"}
-        src={data.profile.avatar}
+        src={data.profile.hasAvatar ? 
+          data.profile.hasAvatar.startsWith("http") 
+            ? data.profile.hasAvatar 
+            : `${import.meta.env.VITE_API_URL}/public/avatars/${data.profile.hasAvatar}` 
+          : undefined
+        }
         name={data.profile.username}
       />
     );

@@ -15,7 +15,7 @@ async function createUser(quantity = 1) {
           : undefined,
       bio: Math.random() < 0.5 ? faker.person.bio() : undefined,
       pronouns: pronounValues[faker.number.int({ min: 0, max: 3 })],
-      hasAvatar: Math.random() < 0.75 ? faker.image.avatar() : undefined,
+      hasAvatar: Math.random() < 0.75 ? faker.image.avatar() : "",
     }).save();
     users.push(user);
   }

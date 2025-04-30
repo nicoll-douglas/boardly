@@ -9,7 +9,15 @@ import { useToast } from "@chakra-ui/react";
 
 export default function useEditAvatar() {
   const { data } = useProfile();
-  const [avatarSrc, setAvatarSrc] = useState(data.profile.avatar);
+  const [avatarSrc, setAvatarSrc] = useState(
+    data.profile.hasAvatar
+      ? data.profile.hasAvatar.startsWith("http")
+        ? data.profile.hasAvatar
+        : `${import.meta.env.VITE_API_URL}/public/avatars/${
+            data.profile.hasAvatar
+          }`
+      : undefined
+  );
   const [editHidden, setEditHidden] = useState(true);
 
   const queryClient = useQueryClient();
@@ -19,7 +27,13 @@ export default function useEditAvatar() {
 
   const handleReset = () => {
     form.reset();
-    setAvatarSrc(data.profile.avatar);
+    setAvatarSrc(
+      data.profile.hasAvatar
+        ? data.profile.hasAvatar.startsWith("http")
+          ? data.profile.hasAvatar
+          : `${import.meta.env.VITE_API_URL}/public/avatars/${data.profile.hasAvatar}`
+        : undefined
+    );
     setEditHidden(true);
     if (inputRef.current) {
       inputRef.current.value = "";
@@ -32,7 +46,16 @@ export default function useEditAvatar() {
   const editHandlers = useProtectedSubmission(() => {
     queryClient.invalidateQueries({ queryKey: ["GET /api/me"] });
     setEditHidden(true);
-    setAvatarSrc(data.profile.avatar);
+    // Need to re-fetch the data after invalidation
+    setTimeout(() => {
+      setAvatarSrc(
+        data.profile.hasAvatar
+          ? data.profile.hasAvatar.startsWith("http")
+            ? data.profile.hasAvatar
+            : `${import.meta.env.VITE_API_URL}/public/avatars/${data.profile.hasAvatar}`
+          : undefined
+      );
+    }, 100);
     toast({
       status: "success",
       title: "Successfully updated avatar",
@@ -42,7 +65,16 @@ export default function useEditAvatar() {
   const deleteHandlers = useProtectedSubmission(() => {
     queryClient.invalidateQueries({ queryKey: ["GET /api/me"] });
     setEditHidden(true);
-    setAvatarSrc(data.profile.avatar);
+    // Need to re-fetch the data after invalidation
+    setTimeout(() => {
+      setAvatarSrc(
+        data.profile.hasAvatar
+          ? data.profile.hasAvatar.startsWith("http")
+            ? data.profile.hasAvatar
+            : `${import.meta.env.VITE_API_URL}/public/avatars/${data.profile.hasAvatar}`
+          : undefined
+      );
+    }, 100);
     toast({
       status: "success",
       title: "Successfully removed avatar",

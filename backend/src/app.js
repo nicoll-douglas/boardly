@@ -6,6 +6,16 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const config = require("./config");
 const path = require("path");
+const fs = require("fs/promises");
+
+// Ensure public folders exist
+const PUBLIC_DIR = path.join(process.cwd(), "public");
+const AVATARS_DIR = path.join(PUBLIC_DIR, "avatars");
+
+// Create public and avatars directories if they don't exist
+fs.mkdir(PUBLIC_DIR, { recursive: true })
+  .then(() => fs.mkdir(AVATARS_DIR, { recursive: true }))
+  .catch(err => console.error("Error creating public directories:", err));
 
 const customMethods = require("./middleware/global/customMethods");
 const errorHandler = require("./middleware/global/errorHandler");
