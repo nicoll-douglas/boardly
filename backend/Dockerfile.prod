@@ -9,6 +9,10 @@ RUN npm install --omit=dev
 
 COPY . .
 
+# Create directories with proper permissions
+RUN mkdir -p public/avatars logs \
+    && chown -R node:node public logs
+
 EXPOSE 80
 
 USER node
