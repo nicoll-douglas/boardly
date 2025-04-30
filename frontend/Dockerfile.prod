@@ -1,0 +1,27 @@
+# Frontend Production Dockerfile
+FROM node:23-alpine AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+# Serve static files
+FROM node:23-alpine AS runner
+
+WORKDIR /app
+
+RUN npm install -g serve
+
+COPY --from=builder /app/dist ./dist
+
+EXPOSE 80
+
+USER node
+
+CMD ["serve", "-s", "dist", "-l", "80"]

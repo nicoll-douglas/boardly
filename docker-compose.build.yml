@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  frontend:
+    container_name: ${FRONTEND_APP_NAME}
+    image: ${FRONTEND_DOCKERHUB_IMAGE}
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    env_file:
+      - .env.production
+
+  backend:
+    container_name: ${BACKEND_APP_NAME}
+    image: ${BACKEND_DOCKERHUB_IMAGE}
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    env_file:
+      - .env.production

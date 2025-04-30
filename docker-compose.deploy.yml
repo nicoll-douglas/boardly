@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+  frontend:
+    image: ${FRONTEND_DOCKERHUB_IMAGE}
+    container_name: ${FRONTEND_APP_NAME}
+    environment:
+      - VIRTUAL_HOST=${FRONTEND_VIRTUAL_HOST}
+      - LETSENCRYPT_HOST=${FRONTEND_VIRTUAL_HOST}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+    networks:
+      - chattr_network
+      - nginx-proxy-network
+    restart: unless-stopped
+    env_file:
+      - .env.production
+
+  backend:
+    image: ${BACKEND_DOCKERHUB_IMAGE}
+    container_name: ${BACKEND_APP_NAME}
+    environment:
+      - VIRTUAL_HOST=${BACKEND_VIRTUAL_HOST}
+      - LETSENCRYPT_HOST=${BACKEND_VIRTUAL_HOST}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    networks:
+      - nginx-proxy-network
+      - chattr_network
+    volumes:
+      - chattr_backend_uploads:/app/public/avatars
+      - chattr_backend_logs:/app/logs
+
+  mongo:
+    image: mongo:6.0
+    restart: always
+    container_name: chattr_mongo
+    volumes:
+      - chattr_mongo_data:/data/db
+    networks:
+      - chattr_network
+    ports:
+      - "127.0.0.1:27017:27017"
+
+volumes:
+  - chattr_mongo_data:
+  - chattr_backend_uploads:
+  - chattr_backend_logs:
+
+networks:
+  nginx-proxy-network:
+    external: true
+  chattr_network:
+    driver: bridge
