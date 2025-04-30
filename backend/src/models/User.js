@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const bucket = require("@/services/firebaseStorage");
 
 const user = new mongoose.Schema(
   {
@@ -45,7 +44,7 @@ user.virtual("avatar").get(function () {
   if (process.env.NODE_ENV === "development") {
     if (this.username !== process.env.SEED_USER) return this.hasAvatar;
   }
-  return bucket.file(`avatar-${this._id.toString()}`).publicUrl();
+  return `/public/avatars/${this._id}`;
 });
 
 user.methods.setPassword = async function (password) {

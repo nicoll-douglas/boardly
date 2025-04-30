@@ -1,58 +1,49 @@
-const bucket = require("@/services/firebaseStorage");
+const fs = require("fs/promises");
+const path = require("path");
+
+// directory where avatars are stored
+const AVATARS_DIR = path.join(process.cwd(), "public", "avatars");
+
+// Ensure avatars directory exists
+fs.mkdir(AVATARS_DIR, { recursive: true }).catch(() => {});
 
 exports.updateAvatar = async (req, res, next) => {
   const user = req.user;
   const imgFile = req.file;
   if (!imgFile) return res.status(400)._end();
 
-  const file = bucket.file(`avatar-${req.user._id}`);
-  req.log("new write stream");
-  const stream = file.createWriteStream({
-    metadata: {
-      contentType: imgFile.mimetype,
-    },
-  });
+  try {
+    const avatarPath = path.join(AVATARS_DIR, `${user._id}`);
+    await fs.writeFile(avatarPath, imgFile.buffer);
 
-  stream
-    .on("error", (err) => next(err))
-    .on("finish", async () => {
-      try {
-        req.log("making file public...");
-        user.hasAvatar = true;
-        await user.save();
-        await file.makePublic();
+    user.hasAvatar = true;
+    await user.save();
 
-        req.log("200, sent");
-        return res.status(200)._end();
-      } catch (err) {
-        next(err);
-      }
-    });
-
-  req.log("writing...");
-  stream.end(imgFile.buffer);
+    req.log("Avatar saved to public/avatars");
+    return res.status(200)._end();
+  } catch (err) {
+    next(err);
+  }
 };
 
 exports.deleteAvatar = async (req, res, next) => {
   const user = req.user;
-  const file = bucket.file(`avatar-${req.user._id}`);
+  const avatarPath = path.join(AVATARS_DIR, `${user._id}`);
 
   try {
     req.log(`does avatar file exist?`);
-    const [exists] = await file.exists();
-
-    if (exists) {
-      await file.delete();
-      req.log("file exists, deleted");
-      user.hasAvatar = false;
-      await user.save();
-
-      req.log("200, sent");
-      return res.status(200)._end();
-    } else {
+    try {
+      await fs.access(avatarPath);
+    } catch {
       req.log("doesn't exist, 404, sent");
       return res.status(404)._end();
     }
+    await fs.unlink(avatarPath);
+    req.log("file exists, deleted");
+    user.hasAvatar = false;
+    await user.save();
+    req.log("200, sent");
+    return res.status(200)._end();
   } catch (err) {
     next(err);
   }

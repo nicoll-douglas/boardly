@@ -1,6 +1,7 @@
 const User = require("@/models/User");
 const bcrypt = require("bcrypt");
-const bucket = require("@/services/firebaseStorage");
+const path = require("path");
+const fs = require("fs/promises");
 
 exports.avatar = require("./avatar.controller");
 exports.replies = require("./replies.controller");
@@ -106,12 +107,23 @@ exports.deleteUser = async (req, res, next) => {
     user.hasAvatar = false;
     await user.save();
 
-    const avatar = bucket.file(`avatar-${user._id}`);
-    const [exists] = await avatar.exists();
-    if (exists) {
-      await avatar.delete();
+    const avatarPath = path.join(
+      process.cwd(),
+      "public",
+      "avatars",
+      `${user._id}`
+    );
+
+    try {
+      req.log(`does user avatar exist?`);
+      await fs.access(avatarPath);
+      await fs.unlink(avatarPath);
+      req.log("avatar exists, deleted");
+    } catch {
+      req.log("doesn't exist");
     }
 
+    req.log("200, sent");
     return res.status(200)._end();
   } catch (err) {
     return next(err);

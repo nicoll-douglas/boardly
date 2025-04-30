@@ -5,6 +5,7 @@ const cors = require("cors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const config = require("./config");
+const path = require("path");
 
 const customMethods = require("./middleware/global/customMethods");
 const errorHandler = require("./middleware/global/errorHandler");
@@ -28,6 +29,7 @@ app.use(customMethods);
 // unprotected routes
 app.use("/api/auth", require("./routers/auth.router"));
 app.use("/api/demo", require("./routers/demo.router"));
+app.use("/public", express.static(path.join(process.cwd(), "public")));
 
 // protected routes
 app.use(verifyAuth);
