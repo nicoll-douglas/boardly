@@ -44,9 +44,9 @@ services:
       - "127.0.0.1:27017:27017"
 
 volumes:
-  - chattr_mongo_data:
-  - chattr_backend_uploads:
-  - chattr_backend_logs:
+  chattr_mongo_data:
+  chattr_backend_uploads:
+  chattr_backend_logs:
 
 networks:
   nginx-proxy-network:

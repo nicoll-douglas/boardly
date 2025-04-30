@@ -69,10 +69,10 @@ export default function WelcomeCard() {
                 />
                 <Flex flexDir={"column"}>
                   <Heading mb={1} id="welcome-heading">
-                    Welcome to ${import.meta.env.VITE_APP_TITLE}!
+                    Welcome to {import.meta.env.VITE_APP_TITLE}!
                   </Heading>
                   <Text mb={2} fontSize={fontSize}>
-                    ${import.meta.env.VITE_APP_TITLE} is a prototype messaging
+                    {import.meta.env.VITE_APP_TITLE} is a prototype messaging
                     board app where you can post threads to various different
                     boards, reply to users, customise your profile and more.
                   </Text>

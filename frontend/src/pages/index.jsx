@@ -2,8 +2,6 @@ import {
   Center,
   useDisclosure,
   Text,
-  Button,
-  Link,
   VStack,
   Heading,
   Image,
@@ -63,7 +61,7 @@ export default function Index() {
         <ToggleThemeBtn ml={3} />
         <MobileMenu display={{ base: "flex", md: "none" }} ml={1} />
       </Header>
-      <Center flex={1} mt={12} px={4}>
+      <Center flex={1} px={4}>
         <VStack gap={4} maxW={"2xl"} as={"main"}>
           <Heading
             as="h1"
@@ -97,19 +95,6 @@ export default function Index() {
             />
           </Flex>
         </VStack>
-      </Center>
-      <Center mb={16}>
-        <Text display={"flex"} gap={1} as={"footer"}>
-          {"A project by"}
-          <Button
-            as={Link}
-            href="https://github.com/nicoll-douglas"
-            target="_blank"
-            variant={"link"}
-          >
-            Nicoll Douglas
-          </Button>
-        </Text>
       </Center>
     </Container>
   );
