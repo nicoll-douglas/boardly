@@ -1,5 +1,5 @@
 const User = require("@/models/User");
-const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 const path = require("path");
 const fs = require("fs/promises");
 
@@ -87,10 +87,14 @@ exports.deleteUser = async (req, res, next) => {
   const { currentPassword } = req.body;
 
   try {
-    const passwordMatch = await bcrypt.compare(
-      currentPassword,
-      user.hashedPassword
-    );
+    // Split stored hash into salt and hash portions
+    const [salt, storedHash] = user.hashedPassword.split(':');
+    
+    // Hash the provided password with the same salt
+    const hash = crypto.pbkdf2Sync(currentPassword, salt, 1000, 64, 'sha512').toString('hex');
+    
+    // Compare the generated hash with the stored hash
+    const passwordMatch = storedHash === hash;
 
     if (!passwordMatch) {
       return res
@@ -104,23 +108,26 @@ exports.deleteUser = async (req, res, next) => {
     user.pronouns = "";
     user.age = "";
     user.email = "";
-    user.hasAvatar = false;
+    user.hasAvatar = "";
     await user.save();
 
-    const avatarPath = path.join(
-      process.cwd(),
-      "public",
-      "avatars",
-      `${user._id}`
-    );
+    // Only attempt to delete if user has an avatar
+    if (user.hasAvatar) {
+      const avatarPath = path.join(
+        process.cwd(),
+        "public",
+        "avatars",
+        user.hasAvatar
+      );
 
-    try {
-      req.log(`does user avatar exist?`);
-      await fs.access(avatarPath);
-      await fs.unlink(avatarPath);
-      req.log("avatar exists, deleted");
-    } catch {
-      req.log("doesn't exist");
+      try {
+        req.log(`does user avatar exist?`);
+        await fs.access(avatarPath);
+        await fs.unlink(avatarPath);
+        req.log("avatar exists, deleted");
+      } catch {
+        req.log("doesn't exist");
+      }
     }
 
     req.log("200, sent");

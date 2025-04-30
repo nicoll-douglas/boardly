@@ -16,17 +16,19 @@ module.exports = async (req, res, next) => {
       req.log("email, 409, sent");
       return res.status(409)._feedback(["email", "Email is already in use"]);
     }
-
     const newUser = new User({ email, username });
-    await sendVerificationEmail(email, newUser._id.toString());
 
-    await newUser.setPassword(password);
+    // setPassword is now synchronous
+    newUser.setPassword(password);
     await newUser.save();
+
+    // Send verification email after user is saved
+    await sendVerificationEmail(email, newUser._id.toString());
 
     req.log("email sent, user created, 200");
     return res.status(200).end();
   } catch (err) {
-    console.log(err);
+    req.log(err);
     next(err);
   }
 };

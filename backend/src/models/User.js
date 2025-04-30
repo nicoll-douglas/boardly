@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 
 const user = new mongoose.Schema(
   {
@@ -25,9 +25,8 @@ const user = new mongoose.Schema(
       default: "",
     },
     hasAvatar: {
-      type: mongoose.Schema.Types.Mixed,
-      default: false,
-      enum: [String, Boolean],
+      type: String,
+      default: "",
     },
     threads: [{ type: mongoose.Schema.Types.ObjectId, ref: "Thread" }],
     replies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reply" }],
@@ -40,17 +39,27 @@ const user = new mongoose.Schema(
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-user.virtual("avatar").get(function () {
-  if (process.env.NODE_ENV === "development") {
-    if (this.username !== process.env.SEED_USER) return this.hasAvatar;
-  }
-  return `/public/avatars/${this._id}`;
-});
+user.methods.setPassword = function (password) {
+  try {
+    console.log("Starting password hash for:", this._id);
 
-user.methods.setPassword = async function (password) {
-  const hashedPassword = await bcrypt.hash(password, 10);
-  this.hashedPassword = hashedPassword;
-  return this;
+    // Create a random salt
+    const salt = crypto.randomBytes(16).toString("hex");
+
+    // Hash the password with the salt
+    const hash = crypto
+      .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+      .toString("hex");
+
+    // Store both salt and hash
+    this.hashedPassword = `${salt}:${hash}`;
+
+    console.log("Password hashed successfully");
+    return this;
+  } catch (error) {
+    console.error("Error in setPassword:", error);
+    throw error; // Re-throw to be caught by the caller
+  }
 };
 
 module.exports = mongoose.model("User", user);

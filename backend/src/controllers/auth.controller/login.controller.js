@@ -1,5 +1,5 @@
 const User = require("@/models/User");
-const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 const {
   issueAccessToken,
   issueRefreshToken,
@@ -17,10 +17,14 @@ module.exports = async (req, res, next) => {
 
     if (foundUser.deleted) return res.status(404).end();
 
-    const passwordMatch = await bcrypt.compare(
-      password,
-      foundUser.hashedPassword
-    );
+    // Split stored hash into salt and hash portions
+    const [salt, storedHash] = foundUser.hashedPassword.split(':');
+    
+    // Hash the provided password with the same salt
+    const hash = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
+    
+    // Compare the generated hash with the stored hash
+    const passwordMatch = storedHash === hash;
     if (!passwordMatch) {
       req.log("password, 404, sent");
       return res.status(404).end();
