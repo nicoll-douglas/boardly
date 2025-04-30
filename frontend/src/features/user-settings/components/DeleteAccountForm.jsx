@@ -13,17 +13,17 @@ export default function DeleteAccountForm() {
 
   return (
     <Ch.Box maxW={96}>
-      <form>
+      <form onSubmit={form.handleSubmit(onOpen)}>
         <CurrentPasswordField form={form} />
+        <Ch.Button
+          w={"full"}
+          isLoading={form.formState.isSubmitting}
+          isDisabled={data?.profile.username === "DEMO_USER"}
+          type="submit"
+        >
+          Submit
+        </Ch.Button>
       </form>
-      <Ch.Button
-        w={"full"}
-        onClick={form.handleSubmit(onOpen)}
-        isLoading={form.formState.isSubmitting}
-        isDisabled={data?.profile.username === "DEMO_USER"}
-      >
-        Submit
-      </Ch.Button>
       <Ch.AlertDialog isOpen={isOpen} onClose={onClose} size={"sm"}>
         <Ch.AlertDialogOverlay />
         <Ch.AlertDialogContent mx={4}>
