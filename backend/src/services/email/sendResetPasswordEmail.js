@@ -14,7 +14,7 @@ async function sendResetPasswordEmail(email, id) {
   return transporter.sendMail({
     from: process.env.EMAIL_USER,
     to: email,
-    subject: "Boardly Password Reset",
+    subject: `${process.env.VITE_APP_TITLE} Password Reset`,
     html: `<a target="_blank" href="${process.env.HTTP_CLIENT}/#/auth/reset?token=${token}">reset password</a>`,
   });
 }

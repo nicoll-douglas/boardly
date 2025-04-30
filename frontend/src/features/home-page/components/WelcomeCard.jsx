@@ -69,13 +69,12 @@ export default function WelcomeCard() {
                 />
                 <Flex flexDir={"column"}>
                   <Heading mb={1} id="welcome-heading">
-                    Welcome to Boardly!
+                    Welcome to ${import.meta.env.VITE_APP_TITLE}!
                   </Heading>
                   <Text mb={2} fontSize={fontSize}>
-                    Boardly is a demo messaging board where you can post threads
-                    to various different boards, reply to users, customise your
-                    profile and more. This is a non-production environment so
-                    try it out!
+                    ${import.meta.env.VITE_APP_TITLE} is a prototype messaging
+                    board app where you can post threads to various different
+                    boards, reply to users, customise your profile and more.
                   </Text>
                   <Text fontSize={fontSize} mb={2} lineHeight={0.9}>
                     Check out my{" "}

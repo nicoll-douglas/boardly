@@ -16,7 +16,7 @@ async function sendVerificationEmail(email, id) {
   return transporter.sendMail({
     from: process.env.EMAIL_USER,
     to: email,
-    subject: "Boardly Email Verification",
+    subject: `${process.env.VITE_APP_TITLE} Email Verification`,
     html: `<a target="_blank" href="${process.env.HTTP_CLIENT}/#/auth/verify?token=${token}">verify</a>`,
   });
 }

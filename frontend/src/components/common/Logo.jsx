@@ -15,7 +15,7 @@ export default function Logo(props) {
       as={Link}
       {...props}
     >
-      Boardly
+      {import.meta.env.VITE_APP_TITLE}
     </Button>
   );
 }

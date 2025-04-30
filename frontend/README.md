@@ -1,8 +1,8 @@
-# Boardly (Frontend)
+# Chattr (Frontend)
 
-Boardly is a demo messaging board app where users can connect through user-created boards, threads, and replies whilst experiencing a modern and intuitive UI/UX.
+Chattr is a demo messaging board app where users can connect through user-created boards, threads, and replies whilst experiencing a modern and intuitive UI/UX.
 
-[![Link](https://img.shields.io/badge/Live_At-https://demo.boardly.nicolldouglas.dev-fbd38d)](https://demo.boardly.nicolldouglas.dev)
+[![Link](https://img.shields.io/badge/Live_At-https://chattr.nicolldouglas.dev-fbd38d)](https://chattr.nicolldouglas.dev)
 
 ## Features
 
@@ -37,12 +37,6 @@ This project is built with the MERN stack. Some core packages used include Chakr
 ## Demo
 
 ![Demo](proj/demo.gif)
-
-## Related
-
-Check out the backend repo that powers the application:
-
-[boardly-backend](https://github.com/nicoll-douglas/boardly-backend)
 
 ## License
 

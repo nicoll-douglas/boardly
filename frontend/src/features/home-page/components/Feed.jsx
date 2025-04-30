@@ -47,7 +47,8 @@ export default function Feed() {
                 <Image src={creativeUrl} width={250} height={250} />
                 <Heading size={"md"}>Nothing to show</Heading>
                 <Text mt={1}>
-                  Boardly currently has no threads, be the first to create one!
+                  {import.meta.env.VITE_APP_TITLE} currently has no threads, be
+                  the first to create one!
                 </Text>
               </VStack>
             ) : (
