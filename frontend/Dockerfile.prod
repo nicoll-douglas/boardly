@@ -1,6 +1,14 @@
 # Frontend Production Dockerfile
 FROM node:23-alpine AS builder
 
+# Define build arguments
+ARG VITE_APP_TITLE
+ARG VITE_API_URL
+
+# Set environment variables from build args
+ENV VITE_APP_TITLE=$VITE_APP_TITLE
+ENV VITE_API_URL=$VITE_API_URL
+
 WORKDIR /app
 
 COPY package*.json ./

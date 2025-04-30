@@ -7,6 +7,9 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.prod
+      args:
+        - VITE_APP_TITLE=${VITE_APP_TITLE}
+        - VITE_API_URL=${VITE_API_URL}
     env_file:
       - .env.production
 
