@@ -1,9 +1,12 @@
-<div align="center">
-  <img src="./assets/logo.png" height="50">
-  <p>
+<p align="center">
+  <img src="./assets/logo.png" alt="Logo" height="50">
+</p>
+
+<h1 align="center">Chattr</h1>
+
+  <p align="center">
 A messaging board app/prototype where users can connect through user-created boards, threads, and replies.
   </p>
-</div>
 
 ## Features
 
