@@ -1,11 +1,6 @@
-<p>
-  <img src="./assets/logo.png" alt="Logo" height="30">
-</p>
-<hr>
+# Chattr
 
-  <p>
 A messaging board app/prototype where users can connect through user-created boards, threads, and replies.
-  </p>
 
 ## Features
 
