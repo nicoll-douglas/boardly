@@ -1,8 +1,9 @@
-# Chattr
-
-Chattr is a messaging board app/prototype where users can connect through user-created boards, threads, and replies whilst experiencing a modern and intuitive UI/UX.
-
-[![Link](https://img.shields.io/badge/Live_At-https://chattr.nicolldouglas.dev-fbd38d)](https://chattr.nicolldouglas.dev)
+<div align="center">
+  <img src="./assets/logo.png" height="50">
+  <p>
+A messaging board app/prototype where users can connect through user-created boards, threads, and replies.
+  </p>
+</div>
 
 ## Features
 
